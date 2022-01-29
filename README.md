@@ -14,7 +14,7 @@ Please, read the instructions below and submit your homework correctly, so we ca
 
 2. Clone your forked repo: 
    1. ![Copy Link](copy_link.png)
-   2. ![Clone]()
+   2. ![Clone](clone.png)
    
 #### *Each time you want to submit your homework*:
 **Important (!)** – you are now working with your own copy/fork of the repository! 
