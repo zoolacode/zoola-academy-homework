@@ -9,9 +9,13 @@ Please, read the instructions below and submit your homework correctly, so we ca
 
 ### Instructions
 
-Fork this repository by pressing the button `Fork` **(!) this is one time action**:
+1. Fork this repository by pressing the button `Fork` **(!) this is one time action**:
 ![Fork](fork.png)
 
+2. Clone your forked repo: 
+   1. ![Copy Link](copy_link.png)
+   2. ![Clone]()
+   
 #### *Each time you want to submit your homework*:
 **Important (!)** – you are now working with your own copy/fork of the repository! 
 All commits NEED TO BE pushed into your own repo.
