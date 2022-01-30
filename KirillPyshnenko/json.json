@@ -1,0 +1,22 @@
+{
+ "name": "Group name",
+ "type": "private_group",
+ "id": 1111,
+ "messages": [
+  {
+   "id": 01,
+   "type": "message",
+   "date": "2021-03-05T17:36:33",
+   "from": "Author-1",
+   "from_id": "user1111",
+   "text": "text of the message"
+  },   {
+   "id": 01,
+   "type": "message",
+   "date": "2021-03-05T17:36:33",
+   "from": "Author-2",
+   "from_id": "user2222",
+   "text": "text of some other message"
+  }
+ ]
+}
