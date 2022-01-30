@@ -1,0 +1,4 @@
+It's all about the flow of execution of commands
+ and the transfer of control between them.
+For the correct execution of the script, we need the following command:
+source ./mcd nested/dir
