@@ -1,0 +1,9 @@
+!/bin/bash
+var1=$(date +%u)
+var2=$(date +%d/%b)
+if [ $var1 -le 5 ]
+then
+echo "Looks like $var2 is a working day"
+else
+echo "Looks like $var2 is a weekend"
+fi
