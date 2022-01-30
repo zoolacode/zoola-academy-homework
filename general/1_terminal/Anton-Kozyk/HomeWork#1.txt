@@ -1,0 +1,44 @@
+﻿
+ZoolaTech Homework #1
+
+Task 0
+To install git – sudo apt-get install git.
+
+Task 1
+To create files with "touch" – touch <file_nime>
+To find all files with "zoola" in their names we can type ls | grep zoola
+
+Task 2
+The script is run in a subshell, and cannot change the parent shell working directory.
+To change the current shell's directory permanently you should use the source command, also aliased simply as . , which runs a script in the current shell environment instead of a sub shell.
+
+Task 3
+#!/bin/bash
+
+day=$(date +%a)
+
+if [ $day == "Сб" ] || [ $day="Вс" ]; then
+  sowhat="weekend"
+else
+  sowhat="working day"
+fi
+
+echo "Looks like $(date +%d) is a $sowhat"
+echo "Looks like $(date +%d) is a $sowhat" #print information
+
+
+
+
+Task 4
+To install jq you can type apt-get install jq.
+
+After export chat history in .json format you can open it in terminal with the next command:
+cat <your_dir>/result.json | jq .
+
+For output all textes from messages you should type:
+cat <your_dir>/result.json | jq '.messages[].text'
+
+Also you can save the output into the text file:
+cat <your_dir>/result.json | jq '.messages[].text' > only_messages.txt
+
+
