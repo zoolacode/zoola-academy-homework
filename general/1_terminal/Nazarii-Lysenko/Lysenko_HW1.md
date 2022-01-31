@@ -23,14 +23,14 @@ Task3
 
 File test.sh
 
-day=$(date +%u)
-dayOfMonth=$( date +%d )
-if [ $day -lt 6 ];
-then
-echo "Looks like $dayOfMonth is a working day"
-else
-echo "Looks like $dayOfMonth is a weekend"
-fi
+  day=$(date +%u)
+  dayOfMonth=$( date +%d )
+  if [ $day -lt 6 ];
+  then
+  echo "Looks like $dayOfMonth is a working day"
+  else
+  echo "Looks like $dayOfMonth is a weekend"
+  fi
 
 Task4
 
