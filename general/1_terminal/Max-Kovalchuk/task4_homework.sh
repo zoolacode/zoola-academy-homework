@@ -1,5 +1,3 @@
 #!/bin/bash
 
-$1
-
-jq ".messages[].text" $1
+jq '.messages | .[].text | if type == "string" then . else .[] end' $1

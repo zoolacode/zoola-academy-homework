@@ -1,15 +1,15 @@
 #!/bin/zsh
 
-# получаем месяц
+# get month
 month=`date +%B`
-# получаем день месяца
+# get day of month
 day_of_month=`date +%d` 
-# получаем день недели
-day=`date +%u`
+# get day of week
+day_of_week=`date +%u`
 
-# прописываем условие для вывода текста
-if [ $day -ge 6 ]; then
-echo Похоже, что $day_of_month $month - выходной
+# condition for text output
+if [ $day_of_week -ge 6 ]; then
+echo Looks like $day_of_month $month - weekend
 else
-echo Похоже, что $day_of_month $month - рабочий день
+echo Looks like $day_of_month $month - work day
 fi

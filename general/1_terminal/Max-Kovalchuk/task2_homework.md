@@ -13,6 +13,4 @@
 # The nested directory is created, but the working directory didn't change. Why?
 
 
-# Ответ:в данной ситуации мы запускаем скрипт, а каждый скрипт выполняется в своем собственном subshell , и является отдельным процессом, который не может менять свою рабочую директорию с помощью
-# скрипта, записанного в файл.
-
+# Answer: we run a script, and each script runs in its own subshell, and is a separate process that cannot change its working directory with script written to file.

@@ -15,5 +15,7 @@ zoola_api
 zoola-ac
 zoola
 
+# Cleanup
 
+rm wrong_file test_file
 
