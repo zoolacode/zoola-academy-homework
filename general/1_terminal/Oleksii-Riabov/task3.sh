@@ -1,10 +1,11 @@
 #!/bin/sh
 
-d=$( date "+%u" )
-d2=$( date "+%e" )
+WEEKDAY=$( date "+%u" )
+DAY_OF_THE_MONTH=$( date "+%e" )
+FRIDAY=5
 
-if [ $d -gt 5 ]; then
- echo Looks like $d2 is a weekend
+if [ $WEEKDAY -gt $FRIDAY ]; then
+ echo Looks like $DAY_OF_THE_MONTH is a weekend
 else
- echo Looks like $d2 is a working day
+ echo Looks like $DAY_OF_THE_MONTH is a working day
 fi
