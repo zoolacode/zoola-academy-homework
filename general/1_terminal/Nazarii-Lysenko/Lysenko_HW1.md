@@ -1,8 +1,10 @@
 ###Task1
+
 ![Task1_1](task1_1.png)
 ![Task1_2](task1_2.png)
 
 ###Task2
+
 Directory changed for script, but not for terminal. Shell script is completely another
 process and “cd” command was executed for it. To check how this works we can run
 this code:
@@ -18,6 +20,7 @@ Script created directory “nested”, changed current directory and created “
 ![Task2](task2.png)
 
 ###Task3
+
 	File test.sh
 
 day=$(date +%u)
@@ -30,4 +33,5 @@ echo "Looks like $dayOfMonth is a weekend"
 fi
 
 ###Task4
+
 ![Task4](task4.jpg)
