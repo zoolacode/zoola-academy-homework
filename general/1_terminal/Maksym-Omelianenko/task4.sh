@@ -1,5 +1,5 @@
 #!/bin/sh
 
-set -e
+set -ex
 
-jq '.messages | .[] | .text' result.json
+jq '.messages | .[] | .text | select(type != "array" and . != "")' result.json

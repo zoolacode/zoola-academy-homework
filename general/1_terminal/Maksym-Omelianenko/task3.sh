@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+set -ex
 
 date=$(date +%d)
 day=$(date +%u)
