@@ -1,0 +1,5 @@
+in empty folder
+
+1. touch xoola.txt xxzoola.txt zola.txt a.txt zoolazoo.txt
+2. ls > result.txt
+3. greep "zoola" result.txt
