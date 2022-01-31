@@ -1,11 +1,7 @@
 #!/bin/bash
 
-day=$(date +%a)
 
-if [ $day == "Сб" ] || [ $day="Вс" ]; then
-  sowhat="weekend"
-else
-  sowhat="working day"
-fi
+[[ `date +%u` -gt 5 ]] &&  day="weekend"  || day="working day"
 
-echo "Looks like $(date +%d) is a $sowhat"
+echo "Looks like $(date +%d) is a $day"
+
