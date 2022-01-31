@@ -9,3 +9,5 @@ for (( i = 0; i < $qtyOfFiles; i++ ))   # Loop for creating each file
 do
     touch "Zoola-$i.txt"
 done
+
+ls -l | grep Zoola                      # Output files where "Zoola" word is present in the filename
