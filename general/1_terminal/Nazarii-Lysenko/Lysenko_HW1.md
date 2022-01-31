@@ -1,9 +1,9 @@
-Task1
+## Task1
 
 ![Task1_1](task1_1.png)
 ![Task1_2](task1_2.png)
 
-Task2
+## Task2
 
 Directory changed for script, but not for terminal. Shell script is completely another
 process and “cd” command was executed for it. To check how this works we can run
@@ -21,7 +21,7 @@ Script created directory “nested”, changed current directory and created “
 
 ![Task2](task2.png)
 
-Task3
+## Task3
 
 File test.sh
 
@@ -41,6 +41,6 @@ File test.sh
   
   fi
 
-Task4
+## Task4
 
 ![Task4](task4.jpg)
