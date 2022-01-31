@@ -1,9 +1,8 @@
 #!/bin/bash
 
-todays_date=$(date +"%y-%m-%d")
-day_week=$(date -d $todays_date +%A)
+day_week=$(date +%u)
 day_month=$(date +%d)
-weekend='Saturday Sunday'
+weekend='6 7'
 
 if grep -q "$day_week" <<< "$weekend"
 then
