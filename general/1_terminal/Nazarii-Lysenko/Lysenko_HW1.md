@@ -34,4 +34,7 @@ File test.sh
 ```
 ## Task4
 
+```
+cat result.json | jq '.messages | .[] | .text | select(. != "")'
+```
 ![Task4](task4.jpg)
