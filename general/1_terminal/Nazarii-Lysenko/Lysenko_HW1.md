@@ -10,7 +10,9 @@ process and “cd” command was executed for it. To check how this works we can
 this code:
 
 mkdir -p $1
+
 cd $1
+
 mkdir -p "test"
 
 ./test.sh nested
