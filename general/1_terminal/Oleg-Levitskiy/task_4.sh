@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cat zoola_chat_result.json | jq .messages[].text
+jq '.messages[].text | if(type == "array") then .[0] else . end' ${1}
