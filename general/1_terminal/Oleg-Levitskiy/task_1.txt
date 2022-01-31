@@ -1,1 +1,1 @@
-exa -l *zoola*
+Ls -l *zoola*
