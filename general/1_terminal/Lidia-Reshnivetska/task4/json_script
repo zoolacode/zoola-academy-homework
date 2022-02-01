@@ -1,0 +1,7 @@
+#!/bin/bash
+ STRING="HELLO WORLD!!!"
+ #echo result.json 
+ output=$(cat result.json)
+ #echo $output
+ output=$(echo $output | jq '.messages[].text')
+ echo $output

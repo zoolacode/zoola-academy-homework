@@ -4,20 +4,30 @@
 
 #### Task 0
 
-![Screenshot](1.png)
+Checked version of the git:
+
+![Screenshot](img/1.png)
 
 #### Task 1
 
-![Screenshot](2.png)
+Parsing file names with name "zoola":
+
+![Screenshot](img/2.png)
 
 #### Task 2
 
-![Screenshot](3.png)
+Gave right accessing + starting script via source command:
+
+![Screenshot](img/3.png)
 
 ### Task 3
 
-![Screenshot](4.png)
+Script will recognize current time ( WORKING DAY/WEEKEND )
+
+![Screenshot](img/4.png)
 
 ### Task 4
 
-![Screenshot](5.png)
+Parsing json text only:
+
+![Screenshot](img/7.png)
