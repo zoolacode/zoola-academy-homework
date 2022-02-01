@@ -8,7 +8,7 @@
 Directory changed for script, but not for terminal. Shell script is completely another
 process and “cd” command was executed for it. To check how this works we can run
 this code:
-```
+```sh
 mkdir -p $1
 cd $1
 mkdir -p "test"
