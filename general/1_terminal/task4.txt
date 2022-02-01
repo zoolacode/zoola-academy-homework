@@ -1,0 +1,4 @@
+Task almost ready, in process.
+
+
+ jq -r '.messages[] .text' result.json
