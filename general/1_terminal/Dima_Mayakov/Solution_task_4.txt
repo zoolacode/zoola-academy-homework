@@ -1,3 +1,5 @@
 To output only the texts of the message using jq
  we need the following command: 
 $ jq '.messages[].text' result.json
+or:
+$ jq '.messages | .[].text | if type == "string" then . else .[] end' $1
