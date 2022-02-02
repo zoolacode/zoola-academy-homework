@@ -1,0 +1,6 @@
+The cd command is indeed executed, but as soon as the script exits we will be back where we started. This is because of the fact that the script is not being executed in a subshell that is on a different process.
+
+. ./mcd nested/dir
+In this way we will create a folder ‘nested’, folder ‘dir’ in ‘nested’ and move to ‘dir’ directory.
+
+This article helped me https://gist.github.com/rehnen/34236d6ff270ccaa74b6
