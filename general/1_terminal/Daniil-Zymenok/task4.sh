@@ -1,3 +1,3 @@
 #!bin/bash
 
-jq '.messages[]' result.json | '.text'
+jq '.messages[].text' result.json
