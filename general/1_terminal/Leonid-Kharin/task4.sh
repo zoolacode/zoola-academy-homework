@@ -10,7 +10,7 @@ for ((i=0; i >(-1); i++)) do
 
    text=$(echo $file | jq '.messages'[$i] | jq '.text' ) 
 
-   if [[ $text == "null" ]]; then # when the list ends the value becomes null
+   if [[ $text == "null" ]]; then #  when the list ends the value becomes null
       break
    fi
    
