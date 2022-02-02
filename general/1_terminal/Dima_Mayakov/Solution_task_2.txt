@@ -1,4 +1,5 @@
 It's all about the flow of execution of commands
  and the transfer of control between them.
+ The script runs in its own thread and cannot affect the thread in which the terminal is running to change the directory
 For the correct execution of the script, we need the following command:
 source ./mcd nested/dir
