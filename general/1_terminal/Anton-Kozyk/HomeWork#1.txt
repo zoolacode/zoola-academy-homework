@@ -36,7 +36,7 @@ After export chat history in .json format you can open it in terminal with the n
 cat <your_dir>/result.json | jq .
 
 For output all textes from messages you should type:
-cat <your_dir>/result.json | jq '.messages[].text'
+jq '.messages[].text | if type=="string" then . else [.[] | if type=="object" then .text else . end] | add end | select(length>0)' ./result.json
 
 Also you can save the output into the text file:
 cat <your_dir>/result.json | jq '.messages[].text' > only_messages.txt
