@@ -1,0 +1,1 @@
+ jq -r '.messages[] .text|strings ' result.json
