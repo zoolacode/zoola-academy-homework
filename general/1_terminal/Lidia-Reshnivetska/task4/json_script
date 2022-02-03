@@ -1,0 +1,4 @@
+#!/bin/bash
+ output=$(cat result2.json)
+ output=$(echo $output | jq '.messages[].text')
+ echo $output

@@ -1,0 +1,6 @@
+How I see this, the script is run in a subshell (child shell). 
+Changing the current directory in a subshell doesn't change the working directory in the parent shell. 
+Its effects are lost when the script finishes.
+The script can also start another child's process in its own subshell. 
+This allows scripts to parallelize data processing across multiple tasks running at the same time.
+So, this behavior helps us to avoid different types of conflicts.
