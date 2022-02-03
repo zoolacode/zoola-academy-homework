@@ -2,4 +2,4 @@
 
 
 
-jq '.messages[]' result.json | jq '.text' | tr -d 'a-z',"A-Z",'/"[]{}:\.','-_','&#'
+jq '.messages[]' result.json | jq '.text' 

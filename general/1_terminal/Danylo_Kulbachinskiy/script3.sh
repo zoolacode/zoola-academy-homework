@@ -1,12 +1,9 @@
 #!/bin/bash
 f="$(date "+%d")"
-arr=("субота" "неділя")
+day="$(date "+%u")"
+if [[  $day == 6  || $day == 7  ]]; then
+    echo "Looks like "${f}" is a weekend."
+else
+    echo "Looks like "${f}" is a working day"
+fi
 
-for i in $arr; do
-    if [[ i == *"$date "+%A""* ]]
-    then
-        echo "Looks like "${f}" is a weekend."
-    else
-        echo "Looks like "${f}" is a working day"
-    fi
-done
