@@ -1,0 +1,3 @@
+// Comand to output the names with "zoola" :
+
+ls | grep zoola
