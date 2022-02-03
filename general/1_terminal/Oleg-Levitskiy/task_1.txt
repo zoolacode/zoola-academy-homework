@@ -1,1 +1,1 @@
-Ls -l *zoola*
+ls -l *zoola*
