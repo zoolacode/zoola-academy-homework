@@ -15,13 +15,9 @@ To change the current shell's directory permanently you should use the source co
 Task 3
 #!/bin/bash
 
-day=$(date +%a)
+[[ `date +%u` -gt 5 ]] &&  day="weekend"  || day="working day"
 
-if [ $day == "Сб" ] || [ $day="Вс" ]; then
-  sowhat="weekend"
-else
-  sowhat="working day"
-fi
+echo "Looks like $(date +%d) is a $day"
 
 echo "Looks like $(date +%d) is a $sowhat"
 echo "Looks like $(date +%d) is a $sowhat" #print information
