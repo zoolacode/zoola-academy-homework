@@ -1,0 +1,2 @@
+Answe for task 1:
+find . -iname "zoola*"
