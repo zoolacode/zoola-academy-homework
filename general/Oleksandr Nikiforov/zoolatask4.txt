@@ -1,0 +1,3 @@
+Answer for task 4:
+cat result.json | jq '.messages[] | {text}'
+

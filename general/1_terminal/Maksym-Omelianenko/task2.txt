@@ -1,0 +1,4 @@
+The working directory was changed only in a subshell. This script is run in Z shell.
+Each subshell is situated in the diferent places. So, if we execute "cd" in the script,
+it will change working directory only for subshell and it won't effect to the current
+directory in the shell. 
