@@ -1,1 +1,1 @@
- jq -r '.messages[] .text|strings ' result.json
+ jq -r '.messages[] .text|strings' result.json
