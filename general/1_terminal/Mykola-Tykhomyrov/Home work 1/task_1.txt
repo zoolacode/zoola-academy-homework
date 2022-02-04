@@ -1,0 +1,6 @@
+$ touch zoola_1.txt
+$ touch zoola_2.txt
+$ touch zoola_3.txt
+$ touch zoola_2004.txt
+$ touch zoola_5.txt
+

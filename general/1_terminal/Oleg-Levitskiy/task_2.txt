@@ -1,0 +1,1 @@
+When you run mcd.sh in a terminal, a child process is started, the scope of the cd command is only assigned to the child process, not the parent. Therefore, where you run the script, the old path is still there.

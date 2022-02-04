@@ -1,0 +1,3 @@
+If we want to output the names that have "zoola" we can use: ls -l | grep zoola. 
+If we want to output the names that have "zoola"
+and ignoring register of characters we can use: ls -l | grep -i zoola. 

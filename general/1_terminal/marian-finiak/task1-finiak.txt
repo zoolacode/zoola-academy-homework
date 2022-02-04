@@ -1,0 +1,9 @@
+#Create a bunch of files using touch
+~$ touch name1 name2 zoola1 zoola2
+
+#Output the names of those that have zoola in their names.
+~$ ls | grep zoola
+
+#Output:
+zoola1
+zoola2
