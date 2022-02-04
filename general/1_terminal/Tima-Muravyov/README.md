@@ -1,10 +1,6 @@
 # homework 1
 
 
-![](images/task1.png)
-
-proof that i did task 0
-
 ## task 1
 
 'ls -l | grep -i zoola'
