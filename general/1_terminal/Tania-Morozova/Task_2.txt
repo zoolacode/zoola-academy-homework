@@ -1,0 +1,3 @@
+My suggestion.
+The process of moving to another directory happens inside our script,
+but not in the place where we call it.

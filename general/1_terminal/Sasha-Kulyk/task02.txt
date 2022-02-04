@@ -1,0 +1,2 @@
+The cd command runs but as the script is done, we get back to the beginning.
+The reason is that this script runs in a subshell belonging to another process

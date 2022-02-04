@@ -1,0 +1,1 @@
+jq '.messages | .[].text | if type == "string" then . else .[] | walk(if type == "string" then . else empty end) end' jsonfile.json
