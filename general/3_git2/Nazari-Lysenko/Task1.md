@@ -29,3 +29,5 @@
     5. ![Log after second conflict](task1-second-log.jpg)
     6. ![Log after third conflict](task1-third-log.jpg)
     7. ![Log after all conflicts](task1-full-log.jpg)
+4. Conclusion: 
+Conflicts might happed easily, but it is not a big deal to solve them. Especially when idea can help with accepting changes.
