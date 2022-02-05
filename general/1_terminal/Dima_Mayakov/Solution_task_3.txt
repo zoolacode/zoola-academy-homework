@@ -1,0 +1,9 @@
+#!/bin/bash
+dayOfTheWeek=$(date +%u)
+dayOfTheMonth=$(date +%d/%b)
+if [ $var1 -le 5 ]
+then
+echo "Looks like $dayOfTheMonth is a working day"
+else
+echo "Looks like $dayOfTheMonth is a weekend"
+fi

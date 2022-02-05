@@ -1,0 +1,2 @@
+The script is run ina subshell and can`t change the parent shell working directory.
+To change the current shell's directory permanently you should use the source command, also aliased simply as ., which runs a script in the current shell environment instead of a sub shell.

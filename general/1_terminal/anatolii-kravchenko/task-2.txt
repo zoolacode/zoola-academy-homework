@@ -1,0 +1,3 @@
+Because the script is running in the child process, inside of which one we change a directory.
+Not in the terminal process, from where the script is called.
+When the child process of the script finishes, we return to the parent process - the terminal process.

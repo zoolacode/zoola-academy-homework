@@ -1,0 +1,4 @@
+The directory is changed in the child process of your script,
+not in the terminal process from which the script is called.
+After the child process dies, you are back in the terminal 
+which is left where it was.
