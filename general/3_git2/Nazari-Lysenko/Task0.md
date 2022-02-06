@@ -12,6 +12,6 @@ Public repo: https://github.com/sadattachi/zoola-git-2-homework
     6. git remote add
     7. git push
 3. Screenshots:
-    1. ![Git log](task0-git-log.jpg)
-    2. ![Git log in graph](task0-git-graph.jpg)
+    1. ![Git log](./Screenshots/task0-git-log.jpg)
+    2. ![Git log in graph](./Screenshots/task0-git-graph.jpg)
 4. Conclusion: some easy and basic work, but that is why this is task0.

@@ -22,12 +22,12 @@
     4. git commit
     5. git add
 3. Screenshots:
-    1. ![First conflict](task1-first-conflict.jpg)
-    2. ![Conflict in name](task1-name-conflict.jpg)
-    3. ![Log after first conflict](task1-first-git-log.jpg)
-    4. ![Solving second conflict in vscode](task1-solving-conflict-in-vscode.jpg)
-    5. ![Log after second conflict](task1-second-log.jpg)
-    6. ![Log after third conflict](task1-third-log.jpg)
-    7. ![Log after all conflicts](task1-full-log.jpg)
+    1. ![First conflict](./Screenshots/task1-first-conflict.jpg)
+    2. ![Conflict in name](./Screenshots/task1-name-conflict.jpg)
+    3. ![Log after first conflict](./Screenshots/task1-first-git-log.jpg)
+    4. ![Solving second conflict in vscode](./Screenshots/task1-solving-conflict-in-vscode.jpg)
+    5. ![Log after second conflict](./Screenshots/task1-second-log.jpg)
+    6. ![Log after third conflict](./Screenshots/task1-third-log.jpg)
+    7. ![Log after all conflicts](./Screenshots/task1-full-log.jpg)
 4. Conclusion: 
 Conflicts might happed easily, but it is not a big deal to solve them. Especially when idea can help with accepting changes.
