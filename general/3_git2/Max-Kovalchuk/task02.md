@@ -9,9 +9,9 @@ The easiest way to merge the main branch into a feature branch is with the follo
 
 This operation creates a new "merge commit" on the feature branch, linking the histories of both branches:
 
-![merge](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/merge-task2.png)
+![merge](./screenshot/merge-task2.png)
 
-![log](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/merge-log-task2.png)
+![log](./screenshot/merge-log-task2.png)
 
 ## git rebase
 
@@ -22,9 +22,9 @@ Instead of merging, we can rebase the feature branch onto the main branch with t
 
 As a result, the entire feature branch will be on top of the main main branch, including all new commits in the main branch. If rebase is used instead of the merge command for commits, this command rewrites the history of the project, creating new commits for each commit in the source branch
 
-![rebase](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/rebase-task2.png)
+![rebase](./screenshot/rebase-task2.png)
 
-![log](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/reflog-task2.png)
+![log](./screenshot/reflog-task2.png)
 
 
 
