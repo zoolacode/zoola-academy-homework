@@ -1,6 +1,6 @@
 ### Before you begin
 
-Ffffffor most of these, you are going to have to look stuff up. 
+For most of these, you are going to have to look stuff up. 
 
 Such is the life of software engineers! Google things, ask each other, ask me or other mentors.
 
