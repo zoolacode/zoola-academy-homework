@@ -137,7 +137,9 @@ Date:   Mon Feb 7 22:10:05 2022 +0200
     create use_rebase file in main branch
 ```
 
-
+## Questions
+1. I like `git merge` more because of its simplicity and keeping the commit history.
+2. In my opinion `git rebase` is better if you work locally: if you dont share your work with anyone else.
 
 
 
