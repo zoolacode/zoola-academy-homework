@@ -2,35 +2,35 @@
 
 1. **Conflict with accept local changes:**
 
-   ![Local changes](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task01-1.png)
+   ![Local changes](./screenshot/task01-1.png)
 
    `git log`:
 
-   ![log](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task01-2.png)
+   ![log](./screenshot/task01-2.png)
 
    GitHub:
 
-   ![conflict GItHub](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task01-3.png)
+   ![conflict GItHub](./screenshot/task01-3.png)
 
-   ![changes GitHub](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task01-4.png)
+   ![changes GitHub](./screenshot/task01-4.png)
 
 2. **Conflict with accept remote changes:**
 
-   ![Remote changes](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task01-5.png)
+   ![Remote changes](./screenshot/task01-5.png)
 
-   ![choose changes](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task01-6.png)
+   ![choose changes](./screenshot/task01-6.png)
 
    `git log`:
 
-   ![log](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task01-7.png)
+   ![log](./screenshot/task01-7.png)
 
 3. **Conflict with accept both changes:**
 
-   ![](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task01-8.png)
+   ![Conflict3](./screenshot/task01-8.png)
 
-   ![](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task01-9.png)
+   ![Conflict3](./screenshot/task01-9.png)
 
-   ![](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task01-10.png)
+   ![Conflict3](./screenshot/task01-10.png)
 
    
 
