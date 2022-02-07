@@ -2,7 +2,7 @@
 
 ## Create my repo:
 
-![Create on GitHub](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/task00-1.png)
+![Create on GitHub](./screenshot/task00-1.png)
 
 Next, I clone the repo to myself remotely and set up a connection between the local and remote repo, create a **.gitignore** file:
 
@@ -16,7 +16,7 @@ Next, I clone the repo to myself remotely and set up a connection between the lo
 
 `git push -u origin main`:
 
-![Create and push .gitignore](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/gitignore-task00.png)
+![Create and push .gitignore](./screenshot/gitignore-task00.png)
 
 Then I create a new branch and create a file name-surname in it:
 
@@ -32,7 +32,7 @@ Then I create a new branch and create a file name-surname in it:
 
 `git log:`
 
-![Log](/home/maks/zoola-academy-homework/general/3_git2/Max-Kovalchuk/screenshot/log-task00.png)
+![Log](./screenshot/log-task00.png)
 
 ### Conclusions
 
