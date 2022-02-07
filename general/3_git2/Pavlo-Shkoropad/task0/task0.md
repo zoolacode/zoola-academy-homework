@@ -10,12 +10,12 @@ Pavlo Shkoropad
 3.1. Created text file with my name and surname.
 3.2. Made commit.
 3.3. Push commit.
-![alt text](https://github.com/[4Pavlo2]/[3-git2--HM2]/blob/[main]/last-step.jpg?raw=true)
+![alt text](https://github.com/[4Pavlo2]/[3-git2--HM2]/blob/[main]/step2.jpg?raw=true)
 
 4. Cheked my .gitignore file.
 
 5.git status
-![alt text](https://github.com/[4Pavlo2]/[3-git2--HM2]/blob/[main]/step2.jpg?raw=true)
+![alt text](https://github.com/[4Pavlo2]/[3-git2--HM2]/blob/[main]/last-step.png?raw=true)
 
 : = :
 
