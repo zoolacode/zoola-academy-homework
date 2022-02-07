@@ -3,9 +3,9 @@
 
 DOM=$(date +"%d")
 
-LANG=C DOW=$(date +"%a")
+DOW=$(date +"%u")
 
-if [[ $DOW == "Sat" || $DOW == "Sun" ]]
+if [[ $DOW == 6 || $DOW == 7 ]]
 
 then echo "Looks like $DOM is a weekend"
 
