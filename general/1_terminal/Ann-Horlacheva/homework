@@ -1,0 +1,46 @@
+Task 1
+➜  ~ ls
+Applications Documents    Library      Music        Public
+Desktop      Downloads    Movies       Pictures
+➜  ~ ls Desktop
+Zoola homework
+➜  ~ ls Desktop/Zoola\ homework
+➜  ~ cd Desktop/Zoola\ homework
+➜  Zoola homework touch zoola.txt randomName.pdf zoola.pdf caseName.html zoola.h
+tml randomPic.psd zoola.js projectName.py
+➜  Zoola homework ls
+caseName.html  randomName.pdf zoola.html     zoola.pdf
+projectName.py randomPic.psd  zoola.js       zoola.txt
+➜  Zoola homework
+
+#At first i found the folder that I create recently for task.
+Then I run into it and create 8 random files using “touch”. 
+To find name match at bunch of files I used “Find . –name “zolatec*”. 
+The terminal outputs them all out the selected folder.
+
+
+
+
+Task 2
+The working directory didn`t change for terminal, it changed for script. To change directory for terminal ned to use 'cd' command
+
+
+
+Task 3
+
+#!/bin/sh
+
+if [[ $(date +%u) -gt 5 ]]
+  then
+  echo "Looks like $(date +%d) is a weekend"
+  else
+  echo "Looks like $(date +%d) is a working day"
+fi
+
+
+Task 4
+
+#!/bin/sh
+
+messages=$(jq '.messages[].text' json.json)
+echo "$messages"
