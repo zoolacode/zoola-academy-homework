@@ -1,4 +1,6 @@
 
+    
+Task 0: Setting up remote repo    
     Create new public repo in github.
     https://github.com/magnetron-2000/zoola-hometask_3
 

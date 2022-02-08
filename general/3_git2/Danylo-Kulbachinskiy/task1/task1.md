@@ -1,4 +1,4 @@
-ask 1: Solving conflicts
+Task 1: Solving conflicts
 
 Use the same remote github repo from previous task. The task is to create conflicts. 3 times.
 
