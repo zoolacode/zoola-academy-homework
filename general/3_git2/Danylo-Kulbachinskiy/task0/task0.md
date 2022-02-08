@@ -16,6 +16,7 @@
 
     Push your branch.
     git push -u origin task30_kulba
+    Image: 2.png
 
     Make sure your .gitignore file exists :) and you did not push any unnecessary files.
     done
@@ -39,6 +40,7 @@
     Date:   Fri Feb 4 16:54:12 2022 +0200
 
     Task0: created textfile_task0 in branch task30_kulba
+    Image: 2.png
 
 
     Do not forget to attach a link to your repo in results.
@@ -46,8 +48,3 @@
 
 
     Conclusion: I have succesful created new repo, set up it and made file in branch task30_kulba
-
-    ![alt text](https://github.com/[magnetron-2000]/[zoola-academy-homework]/blob/[task30_kulba]/1.jpg?raw=true)
-    
-
-    ![alt text](https://github.com/[magnetron-2000]/[zoola-academy-homework]/blob/[task30_kulba]/2.jpg?raw=true)
