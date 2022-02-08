@@ -42,5 +42,5 @@ Task 4
 
 #!/bin/sh
 
-massages=$(jq '.messages[].text' json.json)
-echo "$massages"
+messages=$(jq '.messages[].text' json.json)
+echo "$messages"
