@@ -6,11 +6,11 @@ let's do that
 ### For this task let's create a new branch
 Сreate a new file 
 call it fibonacci.txt and write down there, oddly enough, the fibonacci numbers.
-./images/Снимок экрана от 2022-02-09 16-03-56.png
-./images/Снимок экрана от 2022-02-09 16-06-54.png
+![fibonacci-numbers-fake]./images/Снимок экрана от 2022-02-09 16-03-56.png
+![git-add]./images/Снимок экрана от 2022-02-09 16-06-54.png
 And here I understand that I entered the number incorrectly, instead of 11 it should be 13
-/home/mykola/Изображения/Снимок экрана от 2022-02-09 16-08-57.png
+![fibonacci-numbers-Re]./home/mykola/Изображения/Снимок экрана от 2022-02-09 16-08-57.png
 ### Let's use "git amend"
-./images/Снимок экрана от 2022-02-09 16-11-22.png
-./images/Снимок экрана от 2022-02-09 16-15-21.png
+![git-amend]./images/Снимок экрана от 2022-02-09 16-11-22.png
+![git-amend]./images/Снимок экрана от 2022-02-09 16-15-21.png
 And as we can see, we managed to add changes to the previous commit without creating a new one
