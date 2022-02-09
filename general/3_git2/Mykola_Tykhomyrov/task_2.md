@@ -1,12 +1,12 @@
 # Task 2: Merge vs Rebase
 ### Create new branch
-![new-branch]./images/Снимок экрана от 2022-02-09 03-50-56.png
+![new-branch](./images/Снимок-экрана-от-2022-02-09-03-50-56.png)
 ### Back to the main, create a new file and something write in it
 ### Go to the task_2 branch and merge main
-![merge-branch]./images/Снимок экрана от 2022-02-09 04-00-24.png
-![merge-branch]./images/Снимок экрана от 2022-02-09 04-00-31.png
+![merge-branch](./images/Снимок-экрана-от-2022-02-09-04-00-24.png)
+![merge-branch](./images/Снимок-экрана-от-2022-02-09-04-00-31.png)
 ### Let`s do rebase
-![rebase-branch]./images/Снимок экрана от 2022-02-09 04-10-52.png
+![rebase-branch](./images/Снимок-экрана-от-2022-02-09-04-10-52.png)
 ### Discussion
 Git Merge and Git Rebase serve the same purpose. 
 They are designed to integrate changes from one branch into another. 
