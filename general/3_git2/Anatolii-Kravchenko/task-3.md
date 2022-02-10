@@ -25,6 +25,7 @@ git merge main
 ***
 
 tol@tol-VirtualBox:~/Documents/ZA/lesson-3-hw/general/3_git2/Anatolii-Kravchenko$ git log
+
 commit 4f3ff1152211a1c0feb58e9f4f937b8a1280b2f3 (HEAD -> demo-content-variant-2)
 Merge: 4a0ceda 97989ca
 Author: Anatolii Kravchenko <anatoliy.kravchenko1991@gmail.com>
