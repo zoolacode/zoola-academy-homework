@@ -27,6 +27,7 @@
 ***********************************************************************************************
 
 tol@tol-VirtualBox:~/Documents/ZA/lesson-3-hw/general/3_git2/Anatolii-Kravchenko$ git log
+
 commit 75b781b45f42fe1b62eb53b23981d206415d65b5 (HEAD -> hw-02-0-anatolii-kravchenko, origin/hw-02-0-anatolii-kravchenko)
 Author: Anatolii Kravchenko <anatoliy.kravchenko1991@gmail.com>
 Date:   Wed Feb 9 11:36:58 2022 +0200
