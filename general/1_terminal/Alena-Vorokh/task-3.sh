@@ -1,8 +1,8 @@
 #Task-3
 #!/bin/bash
-day="$(date "+%A")"
+day="$(date "+%u")"
 number="$(date "+%d")"
-if [[ "$day" == "$Saturday" || "$day" == "$Sunday" ]]; then
+if [[ "$day" > 5 ]]; then
         echo "Looks like ${number} is a weekend."
 else 
         echo "Looks like ${number} is a working day."
