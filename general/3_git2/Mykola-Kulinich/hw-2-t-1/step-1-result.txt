@@ -1,0 +1,135 @@
+
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git checkout -b test-conflicts-side-a        
+Switched to a new branch 'test-conflicts-side-a'
+mykolakulinich@MacBook-Pro-Mykola zoola-project % nano credentials.txt 
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git checkout main                    
+M	credentials.txt
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git checkout -b test-conflicts-side-b
+Switched to a new branch 'test-conflicts-side-b'
+mykolakulinich@MacBook-Pro-Mykola zoola-project % nano credentials.txt                 
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git checkout test-conflicts-side-a 
+M	credentials.txt
+Switched to branch 'test-conflicts-side-a'
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git add .                         
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git commit -m "Changed name"
+[test-conflicts-side-a b65283f] Changed name
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git push -u main
+fatal: 'main' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git push -u origin test-conflicts-side-a
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 321 bytes | 321.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: Create a pull request for 'test-conflicts-side-a' on GitHub by visiting:
+remote:      https://github.com/NicolasKul/zoola-project/pull/new/test-conflicts-side-a
+remote: 
+To github.com:NicolasKul/zoola-project.git
+ * [new branch]      test-conflicts-side-a -> test-conflicts-side-a
+Branch 'test-conflicts-side-a' set up to track remote branch 'test-conflicts-side-a' from 'origin'.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git checkout test-conflicts-side-b      
+Switched to branch 'test-conflicts-side-b'
+mykolakulinich@MacBook-Pro-Mykola zoola-project % nano credentials.txt                    
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git add .                               
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git commit -m "Changed name"            
+[test-conflicts-side-b bc3d975] Changed name
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git push -u origin test-conflicts-side-b
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 321 bytes | 321.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: Create a pull request for 'test-conflicts-side-b' on GitHub by visiting:
+remote:      https://github.com/NicolasKul/zoola-project/pull/new/test-conflicts-side-b
+remote: 
+To github.com:NicolasKul/zoola-project.git
+ * [new branch]      test-conflicts-side-b -> test-conflicts-side-b
+Branch 'test-conflicts-side-b' set up to track remote branch 'test-conflicts-side-b' from 'origin'.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git checkout main                       
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % nano credentials.txt                    
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git add .                               
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git commit -m "Changed name"            
+[main 1b2af8b] Changed name
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 316 bytes | 316.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:NicolasKul/zoola-project.git
+   ba189d0..1b2af8b  main -> main
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git checkout test-conflicts-side-a      
+Switched to branch 'test-conflicts-side-a'
+Your branch is up to date with 'origin/test-conflicts-side-a'.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git merge test-conflicts-side-b
+Auto-merging credentials.txt
+CONFLICT (content): Merge conflict in credentials.txt
+Automatic merge failed; fix conflicts and then commit the result.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git diff
+diff --cc credentials.txt
+index de69194,783e9c4..0000000
+--- a/credentials.txt
++++ b/credentials.txt
+@@@ -1,3 -1,3 +1,7 @@@
+++<<<<<<< HEAD
+ +name: Nickolas
+++=======
++ name: Nicolai
+++>>>>>>> test-conflicts-side-b
+  surname: Kulinich
+  
+mykolakulinich@MacBook-Pro-Mykola zoola-project % nano credentials.txt              
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git add .                         
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git commit -m "Resolved conflict, accept local changes from *-b branch"
+[test-conflicts-side-a be947e6] Resolved conflict, accept local changes from *-b branch
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git status                                                             
+On branch test-conflicts-side-a
+Your branch is ahead of 'origin/test-conflicts-side-a' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git log
+commit be947e61a6ad30e14743394133419a31d87d1dfe (HEAD -> test-conflicts-side-a)
+Merge: b65283f bc3d975
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 01:15:13 2022 +0200
+
+    Resolved conflict, accept local changes from *-b branch
+
+commit bc3d9759e859a18965af053891fe2136fac5e380 (origin/test-conflicts-side-b, test-conflicts-side-b)
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 01:01:51 2022 +0200
+
+    Changed name
+
+commit b65283fcf993f1700f363a1266caee9429a47152 (origin/test-conflicts-side-a)
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 00:58:47 2022 +0200
+
+    Changed name
+
+commit ba189d0e8de0713cb3ca56b047275e6d7913050e
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 00:47:28 2022 +0200
+
+    Add gitignire and credentials
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git merge test-conflicts-side-b                                        
+Already up to date.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % 
+

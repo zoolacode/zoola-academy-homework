@@ -1,0 +1,36 @@
+mykolakulinich@MacBook-Pro-Mykola 2-3. GIT % git init
+Initialized empty Git repository in /Users/mykolakulinich/Library/Mobile Documents/com~apple~CloudDocs/Backup/Learning/In progres/Zoolatech/2-3. GIT/.git/
+mykolakulinich@MacBook-Pro-Mykola 2-3. GIT % git clone git@github.com:NicolasKul/zoola-project.git
+Cloning into 'zoola-project'...
+warning: You appear to have cloned an empty repository.
+mykolakulinich@MacBook-Pro-Mykola 2-3. GIT % cd zoola-project 
+mykolakulinich@MacBook-Pro-Mykola zoola-project % nano credentials.txt                          
+mykolakulinich@MacBook-Pro-Mykola zoola-project % nano .gitignore                               
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git checkout -b main
+Switched to a new branch 'main'
+mykolakulinich@MacBook-Pro-Mykola zoola-project % ls                  
+credentials.txt
+mykolakulinich@MacBook-Pro-Mykola zoola-project % ls -a
+.		..		.git		.gitignore	credentials.txt
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git add .
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git commit -m "Add gitignire and credentials"        
+[main (root-commit) ba189d0] Add gitignire and credentials
+ 2 files changed, 4 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 credentials.txt
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git push -u origin main                              
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 319 bytes | 319.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:NicolasKul/zoola-project.git
+ * [new branch]      main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git log
+commit ba189d0e8de0713cb3ca56b047275e6d7913050e (HEAD -> main, origin/main)
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 00:47:28 2022 +0200
+
+    Add gitignire and credentials

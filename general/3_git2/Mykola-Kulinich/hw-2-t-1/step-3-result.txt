@@ -1,0 +1,127 @@
+
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git checkout main                                                       
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git log                        
+commit 1b2af8be11f87eeeb078210e08b29a3a03ddc44d (HEAD -> main, origin/main)
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 01:09:52 2022 +0200
+
+    Changed name
+
+commit ba189d0e8de0713cb3ca56b047275e6d7913050e
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 00:47:28 2022 +0200
+
+    Add gitignire and credentials
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git merge test-conflicts-side-b
+Auto-merging credentials.txt
+CONFLICT (content): Merge conflict in credentials.txt
+Automatic merge failed; fix conflicts and then commit the result.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git diff                                                                
+diff --cc credentials.txt
+index 5ea70cd,deadcd0..0000000
+--- a/credentials.txt
++++ b/credentials.txt
+@@@ -1,3 -1,3 +1,7 @@@
+++<<<<<<< HEAD
+ +name: Kolya
+++=======
++ name: Nicolaichikk
+++>>>>>>> test-conflicts-side-b
+  surname: Kulinich
+  
+mykolakulinich@MacBook-Pro-Mykola zoola-project % nano credentials.txt                                                    
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git add .                                                               
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git commit -m "Resolved conflict, accept both changes"                
+[main 8407e8a] Resolved conflict, accept both changes
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git merge test-conflicts-side-b                       
+Already up to date.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git log                                               
+commit 8407e8a2437ba4e3e2399db3e6ae8bf2810099c2 (HEAD -> main)
+Merge: 1b2af8b 52436c2
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 01:32:43 2022 +0200
+
+    Resolved conflict, accept both changes
+
+commit 52436c23c52d617cb00ca69ea976a4300d036737 (test-conflicts-side-b)
+Merge: 0097ef2 bfb1675
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 01:30:24 2022 +0200
+
+    Resolved conflict, accept remote changes from *-b branch
+
+commit 0097ef2d902bd2b597b245d7be09a4105c867a0a
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 01:27:53 2022 +0200
+
+    Change name to Nickolaychikk
+
+commit bfb167505f862bf48146eb1a4c287bc396e37511 (origin/test-conflicts-side-a, test-conflicts-side-a)
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 01:26:11 2022 +0200
+
+    Change name to Mykolaychikk
+
+commit be947e61a6ad30e14743394133419a31d87d1dfe
+Merge: b65283f bc3d975
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 01:15:13 2022 +0200
+
+    Resolved conflict, accept local changes from *-b branch
+
+commit 1b2af8be11f87eeeb078210e08b29a3a03ddc44d (origin/main)
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 01:09:52 2022 +0200
+
+    Changed name
+
+commit bc3d9759e859a18965af053891fe2136fac5e380 (origin/test-conflicts-side-b)
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 01:01:51 2022 +0200
+
+    Changed name
+
+commit b65283fcf993f1700f363a1266caee9429a47152
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 00:58:47 2022 +0200
+
+    Changed name
+
+commit ba189d0e8de0713cb3ca56b047275e6d7913050e
+Author: NicolasKul <nicolaychikk@gmail.com>
+Date:   Sat Feb 12 00:47:28 2022 +0200
+
+    Add gitignire and credentials
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git push
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (7/7), 833 bytes | 833.00 KiB/s, done.
+Total 7 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), done.
+To github.com:NicolasKul/zoola-project.git
+   1b2af8b..8407e8a  main -> main
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git branch -d test-conflicts-side-a                   
+Deleted branch test-conflicts-side-a (was bfb1675).
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git branch -d test-conflicts-side-b
+warning: not deleting branch 'test-conflicts-side-b' that is not yet merged to
+         'refs/remotes/origin/test-conflicts-side-b', even though it is merged to HEAD.
+error: The branch 'test-conflicts-side-b' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D test-conflicts-side-b'.
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git branch -D test-conflicts-side-b
+Deleted branch test-conflicts-side-b (was 52436c2).
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git push
+Everything up-to-date
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git add .
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git commit -m "Test update"                           
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+mykolakulinich@MacBook-Pro-Mykola zoola-project % git push                           
+Everything up-to-date
+mykolakulinich@MacBook-Pro-Mykola zoola-project % 
+
