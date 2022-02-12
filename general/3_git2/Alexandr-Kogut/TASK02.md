@@ -1,4 +1,4 @@
-## Task 1
+## Task 2
 
 - Merge feature/feature1 to main branch
 
@@ -23,3 +23,5 @@
 - See git log
 
   ![Create](images/screen2-3.png)
+
+My repository: [https://github.com/alexandrkogut/git-training](https://github.com/alexandrkogut/git-training)
