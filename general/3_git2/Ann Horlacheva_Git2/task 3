@@ -1,0 +1,21 @@
+How to style a series of Git commits
+
+1. git log --pretty=oneline - using this simple command we can see all commits headlines only without body text
+
+2. If you did several changes, create bunch of files, fixed some conflicts and then remember that these changes are necessary need to commit
+You can use interactive commit
+
+git commit --interactive
+
+It allows you to add to different commits even changes in the same file.
+
+3. git merge --squash will compresses several commits and saves all changes in the current branch. Then you can commit all changes in one. 
+It may be halpful if you need to clean up bunch of minor commits in one or couple major. This makes it easier to keep track of change history.
+
+4. git log --author can do search by author, to show only his commits. In the --author option, you can specify a name or email.
+
+5.  git log --after='date' --before='date' specifying the start and end statistics of commits for range search.
+Example git log --after='2021-03-02 17:35' --before='2021-03-03 16:45'
+
+
+All this commands may can make your job easier, serch and viewing commits faster. 
