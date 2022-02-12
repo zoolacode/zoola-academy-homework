@@ -1,0 +1,10 @@
+Resolve conflicts
+1. For accept local changes we ned to run
+git checkout --ours
+git add
+
+2. For accept remote changes 
+git checkout --theirs
+git add
+
+For accepting both changes we need to press the "Accept Both Changes" button on VSCode
