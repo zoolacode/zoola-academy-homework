@@ -1,0 +1,14 @@
+Merge vs Rebase
+
+Integrate changes using both
+
+`git merge`
+Giving us simple integration after 'git commit' and 'git pull'
+
+`git rebase`
+$ git checkout conflictSolve-branch
+$ git rebase -i master
+
+Rebase compresses all changes into one "patch". It culd be dangerous due to the compression of features to several commits, it can hide the context.
+
+Merge is simplifyed safty metod to integrate your changes into main branch. I recomend to use it into your work.
