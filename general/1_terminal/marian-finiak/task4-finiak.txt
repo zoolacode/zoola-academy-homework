@@ -1,0 +1,1 @@
+$ cat ./result.json | jq '.messages[].text'

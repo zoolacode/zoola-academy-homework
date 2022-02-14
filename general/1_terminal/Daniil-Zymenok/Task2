@@ -1,0 +1,2 @@
+The script runs in the internal directory and cannot change the working parent directory.
+When we change the working directory with the script, it also changes in the terminal.
