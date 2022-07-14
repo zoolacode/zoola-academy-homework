@@ -1,32 +1,36 @@
-package general.com.zoolatech.lecture1.tasks._1.solomiia_tymoshchuk;
+package general.solomiia_tymoshchuk;
 
 import java.util.Scanner;
+
+/**
+ * Write a program that accepts numbers of miles as a floating point number,
+ * converts it to kilometers and outputs the result.
+ **/
 
 public class Task1 {
     double kms;
     String sentence;
 
-    public double getKms(){
+    public double getKms() {
         return kms;
     }
-    public String getSentence(){
+
+    public String getSentence() {
         return sentence;
     }
 
-    public String setSentence(){
+    public String setSentence() {
         return sentence;
     }
 
-    public String enterDataSentence(String sentence)
-    {
+    public String enterDataSentence(String sentence) {
         System.out.println(sentence);
         return sentence;
     }
 
-    public Double convertKmstoMiles(double kms)
-    {
+    public Double convertKmstoMiles(double kms) {
         double milesValue = 1.609;
-        double miles = kms*milesValue;
+        double miles = kms * milesValue;
         System.out.println(miles);
         return miles;
     }
@@ -36,7 +40,7 @@ public class Task1 {
         this.sentence = sentence;
     }
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         String sentence = "Enter km value,please";
 
         Scanner sc = new Scanner(System.in);
