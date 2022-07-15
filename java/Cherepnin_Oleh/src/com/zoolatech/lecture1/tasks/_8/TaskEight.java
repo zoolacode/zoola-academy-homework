@@ -1,5 +1,7 @@
 package com.zoolatech.lecture1.tasks._8;
 
+import java.util.Scanner;
+
 /**
  * Write a program that prints all numbers from 1 to N, that are divisible by 2, 3 or by both.
  * If a number is divisible by only 2 - print it and add in parentheses “(by 2)”, if only by 3 - “(by 3)”,
@@ -17,9 +19,10 @@ package com.zoolatech.lecture1.tasks._8;
  */
 public class TaskEight {
     public static void main(String[] args) {
-        System.out.println(12 % 3);
-        getDivisibleByTwoOrThree1(18);
-        getDivisibleByTwoOrThree2(12);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input a number:");
+        getDivisibleByTwoOrThree1(scanner.nextInt());
+//        getDivisibleByTwoOrThree2(12);
     }
 
     public static void getDivisibleByTwoOrThree1(int number) {

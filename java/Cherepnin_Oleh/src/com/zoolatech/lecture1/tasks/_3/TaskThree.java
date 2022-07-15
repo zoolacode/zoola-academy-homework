@@ -1,5 +1,7 @@
 package com.zoolatech.lecture1.tasks._3;
 
+import java.util.Scanner;
+
 /**
  * Write a program that accepts a double number and outputs only its fractional part
  * (all digits after the decimal point).
@@ -10,10 +12,10 @@ package com.zoolatech.lecture1.tasks._3;
 public class TaskThree {
 
     public static void main(String[] args) {
-        System.out.println(getFactorialPart(1.23));
-        System.out.println(getFactorialPart2(1.23));
-        System.out.println(getFactorialPart(4.85));
-        System.out.println(getFactorialPart2(4.85));
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input number:");
+        System.out.println(getFactorialPart(scanner.nextDouble()));
+//        System.out.println(getFactorialPart2(scanner.nextDouble()));
     }
 
     public static double getFactorialPart(double input) {

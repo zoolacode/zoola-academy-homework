@@ -1,5 +1,7 @@
 package com.zoolatech.lecture1.tasks._6;
 
+import java.util.Scanner;
+
 /**
  * Write a program that accepts two numbers and a symbol of an operation (as a character)
  * and outputs the result of the selected operation. Possible characters for the operation:
@@ -18,18 +20,15 @@ package com.zoolatech.lecture1.tasks._6;
 public class TaskSix {
 
     public static void main(String[] args) {
-        System.out.println(calculate1(7, 5, '%'));
-        System.out.println(calculate1(1, 5, '+'));
-        System.out.println(calculate1(1, 5, '-'));
-        System.out.println(calculate1(4, 5, '*'));
-        System.out.println(calculate1(10, 5, '/'));
-        System.out.println(calculate1(10, 2, 'f'));
-        System.out.println("---------------------------");
-        System.out.println(calculate2(10, 2, '%'));
-        System.out.println(calculate2(10, 2, '*'));
-        System.out.println(calculate2(10, 2, '/'));
-        System.out.println(calculate2(10, 2, '+'));
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input a first number:");
+        int a = scanner.nextInt();
+        System.out.println("Input a second number:");
+        int b = scanner.nextInt();
+        System.out.println("Input an operator:");
+        char operator = scanner.next().charAt(0);
+        System.out.println(calculate1(a, b, operator));
+//        System.out.println(calculate2(a, b, operator));
     }
 
     public static int calculate1(int a, int b, char c) {

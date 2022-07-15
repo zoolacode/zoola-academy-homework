@@ -1,5 +1,7 @@
 package com.zoolatech.lecture1.tasks._5;
 
+import java.util.Scanner;
+
 /**
  * Write a program that accepts two numbers and outputs the larger number.
  * If numbers are equal - output “Numbers are equal”.
@@ -14,9 +16,12 @@ package com.zoolatech.lecture1.tasks._5;
 public class TaskFive {
 
     public static void main(String[] args) {
-        getLargerNumber(2, 3);
-        getLargerNumber(3, 2);
-        getLargerNumber(2, 2);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input a first number:");
+        int a = scanner.nextInt();
+        System.out.println("Input a second number:");
+        int b = scanner.nextInt();
+        getLargerNumber(a, b);
     }
 
     public static void getLargerNumber(int a, int b) {

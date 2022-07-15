@@ -1,5 +1,7 @@
 package com.zoolatech.lecture1.tasks._2;
 
+import java.util.Scanner;
+
 /**
  * Write a program that accepts a distance in meters and time in seconds
  * and outputs a speed in meters/second and kilometers/hour.
@@ -14,7 +16,16 @@ package com.zoolatech.lecture1.tasks._2;
 public class TaskTwo {
 
     public static void main(String[] args) {
-        float metersInSecond = countMetersInSecond(80, 10);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input distance:");
+        int distance = scanner.nextInt();
+        System.out.println("Input time:");
+        int time = scanner.nextInt();
+        showResults(distance, time);
+    }
+
+    public static void showResults(int distance, int time) {
+        float metersInSecond = countMetersInSecond(distance, time);
         float kmInHour = countKmInHour(metersInSecond);
         System.out.println(metersInSecond + "\n" + kmInHour);
     }
@@ -24,6 +35,6 @@ public class TaskTwo {
     }
 
     public static float countKmInHour(float speed) {
-        return (float) (speed * 3.6);  // X km/h = X *(1000/3600) m/s
+        return (float) (speed * 3.6);
     }
 }

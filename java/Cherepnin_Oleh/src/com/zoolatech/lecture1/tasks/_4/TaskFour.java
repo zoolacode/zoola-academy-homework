@@ -1,5 +1,7 @@
 package com.zoolatech.lecture1.tasks._4;
 
+import java.util.Scanner;
+
 /**
  * Write a program that accepts a day of the week as an integer number (1 - Monday, 2 - Tuesday, …, 7 - Sunday)
  * and output “Need to go to work…” if the day is a weekday or “Sleeping…” if it’s a weekend.
@@ -14,13 +16,10 @@ package com.zoolatech.lecture1.tasks._4;
 public class TaskFour {
 
     public static void main(String[] args) {
-        getDayOfWeek1(3);
-        getDayOfWeek1(6);
-        getDayOfWeek1(0);
-        System.out.println("--------------------");
-        getDayOfWeek2(1);
-        getDayOfWeek2(7);
-        getDayOfWeek2(9);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input a number of day:");
+        getDayOfWeek1(scanner.nextInt());
+//        getDayOfWeek2(scanner.nextInt());
     }
 
     public static void getDayOfWeek1(int day) {
