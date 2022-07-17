@@ -13,4 +13,7 @@ The north-west corner of a room is represented by coordinates
       All next moves in the same direction should be prevented.
 */
 public class Number2 {
+    public static void main(String[] args) {
+        System.out.println("TEST");
+    }
 }
