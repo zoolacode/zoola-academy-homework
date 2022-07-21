@@ -20,10 +20,10 @@ public class TaskNine {
     }
 
     public static void reverseInteger(Integer integer) {
-        String[] split = String.valueOf(integer).split("");
+        String[] split = integer.toString().split("");
 
-        for (int i = 0; i < split.length; i++) {
-            System.out.println(split[split.length - (i + 1)]);
+        for (int i = split.length - 1; i >= 0; i--) {
+            System.out.println(split[i]);
         }
     }
 }

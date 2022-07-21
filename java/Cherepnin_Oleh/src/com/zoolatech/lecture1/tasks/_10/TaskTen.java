@@ -26,19 +26,20 @@ public class TaskTen {
 
     public static void guessNumber() {
         System.out.println("Input max number");
-        int randomInt = new Random().nextInt(1, scanner.nextInt());
+        int randomInt = new Random().nextInt(1, scanner.nextInt() + 1);
         int guessedNumber = 0;
 
-        while (true) {
+        do {
             System.out.println("Input guessed number");
             guessedNumber = scanner.nextInt();
             if (guessedNumber == randomInt) {
                 System.out.println("That’s it!");
-                break;
-            } else if (guessedNumber > randomInt)
+            } else if (guessedNumber > randomInt) {
                 System.out.println("Smaller");
-            else System.out.println("Bigger");
-        }
+            } else {
+                System.out.println("Bigger");
+            }
+        } while (guessedNumber != randomInt);
 
     }
 }

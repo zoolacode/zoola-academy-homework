@@ -27,7 +27,7 @@ public class TaskSeven {
     }
 
     public static void getOddsNumbers2(int number) {
-        while (number != 0) {
+        while (number > 0) {
             if (number % 2 != 0)
                 System.out.println(number);
             number--;

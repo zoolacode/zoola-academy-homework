@@ -19,7 +19,7 @@ public class TaskFour {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input a number of day:");
         getDayOfWeek1(scanner.nextInt());
-//        getDayOfWeek2(scanner.nextInt());
+//        System.out.println(getDayOfWeek2(scanner.nextInt()));
     }
 
     public static void getDayOfWeek1(int day) {
@@ -32,11 +32,10 @@ public class TaskFour {
         } else System.out.println("Days of the week are counted from 1 to 7");
     }
 
-    public static void getDayOfWeek2(int day) {
-        switch (day) {
-            case 1, 2, 3, 4, 5 -> System.out.println("Need to go to work…");
-            case 6, 7 -> System.out.println("Sleeping…");
-            default -> System.out.println("Days of the week are counted from 1 to 7");
+    public static String getDayOfWeek2(int day) {
+        if (day <= 0 || day > 7) {
+            return "Days of the week are counted from 1 to 7";
         }
+        return day <= 5 ? "Need to go to work…" : "Sleeping…";
     }
 }
