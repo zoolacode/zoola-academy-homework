@@ -13,7 +13,6 @@ import java.util.Random;
 
 public class Task10 {
     public static void main(String[] args) {
-        // task solution code here
         Scanner sc = new Scanner(System.in);
         System.out.println("Input game limit: ");
         int n = sc.nextInt();
@@ -25,25 +24,25 @@ public class Task10 {
     public static int randIntN(int n){
         //return random integer value from 1 to N
         Random randomGenerator = new Random();
-        return randomGenerator.nextInt(n);
+        return randomGenerator.nextInt(n) + 1;
     }
 
 
     public static void game(int randomNumber){
         //larger-smaller game code
+        int number = 0;
         Scanner sc = new Scanner(System.in);
-        while (true){
+        do{
             System.out.println("Input number: ");
-            int number = sc.nextInt();
+            number = sc.nextInt();
             if (randomNumber == number){
                 System.out.println("That’s it!");
-                break;
             }else if(randomNumber < number){
                 System.out.println("Smaller");
             }else{
                 System.out.println("Larger");
             }
             System.out.println();
-        }
+        }while (randomNumber!=number);
     }
 }

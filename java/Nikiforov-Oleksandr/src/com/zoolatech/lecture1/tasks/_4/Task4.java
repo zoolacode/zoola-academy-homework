@@ -9,22 +9,19 @@ import java.util.Scanner;
 
 public class Task4 {
     public static void main(String[] args) {
-        // task solution code here
         Scanner sc = new Scanner(System.in);
-        int numberofDay = sc.nextInt();
-        dayTypeIf(numberofDay);
-        dayTypeCond(numberofDay);
+        int numberofDays = sc.nextInt();
+        dayTypeByIfElseStatement(numberofDays);
+        dayTypeCond(numberofDays);
         //in this task, in my opinion, it is better to use an if-else statement, because the conditioal operator does not exclude the option of incorrect input
     }
 
-    public static void dayTypeIf(int numberofDay){
-        // function by if-else statement
-        if(numberofDay>0 && numberofDay<6){
+    public static void dayTypeByIfElseStatement(int numberofDays){
+        if(numberofDays>0 && numberofDays<6){
 
             System.out.println("Need to go to work…");
 
-        } else if (numberofDay>5 && numberofDay<8) {
-
+        } else if (numberofDays>5 && numberofDays<8) {
             System.out.println("Sleeping…");
 
         }else{
@@ -33,9 +30,8 @@ public class Task4 {
     }
 
 
-    public static void dayTypeCond(int numberofDay){
-        // function by conditional operator
-        System.out.println((numberofDay>0 && numberofDay<6)? "Need to go to work…": "Sleeping…");
+    public static void dayTypeCond(int numberofDays){
+        System.out.println((numberofDays>0 && numberofDays<6)? "Need to go to work…": "Sleeping…");
     }
 
 }

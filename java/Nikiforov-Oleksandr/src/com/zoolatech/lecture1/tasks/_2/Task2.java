@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class Task2 {
     public static void main(String[] args) {
-        // task solution code here
         Scanner sc = new Scanner(System.in);
         float distance = sc.nextFloat();
         float time = sc.nextFloat();
@@ -17,10 +16,7 @@ public class Task2 {
 
 
     public static void  calculateSpeed(float distance, float time){
-        // calculate speed in m/sec  and in km/h
         System.out.println("Distance in m/sec:" + distance / time);
         System.out.println("Distance in km/h: "+distance * 3.6f / time);
-
-
     }
 }

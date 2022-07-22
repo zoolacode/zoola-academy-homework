@@ -11,54 +11,54 @@ import java.util.Scanner;
 
 public class Task6 {
     public static void main(String[] args) {
-        // task solution code here
         Scanner sc = new Scanner(System.in);
         int a = sc.nextInt();
         int b = sc.nextInt();
         char symbol = sc.next().charAt(0);
         //calculatorIf(a,b,symbol);
-        calculatorSwitch(a,b,symbol);
+        calculatorSwitch(a, b, symbol);
     }
 
 
-    public static void calculatorIf(int a, int b, char symbol){
+    public static void calculatorIf(int a, int b, char symbol) {
         // calculator function, which made by if-else statement
-        if (symbol == '+'){
-            System.out.println(a+b);
+        if (symbol == '+') {
+            System.out.println(a + b);
         } else if (symbol == '-') {
-            System.out.println(a-b);
-        } else if (symbol=='/') {
-            System.out.println(a/b);
-        } else if (symbol =='*') {
-            System.out.println(a*b);
-        }else if(symbol=='%'){
-            System.out.println(a%b);
-        }else{
+            System.out.println(a - b);
+        } else if (symbol == '/') {
+            System.out.println(a / b);
+        } else if (symbol == '*') {
+            System.out.println(a * b);
+        } else if (symbol == '%') {
+            System.out.println(a % b);
+        } else {
             System.out.println("Input error");
         }
     }
 
 
-    public static void calculatorSwitch(int a, int b, char symbol){
+    public static void calculatorSwitch(int a, int b, char symbol) {
         //calculator function, which made by switch statement
         switch (symbol) {
-            case '+' :
-                System.out.println(a+b);
-                break;
-            case '-' :
-                System.out.println(a-b);
-                break;
-            case '/':
-                System.out.println(a/b);
-                break;
-            case '*':
-                System.out.println(a*b);
-                break;
-            case '%':
-                System.out.println(a%b);
-                break;
-            default:
+            case '+' -> {
+                System.out.println(a + b);
+            }
+            case '-' -> {
+                System.out.println(a - b);
+            }
+            case '/' -> {
+                System.out.println(a / b);
+            }
+            case '*' -> {
+                System.out.println(a * b);
+            }
+            case '%' -> {
+                System.out.println(a % b);
+            }
+            default -> {
                 System.out.println("Input error");
+            }
         }
     }
 }

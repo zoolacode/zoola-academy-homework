@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class Task7 {
     public static void main(String[] args) {
-        // task solution code here
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         if (n % 2 == 0){

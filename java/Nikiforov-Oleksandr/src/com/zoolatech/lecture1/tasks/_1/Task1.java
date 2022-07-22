@@ -10,13 +10,11 @@ import java.util.Scanner;
 
 public class Task1 {
     public static void main(String[] args) {
-        // task solution code here
         Scanner sc = new Scanner(System.in);
         milesToKm(sc.nextFloat());
     }
 
     public static void milesToKm(float distance){
-        // converts distance from miles to kilometers multiplied by 1.60934412
         System.out.println("Distance in km: "+ distance * 1.60934412f);
     }
 }

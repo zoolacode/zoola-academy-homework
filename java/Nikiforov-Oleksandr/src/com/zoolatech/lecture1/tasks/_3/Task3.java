@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class Task3 {
     public static void main(String[] args) {
-        // task solution code here
         Scanner sc = new Scanner(System.in);
         calculateFractional(sc.nextDouble());
     }
