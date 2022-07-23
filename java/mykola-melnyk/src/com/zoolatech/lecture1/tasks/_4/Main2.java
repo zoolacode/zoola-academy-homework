@@ -15,14 +15,12 @@ public class Main2 {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter week day number:");
         int day = scanner.nextInt();
-        if ((1 <= day) && (day < 6)) {
+        if ((day >= 1) && (day < 6)) {
             System.out.println("Need to go to work…");
         } else if (day >= 6 && day < 8) {
             System.out.println("Sleeping…");
         } else {
             System.out.println("Error");
         }
-
-
     }
 }
