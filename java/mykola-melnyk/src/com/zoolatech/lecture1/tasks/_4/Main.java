@@ -17,7 +17,7 @@ public class Main {
         int day = scanner.nextInt();
         String msg = ((1 <= day) && (day < 6)) ?
                 ("Need to go to work…") :
-                ((day > 8) ? ("Error") : ("Sleeping…")
+                (((day > 8) || (day < 1)) ? ("Error") : ("Sleeping…")
                 );
         System.out.println(msg);
     }

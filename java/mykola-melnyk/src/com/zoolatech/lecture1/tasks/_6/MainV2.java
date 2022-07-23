@@ -23,15 +23,16 @@ public class MainV2 {
         System.out.println("Input either of the operators: +, -, *, /, %");
         char ch = scanner.next().charAt(0);
 
+        int result = 0; // introduced a variable to remove extra sout statements in switch
+
         switch (ch) {
-            case '+' -> System.out.println(num1 + num2);
-            case '-' -> System.out.println(num1 - num2);
-            case '*' -> System.out.println(num1 * num2);
-            case '/' -> System.out.println(num1 / num2);
-            case '%' -> System.out.println(num1 % num2);
+            case '+' -> result = num1 + num2;
+            case '-' -> result = num1 - num2;
+            case '*' -> result = num1 * num2;
+            case '/' -> result = num1 / num2;
+            case '%' -> result = num1 % num2;
             default -> System.out.println("Wrong input!");
         }
-
-
+        System.out.println("Result is: " + result);
     }
 }
