@@ -20,7 +20,5 @@ public class Main {
         double speedKMperS = speedMperS * 3.6;
         System.out.println("Speed in meters per second: " + speedMperS + " m/s; " +
                 "Speed in kilometers per hour: " + speedKMperS + " km/hr.");
-
-
     }
 }
