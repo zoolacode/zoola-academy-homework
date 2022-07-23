@@ -18,7 +18,10 @@ public class Main {
         System.out.println("Enter max value:");
         int max = scanner.nextInt();
         Random randomGenerator = new Random();
-        int randomNumber = randomGenerator.nextInt(max);
+        int randomNumber = randomGenerator.nextInt(max + 1);
+        if (randomNumber == 0) {
+            randomNumber = 1;
+        }
         int guess;
         do {
             System.out.println("Try to guess number:");
@@ -31,6 +34,5 @@ public class Main {
         } while (guess != randomNumber);
 
         System.out.println("That's it!");
-
     }
 }
