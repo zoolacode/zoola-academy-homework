@@ -15,17 +15,11 @@ public class MainV2 {
         int num = scanner.nextInt();
         if (num % 2 == 0) {
             System.out.println("Converting your even number to odd...");
-            int oddnum = num - 1;
-            while (oddnum > 0) {
-                System.out.println(oddnum);
-                oddnum -= 2;
-            }
+            num -= 1;
         }
-        else {
-                while (num > 0) {
-                    System.out.println(num);
-                    num -= 2;
-                }
+        while (num > 0) {
+            System.out.println(num);
+            num -= 2;
         }
     }
 }

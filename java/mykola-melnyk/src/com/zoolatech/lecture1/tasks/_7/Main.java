@@ -14,14 +14,10 @@ public class Main {
         System.out.println("Input an integer:");
         int num = scanner.nextInt();
         if (num % 2 == 0) {
-            System.out.println("Converting your even number to odd...");
-            int oddnum = num - 1;
-            for (int i = oddnum; i > 0; i -= 2)
-                System.out.println(i);
+            num -= 1;
         }
-        else {
-            for (int i = num; i > 0; i -= 2)
-                System.out.println(i);
+        for (int i = num; i > 0; i -= 2) {
+            System.out.println(i);
         }
     }
 }
