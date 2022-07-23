@@ -14,13 +14,11 @@ public class Main {
         double value1 = scanner.nextDouble();
         System.out.println("Enter second number:");
         double value2 = scanner.nextDouble();
-        double largerValue = (value1 > value2)?(value1):(value2);
         if (value1==value2) {
             System.out.println("Numbers are equal");
         } else {
+            double largerValue = (value1 > value2)?(value1):(value2);
             System.out.println("Larger number is: " + largerValue);
         }
-
-
     }
 }
