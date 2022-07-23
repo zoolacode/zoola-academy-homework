@@ -16,8 +16,6 @@ public class MainV2 {
         int num = scanner.nextInt();
         int start = 1;
         while (start <= num) {
-
-
             if ((start % 2 == 0) && (start % 3 == 0)) {
                 System.out.println(start + "(by 2 and 3)");
             } else if (start % 3 == 0) {
