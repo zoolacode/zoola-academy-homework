@@ -37,10 +37,8 @@ public class Calculator {
     }
 
     public void divide(double operand) {
-        if (operand == 0) {
-            System.out.println("Division by 0 is forbidden");
-            storedValue = 0;
-        } else {
+        System.out.println("Keep in mind that division by 0 is ignored!");
+        while (operand != 0) {     // added patch to ignore division by 0, as requested.
             storedValue /= operand;
         }
     }
