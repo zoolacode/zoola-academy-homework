@@ -95,22 +95,23 @@ public class Number1 {
         frame.setVisible(true);
         //MARK: SETTING UP ENDED
 
-        resultButton.addActionListener(e -> buttonAcction());
+        resultButton.addActionListener(e -> buttonAction());
     }
 
     //MARK: LOGICS
-    public void buttonAcction() {
+    public void buttonAction() {
 
         //MARK: SOME MAGIC HERE!
         String text = textField.getText();
         result = Float.parseFloat(text);
+        float resultForKilometer =  result * 1.609347F;
+        float resultForMiles = result / 1.609347F;
 
         if (buttonForKilometer.getModel().isSelected()) {
-            labelForResultPanel.setText("Results are: " +  result * 1.609347F);
+            labelForResultPanel.setText("Results are: " +  resultForKilometer);
         }
-
         else if (buttonForMiles.getModel().isSelected()) {
-            labelForResultPanel.setText("Results are: " +  result / 1.609347F);
+            labelForResultPanel.setText("Results are: " +  resultForMiles);
 
         }
     }
