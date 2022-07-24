@@ -1,4 +1,4 @@
-package com.zoolatech.lecture2.tasks._2;
+package com.zoolatech.lecture2.tasks._2.old;
 
 /**
  * Define a class that represents a robot, which moves in a room of a width W
@@ -17,34 +17,33 @@ package com.zoolatech.lecture2.tasks._2;
 
 import java.util.Scanner;
 
-enum Direction {   //set direction variants
-    WEST,
-    EAST,
-    NORTH,
-    SOUTH
-}
-
 public class SimpleRobot {
-    private int x = 0; // this will be a position on x-axis (along width)
-    private int y = 0;  // this will be a position along y-axis (along height)
-    private int W;  // this will be a width value
-    private int H;  // this will be a height value
+    enum Direction {   //set direction variants
+        WEST,
+        EAST,
+        NORTH,
+        SOUTH
+    }
+    private int x; // this will be a position on x-axis (along width)
+    private int y;  // this will be a position along y-axis (along height)
+    private int width;  // this will be a width value
+    private int height;  // this will be a height value
     private Direction dir;  // we set a direction
     private String compass; //to convert enum value to human-readable output
 
 
-    { //Initialization block
+    {
         Scanner scanner = new Scanner(System.in);
 
         do {
             System.out.println("Set the width of the room:");
-            W = scanner.nextInt();
-        } while (W <= 0);
+            width = scanner.nextInt();
+        } while (width <= 0);
 
         do {
             System.out.println("Set the height of the room:");
-            H = scanner.nextInt();
-        } while (H <= 0);
+            height = scanner.nextInt();
+        } while (height <= 0);
 
         System.out.println("Default coordinates are 0:0. Set custom? (y/n)");
         if (scanner.next().charAt(0) == 'y') {
@@ -52,31 +51,32 @@ public class SimpleRobot {
                 System.out.println("Enter x (width) axis coordinates " +
                         "(must be > 0 and < room width):");
                 x = scanner.nextInt();
-            } while (x < 0 || x >= W);
+            } while (x < 0 || x >= width);
 
             do {
                 System.out.println("Enter y (height) axis coordinates " +
                         "(must be > 0 and < room height):");
                 y = scanner.nextInt();
-            } while (y < 0 || y >= H);
+            } while (y < 0 || y >= height);
         }
 
 
         System.out.println("Default direction is South. Set custom? (y/n)");
         if (scanner.next().charAt(0) == 'y') {
             System.out.println("Possible variants are: N, E, S, W");
-            if (scanner.next().charAt(0) == 'N') {
+            char custDir = scanner.next().charAt(0);
+            if (custDir == 'N') {
                 dir = Direction.NORTH;
-            } else if (scanner.next().charAt(0) == 'E') {
+            } else if (custDir == 'E') {
                 dir = Direction.EAST;
-            } else if (scanner.next().charAt(0) == 'S') {
+            } else if (custDir == 'S') {
                 dir = Direction.SOUTH;
-            } else if (scanner.next().charAt(0) == 'W') {
+            } else if (custDir == 'W') {
                 dir = Direction.WEST;
             } else {
                 System.out.println("Unknown parameter. Setting to default (East).");
             }
-        } else dir = Direction.EAST;  //set default dir to South
+        } else dir = Direction.EAST;  //set default dir to East
 
         if (dir == Direction.WEST) {  //convert enum value to human-readable output
             compass = "West";
@@ -95,10 +95,10 @@ public class SimpleRobot {
         if (steps > 0) {
 
             if (dir == Direction.EAST) {
-                if ((x + steps) < W) {
+                if ((x + steps) < width) {
                     x += steps;
                 } else {
-                    x = W - 1;
+                    x = width - 1;
                     System.out.println("Reached Eastern wall! Change direction");
                 }
             } else if (dir == Direction.WEST) {
@@ -109,10 +109,10 @@ public class SimpleRobot {
                     System.out.println("Reached Western wall! Change direction");
                 }
             } else if (dir == Direction.SOUTH) {
-                if ((y + steps) < H) {
+                if ((y + steps) < height) {
                     y += steps;
                 } else {
-                    y = H - 1;
+                    y = height - 1;
                     System.out.println("Reached Southern wall! Change direction");
                 }
             } else if (dir == Direction.NORTH) {
@@ -134,10 +134,10 @@ public class SimpleRobot {
         if (steps > 0) {
 
             if (dir == Direction.EAST) {
-                if ((x + steps) < W) {
+                if ((x + steps) < width) {
                     x += steps;
                 } else {
-                    x = W - 1;
+                    x = width - 1;
                     System.out.println("Reached Eastern wall! Change direction");
                 }
             } else if (dir == Direction.WEST) {
@@ -148,10 +148,10 @@ public class SimpleRobot {
                     System.out.println("Reached Western wall! Change direction");
                 }
             } else if (dir == Direction.SOUTH) {
-                if ((y + steps) < H) {
+                if ((y + steps) < height) {
                     y += steps;
                 } else {
-                    y = H - 1;
+                    y = height - 1;
                     System.out.println("Reached Southern wall! Change direction");
                 }
             } else if (dir == Direction.NORTH) {
@@ -195,8 +195,8 @@ public class SimpleRobot {
     public void showPosition() {
         System.out.println("Robot's coordinates are (x:y): (" +
                 x + ":" + y + ").");
-        for (int i = 0; i < H; i++) {
-            for (int j = 0; j < W; j++) { // first print a line wit a symbol
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) { // first print a line wit a symbol
                 if (i == y && j == x) {   // markup position
                     System.out.print("|@ |");
                 } else {
