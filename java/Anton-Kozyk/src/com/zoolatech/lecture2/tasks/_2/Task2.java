@@ -17,96 +17,85 @@ import java.util.Scanner;
  */
 
 /**
- When you first run the program, you will be asked to enter the dimensions of the
- room (width and height) - they cannot be negative or zero. Next you will be able to enter the initial
- coordinates of the robot, to do this, enter "y" and then specify the desired values,
- keep in mind that these values can only be within the previously defined room
- dimensions. To continue with the default values of the coordinates of the robot,
- simply type any character and press Enter. Now the robot will follow your instructions
- from the code. He can go forward a certain number of steps, or turn left and right. Also
- note that left or right is relative to the direction of the robot. That is, if the robot
- is standing in the direction of the South, turning to the left, it will turn in the
- direction of the East. If the number of steps entered exceeds the size of the room, the
- robot will stop at its border. printPosition() method displays the compass, current
- position, direction, as well as a map with a picture of a robot on it (it can be displayed
- in 4 ways, depending on the direction - [ > ], [ < ], [/\ ] , [\/ ]).
+ * The size of the room is set when creating an object of the robot class. Also, when creating,
+ * you can set the initial coordinates and direction for the robot (use the format x, y, direction,
+ * Width, Height for this). Now the robot will follow the instructions from the code. He can go
+ * forward a certain number of steps, or turn left and right. Using the moveForward() method
+ * without arguments the robot will take one step, if you set a number in the method (moveForward(2))
+ * the robot will take the corresponding number of steps. Also note that left or right is relative
+ * to the direction of the robot. That is, if the robot is standing in the direction of the South,
+ * turning to the left, it will turn in the direction of the East. If the number of steps entered
+ * exceeds the size of the room, the robot will stop at its border. printPosition() method displays
+ * the compass, current position, direction, as well as a map with a picture of a robot on it (it can
+ * be displayed in 4 ways, depending on the direction - [ > ], [ < ], [/\ ] , [\/ ]).
  */
 
 public class Task2 {
     public static void main(String[] args) {
-        Robot robot = new Robot();
-        robot.printPosition();
-        robot.moveForward(10);
-        robot.turnLeft();
-        robot.moveForward(4);
-        robot.turnLeft();
-        robot.moveForward(3);
-        robot.printPosition();
-        robot.turnLeft();
+        Robot robot = new Robot(5, 5);
         robot.printPosition();
         robot.moveForward(4);
+        robot.moveForward();
+        robot.turnLeft();
+        robot.moveForward();
         robot.printPosition();
     }
 }
 
 class Robot {
-    //Start position coordinates
-    int x = 0;
-    int y = 0;
-    char direction = 'S';
+    int x;
+    int y;
+    char direction;
 
-    int W; //width of area
-    int H; //height of area
+    int Width;
+    int Height;
 
-    { //Initialization block
-        Scanner scanner = new Scanner(System.in);
+    final char S = 'S';
+    final char N = 'N';
+    final char W = 'W';
+    final char E = 'E';
 
-        do {
-            System.out.print("Enter Width of area: ");
-            W = scanner.nextInt();
-        } while (W <= 0);
+    Robot(int Width, int Height) {
+        this.x = 0;
+        this.y = 0;
+        this.direction = S;
+        this.Width = Width;
+        this.Height = Height;
+    }
 
-        do {
-            System.out.print("Enter Height of area: ");
-            H = scanner.nextInt();
-        } while (H <= 0);
+    Robot(int x, int y, char direction, int Width, int Height) {
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
+        this.Width = Width;
+        this.Height = Height;
+    }
 
-        System.out.print("If you want to chose start coordinates type \"y\" or" +
-                "type any letter to continue with default [0:0]: ");
-        if (scanner.next().charAt(0) == 'y') {
-            do {
-                System.out.print("Enter x: ");
-                x = scanner.nextInt();
-            } while (x < 0 || x >= W);
-
-            do {
-                System.out.print("Enter y: ");
-                y = scanner.nextInt();
-            } while (y < 0 || y >= H);
-        }
+    public void moveForward() {
+        moveForward(1);
     }
 
     public void moveForward(int step) {
         System.out.println("Trying to do " + step + " step(s) to " + direction);
         if (step > 0) {
             switch (direction) {
-                case 'S' -> {
-                    if (y + step < H) {
+                case S -> {
+                    if (y + step < Height) {
                         y += step;
                     } else {
-                        y = H - 1;
+                        y = Height - 1;
                         System.out.println("You can't go South anymore, please change direction.");
                     }
                 }
-                case 'E' -> {
-                    if (x + step < W) {
+                case E -> {
+                    if (x + step < Width) {
                         x += step;
                     } else {
-                        x = W - 1;
+                        x = Width - 1;
                         System.out.println("You can't go East anymore, please change direction.");
                     }
                 }
-                case 'N' -> {
+                case N -> {
                     if (y - step >= 0) {
                         y -= step;
                     } else {
@@ -114,7 +103,7 @@ class Robot {
                         System.out.println("You can't go North anymore, please change direction.");
                     }
                 }
-                case 'W' -> {
+                case W -> {
                     if (x - step >= 0) {
                         x -= step;
                     } else {
@@ -123,8 +112,7 @@ class Robot {
                     }
                 }
             }
-            System.out.println("At the moment you are at [" + y + ":" + x + "]\n");
-//            printPosition();
+            getPosition();
         } else {
             System.out.println("Nothing happened...");
         }
@@ -132,10 +120,10 @@ class Robot {
 
     public void turnLeft() {
         direction = switch (direction) {
-            case 'S' -> 'E';
-            case 'E' -> 'N';
-            case 'N' -> 'W';
-            case 'W' -> 'S';
+            case S -> E;
+            case E -> N;
+            case N -> W;
+            case W -> S;
             default -> throw new IllegalStateException("Unknown direction: " + direction);
         };
         System.out.println("Direction changed to " + direction + "\n");
@@ -143,10 +131,10 @@ class Robot {
 
     public void turnRight() {
         direction = switch (direction) {
-            case 'S' -> 'W';
-            case 'W' -> 'N';
-            case 'N' -> 'E';
-            case 'E' -> 'S';
+            case S -> W;
+            case W -> N;
+            case N -> E;
+            case E -> S;
             default -> throw new IllegalStateException("Unknown direction: " + direction + "\n");
         };
         System.out.println("Direction changed to " + direction);
@@ -154,28 +142,22 @@ class Robot {
 
     public void printPosition() {
         System.out.println(
-                "Compass" +
-                        "\n   N" +
-                        "\nW     E" +
-                        "\n   S");
+                        """
+                        Compass
+                           N
+                        W     E
+                           S""");
 
-        System.out.println("\nYour current position is [" + y + ":" + x + "]");
-        System.out.println("Direction: " + switch (direction) {
-            case 'S' -> "South";
-            case 'W' -> "West";
-            case 'N' -> "North";
-            case 'E' -> "East";
-            default -> throw new IllegalStateException("Unexpected direction: " + direction);
-        });
-        System.out.println();
-        for (int i = 0; i < H; i++) {
-            for (int j = 0; j < W; j++) {
+        getPosition();
+        System.out.println("Direction: " + direction + "\n");
+        for (int i = 0; i < Height; i++) {
+            for (int j = 0; j < Width; j++) {
                 if (i == y && j == x) {
                     System.out.print(switch (direction) {
-                        case 'S' -> "[\\/ ]";
-                        case 'W' -> "[ < ]";
-                        case 'N' -> "[/\\ ]";
-                        case 'E' -> "[ > ]";
+                        case S -> "[\\/ ]";
+                        case W -> "[ < ]";
+                        case N -> "[/\\ ]";
+                        case E -> "[ > ]";
                         default -> throw new IllegalStateException("Unexpected direction: " + direction);
                     });
                 } else {
@@ -186,4 +168,23 @@ class Robot {
         }
         System.out.println();
     }
+
+    class RobotsPosition {
+        int x = Robot.this.x;
+        int y = Robot.this.y;
+    }
+
+    public RobotsPosition getPosition() {
+        RobotsPosition robotsPosition = new RobotsPosition();
+        System.out.println("\nYour current position is [" +
+                robotsPosition.y + ":" + robotsPosition.x + "]");
+        return robotsPosition;
+    }
+
+    public char getDirection() {
+        System.out.println(direction);
+        return direction;
+    }
 }
+
+

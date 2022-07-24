@@ -10,12 +10,13 @@ import java.util.Scanner;
 public class Task3 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number with a fractional part: ");
         printFractionalPart(scanner.nextDouble());
     }
 
-    public static void printFractionalPart (double a) {
-        System.out.println("Fractional part: " + (a - (int) a));
+    public static void printFractionalPart(double number) {
+        int integerNumber = (int) number;
+        double fractionalPart = number - integerNumber;
+        System.out.println("Fractional part: " + fractionalPart);
     }
-
-
 }

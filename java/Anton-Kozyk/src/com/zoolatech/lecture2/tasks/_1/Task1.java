@@ -11,18 +11,17 @@ package com.zoolatech.lecture2.tasks._1;
 
 public class Task1 {
     public static void main(String[] args) {
-        Calculator calc = new Calculator(10);
+        Calculator calc = new Calculator(0);
 
         //Test block
-        calc.getValue();
-        calc.addition(5);
+        System.out.println(calc.getValue());
+        calc.addition(10);
+        calc.division(2);
+        System.out.println(calc.getValue());
         calc.division(0);
-        calc.multiplication(4);
-        calc.subtraction(7);
-        System.out.println("--------------");
-        calc.setValue(19.123);
-        calc.addition(1.3);
-        calc.division(2.5);
+        calc.multiplication(100);
+        calc.subtraction(150);
+        System.out.println(calc.getValue());
     }
 }
 
@@ -33,44 +32,35 @@ class Calculator {
         this.value = value;
     }
 
-    public double addition(double another_value) {
-        double result;
-        result = value + another_value;
-        System.out.println(value + " + " + another_value + " = " + result);
-        return result;
+    public double addition(double anotherValue) {
+        value += anotherValue;
+        return value;
     }
 
-    public double subtraction(double another_value) {
-        double result;
-        result = value - another_value;
-        System.out.println(value + " - " + another_value + " = " + result);
-        return result;
+    public double subtraction(double anotherValue) {
+        value -= anotherValue;
+        return value;
     }
 
-    public double multiplication(double another_value) {
-        double result;
-        result = value * another_value;
-        System.out.println(value + " * " + another_value + " = " + result);
-        return result;
+    public double multiplication(double anotherValue) {
+        value *= anotherValue;
+        return value;
     }
 
-    public double division(double another_value) {
-        double result = 0;
-        if (another_value == 0) {
+    public double division(double anotherValue) {
+        if (anotherValue == 0) {
             System.out.println("Zero division!");
         } else {
-            result = value / another_value;
-            System.out.println(value + " / " + another_value + " = " + result);
+            value /= anotherValue;
         }
-        return result;
+        return value;
     }
 
-    public void getValue() {
-        System.out.println("Current value is: " + value);
+    public double getValue() {
+        return value;
     }
 
     public void setValue(double value) {
         this.value = value;
-        System.out.println("New value is: " + this.value);
     }
 }

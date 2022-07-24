@@ -13,26 +13,25 @@ import java.util.Scanner;
  */
 
 public class Task10 {
+    static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         game(scanner.nextInt());
     }
 
     public static void game(int N) {
-        Scanner scanner = new Scanner(System.in);
         Random rand = new Random();
         int target = rand.nextInt(N) + 1;
-//        System.out.println("|" + target + "|");
-        int guess = scanner.nextInt();
+        int guess;
 
-        while (guess != target) {
+        do {
+            guess = scanner.nextInt();
             if (target > guess) {
                 System.out.println("Larger");
-            } else {
+            } else if (target < guess) {
                 System.out.println("Smaller");
             }
-            guess = scanner.nextInt();
-        }
+        } while (guess != target);
         System.out.println("That's it!");
     }
 }

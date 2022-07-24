@@ -11,9 +11,7 @@ import java.util.Scanner;
 public class Task4 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        int day;
-        day = scanner.nextInt();
+        int day = scanner.nextInt();
 
         if (day > 0 && day < 8) {
             isItWeekend_1(day);
@@ -22,7 +20,6 @@ public class Task4 {
         } else {
             System.out.println("Wrong day...");
         }
-
     }
 
     public static void isItWeekend_1(int day) {

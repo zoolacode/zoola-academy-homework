@@ -29,7 +29,7 @@ public class Task8 {
         }
     }
 
-    public static void divisible_2 (int N) {
+    public static void divisible_2(int N) {
         int i = 1;
         while (i <= N) {
             if (i % 2 == 0 && i % 3 == 0) {

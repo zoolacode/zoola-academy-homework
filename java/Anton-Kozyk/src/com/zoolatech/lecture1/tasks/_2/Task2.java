@@ -14,7 +14,7 @@ public class Task2 {
         calculateSpeed(scanner.nextDouble(), scanner.nextInt());
     }
 
-    public static void calculateSpeed (double distance, int time) {
+    public static void calculateSpeed(double distance, int time) {
         double speedInMS = distance / time;
         double speedInKmH = speedInMS * 3.6;
         System.out.println("Your speed is: " + speedInMS + " m/s " +

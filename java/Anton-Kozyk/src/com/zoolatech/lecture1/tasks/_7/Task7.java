@@ -17,9 +17,11 @@ public class Task7 {
     }
 
     public static void printOdd(int N) {
-        if (N % 2 == 0) N -= 1;
+        if (N % 2 == 0) {
+            N--;
+        }
 
-        for (int i = N; i > 0; i = i - 2) {
+        for (int i = N; i > 0; i -= 2) {
             System.out.println(i);
         }
     }

@@ -10,15 +10,26 @@ import java.util.Scanner;
 public class Task5 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        printLarger(scanner.nextInt(), scanner.nextInt());
+        int firstNumber = scanner.nextInt();
+        int secondNumber = scanner.nextInt();
 
+        if (firstNumber == secondNumber) {
+            System.out.println("Numbers are equal");
+        } else {
+            System.out.println("Result of the first method: " +
+                    printLarger1(firstNumber, secondNumber));
+
+            System.out.println("Result of the second method: " +
+                    printLarger2(firstNumber, secondNumber));
+        }
     }
 
-    public static void printLarger(int a, int b) {
-        if (a == b)
-            System.out.println("Numbers are equal");
-        else
-            System.out.println(Math.max(a, b));
+    public static int printLarger1(int firstNumber, int secondNumber) {
+        return Math.max(firstNumber, secondNumber);
+    }
+
+    public static int printLarger2(int firstNumber, int secondNumber) {
+        return firstNumber > secondNumber ? firstNumber : secondNumber;
     }
 }
 

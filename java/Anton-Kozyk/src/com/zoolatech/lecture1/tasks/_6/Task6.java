@@ -13,40 +13,52 @@ public class Task6 {
         Scanner scanner = new Scanner(System.in);
         calculator(scanner.nextInt(), scanner.nextInt(), scanner.next().charAt(0));
         System.out.println();
-        calculator_2(scanner.nextInt(), scanner.nextInt(), scanner.next().charAt(0));
+        calculator2(scanner.nextInt(), scanner.nextInt(), scanner.next().charAt(0));
     }
 
     public static void calculator(int a, int b, char operation) {
+        int result = 0;
+
         if (operation == '+') {
-            System.out.println(a + b);
+            result = a + b;
         } else if (operation == '-') {
-            System.out.println(a - b);
+            result = a - b;
         } else if (operation == '*') {
-            System.out.println(a * b);
+            result = a * b;
+        } else if (operation == '%') {
+            result = a % b;
         } else if (operation == '/') {
             try {
-                System.out.println(a / b);
+                result = a / b;
             } catch (ArithmeticException e) {
                 System.out.println(e.getMessage());
             }
         } else {
             System.out.println("Wrong operation...");
         }
+
+        System.out.println(result);
     }
 
-    public static void calculator_2(int a, int b, char operation) {
-        switch (operation) {
-            case '+' -> System.out.println(a + b);
-            case '-' -> System.out.println(a - b);
-            case '*' -> System.out.println(a * b);
+    public static void calculator2(int a, int b, char operation) {
+        int result = switch (operation) {
+            case '+' -> a + b;
+            case '-' -> a - b;
+            case '*' -> a * b;
+            case '%' -> a % b;
             case '/' -> {
                 try {
-                    System.out.println(a / b);
+                    yield a / b;
                 } catch (ArithmeticException e) {
                     System.out.println(e.getMessage());
+                    yield 0;
                 }
             }
-            default -> System.out.println("Wrong operation");
-        }
+            default -> {
+                System.out.println("Wrong operation...");
+                yield 0;
+            }
+        };
+        System.out.println(result);
     }
 }
