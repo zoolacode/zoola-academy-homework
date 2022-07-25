@@ -12,24 +12,17 @@ import java.util.Scanner;
 public class Task4 {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        int dayOfWeek1;
-
-        Scanner scanner1 = new Scanner(System.in);
-
-        if(scanner1.hasNextInt()){
-            dayOfWeek1 = scanner1.nextInt();
+        if(scanner.hasNextInt()){
+            ifElseMethod(scanner.nextInt());
+            conditionalOperatorMethod(scanner.nextInt());
         } else {
             throw new IllegalArgumentException("Enter integer value");
         }
-
-        ifElseMethod(dayOfWeek1);
-        conditionalOperatorMethod(dayOfWeek1);
-
     }
 
     public static void ifElseMethod(int dayOfWeek) {
-
          if (dayOfWeek <= 0 || dayOfWeek >= 8) {
             throw new IllegalArgumentException("Enter value form 1 to 7");
         } else if(dayOfWeek == 6 || dayOfWeek == 7) {
@@ -40,7 +33,6 @@ public class Task4 {
     }
 
     public static void conditionalOperatorMethod(int dayOfWeek) {
-
         if (dayOfWeek <= 0 || dayOfWeek >= 8) {
             throw new IllegalArgumentException("Enter value form 1 to 7");
         } else {
