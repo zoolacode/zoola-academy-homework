@@ -14,35 +14,25 @@ import java.util.Scanner;
 public class Task10 {
 
     public static void main(String[] args) {
-
         randomGenerator();
     }
 
     public static void randomGenerator() {
-        int randomNumber;
-
         Scanner scanner = new Scanner(System.in);
 
-        Random randomGenerator = new Random();
-
         if(scanner.hasNextInt()){
-            randomNumber = randomGenerator.nextInt(scanner.nextInt());
+            guessNumber(new Random().nextInt(scanner.nextInt() + 1));
         } else {
             throw new IllegalArgumentException("Enter numeric value");
         }
-
-        guessNumber(randomNumber);
     }
 
     public static void guessNumber(int randomNumber) {
-
+        Scanner scanner = new Scanner(System.in);
         boolean win = false;
         int guessNumber;
 
-        while(!win) {
-
-            Scanner scanner = new Scanner(System.in);
-
+        do {
             if(scanner.hasNextInt()){
                 guessNumber = scanner.nextInt();
             } else {
@@ -59,6 +49,6 @@ public class Task10 {
             } else if (guessNumber < randomNumber) {
                 System.out.println("Smaller");
             }
-        }
+        } while (!win);
     }
 }
