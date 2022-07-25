@@ -10,27 +10,24 @@ import java.util.Scanner;
 public class Task5 {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
         int number1;
         int number2;
 
-        Scanner scanner1 = new Scanner(System.in);
-        Scanner scanner2 = new Scanner(System.in);
-
-        if(scanner1.hasNextInt()){
-            number1 = scanner1.nextInt();
+        if(scanner.hasNextInt()){
+            number1 = scanner.nextInt();
         } else {
             throw new IllegalArgumentException("Enter integer value");
         }
 
-        if(scanner2.hasNextInt()){
-            number2 = scanner2.nextInt();
+        if(scanner.hasNextInt()){
+            number2 = scanner.nextInt();
         } else {
             throw new IllegalArgumentException("Enter numeric value");
         }
 
         largerNumberOutputMethod(number1, number2);
-
     }
 
     public static void largerNumberOutputMethod(int number1, int number2) {
