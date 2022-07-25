@@ -11,21 +11,19 @@ import java.util.Scanner;
 public class Task2 {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
         double distanceInMeters;
         double timeInSeconds;
 
-        Scanner distanceScanner = new Scanner(System.in);
-        Scanner timeScanner = new Scanner(System.in);
-
-        if(distanceScanner.hasNextFloat()){
-            distanceInMeters = distanceScanner.nextFloat();
+        if(scanner.hasNextFloat()){
+            distanceInMeters = scanner.nextFloat();
         } else {
             throw new IllegalArgumentException("Enter numeric value");
         }
 
-        if(timeScanner.hasNextFloat()){
-            timeInSeconds = timeScanner.nextFloat();
+        if(scanner.hasNextFloat()){
+            timeInSeconds = scanner.nextFloat();
         } else {
             throw new IllegalArgumentException("Enter numeric value");
         }
