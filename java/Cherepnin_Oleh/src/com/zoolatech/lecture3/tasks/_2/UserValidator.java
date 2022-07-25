@@ -1,0 +1,24 @@
+package com.zoolatech.lecture3.tasks._2;
+
+import java.util.List;
+
+public class UserValidator {
+    private static final List<SmallerValidator> VALIDATORS = List.of(
+            new NameValidator(),
+            new NumberValidator(),
+            new DateValidator(),
+            new EmailValidator());
+
+    public static boolean validate(User user) {
+        System.out.println("Start to validate user #" + user.getId());
+        boolean result = true;
+        for (SmallerValidator validator : VALIDATORS) {
+            if (!validator.isValid(user)) {
+                result = false;
+            }
+        }
+        System.out.println(!result ? "User #" + user.getId() + " failed validation"
+                : "User #" + user.getId() + " completed validation");
+        return result;
+    }
+}
