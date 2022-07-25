@@ -11,24 +11,19 @@ import java.util.Scanner;
 public class Task7 {
 
     public static void main(String[] args) {
-
-        int number;
         Scanner scanner = new Scanner(System.in);
 
         if(scanner.hasNextInt()){
-            number = scanner.nextInt();
+            printOddNumbersForLoop(scanner.nextInt());
+            System.out.println();
+            printOddNumbersWhileLoop(scanner.nextInt());
         } else {
             throw new IllegalArgumentException("Enter integer value");
         }
-
-        printOddNumbersForLoop(number);
-        System.out.println();
-        printOddNumbersWhileLoop(number);
     }
 
     public static void printOddNumbersForLoop(int number) {
-
-        for (int i = --number; i >= 1; i--) {
+        for (int i = number; i >= 1; i--) {
             if (i % 2 != 0) {
                 System.out.println(i);
             }
@@ -36,12 +31,11 @@ public class Task7 {
     }
 
     public static void printOddNumbersWhileLoop(int number) {
-
         while (number >= 1) {
-            number--;
             if (number % 2 != 0) {
                 System.out.println(number);
             }
+            number--;
         }
     }
 }
