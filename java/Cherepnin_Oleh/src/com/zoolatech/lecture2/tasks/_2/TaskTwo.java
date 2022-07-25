@@ -1,7 +1,5 @@
 package com.zoolatech.lecture2.tasks._2;
 
-import java.util.Locale;
-import java.util.Scanner;
 
 /**
  * Define a class that represents a robot, which moves in a room of a width W and a height of H.

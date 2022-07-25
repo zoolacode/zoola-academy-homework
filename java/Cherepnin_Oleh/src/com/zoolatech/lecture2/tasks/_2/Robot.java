@@ -2,8 +2,8 @@ package com.zoolatech.lecture2.tasks._2;
 
 public class Robot {
     private Direction direction;
-    private Integer width;
-    private Integer height;
+    private final int width;
+    private final int height;
     private int x;
     private int y;
 
@@ -11,15 +11,15 @@ public class Robot {
         this(width, height, 0, 0);
     }
 
-    public Robot(Integer width, Integer height, Direction direction) {
+    public Robot(int width, int height, Direction direction) {
         this(width, height, 0, 0, direction);
     }
 
-    public Robot(Integer width, Integer height, int x, int y) {
+    public Robot(int width, int height, int x, int y) {
         this(width, height, x, y, Direction.SOUTH);
     }
 
-    public Robot(Integer width, Integer height, int x, int y, Direction direction) {
+    public Robot(int width, int height, int x, int y, Direction direction) {
         this.direction = direction;
         this.width = width;
         this.height = height;
@@ -27,10 +27,15 @@ public class Robot {
         this.y = y;
     }
 
+    public void takeOneStep() {
+        moveForward(1);
+    }
+
     public void moveForward(int steps) {
-        System.out.println("The robot is taking " + steps + "steps to the " + direction);
+        System.out.println(steps > 1 ? "The robot is taking " + steps + "steps to the " + direction
+                : "The robot is taking one step to the " + direction);
         switch (direction) {
-            case WEST -> this.x = move((steps * -1), this.x, 0);
+            case WEST -> this.x += move((steps * -1), this.x, 0);
             case NORTH -> this.y = move((steps * -1), this.y, 0);
             case EAST -> this.x = move(steps, this.x, this.width);
             case SOUTH -> this.y = move(steps, this.y, this.height);
@@ -39,17 +44,17 @@ public class Robot {
 
     private int move(int steps, int position, int edge) {
         position += steps;
-        if (steps > 0)
-            position = position > edge ? showAttention(edge) : position;
-        else
-            position = position < edge ? showAttention(edge) : position;
+        if ((steps > 0 && position > edge)
+                || (steps < 0 && position < edge)) {
+            showAttention();
+            return edge;
+        }
         return position;
     }
 
-    private int showAttention(int edge) {
-        System.out.println("Too many steps, the robot has already come to border of room at " +
+    private void showAttention() {
+        System.out.println("The robot has already come to border of room at " +
                 direction + "\nRobot should change direction");
-        return edge;
     }
 
 
@@ -61,11 +66,6 @@ public class Robot {
     public void turnRight() {
         direction = Direction.valueOf(direction.getRight());
         showDirection();
-    }
-
-    private void showDirection(){
-        System.out.println("Compass\n   N\nW  +  E\n   S");
-        System.out.println("The robot looks " + direction);
     }
 
     public void showPosition() {
@@ -80,5 +80,10 @@ public class Robot {
             }
             System.out.println();
         }
+    }
+
+    private void showDirection() {
+        System.out.println("Compass\n   N\nW  +  E\n   S");
+        System.out.println("The robot looks " + direction);
     }
 }

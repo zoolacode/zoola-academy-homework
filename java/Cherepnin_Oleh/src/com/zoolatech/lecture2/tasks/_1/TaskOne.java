@@ -38,7 +38,8 @@ public class TaskOne {
             case "/" -> calculator.divide(value);
             default -> System.out.println("operator: '" + c + "' does not exist");
         }
-        if (Double.compare(oldValue, calculator.getNumber()) != 0)
-        System.out.println(oldValue + c + value + "=" + calculator.getNumber());
+        if (Double.compare(oldValue, calculator.getNumber()) != 0) {
+            System.out.println(oldValue + c + value + "=" + calculator.getNumber());
+        }
     }
 }

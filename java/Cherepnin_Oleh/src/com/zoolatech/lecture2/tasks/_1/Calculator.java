@@ -5,7 +5,6 @@ public class Calculator {
     private double number;
 
     public Calculator() {
-        this(0);
     }
 
     public Calculator(double number) {
@@ -23,10 +22,14 @@ public class Calculator {
     }
 
     public double divide(double value) {
-        if (value != 0) {
-            number /= value;
-            return number;
-        }else System.out.println("division by zero is not available");
+        try {
+            if (value != 0) {
+                number /= value;
+                return number;
+            } else throw new ArithmeticException("division by zero is not available");
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
