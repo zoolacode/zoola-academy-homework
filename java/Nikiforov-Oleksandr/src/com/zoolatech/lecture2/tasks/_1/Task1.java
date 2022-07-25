@@ -1,4 +1,5 @@
 package com.zoolatech.lecture2.tasks._1;
+
 import java.util.Scanner;
 
 /**
@@ -19,43 +20,42 @@ public class Task1 {
     }
 
 
-    public static void calculation(float value){
+    public static void calculation(float value) {
         Calculcator calculcator = new Calculcator(value);
-        float variable = 0, result =0;
-        end :while (true){
+        float number = 0, result = 0;
+        while (true) {
             Scanner sc = new Scanner(System.in);
             char symbol = sc.next().charAt(0);
-            switch (symbol){
-                case '+' :
+            switch (symbol) {
+                case '+' -> {
                     System.out.println("Value to calculate: ");
-                    variable = sc.nextFloat();
-                    result = calculcator.adding(variable);
+                    number = sc.nextFloat();
+                    result = calculcator.adding(number);
                     System.out.println("Result = " + result);
-                    break;
-                case '-' :
+                }
+                case '-' -> {
                     System.out.println("Value to calculate: ");
-                    variable = sc.nextFloat();
-                    result = calculcator.substracting(variable);
+                    number = sc.nextFloat();
+                    result = calculcator.substracting(number);
                     System.out.println("Result = " + result);
-                    break;
-                case '/':
+                }
+                case '/' -> {
                     System.out.println("Value to calculate: ");
-                    variable = sc.nextFloat();
-                    result = calculcator.division(variable);
+                    number = sc.nextFloat();
+                    result = calculcator.division(number);
                     System.out.println("Result = " + result);
-                    break;
-                case '*':
+                }
+                case '*' -> {
                     System.out.println("Value to calculate: ");
-                    variable = sc.nextFloat();
-                    result = calculcator.multiplication(variable);
+                    number = sc.nextFloat();
+                    result = calculcator.multiplication(number);
                     System.out.println("Result = " + result);
-                    break;
-                case '%':
+                }
+                case '%' -> {
                     System.out.println("Bue!");
-                    break end;
-                default:
-                    System.out.println("Input error");
-                    break;
+                    return;
+                }
+                default -> System.out.println("Input error");
             }
         }
     }
