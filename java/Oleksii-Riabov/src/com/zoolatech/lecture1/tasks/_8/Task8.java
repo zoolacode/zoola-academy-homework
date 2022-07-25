@@ -13,23 +13,18 @@ import java.util.Scanner;
 public class Task8 {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        int number;
-        Scanner scanner1 = new Scanner(System.in);
-
-        if(scanner1.hasNextInt()){
-            number = scanner1.nextInt();
+        if(scanner.hasNextInt()){
+            printDivisibleNumbersForLoop(scanner.nextInt());
+            System.out.println();
+            printDivisibleNumbersWhileLoop(scanner.nextInt());
         } else {
             throw new IllegalArgumentException("Enter integer value");
         }
-
-        printDivisibleNumbersForLoop(number);
-        System.out.println();
-        printDivisibleNumbersWhileLoop(number);
     }
 
     public static void printDivisibleNumbersForLoop(int number) {
-
         for (int i=2; i <= number; i++){
             if (i % 2 == 0 & i % 3 == 0) {
                 System.out.println(i + " (by 2 and 3)");
@@ -42,7 +37,6 @@ public class Task8 {
     }
 
     public static void printDivisibleNumbersWhileLoop(int number) {
-
         int i = 2;
         while(i <= number) {
             if (i % 2 == 0 & i % 3 == 0) {
