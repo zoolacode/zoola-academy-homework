@@ -15,6 +15,7 @@ public class Task1 {
     }
 
     public static void milesToKm(float distance){
-        System.out.println("Distance in km: "+ distance * 1.60934412f);
+        float result = distance * 1.60934412f;
+        System.out.println("Distance in km: "+ result);
     }
 }
