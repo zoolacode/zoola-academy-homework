@@ -26,7 +26,7 @@ public class Task1 {
 }
 
 class Calculator {
-    double value;
+    private double value;
 
     Calculator(double value) {
         this.value = value;

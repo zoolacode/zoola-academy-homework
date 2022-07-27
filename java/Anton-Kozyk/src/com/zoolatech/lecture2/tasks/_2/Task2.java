@@ -1,7 +1,5 @@
 package com.zoolatech.lecture2.tasks._2;
 
-import java.util.Scanner;
-
 /**
  * Define a class that represents a robot, which moves in a room of a width W and a height
  * of H. The class should provide methods to move a robot forward by either 1 or N tiles
@@ -43,32 +41,28 @@ public class Task2 {
 }
 
 class Robot {
-    int x;
-    int y;
-    char direction;
+    private int x;
+    private int y;
+    private char direction;
 
-    int Width;
-    int Height;
+    private int width;
+    private int height;
 
-    final char S = 'S';
-    final char N = 'N';
-    final char W = 'W';
-    final char E = 'E';
+    private final static char SOUTH = 'S';
+    private final static char NORTH = 'N';
+    private final static char WEST = 'W';
+    private final static char EAST = 'E';
 
-    Robot(int Width, int Height) {
-        this.x = 0;
-        this.y = 0;
-        this.direction = S;
-        this.Width = Width;
-        this.Height = Height;
+    Robot(int width, int height) {
+        this(0, 0, 'S', width, height);
     }
 
-    Robot(int x, int y, char direction, int Width, int Height) {
+    Robot(int x, int y, char direction, int width, int height) {
         this.x = x;
         this.y = y;
         this.direction = direction;
-        this.Width = Width;
-        this.Height = Height;
+        this.width = width;
+        this.height = height;
     }
 
     public void moveForward() {
@@ -79,23 +73,23 @@ class Robot {
         System.out.println("Trying to do " + step + " step(s) to " + direction);
         if (step > 0) {
             switch (direction) {
-                case S -> {
-                    if (y + step < Height) {
+                case SOUTH -> {
+                    if (y + step < height) {
                         y += step;
                     } else {
-                        y = Height - 1;
+                        y = height - 1;
                         System.out.println("You can't go South anymore, please change direction.");
                     }
                 }
-                case E -> {
-                    if (x + step < Width) {
+                case EAST -> {
+                    if (x + step < width) {
                         x += step;
                     } else {
-                        x = Width - 1;
+                        x = width - 1;
                         System.out.println("You can't go East anymore, please change direction.");
                     }
                 }
-                case N -> {
+                case NORTH -> {
                     if (y - step >= 0) {
                         y -= step;
                     } else {
@@ -103,7 +97,7 @@ class Robot {
                         System.out.println("You can't go North anymore, please change direction.");
                     }
                 }
-                case W -> {
+                case WEST -> {
                     if (x - step >= 0) {
                         x -= step;
                     } else {
@@ -120,10 +114,10 @@ class Robot {
 
     public void turnLeft() {
         direction = switch (direction) {
-            case S -> E;
-            case E -> N;
-            case N -> W;
-            case W -> S;
+            case SOUTH -> EAST;
+            case EAST -> NORTH;
+            case NORTH -> WEST;
+            case WEST -> SOUTH;
             default -> throw new IllegalStateException("Unknown direction: " + direction);
         };
         System.out.println("Direction changed to " + direction + "\n");
@@ -131,10 +125,10 @@ class Robot {
 
     public void turnRight() {
         direction = switch (direction) {
-            case S -> W;
-            case W -> N;
-            case N -> E;
-            case E -> S;
+            case SOUTH -> WEST;
+            case WEST -> NORTH;
+            case NORTH -> EAST;
+            case EAST -> SOUTH;
             default -> throw new IllegalStateException("Unknown direction: " + direction + "\n");
         };
         System.out.println("Direction changed to " + direction);
@@ -142,7 +136,7 @@ class Robot {
 
     public void printPosition() {
         System.out.println(
-                        """
+                """
                         Compass
                            N
                         W     E
@@ -150,14 +144,14 @@ class Robot {
 
         getPosition();
         System.out.println("Direction: " + direction + "\n");
-        for (int i = 0; i < Height; i++) {
-            for (int j = 0; j < Width; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 if (i == y && j == x) {
                     System.out.print(switch (direction) {
-                        case S -> "[\\/ ]";
-                        case W -> "[ < ]";
-                        case N -> "[/\\ ]";
-                        case E -> "[ > ]";
+                        case SOUTH -> "[\\/ ]";
+                        case WEST -> "[ < ]";
+                        case NORTH -> "[/\\ ]";
+                        case EAST -> "[ > ]";
                         default -> throw new IllegalStateException("Unexpected direction: " + direction);
                     });
                 } else {
@@ -169,20 +163,24 @@ class Robot {
         System.out.println();
     }
 
-    class RobotsPosition {
-        int x = Robot.this.x;
-        int y = Robot.this.y;
+    static class RobotsPosition {
+        private int x;
+        private int y;
+
+        RobotsPosition(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
     }
 
     public RobotsPosition getPosition() {
-        RobotsPosition robotsPosition = new RobotsPosition();
+        RobotsPosition robotsPosition = new RobotsPosition(x, y);
         System.out.println("\nYour current position is [" +
                 robotsPosition.y + ":" + robotsPosition.x + "]");
         return robotsPosition;
     }
 
     public char getDirection() {
-        System.out.println(direction);
         return direction;
     }
 }
