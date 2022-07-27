@@ -2,10 +2,10 @@ package com.zoolatech.lecture3.tasks._1;
 
 import java.util.Objects;
 
-abstract public class Musicians {
+abstract public class Musician {
     String name;
 
-    Musicians(String name) {
+    Musician(String name) {
         this.name = name;
     }
 
@@ -15,7 +15,7 @@ abstract public class Musicians {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Musicians musician = (Musicians) o;
+        Musician musician = (Musician) o;
         return Objects.equals(name, musician.name);
     }
 
@@ -24,7 +24,7 @@ abstract public class Musicians {
     }
 }
 
-class Guitarist extends Musicians {
+class Guitarist extends Musician {
     Guitarist(String name) {
         super(name);
     }
@@ -34,7 +34,7 @@ class Guitarist extends Musicians {
         guitar.playSound();
     }
 
-    Guitar guitar = new Guitar();
+    private Guitar guitar = new Guitar();
 
     @Override
     void printInfo() {
@@ -44,7 +44,7 @@ class Guitarist extends Musicians {
     }
 }
 
-class Pianist extends Musicians {
+class Pianist extends Musician {
     Pianist(String name) {
         super(name);
     }
@@ -54,7 +54,7 @@ class Pianist extends Musicians {
         piano.playSound();
     }
 
-    Piano piano = new Piano();
+    private Piano piano = new Piano();
 
     @Override
     void printInfo() {
@@ -64,7 +64,7 @@ class Pianist extends Musicians {
     }
 }
 
-class Violinist extends Musicians {
+class Violinist extends Musician {
     Violinist(String name) {
         super(name);
     }
@@ -74,7 +74,7 @@ class Violinist extends Musicians {
         violin.playSound();
     }
 
-    Violin violin = new Violin();
+    private Violin violin = new Violin();
 
     @Override
     void printInfo() {

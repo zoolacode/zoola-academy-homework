@@ -30,8 +30,8 @@ public class Task2 {
                 5,
                 7);
 
-        Validator validator = new Validator();
+        MainValidator validator = new MainValidator();
 
-        validator.isValid(peter);
+        System.out.println(validator.isValid(peter));
     }
 }
