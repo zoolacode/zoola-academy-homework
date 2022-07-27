@@ -25,8 +25,10 @@ public class TaskFive {
     }
 
     public static void getLargerNumber(int a, int b) {
-        if (a == b)
+        if (a == b) {
             System.out.println("Numbers are equal");
-        else System.out.println(a > b ? a : b);
+        } else {
+            System.out.println(a > b ? a : b);
+        }
     }
 }

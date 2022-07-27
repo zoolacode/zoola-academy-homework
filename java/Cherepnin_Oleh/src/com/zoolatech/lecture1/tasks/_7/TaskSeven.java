@@ -21,16 +21,17 @@ public class TaskSeven {
 
     public static void getOddsNumbers1(int number) {
         for (int i = number; i > 0; i--) {
-            if (i % 2 != 0)
+            if (i % 2 != 0) {
                 System.out.println(i);
+            }
         }
     }
 
     public static void getOddsNumbers2(int number) {
         while (number > 0) {
-            if (number % 2 != 0)
+            if (number % 2 != 0) {
                 System.out.println(number);
-            number--;
+            } number--;
         }
     }
 }

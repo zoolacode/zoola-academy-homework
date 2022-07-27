@@ -32,18 +32,20 @@ public class TaskSix {
     }
 
     public static int calculate1(int a, int b, char c) {
-        if (c == '+')
+        if (c == '+') {
             return a + b;
-        else if (c == '-')
+        } else if (c == '-') {
             return a - b;
-        else if (c == '*')
+        } else if (c == '*') {
             return a * b;
-        else if (c == '/')
+        } else if (c == '/') {
             return a / b;
-        else if (c == '%')
+        } else if (c == '%') {
             return a % b;
-        else System.out.println("operator: '" + c + "' does not exist");
-        return 0;
+        } else {
+            System.out.println("operator: '" + c + "' does not exist");
+            return 0;
+        }
     }
 
     public static int calculate2(int a, int b, char c) {

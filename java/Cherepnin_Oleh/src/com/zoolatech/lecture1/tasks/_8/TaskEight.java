@@ -27,24 +27,26 @@ public class TaskEight {
 
     public static void getDivisibleByTwoOrThree1(int number) {
         for (int i = 1; i <= number; i++) {
-            if (i % 2 == 0 && i % 3 == 0)
+            if (i % 2 == 0 && i % 3 == 0) {
                 System.out.println(i + "(by 2 and 3)");
-            else if (i % 2 == 0)
+            } else if (i % 2 == 0) {
                 System.out.println(i + "(by 2)");
-            else if (i % 3 == 0)
+            } else if (i % 3 == 0) {
                 System.out.println(i + "(by 3)");
+            }
         }
     }
 
     public static void getDivisibleByTwoOrThree2(int number) {
         int i = 0;
         while (i <= number) {
-            if (i % 2 == 0 && i % 3 == 0)
+            if (i % 2 == 0 && i % 3 == 0) {
                 System.out.println(i + "(by 2 and 3)");
-            else if (i % 2 == 0)
+            } else if (i % 2 == 0) {
                 System.out.println(i + "(by 2)");
-            else if (i % 3 == 0)
+            } else if (i % 3 == 0) {
                 System.out.println(i + "(by 3)");
+            }
             i++;
         }
     }
