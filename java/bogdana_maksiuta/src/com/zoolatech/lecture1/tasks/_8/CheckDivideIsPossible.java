@@ -33,19 +33,7 @@ public class CheckDivideIsPossible {
                 divisionBy2By3(i);
             }
         } else {
-            for (int i = number; i < 0; i++) { // for negative numbers
-                divisionBy2By3(i);
-            }
-        }
-    }
-
-    public static void divisionBy2By3(int i) {
-        if (i % 2 == 0 && i % 3 == 0) {
-            System.out.println(i + " (by 2 and 3)");
-        } else if (i % 2 == 0) {
-            System.out.println(i + " (by 2)");
-        } else if (i % 3 == 0) {
-            System.out.println(i + " (by 3)");
+            throw new IllegalArgumentException("Negative number");
         }
     }
 
@@ -59,10 +47,17 @@ public class CheckDivideIsPossible {
                 startNumber++;
             }
         } else {
-            while (number < 0) { // for negative numbers
-                divisionBy2By3(number);
-                number++;
-            }
+            throw new IllegalArgumentException("Negative number");
+        }
+    }
+
+    public static void divisionBy2By3(int i) {
+        if (i % 2 == 0 && i % 3 == 0) {
+            System.out.println(i + " (by 2 and 3)");
+        } else if (i % 2 == 0) {
+            System.out.println(i + " (by 2)");
+        } else if (i % 3 == 0) {
+            System.out.println(i + " (by 3)");
         }
     }
 }

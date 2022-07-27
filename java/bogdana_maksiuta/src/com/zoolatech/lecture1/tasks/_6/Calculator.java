@@ -26,72 +26,62 @@ public class Calculator {
         System.out.println("Add arithmetic operation:");
         char symbol = scanner.next().charAt(0);
 
-        ifElseCalculator(firstNumber, secondNumber, symbol);
-        switchCaseCalculator(firstNumber, secondNumber, symbol);
+        System.out.println(firstNumber + " " + symbol + " " + secondNumber + " = " +
+                ifElseCalculator(firstNumber, secondNumber, symbol));
+        System.out.println(firstNumber + " " + symbol + " " + secondNumber + " = " +
+                switchCaseCalculator(firstNumber, secondNumber, symbol));
     }
 
-    public static void ifElseCalculator(int firstNumber, int secondNumber, char symbol) {
+    public static int ifElseCalculator(int firstNumber, int secondNumber, char symbol) {
+        int result = 0;
         if (symbol == '+') {
-            int result = firstNumber + secondNumber;
-            System.out.println(firstNumber + " + " + secondNumber + " = " + result);
+            result = firstNumber + secondNumber;
         }
         if (symbol == '-') {
-            int result = firstNumber - secondNumber;
-            System.out.println(firstNumber + " - " + secondNumber + " = " + result);
+            result = firstNumber - secondNumber;
         }
         if (symbol == '*') {
-            int result = firstNumber * secondNumber;
-            System.out.println(firstNumber + " * " + secondNumber + " = " + result);
+            result = firstNumber * secondNumber;
         }
         if (symbol == '/') {
             if (secondNumber == 0) {
                 System.out.println("Cannot divide by 0");
             } else {
-                int result = firstNumber / secondNumber;
-                System.out.println(firstNumber + " / " + secondNumber + " = " + result);
+                result = firstNumber / secondNumber;
             }
         }
         if (symbol == '%') {
             if (secondNumber == 0) {
                 System.out.println("Cannot divide by 0");
             } else {
-                int result = firstNumber % secondNumber;
-                System.out.println(firstNumber + " % " + secondNumber + " = " + result);
+                result = firstNumber % secondNumber;
             }
         }
+        return result;
     }
 
-    public static void switchCaseCalculator(int firstNumber, int secondNumber, char symbol) {
+    public static int switchCaseCalculator(int firstNumber, int secondNumber, char symbol) {
+        int result = 0;
         switch (symbol) {
-            case '+' -> {
-                int result = firstNumber + secondNumber;
-                System.out.println(firstNumber + " + " + secondNumber + " = " + result);
-            }
-            case '-' -> {
-                int result = firstNumber - secondNumber;
-                System.out.println(firstNumber + " - " + secondNumber + " = " + result);
-            }
-            case '*' -> {
-                int result = firstNumber * secondNumber;
-                System.out.println(firstNumber + " * " + secondNumber + " = " + result);
-            }
+            case '+' -> result = firstNumber + secondNumber;
+            case '-' -> result = firstNumber - secondNumber;
+            case '*' -> result = firstNumber * secondNumber;
             case '/' -> {
                 if (secondNumber == 0) {
                     System.out.println("Cannot divide by 0");
                 } else {
-                    int result = firstNumber / secondNumber;
-                    System.out.println(firstNumber + " / " + secondNumber + " = " + result);
+                    result = firstNumber / secondNumber;
                 }
             }
             case '%' -> {
                 if (secondNumber == 0) {
                     System.out.println("Cannot divide by 0");
                 } else {
-                    int result = firstNumber % secondNumber;
-                    System.out.println(firstNumber + " % " + secondNumber + " = " + result);
+                    result = firstNumber % secondNumber;
                 }
             }
         }
+        return result;
     }
 }
 

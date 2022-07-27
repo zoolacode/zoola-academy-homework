@@ -22,12 +22,10 @@ public class LargestNumber {
         compareNumbers(firstNumber, secondNumber);
     }
     public static void compareNumbers (int firstNumber, int secondNumber) {
-        if (firstNumber > secondNumber) {
-            System.out.println("The largest number is: " + firstNumber);
-        } else if (firstNumber == secondNumber) {
+        if (firstNumber == secondNumber) {
             System.out.println("The numbers are equal");
         } else {
-            System.out.println("The largest number is: " + secondNumber);
+            System.out.println("The largest number is: " + Math.max(firstNumber, secondNumber));
         }
     }
 }

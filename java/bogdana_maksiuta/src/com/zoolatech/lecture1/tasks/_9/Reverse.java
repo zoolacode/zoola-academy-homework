@@ -23,10 +23,8 @@ public class Reverse {
 
     public static void reverseNumberWhileLoop (int number) {
         System.out.println("While loop: ");
-        int numberForReverse = 0;
         while (number != 0) {
             int lastNumber = number % 10;
-            numberForReverse = numberForReverse * 10 + lastNumber;
             number = number/10;
             System.out.println(lastNumber);
         }
@@ -34,11 +32,9 @@ public class Reverse {
 
     public static void reverseNumberForLoop (int number) {
         System.out.println("For loop: ");
-        int numberForReverse = 0;
         for (int i = number; i != 0 ; i /= 10) {
             int lastNumber = i % 10;
             System.out.println(lastNumber);
-            numberForReverse = numberForReverse * 10 + lastNumber;
         }
     }
 }

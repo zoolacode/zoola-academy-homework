@@ -11,8 +11,7 @@ import java.util.Scanner;
 public class ConverterMiToKm {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        float miles = scanner.nextFloat(); //input number
-//        float miles = 2.5F; // for testing
+        float miles = scanner.nextFloat();
         if (miles > 0) {
             converter(miles);
         } else {
@@ -20,7 +19,7 @@ public class ConverterMiToKm {
         }
     }
     public static void converter (float miles) {
-        final float METRIC_EQUIVALENT = (float) 1.609344;
+        final float METRIC_EQUIVALENT = 1.609344F;
         float kilometer = miles * METRIC_EQUIVALENT;
         System.out.println("From: " + miles + " mile \n" + "To: " + kilometer + " kilometer");
     }

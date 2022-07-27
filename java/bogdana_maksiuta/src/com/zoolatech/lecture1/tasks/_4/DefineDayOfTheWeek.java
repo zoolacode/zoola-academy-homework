@@ -18,8 +18,9 @@ public class DefineDayOfTheWeek {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the day of the week: \nWhere \"1\" is Monday \"7\" is Sunday");
         int numberOfTheDay = scanner.nextInt();
-        ifElseDefiner(numberOfTheDay);
         System.out.println(conditionalOperatorDefiner(numberOfTheDay));
+        ifElseDefiner(numberOfTheDay);
+
     }
 
     public static void ifElseDefiner(int numberOfTheDay) {
@@ -33,6 +34,7 @@ public class DefineDayOfTheWeek {
     }
 
     public static String conditionalOperatorDefiner(int numberOfTheDay) {
-        return numberOfTheDay >= 1 && numberOfTheDay <= 5 ? "Need to go to work..." : "Sleeping…";
+        return numberOfTheDay < 1 || numberOfTheDay > 7 ?
+                "Wrong number" : (numberOfTheDay <= 5 ? "Need to go to work..." : "Sleeping…");
     }
 }

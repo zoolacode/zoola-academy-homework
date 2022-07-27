@@ -23,17 +23,9 @@ public class OddNumbers {
 
     public static void forLoopAllOddNumbers(int number) {
         System.out.println("For loop: ");
-        if (number >= 0) {
-            for (int i = number; i > 0; i--) {
-                if (i % 2 == 1) {
-                    System.out.println(i);
-                }
-            }
-        } else {
-            for (int i = number; i < 1; i++) {
-                if (i % 2 == -1) {
-                    System.out.println(i);
-                }
+        for (int i = number; i > 0; i--) {
+            if (i % 2 == 1) {
+                System.out.println(i);
             }
         }
     }
@@ -45,12 +37,6 @@ public class OddNumbers {
                 System.out.println(number);
             }
             number--;
-        }
-        while (number < 0) {
-            if (number % 2 == -1) {
-                System.out.println(number);
-            }
-            number++;
         }
     }
 }

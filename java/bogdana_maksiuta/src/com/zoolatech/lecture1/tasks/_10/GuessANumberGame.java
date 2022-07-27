@@ -27,10 +27,10 @@ public class GuessANumberGame {
 
     public static void config () {
         int maxLimit = 0;
-        while (maxLimit < 5 || maxLimit > 500) {
-            System.out.println("Start \nEnter the number \nFrom 5 to 500: ");
+        while (maxLimit < 2) {
+            System.out.println("Start \nEnter the number \nFrom 2: ");
             maxLimit = scanner.nextInt();
-            if (maxLimit > 5 && maxLimit < 500) {
+            if (maxLimit >= 2) {
                 game(maxLimit, randomNumber(maxLimit));
             } else {
                 System.out.println("Invalid value. Try again");
@@ -39,8 +39,8 @@ public class GuessANumberGame {
     }
 
     public static int randomNumber (int maxLimit) {
-        Random randomGenerator = new Random();
-        return randomGenerator.nextInt(maxLimit);
+        Random random = new Random();
+        return random.nextInt(maxLimit) + 1;
     }
 
     public static void game (int maxLimit, int randomNumber) {
@@ -48,19 +48,17 @@ public class GuessANumberGame {
         int inputNumber;
         do {
             inputNumber = scanner.nextInt();
-            if (inputNumber < 5) {
-                System.out.println("Nice try! But range is from 5 to " + maxLimit);
+            if (inputNumber < 1) {
+                System.out.println("Nice try! But range is from 1 to " + maxLimit);
             } else if (inputNumber > maxLimit) {
-                System.out.println("Nice try! But range is from 5 to " + maxLimit);
+                System.out.println("Nice try! But range is from 1 to " + maxLimit);
             } else if (inputNumber < randomNumber) {
                 System.out.println("Larger");
             } else if (inputNumber > randomNumber) {
                 System.out.println("Smaller");
-            } else {
-                System.out.println("That’s it!");
-                break;
             }
         } while (inputNumber != randomNumber);
+        System.out.println("That’s it!");
     }
 }
 

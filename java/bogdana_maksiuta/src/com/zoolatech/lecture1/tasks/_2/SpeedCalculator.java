@@ -15,11 +15,8 @@ public class SpeedCalculator {
         System.out.println("Введіть відстань: ");
         Scanner scanner = new Scanner(System.in);
         float distance = scanner.nextFloat();
-//        float distance = 80; //for testing
         System.out.println("Введіть час: ");
-        Scanner scanner1 = new Scanner(System.in);
-        float time = scanner1.nextFloat();
-//        float time = 10; //for testing
+        float time = scanner.nextFloat();
 
         if (distance >= 0 && time >= 0) {
             speedMeterPerSecond(distance, time);
