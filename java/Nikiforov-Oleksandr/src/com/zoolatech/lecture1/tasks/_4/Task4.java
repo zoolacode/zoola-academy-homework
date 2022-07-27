@@ -18,12 +18,9 @@ public class Task4 {
 
     public static void dayTypeByIfElseStatement(int numberofDays){
         if(numberofDays>0 && numberofDays<6){
-
             System.out.println("Need to go to work…");
-
         } else if (numberofDays>5 && numberofDays<8) {
             System.out.println("Sleeping…");
-
         }else{
             System.out.println("Incorrect input!!!");
         }
@@ -33,5 +30,4 @@ public class Task4 {
     public static void dayTypeCond(int numberofDays){
         System.out.println((numberofDays>0 && numberofDays<6)? "Need to go to work…": "Sleeping…");
     }
-
 }

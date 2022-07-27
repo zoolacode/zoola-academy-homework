@@ -39,26 +39,29 @@ public class Task6 {
 
 
     public static void calculatorSwitch(int a, int b, char symbol) {
+        int result;
         //calculator function, which made by switch statement
         switch (symbol) {
             case '+' -> {
-                System.out.println(a + b);
+                result  = a + b;
             }
             case '-' -> {
-                System.out.println(a - b);
+                result = a - b;
             }
             case '/' -> {
-                System.out.println(a / b);
+                result = a / b;
             }
             case '*' -> {
-                System.out.println(a * b);
+                result=a * b;
             }
             case '%' -> {
-                System.out.println(a % b);
+                result = a % b;
             }
             default -> {
                 System.out.println("Input error");
+                return;
             }
         }
+        System.out.println(result);
     }
 }
