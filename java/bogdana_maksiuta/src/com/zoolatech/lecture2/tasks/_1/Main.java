@@ -11,28 +11,51 @@ import java.util.Scanner;
  * Assume all operation results fit into the range of values for a current value type.
  */
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Calculator calculation = new Calculator();
-        calculation.processOfCalculation();
+        Calculator calculator = new Calculator();
 
-        Scanner scanner = new Scanner(System.in);
+        double firstNumber = inputNumber();
 
-        boolean work = true;
-        while (work) {
-            System.out.println("""
-                                Next calculation?
-                                'Y' - YES
-                                'N' - NO
-                                """);
-            String choice = scanner.next();
-            if ("Y".equals(choice)) {
-                calculation.processOfCalculation();
-            } else {
-                System.out.println("Bye!");
-                work = false;
+        calculator.setCurrentValue(firstNumber);
+        char symbol = inputSymbol();
+
+        while (symbol != '!') {
+            double secondNumber = inputNumber();
+            switch (symbol) {
+                case '+' -> calculator.addition(secondNumber);
+                case '-' -> calculator.subtraction(secondNumber);
+                case '*' -> calculator.multiplication(secondNumber);
+                case '/' -> calculator.division(secondNumber);
+                default -> System.out.println("Invalid symbol");
             }
+            System.out.println(calculator.getCurrentValue());
+            System.out.println("'!' - exit");
+            symbol = inputSymbol();
         }
     }
-}
 
+    public static double inputNumber() {
+        System.out.println("Please enter a number : ");
+        double number;
+        if (scanner.hasNextDouble()) {
+            number = scanner.nextDouble();
+        } else {
+            System.out.println("Invalid value. Try another number : ");
+            scanner.next();
+            number = inputNumber();
+        }
+        return number;
+    }
+
+    public static char inputSymbol() {
+        System.out.println("Please enter a symbol of arithmetic operation : ");
+        char symbol = scanner.next().charAt(0);
+        if (symbol != '/' && symbol != '+' && symbol != '-' && symbol != '*' && symbol != '!') {
+            System.out.println("Invalid value");
+            symbol = inputSymbol();
+        }
+        return symbol;
+    }
+}
