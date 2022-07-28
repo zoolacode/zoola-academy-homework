@@ -3,11 +3,11 @@ package com.zoolatech.lecture3.tasks._3;
 import java.util.Objects;
 
 public non-sealed class Triangle implements Shape {
-    int firstSide;
-    int secondSide;
-    int thirdSide;
+    private float firstSide;
+    private float secondSide;
+    private float thirdSide;
 
-    public Triangle(int firstSide, int secondSide, int thirdSide) {
+    public Triangle(float firstSide, float secondSide, float thirdSide) {
         this.firstSide = firstSide;
         this.secondSide = secondSide;
         this.thirdSide = thirdSide;
@@ -15,14 +15,14 @@ public non-sealed class Triangle implements Shape {
 
     @Override
     public void findPerimeter() {
-        int perimeters = firstSide + secondSide + thirdSide;
+        float perimeters = firstSide + secondSide + thirdSide;
         System.out.println("The perimeter of the triangle is " + perimeters);
     }
 
     @Override
     public void findArea() {
-        int p = (firstSide + secondSide + thirdSide) / 2;
-        int area = (int) Math.sqrt(p * (p - firstSide) * (p - secondSide) * (p - thirdSide));
+        float p = (firstSide + secondSide + thirdSide) / 2;
+        float area = (float) Math.sqrt(p * (p - firstSide) * (p - secondSide) * (p - thirdSide));
         System.out.println("The area of the triangle is " + area);
     }
 

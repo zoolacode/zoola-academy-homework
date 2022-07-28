@@ -1,5 +1,7 @@
 package com.zoolatech.lecture3.tasks._3;
 
+import java.util.ArrayList;
+
 /**
  * Create an hierarchy of 3 classes:
  * Circle, Triangle, Rectangle,
@@ -16,27 +18,23 @@ public class Main {
         Circle circle = new Circle(5);
         Rectangle rectangle = new Rectangle(3, 5);
         Triangle triangle = new Triangle(3, 4, 5);
-        Triangle triangle2 = new Triangle(3, 4, 5);
-        Triangle triangle3 = new Triangle(3, 4, 6);
+        Triangle triangle2 = new Triangle(3, 4, 6);
 
-        circle.findArea();
-        circle.findPerimeter();
-        rectangle.findArea();
-        rectangle.findPerimeter();
-        triangle.findArea();
-        triangle.findPerimeter();
+        ArrayList<Shape> listOfShapes = new ArrayList<>();
+        listOfShapes.add(triangle);
+        listOfShapes.add(circle);
+        listOfShapes.add(rectangle);
 
-        System.out.println("\nThe radius of a circle is: " + circle.radius);
-        System.out.println("The lengths of a triangle are: " + triangle.firstSide + ", " + triangle.secondSide +
-                ", " + triangle.thirdSide + " ;");
-        System.out.println("The lengths of a rectangle are: " + rectangle.firstSide + ", " + rectangle.secondSide + " ;");
+        for (Shape shape : listOfShapes) {
+            shape.findArea();
+            shape.findPerimeter();
+        }
 
+        for (Shape shape : listOfShapes) {
+            System.out.println(shape);
+        }
+
+        listOfShapes.add(triangle2);
         System.out.println("\nAre those triangles are equals? - " + triangle.equals(triangle2));
-        System.out.println("Are those triangles are equals? - " + triangle.equals(triangle3));
-
-        System.out.println("\n" + circle);
-        System.out.println(rectangle);
-        System.out.println(triangle);
-        System.out.println(triangle3);
     }
 }
