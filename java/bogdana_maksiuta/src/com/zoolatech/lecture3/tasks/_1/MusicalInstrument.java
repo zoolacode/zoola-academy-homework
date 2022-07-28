@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._1;
 
-public abstract class MusicalInstrument {
+public class MusicalInstrument {
     private String name;
     private String sound;
 
@@ -11,5 +11,10 @@ public abstract class MusicalInstrument {
 
     void play() {
         System.out.println(sound);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -13,13 +13,13 @@ package com.zoolatech.lecture3.tasks._1;
  */
 public class Main {
     public static void main(String[] args) {
-        Guitar guitar = new Guitar("Guitar", "strum strum");
-        Trumpet trumpet = new Trumpet("Trumpet", "pah-pa-rah");
-        Drum drum = new Drum("Drum", "boom-bang, bang");
+        MusicalInstrument guitar = new MusicalInstrument("Guitar", "strum strum");
+        MusicalInstrument trumpet = new MusicalInstrument("Trumpet", "pah-pa-rah");
+        MusicalInstrument drum = new MusicalInstrument("Drum", "boom-bang, bang");
 
-        Musicians guitarist = new Musicians("Alan", guitar);
-        Musicians trumpeter = new Musicians("Mike", trumpet);
-        Musicians drummer = new Musicians("Peter", drum);
+        Musician guitarist = new Musician("Alan", guitar);
+        Musician trumpeter = new Musician("Mike", trumpet);
+        Musician drummer = new Musician("Peter", drum);
 
         System.out.println("The guitarist and the drummer are the same person? " + guitarist.equals(drummer));
         guitarist.getNameAndInstrument(guitarist);
@@ -27,19 +27,15 @@ public class Main {
         drummer.getNameAndInstrument(drummer);
 
 
-        Orchestra firstGroup = new Orchestra();
-        firstGroup.add(guitarist);
-        firstGroup.add(trumpeter);
-        firstGroup.add(drummer);
+        Orchestra firstOrchestra = new Orchestra();
+        firstOrchestra.add(guitarist);
+        firstOrchestra.add(trumpeter);
+        firstOrchestra.add(drummer);
 
-        firstGroup.playAll();
+        firstOrchestra.playAll();
 
-        firstGroup.remove(trumpeter);
-        firstGroup.playAll();
-
-        Orchestra secondGroup = new Orchestra();
-        secondGroup.add(trumpeter);
-        secondGroup.playAll();
+        firstOrchestra.remove(trumpeter);
+        firstOrchestra.playAll();
     }
 }
 
