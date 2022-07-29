@@ -15,14 +15,11 @@ public class Number2 {
 
     private void calculate() {
 
-        float meters;
-        float seconds;
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input number of a distance:");
-        meters = scanner.nextFloat();
+        float meters = scanner.nextFloat();
         System.out.println("Input time in seconds:");
-        seconds = scanner.nextFloat();
+        float seconds = scanner.nextFloat();
 
         float ms = meters / seconds;
         System.out.println("Result is: " + ms + " m/s");
