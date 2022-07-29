@@ -2,7 +2,7 @@ package com.zoolatech.lecture1.tasks._5;
 
 import java.util.Scanner;
 
-/**Write a program that accepts two numbers and outputs the larger number.
+/**Write a program that accepts two numbers and outputs the larger value.
  * If numbers are equal - output “Numbers are equal”.
  */
 
@@ -13,18 +13,25 @@ public class Number5 {
     }
 
     private void greaterNumber() {
-        int number1;
-        int number2;
-        String result;
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type first number:");
-        number1 = scanner.nextInt();
+        int number1 = scanner.nextInt();
         System.out.println("Type second number:");
-        number2 = scanner.nextInt();
+        int number2 = scanner.nextInt();
 
-        result = number1 > number2 ? "First number is greater" : number1 == number2 ? "Equal" : "Second number is greater";
+                    //if number1 > number2 : First...  else if number1 == number2: "Equal"...   else: Second...
+        // result = number1 > number2 ? "First value is greater" : number1 == number2 ? "Equal" : "Second value is greater";
 
+        String result;
+        if(number1 > number2) {
+            result = "First value is greater";
+        }
+        else if(number1 < number2) {
+            result = "Second value is greater";
+        } else {
+            result = "Equal";
+        }
         System.out.println(result);
     }
 }
