@@ -122,13 +122,13 @@ class Number1Original {
 
     void somethingToKilometer() {
 
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Choose units of distance you wanna to convert to something");
         System.out.println("Type a number of unit you want:");
         System.out.println("1. Kilometer, 2. Miles");
 
         float mile = 0F;
         float kilometer = 0F;
+        Scanner scanner = new Scanner(System.in);
 
         switch (scanner.nextInt()) {
             case 1 -> {
