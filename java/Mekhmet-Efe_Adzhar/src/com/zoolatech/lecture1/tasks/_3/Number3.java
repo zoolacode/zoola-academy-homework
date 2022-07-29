@@ -14,14 +14,11 @@ public class Number3 {
     }
 
     private void calculate() {
-        double value;
-        double factorialPart;
-        double integerPart;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input a number");
-        value = scanner.nextDouble();
-        factorialPart = value % 1;
-        integerPart = value - factorialPart;
+        double value = scanner.nextDouble();
+        double factorialPart = value % 1;
+        double integerPart = value - factorialPart;
         System.out.println("Integer Value: " + integerPart);
         System.out.println("Factorial Value: " + factorialPart);
     }
