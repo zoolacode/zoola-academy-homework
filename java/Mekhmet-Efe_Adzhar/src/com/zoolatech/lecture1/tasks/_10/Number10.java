@@ -18,28 +18,26 @@ public class Number10 {
         number10.quessGame();
     }
 
-    private void quessGame() {
+    public void quessGame() {
         Random randomGenerator = new Random();
         Scanner scanner = new Scanner(System.in);
-        int rangeOfNumbers;
-        int userNumber = 0;
 
         System.out.println("Let's play a game. You need to guess a number from a range you have written");
 
-        rangeOfNumbers = randomGenerator.nextInt(10);
+        int userNumber = 0;
+       int randomNumber = randomGenerator.nextInt(10);
 
-        while (userNumber != rangeOfNumbers) {
-
-            System.out.println("Type a number:");
+        System.out.println("Type a number:");
+       do {
             userNumber = scanner.nextInt();
 
-            if (userNumber < rangeOfNumbers) {
-                System.out.println("Low, go higher\n");
-            } else if (userNumber > rangeOfNumbers) {
-                System.out.println("High, go lower\n");
+            if (userNumber < randomNumber) {
+                System.out.println("Low, go higher");
+            } else if (userNumber > randomNumber) {
+                System.out.println("High, go lower");
             } else {
                 System.out.println("Here's your number:" + " " + userNumber);
             }
-        }
+        }  while (userNumber != randomNumber);
     }
 }
