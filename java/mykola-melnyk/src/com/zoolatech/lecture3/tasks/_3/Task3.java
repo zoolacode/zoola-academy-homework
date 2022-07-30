@@ -37,8 +37,9 @@ public class Task3 {
             System.out.println(e);
         }
 
-        var circle2 = new Circle(10);
+        var circle2 = new Circle(11);
         System.out.println(circle.equals(circle2));
-
+        var circle3 = new Circle(10);
+        System.out.println(circle.equals(circle3));
     }
 }

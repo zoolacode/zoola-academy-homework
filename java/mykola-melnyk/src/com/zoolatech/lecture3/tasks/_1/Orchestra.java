@@ -5,7 +5,7 @@ import com.zoolatech.lecture3.tasks._1.musician.Musician;
 import java.util.ArrayList;
 
 public class Orchestra {
-    ArrayList<Musician> orchestra = new ArrayList<>();
+    private ArrayList<Musician> orchestra = new ArrayList<>();
 
     public void addToOrchestra(Musician musician) {
        orchestra.add(musician);
