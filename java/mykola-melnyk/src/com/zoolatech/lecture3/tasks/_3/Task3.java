@@ -19,24 +19,23 @@ public class Task3 {
     public static void main(String[] args) {
 
         var circle = new Circle(10);
-        circle.printPerimeter();
-        circle.printArea();
-//        var triangle = new Triangle(4, 13, 15);
-//
-//        var rectangle = new Rectangle(2,4);
-//
-//        ArrayList<Shape> shape = new ArrayList<>();
-//        shape.add(circle);
-//        shape.add(triangle);
-//        shape.add(rectangle);
-//        for (Shape e : shape) {
-//            e.findArea();
-//            e.findPerimeter();
-//        }
-//
-//        for (Shape e : shape) {
-//            System.out.println(e);
-//        }
+
+        var triangle = new Triangle(4, 13, 15);
+
+        var rectangle = new Rectangle(2, 4);
+
+        ArrayList<Shape> shape = new ArrayList<>();
+        shape.add(circle);
+        shape.add(triangle);
+        shape.add(rectangle);
+        for (Shape e : shape) {
+            e.printArea();
+            e.printPerimeter();
+        }
+
+        for (Shape e : shape) {
+            System.out.println(e);
+        }
 
         var circle2 = new Circle(11);
         System.out.println(circle.equals(circle2));

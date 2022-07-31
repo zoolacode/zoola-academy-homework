@@ -1,7 +1,7 @@
 package com.zoolatech.lecture3.tasks._3;
 
 public sealed interface Shape
-        permits Circle {
+        permits Circle, Rectangle, Triangle {
      double calcPerimeter();
      double calcArea();
      default void printPerimeter() {
