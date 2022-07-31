@@ -6,17 +6,26 @@ public final class Circle implements Shape {
         this.radius = radius;
     }
 
+//    @Override
+//    public void findPerimeter() {
+//        System.out.println(this.calcPerimeter());
+//    }
+
     @Override
-    public void findPerimeter() {
-        double perimeter = 2 * Math.PI * radius;
-        System.out.println(perimeter);
+    public double calcPerimeter() {
+        return 2 * Math.PI * radius;
     }
 
     @Override
-    public void findArea() {
-        double area = Math.PI * Math.pow(radius, 2);
-        System.out.println(area);
+    public double calcArea() {
+        return Math.PI * Math.pow(radius, 2);
     }
+
+//    @Override
+//    public void findArea() {
+//        double area = Math.PI * Math.pow(radius, 2);
+//        System.out.println(area);
+//    }
 
     @Override
     public String toString() {
