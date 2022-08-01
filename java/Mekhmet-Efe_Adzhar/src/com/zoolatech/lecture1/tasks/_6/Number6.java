@@ -13,74 +13,59 @@ import java.util.Scanner;
 public class Number6 {
     public static void main(String[] args) {
         Number6 number6 = new Number6();
-        number6.calculatorIfElseVersion();
+        System.out.println(number6.calculatorIfElseVersion());
         number6.calculatorSwitchCaseVersion();
 
     }
 
-    private void calculatorIfElseVersion() {
+    private String calculatorIfElseVersion() {
         Scanner scanner = new Scanner(System.in);
 
-        int number1;
-        int number2;
-        char operation;
+        System.out.println("Type First Number:");
+        int number1 = scanner.nextInt();
+        System.out.println("Type Second Number:");
+        int number2 = scanner.nextInt();
+        System.out.println("Select operation:");
 
+        char operation = scanner.next().charAt(0);
         char addition = '+';
         char subtraction = '-';
         char multiplication = '*';
         char division = '/';
         char modulus = '%';
 
-        System.out.println("Type First Number:");
-        number1 = scanner.nextInt();
-        System.out.println("Type Second Number:");
-        number2 = scanner.nextInt();
-        System.out.println("Select operation:");
-
-        operation = scanner.next().charAt(0);
-
         if (operation == addition) {
-            System.out.println("Result:" + (number1 + number2));
+            return "Result:" + (number1 + number2);
         } else if (operation == subtraction) {
-            System.out.println("Result:" + (number1 - number2));
+            return"Result:" + (number1 - number2);
         } else if (operation == multiplication) {
-            System.out.println("Result:" + (number1 * number2));
+            return"Result:" + (number1 * number2);
         } else if (operation == division) {
-            System.out.println("Result:" + (number1 / number2));
+            return "Result:" + (number1 / number2);
         } else if (operation == modulus) {
-            System.out.println("Result:" + (number1 % number2));
+            return "Result:" + (number1 % number2);
         } else {
-            throw new IllegalArgumentException("Unknown operator: " + operation);
+            throw new IllegalArgumentException("Unknown operator");
         }
     }
 
     private void calculatorSwitchCaseVersion() {
         Scanner scanner = new Scanner(System.in);
 
-        int number1;
-        int number2;
-        char operation;
-
         System.out.println("Type First Number:");
-        number1 = scanner.nextInt();
+        int number1 = scanner.nextInt();
         System.out.println("Type Second Number:");
-        number2 = scanner.nextInt();
+        int number2 = scanner.nextInt();
         System.out.println("Select operation:");
-        operation = scanner.next().charAt(0);
+        char operation = scanner.next().charAt(0);
 
         int calculate = switch (operation) {
-            case '+':
-                yield number1 + number2;
-            case '-':
-                yield number1 - number2;
-            case '*':
-                yield number1 * number2;
-            case '/':
-                yield number1 / number2;
-            case '%':
-                yield number1 % number2;
-            default:
-                throw new IllegalStateException("Unexpected value: " + operation);
+            case '+' -> number1 + number2;
+            case '-' -> number1 - number2;
+            case '*' -> number1 * number2;
+            case '/' -> number1 / number2;
+            case '%' -> number1 % number2;
+            default -> throw new IllegalStateException("Unexpected value: " + operation);
         };
         System.out.println("Result: " + calculate);
     }
