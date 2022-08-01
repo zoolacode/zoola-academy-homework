@@ -16,15 +16,14 @@ public class Number8 {
 
     public static void main(String[] args) {
         Number8 number8 = new Number8();
-        //number8.divideNumberForLoop();
+        number8.divideNumberForLoop();
         number8.divideNumberWhileLoop();
     }
 
     private void divideNumberForLoop() {
         Scanner scanner = new Scanner(System.in);
-        int integer;
-        System.out.println("Intput number:");
-        integer = scanner.nextInt();
+        System.out.println("Input number:");
+        int integer = scanner.nextInt();
 
         for (int i = 2; i <= integer; i++) {
             if (i % 2 == 0 && i % 3 == 0) {
@@ -33,7 +32,7 @@ public class Number8 {
                 if (i % 2 == 0) {
                     System.out.println(i + " " + "(by 2)");
                 }
-                if (i % 2 != 0) {
+                if (i % 3 == 0) {
                     System.out.println(i + " " + "(by 3)");
                 }
             }
@@ -42,16 +41,22 @@ public class Number8 {
 
     private void divideNumberWhileLoop() {
         Scanner scanner = new Scanner(System.in);
-        int integer;
-        int i = 2;
-        String result;
         System.out.println("Intput number:");
-        integer = scanner.nextInt();
+        int integer = scanner.nextInt();
+        int i = 2;
 
         while (i <= integer) {
-            result = i % 2 == 0 && i % 3 == 0 ? i + " " + "(by 2 & 3)" : i % 2 == 0 ? i + " " + "(by 2)" : i + " " + "(by 3)";
-            System.out.println(result);
-            i += 1;
+            if (i % 2 == 0 && i % 3 == 0) {
+                System.out.println(i + " " + "(by 2 & 3)");
+            } else {
+                if (i % 2 == 0) {
+                    System.out.println(i + " " + "(by 2)");
+                }
+                if (i % 3 == 0) {
+                    System.out.println(i + " " + "(by 3)");
+                }
+            }
+            i++;
         }
     }
 }
