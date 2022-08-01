@@ -18,18 +18,12 @@ public class Number7 {
 
     private void allOddNumbersForLoopVersion() {
         Scanner scanner = new Scanner(System.in);
-        int oddNumber;
         System.out.println("Input number for-loop: ");
-        oddNumber = scanner.nextInt();
+        int maxNumber = scanner.nextInt();
 
-        for (int i = 0; i <= oddNumber; i++) {
-            int number = oddNumber-i;
-
-            if (number % 2 != 0) {
-                System.out.println(number);
-            }
-            if (number % 2 == 0) {
-                number += 1;
+        for (int i = maxNumber; i >= 0; i--) {
+            if (i % 2 != 0) {
+                System.out.println(i);
             }
         }
         System.out.println("Turning of...\nDone :)");
@@ -38,16 +32,15 @@ public class Number7 {
     private void allOddNumbersWhileLoopVersion() {
 
         Scanner scanner = new Scanner(System.in);
-        int oddNumber;
         System.out.println("Input number while-loop: ");
-        oddNumber = scanner.nextInt();
+        int maxNumber = scanner.nextInt();
 
-        while (oddNumber > 0) {
+        while (maxNumber > 0) {
 
-            if (oddNumber % 2 != 0) {
-                System.out.println(oddNumber);
+            if (maxNumber % 2 != 0) {
+                System.out.println(maxNumber);
             }
-            oddNumber-=1;
+            maxNumber-=1;
         }
         System.out.println("Turning of...\nDone :D");
     }
