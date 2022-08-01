@@ -3,7 +3,7 @@ package com.zoolatech.lecture3.tasks._2.validators;
 import com.zoolatech.lecture3.tasks._2.UserAccount;
 
 public class ValidPhoneNumber implements Validator {
-    private String accountField;
+    private final String accountField;
     public ValidPhoneNumber(String accountField) {
         this.accountField = accountField;
     }

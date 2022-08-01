@@ -7,21 +7,21 @@ public class DocReporter extends Reporter {
 
     @Override
     public void createFile() {
-        System.out.printf("Creating a file with name %s. \n", fileName);
+        System.out.printf("Creating a file with name %s. \n", this.getFileName());
     }
 
     @Override
     public void addHeaderData() {
-        System.out.printf("Adding %s in DOC format. \n", headerData);
+        System.out.printf("Adding %s in DOC format. \n", this.getHeaderData());
     }
 
     @Override
     public void addFileData() {
-        System.out.printf("Adding %s in DOC format. \n", fileData);
+        System.out.printf("Adding %s in DOC format. \n", this.getFileData());
     }
 
     @Override
     public void closeFile() {
-        System.out.printf("Closing a file with name %s. \n", fileName);
+        System.out.printf("Closing a file with name %s. \n", this.getFileName());
     }
 }

@@ -1,14 +1,14 @@
 package com.zoolatech.lecture3.tasks._2;
 
 public class UserAccount {
-    private int userID;
-    private String firstName;
-    private String lastName;
-    private String country;
-    private String userEmail;
-    private String phoneNumber;
-    private int birthDay;
-    private int birthMonth;
+    private final int userID;
+    private final String firstName;
+    private final String lastName;
+    private final String country;
+    private final String userEmail;
+    private final String phoneNumber;
+    private final int birthDay;
+    private final int birthMonth;
     public UserAccount(int userID, String firstName, String lastName,
                        String country, String userEmail, String phoneNumber,
                        int birthDay, int birthMonth) {

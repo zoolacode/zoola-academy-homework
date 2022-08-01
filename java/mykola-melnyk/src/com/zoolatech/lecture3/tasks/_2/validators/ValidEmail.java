@@ -4,7 +4,7 @@ import com.zoolatech.lecture3.tasks._2.UserAccount;
 
 public class ValidEmail implements Validator {
 
-    private String accountField;
+    private final String accountField;
     public ValidEmail(String accountField) {
         this.accountField = accountField;
     }

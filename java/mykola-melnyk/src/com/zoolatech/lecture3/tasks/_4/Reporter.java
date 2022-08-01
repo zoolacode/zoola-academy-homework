@@ -1,14 +1,26 @@
 package com.zoolatech.lecture3.tasks._4;
 
 public abstract class Reporter {
-    String headerData;
-    String fileName;
-    String fileData;
+    private final String headerData;
+    private final String fileName;
+    private final String fileData;
 
     public Reporter(String headerData, String fileData, String fileName) {
         this.fileData = fileData;
         this.fileName = fileName;
         this.headerData = headerData;
+    }
+
+    public String getHeaderData() {
+        return headerData;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public String getFileData() {
+        return fileData;
     }
 
     public void generate() {
