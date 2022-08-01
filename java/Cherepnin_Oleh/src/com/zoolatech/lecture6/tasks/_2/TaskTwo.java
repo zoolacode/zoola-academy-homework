@@ -31,13 +31,10 @@ public class TaskTwo {
     }
 
     private static Map<String, Double> getAveragePriceInCountry(List<Order> orders) {
-        return orders
-                .stream()
-                .map(Order::getCountry)
-                .distinct()
-                .collect(Collectors.toMap(country -> country, country -> orders.stream()
-                        .filter(order1 -> order1.getCountry().equals(country))
-                        .collect(Collectors.averagingDouble(Order::getPrice))));
+        return orders.stream()
+                .collect(Collectors.groupingBy(
+                        Order::getCountry,
+                        Collectors.averagingDouble(Order::getPrice)));
     }
 }
 
