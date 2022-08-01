@@ -41,7 +41,7 @@ public class Number8 {
 
     private void divideNumberWhileLoop() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Intput number:");
+        System.out.println("Input number:");
         int integer = scanner.nextInt();
         int i = 2;
 
