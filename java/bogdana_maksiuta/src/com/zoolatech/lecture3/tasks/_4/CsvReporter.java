@@ -7,6 +7,8 @@ public class CsvReporter extends Reporter {
     }
 
     void generate() {
-        super.generate();
-    }
+        System.out.println(createNewFile() + ".csv");
+        System.out.println((addHeaderData() + ".csv"));
+        System.out.println(addFileData() + "CSV format");
+        System.out.println(close() + ".csv");    }
 }

@@ -7,6 +7,9 @@ public class PdfReporter extends Reporter {
     }
 
     void generate() {
-        super.generate();
+        System.out.println(createNewFile() + ".pdf");
+        System.out.println((addHeaderData() + ".pdf"));
+        System.out.println(addFileData() + "PDF format");
+        System.out.println(close() + ".pdf");
     }
 }

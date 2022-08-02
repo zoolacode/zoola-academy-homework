@@ -1,7 +1,5 @@
 package com.zoolatech.lecture3.tasks._4;
 
-import java.util.Scanner;
-
 /**
  *     4 Create three classes CsvReporter, PdfReporter and DocReporter which are able to create files
  *     with tabular data in CSV, PDF and DOC formats accordingly. Each class needs to accept three strings
@@ -14,35 +12,19 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int choice = 0;
-        while (choice <= 0 || choice > 3) {
-            System.out.println("What file do you want to create? \nPress \"1\" for - CSV file \nPress \"2\" " +
-                    "for - PDF file \nPress \"3\" for - DOC file");
+        Reporter csvReporter = new CsvReporter("Class Record",
+                "This is the common base class ...",
+                "Task3") {
+        };
+        csvReporter.generate();
 
-            choice = scanner.nextInt();
+        Reporter pdfReporter = new PdfReporter("Class ArrayList",
+                "Resizable-array implementation...", "Task10");
+        pdfReporter.generate();
 
-            switch (choice) {
-                case 1 -> {
-                    CsvReporter csvReporter = new CsvReporter("Class Record",
-                            "This is the common base class of all Java language record classes.",
-                            "Task3");
-                    csvReporter.generate();
-                }
+        Reporter docReporter = new DocReporter("Keeping pets",
+                "..., the most important of them...", "task10-2");
+        docReporter.generate();
 
-                case 2 -> {
-                    PdfReporter pdfReporter = new PdfReporter("Class ArrayList",
-                            "Resizable-array implementation of the List interface.", "Task10");
-                    pdfReporter.generate();
-                }
-                case 3 -> {
-                    DocReporter docReporter = new DocReporter("Keeping pets is good for children",
-                            "..., the most important of them is the favourable effects it has " +
-                                    "on children's psychology and growth.", "task10-2");
-                    docReporter.generate();
-                }
-                default -> System.out.println("Invalid number. Try again");
-            }
-        }
     }
 }

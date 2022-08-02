@@ -7,7 +7,10 @@ public class DocReporter extends Reporter {
     }
 
     void generate() {
-        super.generate();
+        System.out.println(createNewFile() + ".doc");
+        System.out.println((addHeaderData() + ".doc"));
+        System.out.println(addFileData() + "DOC format");
+        System.out.println(close() + ".doc");
     }
 }
 
