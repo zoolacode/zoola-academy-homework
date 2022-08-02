@@ -1,12 +1,7 @@
 package com.zoolatech.lecture3.tasks._2;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Objects;
 
-@Getter
-@Setter
 public class UserAccount {
     private int userId;
     private String firstName;
@@ -16,6 +11,34 @@ public class UserAccount {
     private String phoneNumber;
     private int birthDay;
     private int birthMonth;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public int getBirthDay() {
+        return birthDay;
+    }
+
+    public int getBirthMonth() {
+        return birthMonth;
+    }
 
     public UserAccount(int userId, String firstName, String lastName, String country,
                        String userEmail, String phoneNumber, int birthDay, int birthMonth) {

@@ -18,20 +18,10 @@ package com.zoolatech.lecture3.tasks._2;
  */
 public class Main {
     public static void main(String[] args) {
-        UserAccount userAccount = new UserAccount(1, "Masha", "Lup",
+        UserAccount user1 = new UserAccount(1, "Masha", "Lup",
                 "Ukraine", "boo@i.ua", "00-00-01", 3, 5);
 
-        UserAccountValidator validation = new UserAccountValidator();
-        if (validation.isValid(userAccount)) {
-            System.out.println(userAccount);
-        };
-
-        UserAccount userAccount2 = new UserAccount(2, "Misha", "Lup",
-                "Ukraine", "boogaga@i.ua", "00-00-02", 4, 6);
-
-        System.out.println(userAccount2.equals(userAccount));
-        if (validation.isValid(userAccount2)) {
-            System.out.println(userAccount2);
-        };
+        UserAccountValidator validation = new UserAccountValidator(user1);
+        validation.isValid(user1);
     }
 }
