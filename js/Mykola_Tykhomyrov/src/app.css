@@ -1,0 +1,87 @@
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  position: relative;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mesh {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  width: 100vh;
+  height: 100vh;
+  background-color: #419884;
+  margin: 0 0 0 100px;
+}
+
+.item {
+  width: calc(100vh / 5);
+  height: calc(100vh / 5);
+}
+
+.item-highlighted {
+  cursor: pointer;
+}
+
+.item-highlighted.item-highlighted-1 {
+  background-color: #f2db63;
+}
+
+.item-highlighted.item-highlighted-2 {
+  background-color: #cc4040;
+}
+
+.item-highlighted.item-highlighted-3 {
+  background-color: #abce29;
+}
+
+.container {
+  display: flex;  
+  justify-content: space-around;
+}
+
+.score {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 46px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: green;
+  /* background-color: #cc4040; */
+  color: #fff;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn_start {
+  border-radius: 35px;
+  margin: 50px;
+  width: 200px;
+  height: 80px;
+  background-color: #ff7b47;
+  color: #fff;
+  font-size: 22px;
+}
+
+.btn_mode {
+  border-radius: 35px;
+  margin: 50px;
+  width: 200px;
+  height: 80px;
+  background-color: #ff7b47;
+  color: #fff;
+  font-size: 22px;
+}
+.mode_1000 {
+  background-color: green;
+}
