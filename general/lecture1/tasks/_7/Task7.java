@@ -1,4 +1,4 @@
-package general.solomiia_tymoshchuk;
+package general.lecture1.tasks._7;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Task7 {
     List<Integer> newarr = new ArrayList<Integer>();
 
     void oddNumbers() {
-        for (int k = getNumber(); k >= 0; k--) {
+        for (int k = number; k > 0; k--) {
             if (k % 2 != 0) {
                 newarr.add(k);
             }
@@ -26,7 +26,7 @@ public class Task7 {
     }
 
     void oddNumbersWhile() {
-        int i = getNumber();
+        int i = number;
         while (i >= 0) {
             if (i % 2 != 0) {
                 newarr.add(i);
@@ -36,33 +36,10 @@ public class Task7 {
         newarr.forEach(System.out::println);
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public Scanner getSc() {
-        return sc;
-    }
-
-    public void setSc(Scanner sc) {
-        this.sc = sc;
-    }
-
-    public List<Integer> getNewarr() {
-        return newarr;
-    }
-
-    public void setNewarr(List<Integer> newarr) {
-        this.newarr = newarr;
-    }
-
     public static void main(String[] args) {
         System.out.println("Enter number");
         Task7 task7 = new Task7();
-        task7.oddNumbersWhile();
+//        task7.oddNumbersWhile();
+        task7.oddNumbers();
     }
 }

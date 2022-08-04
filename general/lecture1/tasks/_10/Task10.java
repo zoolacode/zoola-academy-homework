@@ -1,4 +1,4 @@
-package general.solomiia_tymoshchuk;
+package general.lecture1.tasks._10;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -12,28 +12,32 @@ import java.util.Scanner;
  **/
 public class Task10 {
 
-    public String printSentence(String sentence) {
+    void printSentence(String sentence) {
         System.out.println(sentence);
-        return sentence;
     }
 
-    public String guessNumber() {
+    void guessNumber(int N) {
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
-        int number = sc.nextInt();
-        int randomNumber = random.nextInt(number);
-        System.out.println(randomNumber);
-        if (number == randomNumber) {
-            printSentence("That's it");
-            System.exit(0);
+        int randomNumber = random.nextInt(N);
+        boolean guess = false;
+        while (!guess) {
+            int number = sc.nextInt();
+            if (number < randomNumber) {
+                printSentence("Larger");
+            } else if (number > randomNumber) {
+                printSentence("Smaller");
+            } else {
+                printSentence("That's it");
+                guess = true;
+            }
         }
-        String statement = (number > randomNumber) ? printSentence("Smaller") : printSentence("Larger");
-        return statement;
     }
 
     public static void main(String[] args) {
+        int N = 5;
         Task10 task10 = new Task10();
-        task10.guessNumber();
+        task10.guessNumber(N);
 
     }
 }

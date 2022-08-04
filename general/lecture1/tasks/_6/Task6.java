@@ -1,6 +1,5 @@
-package general.solomiia_tymoshchuk;
+package general.lecture1.tasks._6;
 
-import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -12,30 +11,37 @@ import java.util.Scanner;
  * Create two versions of the program: one should use the if-else statement, second - the switch statement.
  **/
 public class Task6 {
-    HashMap<Integer, String> weekDays = new HashMap<Integer, String>();
-    Scanner sc = new Scanner(System.in);
-    double number = sc.nextDouble();
-    double number1 = sc.nextDouble();
-    String operator = sc.next();
+    private int number;
+    private int number1 ;
+    private String operator;
+
+    public Task6(int number, int number1, String operator){
+        this.number = number;
+        this.number1 = number1;
+        this.operator = operator;
+    }
 
     void calculateNumbersSwitchCase() {
-        System.out.println("Enter two numbers");
         switch (operator) {
             case "+":
                 System.out.println(number + number1);
+                break;
             case "-":
                 System.out.println(number - number1);
+                break;
             case "*":
                 System.out.println(number * number1);
+                break;
             case "/":
                 System.out.println(number / number1);
+                break;
             case "%":
                 System.out.println(number % number1);
+                break;
         }
     }
 
-    public double calculateNumbersIfWay() {
-
+    void calculateNumbersIfWay() {
         if (Objects.equals(operator, "+")) {
             System.out.println(number + number1);
         } else if (Objects.equals(operator, "-")) {
@@ -47,15 +53,15 @@ public class Task6 {
         } else if (Objects.equals(operator, "%")) {
             System.out.println(number % number1);
         }
-
-        return number;
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int number = sc.nextInt();
+        int number1 = sc.nextInt();
+        String operator = sc.next();
         System.out.println("Enter two numbers and the math operator");
-        Task6 task6 = new Task6();
+        Task6 task6 = new Task6(number, number1, operator);
         task6.calculateNumbersIfWay();
-
-
     }
 }

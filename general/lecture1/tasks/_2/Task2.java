@@ -1,4 +1,4 @@
-package general.solomiia_tymoshchuk;
+package general.lecture1.tasks._2;
 
 import java.util.Scanner;
 
@@ -7,15 +7,13 @@ import java.util.Scanner;
  * The result should be a floating point number.
  **/
 public class Task2 {
-    double distance;
-    double time;
 
-    public Double convertSpeedValuetoMs(double distance, double time) {
+    public Double convertSpeedValueToMs(double distance, double time) {
         double convertedDistance = distance / time;
         return convertedDistance;
     }
 
-    public Double convertSpeedValuetoKh(double distance, double time) {
+    public Double convertSpeedValueToKh(double distance, double time) {
         int secondsInHour = 3600;
         int metersInKm = 1000;
         double hours = time / secondsInHour;
@@ -24,15 +22,14 @@ public class Task2 {
         return calculatedValue;
     }
 
-    public double calculatedDistanceValue() {
+    void calculatedDistanceValue() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the distance, please");
-        distance = sc.nextDouble();
+        double distance = sc.nextDouble();
         System.out.println("Enter the time, please");
-        time = sc.nextDouble();
-        System.out.println("Meters per second:" + convertSpeedValuetoMs(distance, time));
-        System.out.println("Kms per hour:" + convertSpeedValuetoKh(distance, time));
-        return distance;
+        double time = sc.nextDouble();
+        System.out.println("Meters per second:" + convertSpeedValueToMs(distance, time));
+        System.out.println("Kms per hour:" + convertSpeedValueToKh(distance, time));
     }
 
     public static void main(String[] args) {

@@ -1,7 +1,5 @@
-package general.solomiia_tymoshchuk;
+package general.lecture1.tasks._9;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -11,7 +9,6 @@ import java.util.Scanner;
 public class Task9 {
     Scanner sc = new Scanner(System.in);
     int number = sc.nextInt();
-    List<Character> newarr = new ArrayList<Character>();
 
     void reversedInput() {
         String string = Integer.toString(number);
@@ -20,9 +17,8 @@ public class Task9 {
 
         for (int i = ch.length - 1; i >= 0; i--) {
             newChar = ch[i];
-            newarr.add(newChar);
+            System.out.println(newChar);
         }
-        newarr.forEach(System.out::println);
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package general.solomiia_tymoshchuk;
+package general.lecture1.tasks._5;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class Task5 {
         Scanner sc = new Scanner(System.in);
         float number = sc.nextFloat();
         float number2 = sc.nextFloat();
-        Object largerNumber = number == number2 ? "Numbers are equal" : Math.max(number, number2);
+        String largerNumber = number == number2 ? "Numbers are equal" : ("Larger number is: " + Math.max(number, number2));
         System.out.println(largerNumber);
     }
 

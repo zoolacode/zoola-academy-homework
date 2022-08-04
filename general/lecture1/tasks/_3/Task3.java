@@ -1,4 +1,4 @@
-package general.solomiia_tymoshchuk;
+package general.lecture1.tasks._3;
 
 import java.util.Scanner;
 
@@ -9,13 +9,12 @@ import java.util.Scanner;
 
 public class Task3 {
 
-    public float getFractionalPart() {
+    void getFractionalPart() {
         System.out.println("Enter the digit");
         Scanner sc = new Scanner(System.in);
         float number = sc.nextFloat();
         float fractionalPart = number % 1;
         System.out.println(fractionalPart);
-        return fractionalPart;
     }
 
     public static void main(String[] args) {
