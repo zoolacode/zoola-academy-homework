@@ -1,6 +1,5 @@
 package com.zoolatech.lecture2.tasks._2;
 
-
 /*Define a class that represents a robot, which moves in a room of a width W and a height of H.
 The class should provide methods to move a robot forward by either 1 or N tiles and turn it either left or right
 by 90 degrees from the current direction.
@@ -14,58 +13,25 @@ move as much as possible to the room border, print a warning message and stop.
 All next moves in the same direction should be prevented.
 */
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Number2 {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        RobotGame robotGame = new RobotGame();
         boolean exit = false;
-        System.out.println("HELLO AND WELCOME!. Please input a W(width)");
-        robotGame.setW(scanner.nextInt());
-        System.out.println("and H(height) of a room");
-        robotGame.setH(scanner.nextInt());
+        System.out.println("HELLO AND WELCOME!. Please input width, height, x, y coordinates and Direction");
+        RobotGame robotGame = new RobotGame(scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), Direction.SOUTH);
         System.out.println("Your room size is:");
-        robotGame.getRoomSize();
-        System.out.println("Press 0 to continue");
-        scanner.nextInt();
-        System.out.println();
-        System.out.println("Please input a coordinates for robot.\nThere must be smaller than your room :)");
-        System.out.println("Input X and then Y");
-        robotGame.setCoordinates(scanner.nextInt(), scanner.nextInt());
+        System.out.println(robotGame.getRoomSize() + "\n");
         System.out.println("Your coordinates are:");
-        robotGame.getCoordinates();
-        System.out.println();
-        System.out.println("Press 0 to continue");
-        System.out.println();
-        System.out.println("Set direction where your robot is going");
+        System.out.println(robotGame.getCoordinates() + "\n");
+        System.out.println("Set direction where your robot is going. Default direction is SOUTH");
         System.out.println("0. SOUTH,\n1. NORTH,\n2. WEST,\n3. EAST");
         Direction direction = Direction.values()[Integer.parseInt(scanner.next())];
+        System.out.println(direction.toString() + "\n");
 
-        switch (direction.toString()) {
-            case "SOUTH" -> {
-                System.out.println("Direction is SOUTH\n");
-                robotGame.setDirection(Direction.SOUTH);
-            }
-            case "NORTH" -> {
-                System.out.println("Direction is NORTH\n");
-                robotGame.setDirection(Direction.NORTH);
-            }
-            case "WEST" -> {
-                System.out.println("Direction is WEST\n");
-                robotGame.setDirection(Direction.WEST);
-            }
-            case "EAST" -> {
-                System.out.println("Direction is EAST\n");
-                robotGame.setDirection(Direction.EAST);
-            }
-            default -> throw new InputMismatchException("Wrong input");
-        }
-
-        System.out.println("1.Move Forward.\n2.ChangeDirection;\n3.Get coordinates;\n4.Get directions;\n5.Exit");
+        System.out.println("1.Move Forward. Type N steps:\n2.Change Direction;\n3.Get coordinates;\n4.Get directions;\n5.Exit");
 
         while (!exit) {
             switch (scanner.nextInt()) {
@@ -79,14 +45,13 @@ public class Number2 {
                         robotGame.turnLeft();
                         System.out.println("Turned left");
 
-                    }
-                    else  {
+                    } else {
                         robotGame.turnRight();
                         System.out.println("Turned right");
                     }
                     break;
                 case 3:
-                    robotGame.getCoordinates();
+                    System.out.println(robotGame.getCoordinates());
                     break;
                 case 4:
                     robotGame.getDirection();
@@ -111,119 +76,87 @@ enum Direction {
 
 class RobotGame {
 
-    private int w;
-    private int h;
+    private final int width;
+    private final int height;
     private int x;
     private int y;
-    private int[] coordinates = {x, y};
-    int[][] roomSize;
+    Direction direction;
 
-    private Direction direction = Direction.SOUTH;
-
-    public void setW(int w) {
-        this.w = w;
-    }
-
-    public void setH(int h) {
-        this.h = h;
-    }
-
-    public void getRoomSize() {
-        roomSize = new int[h][w];
-        for (int[] row : roomSize) {
-            for (int i : row) {
-                System.out.print(i);
-            }
-            System.out.println();
-        }
-    }
-
-
-    public void setDirection(Direction direction) {
+    public RobotGame(int width, int height, int x, int y, Direction direction) {
+        this.width = width;
+        this.height = height;
+        this.x = x;
+        this.y = y;
         this.direction = direction;
     }
 
-    public void getCoordinates() {
-        System.out.println(Arrays.toString(coordinates));
+    public String getRoomSize() {
+        return "Width: " + width + " " + "Height: " + height;
+    }
+
+    public String getCoordinates() {
+        return "X: " + x + " " + "Y: " + y;
     }
 
     public void getDirection() {
         System.out.println(direction);
     }
 
-    public void setCoordinates(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.coordinates = new int[]{x, y};
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
+
     public void moveForward() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Type N steps");
+        int n = scanner.nextInt();
+
         if (direction == Direction.SOUTH) {
-            if (y < h) {
-                y += 1;
-                setCoordinates(x, y);
+            if (y < height) {
+                y += n;
             }
-            if (y == h) {
-                System.out.println("WARNING. OUT OF RANGE. TURN LEFT");
+            if (y == height) {
+                System.out.println("WARNING. OUT OF RANGE");
             }
-        }
-        if (direction == Direction.NORTH) {
+        } else if (direction == Direction.NORTH) {
             if (y > 0) {
-                y -= 1;
-                setCoordinates(x, y);
+                y -= n;
             } else if (y <= 0) {
                 System.out.println("WARNING. OUT OF RANGE");
             }
-        }
-        if (direction == Direction.WEST) {
+        } else if (direction == Direction.WEST) {
             if (x > 0) {
-                x -= 1;
-                setCoordinates(x, y);
+                x -= n;
             }
             if (x <= 0) {
                 System.out.println("WARNING. OUT OF RANGE");
             }
-        }
-        if (direction == Direction.EAST) {
-            if (x < w) {
-                x += 1;
-                setCoordinates(x, y);
+        } else if (direction == Direction.EAST) {
+            if (x < width) {
+                x += n;
             }
-            if (x >= w) {
+            if (x >= width) {
                 System.out.println("WARNING. OUT OF RANGE");
             }
         }
     }
 
     public void turnLeft() {
-        if (direction == Direction.SOUTH) {
-            direction = Direction.EAST;
-            setDirection(direction);
-        } else if (direction == Direction.EAST) {
-            direction = Direction.NORTH;
-            setDirection(direction);
-        } else if (direction == Direction.NORTH) {
-            direction = Direction.WEST;
-            setDirection(direction);
-        } else if (direction == Direction.WEST) {
-            direction = Direction.SOUTH;
-            setDirection(direction);
+        switch (direction) {
+            case SOUTH -> direction = Direction.EAST;
+            case EAST -> direction = Direction.NORTH;
+            case NORTH -> direction = Direction.WEST;
+            case WEST -> direction = Direction.SOUTH;
         }
     }
 
     public void turnRight() {
-        if (direction == Direction.SOUTH) {
-            direction = Direction.WEST;
-            setDirection(direction);
-        } else if (direction == Direction.WEST) {
-            direction = Direction.NORTH;
-            setDirection(direction);
-        } else if (direction == Direction.NORTH) {
-            direction = Direction.EAST;
-            setDirection(direction);
-        } else if (direction == Direction.EAST) {
-            direction = Direction.SOUTH;
-            setDirection(direction);
+        switch (direction) {
+            case SOUTH -> direction = Direction.WEST;
+            case WEST -> direction = Direction.NORTH;
+            case NORTH -> direction = Direction.EAST;
+            case EAST -> direction = Direction.SOUTH;
         }
     }
 }
