@@ -1,0 +1,99 @@
+.page {
+  justify-content: space-evenly;
+  margin: 0;
+  font-family: Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif;
+  display: flex;
+}
+
+.game-params-container {
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 0;
+  display: flex;
+}
+
+.score-title {
+  margin: 0;
+}
+
+.score {
+  width: 80px;
+  height: 80px;
+  color: #fff;
+  background-color: #bcec7b;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  font-size: 46px;
+  display: flex;
+}
+
+.danger {
+  background-color: #ec7b83;
+}
+
+.start-game {
+  margin-top: 15px;
+}
+
+.start-button {
+  color: #fff;
+  width: 100px;
+  cursor: pointer;
+  background-color: #ec7bbc;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.game-speed {
+  text-align: center;
+  border: 1px solid gray;
+  margin-top: 15px;
+}
+
+.select-speed {
+  text-align: center;
+  margin: 15px;
+  padding: 5px;
+}
+
+.mesh-notification {
+  margin-top: 15px;
+}
+
+.mesh-container {
+  width: 100vh;
+  height: 100vh;
+}
+
+.mesh {
+  width: 100%;
+  height: 100%;
+  background-color: #ec7bbc;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  display: grid;
+}
+
+.item {
+  width: 20vh;
+  height: 20vh;
+}
+
+.item-highlighted {
+  cursor: pointer;
+}
+
+.item-highlighted.item-highlighted-1 {
+  background-color: #eafd89;
+}
+
+.item-highlighted.item-highlighted-2 {
+  background-color: #7becab;
+}
+
+.item-highlighted.item-highlighted-3 {
+  background-color: #2403f8;
+}
+
+/*# sourceMappingURL=index.4a5519d3.css.map */

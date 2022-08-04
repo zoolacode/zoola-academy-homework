@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./app.css" />
+  </head>
+  <body class="page">
+    <div class="game-params-container">
+      <div class="score-title">
+        <p>Your score</p>
+      </div>
+      <div class="score">
+        <p>0</p>
+      </div>
+      <div class="game-speed">
+        <p>Game speed</p>
+        <select class="select-speed" name="initialValue" value="1000">
+          <option value="initialValue" hidden>Select game speed</option>
+          <option value="1000">1000 ms</option>
+          <option value="3000">3000 ms</option>
+          <option value="500">500 ms</option>
+        </select>
+      </div>
+    </div>
+    <div class="mesh-container">
+      <div class="mesh"></div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
