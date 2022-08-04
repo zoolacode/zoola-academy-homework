@@ -24,7 +24,7 @@ All commits NEED TO BE pushed into your own repo.
 ![Fetch Latest](fetch_latest.png)
 2. Pull the changes if there are any into your local repo using `git pull`
 3. Create a new local branch: name-surname-lecture-number
-4. Create your directory and name it `Name-Surname` inside directory of the lecture you want to send homework for (for example - com.zoolatech/1_terminal/Ivan-Ivanov).
+4. Create your directory and name it `Name-Surname` inside directory of the lecture you want to send homework for (for example - general/1_terminal/Ivan-Ivanov).
 5. Work on your homework inside that repo, make some commits related to your homework and push your branch into your repo.
 6. Create pull request.
 7. Wait for your work to be approved/reviewed/commented by your lector.
