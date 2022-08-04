@@ -20,10 +20,7 @@ import java.util.TreeSet;
 public class UniqueElements {
 
     static void uniqueWords (List<String> words) {
-        HashSet<String> wordsHashSet = new HashSet<>(words);
-        System.out.println(wordsHashSet);
-
-        Set<String> wordsSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER); //bonus task
+        Set<String> wordsSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         wordsSet.addAll(words);
         System.out.println(wordsSet);
     }
