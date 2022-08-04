@@ -15,251 +15,152 @@ import java.lang.ArithmeticException;
 
 public class Number1 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Number1 number1 = new Number1();
-        Calculator calculator = new Calculator();
-        calculator.setCurrentValueInt(0);
-        calculator.setCurrentValueDouble(0.0);
-        System.out.println("1. Start\n2. Get current value");
 
-        switch (scanner.nextInt()) {
-            case 1 -> number1.calculations();
-            case 2 -> {
-                calculator.getCurrentValue();
-                number1.calculations();
-            }
-            default -> throw new IllegalArgumentException("Unknown" + scanner.nextInt());
+        System.out.println("1. Start");
+        Scanner scanner = new Scanner(System.in);
+
+        if (scanner.nextInt() == 1) {
+            calculations();
+        } else {
+            throw new IllegalArgumentException("Unknown" + scanner.nextInt());
         }
     }
 
-    void calculations() {
+    public static void calculations() {
 
         Calculator calculator = new Calculator();
-
-        RangeOfNumber rangeOfNumber = new RangeOfNumber();
-
-        int numberOne = 0, numberTwo;
-        double numberOneDouble, numberTwoDouble;
-        char operation;
-
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Input first number:");
 
         //MARK: IF INTEGER
         if (scanner.hasNextInt()) {
-            calculator.isInteger = true;
-            numberOne = scanner.nextInt();
-            calculator.setCurrentValueInt(numberOne);
+            calculator.setInteger(true);
+            int numberOne = scanner.nextInt();
 
             System.out.println("Choose operation:");
-            operation = scanner.next().charAt(0);
+            char operation = scanner.next().charAt(0);
             System.out.println("1. Input second integer:\n2. Get current value");
 
             if (scanner.nextInt() == 2) {
-                calculator.getCurrentValue();
+                System.out.println(numberOne);
             }
             System.out.println("Input second integer");
-            numberTwo = scanner.nextInt();
-            calculator.setNumberOne(numberOne);
-            calculator.setNumberTwo(numberTwo);
+            int numberTwo = scanner.nextInt();
 
-            rangeOfNumber.rangeOfNumberInt(numberOne, numberTwo);
-
-            if (!rangeOfNumber.outOfRange) {
-                switch (operation) {
-                    case '+' -> calculator.addition();
-                    case '-' -> calculator.subtraction();
-                    case '*' -> calculator.multiplication();
-                    case '/' -> calculator.division();
-                    default -> System.out.println("Error");
-                }
+            switch (operation) {
+                case '+' -> calculator.addition(numberOne, numberTwo);
+                case '-' -> calculator.subtraction(numberOne, numberTwo);
+                case '*' -> calculator.multiplication(numberOne, numberTwo);
+                case '/' -> calculator.division(numberOne, numberTwo);
+                default -> System.out.println("Error");
             }
         }
 
         //MARK: IF DOUBLE
         else if (scanner.hasNextDouble()) {
-            calculator.isInteger = false;
-            numberOneDouble = scanner.nextDouble();
-            calculator.setCurrentValueDouble(numberOneDouble);
+            calculator.setInteger(false);
+           double numberOneDouble = scanner.nextDouble();
 
             System.out.println("Choose operation:");
-            operation = scanner.next().charAt(0);
+            char operation = scanner.next().charAt(0);
             System.out.println("1. Input second double:\n2. Get current value");
 
             if (scanner.nextInt() == 2) {
-                calculator.getCurrentValue();
+                System.out.println(numberOneDouble);
             }
             System.out.println("Input second double");
 
-            numberTwoDouble = scanner.nextDouble();
+           double numberTwoDouble = scanner.nextDouble();
 
-            calculator.setNumberOneDouble(numberOneDouble);
-            calculator.setNumberTwoDouble(numberTwoDouble);
-            rangeOfNumber.rangeOfNumberDouble(numberOneDouble, numberTwoDouble);
-
-            if (!rangeOfNumber.outOfRange) {
                 switch (operation) {
-                    case '+' -> calculator.addition();
-                    case '-' -> calculator.subtraction();
-                    case '*' -> calculator.multiplication();
-                    case '/' -> calculator.division();
+                    case '+' -> calculator.addition(numberOneDouble, numberTwoDouble);
+                    case '-' -> calculator.subtraction(numberOneDouble, numberTwoDouble);
+                    case '*' -> calculator.multiplication(numberOneDouble, numberTwoDouble);
+                    case '/' -> calculator.division(numberOneDouble, numberTwoDouble);
                     default -> System.out.println("ERROR");
                 }
             }
         }
     }
-}
+
 
 class Calculator {
 
-    Number1 number1 = new Number1();
+    private boolean isInteger;
 
-    boolean isInteger;
-    private double calculationForDouble;
-    private int calculationForInteger;
-    private int currentValueInt;
-    private double currentValueDouble;
-
-    private int numberOne;
-    private int numberTwo;
-    private double numberOneDouble;
-    private double numberTwoDouble;
-
-    public void setCurrentValueInt(int currentValueInt) {
-        this.currentValueInt = currentValueInt;
+    public void setInteger(boolean integer) {
+        isInteger = integer;
     }
 
-    public void setCurrentValueDouble(double currentValueDouble) {
-        this.currentValueDouble = currentValueDouble;
-    }
-
-    public void getCurrentValue() {
+    public void addition(double numberOneDouble, double numberTwoDouble) {
         if (isInteger) {
-            System.out.println("Current value is " + currentValueInt);
-        } else {
-            System.out.println("Current value is " + currentValueDouble );
 
-        }
-    }
+            int numberOneInt = (int) numberOneDouble;
+            int numberTwoInt = (int) numberTwoDouble;
 
-    public void setNumberOne(int numberOne) {
-        this.numberOne = numberOne;
-    }
-
-    public void setNumberTwo(int numberTwo) {
-        this.numberTwo = numberTwo;
-    }
-
-    public void setNumberOneDouble(double numberOneDouble) {
-        this.numberOneDouble = numberOneDouble;
-    }
-
-    public void setNumberTwoDouble(double numberTwoDouble) {
-        this.numberTwoDouble = numberTwoDouble;
-    }
-
-    public void addition() {
-        if (!isInteger) {
-            calculationForDouble = numberOneDouble + numberTwoDouble;
-            System.out.println("Result:" + " " + calculationForDouble);
-        }
-        else {
-            calculationForInteger = numberOne + numberTwo;
+            int calculationForInteger = numberOneInt + numberTwoInt;
             System.out.println("Result:" + " " + calculationForInteger);
         }
-    }
-
-    public void subtraction() {
-        if (!isInteger) {
-            calculationForDouble = numberOneDouble - numberTwoDouble;
+        else {
+            double calculationForDouble = numberOneDouble + numberTwoDouble;
             System.out.println("Result:" + " " + calculationForDouble);
         }
-        else {
-            calculationForInteger = numberOne - numberTwo;
-            System.out.println("Result:" + " " + calculationForInteger);
-        }
     }
 
-    public void multiplication() {
-        if (!isInteger) {
-            calculationForDouble = numberOneDouble * numberTwoDouble;
+    public void subtraction(double numberOneDouble, double numberTwoDouble) {
+        if (isInteger) {
+            int numberOneInt = (int) numberOneDouble;
+            int numberTwoInt = (int) numberTwoDouble;
+
+           int calculationForInteger = numberOneInt - numberTwoInt;
+            System.out.println("Result:" + " " + calculationForInteger);
+        }
+        else {
+           double calculationForDouble = numberOneDouble - numberTwoDouble;
             System.out.println("Result:" + " " + calculationForDouble);
         }
-        else {
-            calculationForInteger = numberOne * numberTwo;
+    }
+
+    public void multiplication(double numberOneDouble, double numberTwoDouble) {
+        if (isInteger) {
+            int numberOneInt = (int) numberOneDouble;
+            int numberTwoInt = (int) numberTwoDouble;
+
+            int calculationForInteger = numberOneInt * numberTwoInt;
             System.out.println("Result:" + " " + calculationForInteger);
+        }
+        else {
+            double calculationForDouble = numberOneDouble * numberTwoDouble;
+            System.out.println("Result:" + " " + calculationForDouble);
         }
     }
 
-    public void division() {
+    public void division(double numberOneDouble, double numberTwoDouble) {
+        int numberOneInt = (int) numberOneDouble;
+        int numberTwoInt = (int) numberTwoDouble;
+
         if (!isInteger) {
-            if (numberOneDouble == 0.0) {
+            if (numberOneDouble == 0.0 && numberTwoDouble == 0.0) {
                 System.out.println("Zero is not dividable\n");
-                number1.calculations();
             } else {
                 try {
-                    calculationForDouble = numberOneDouble / numberTwoDouble;
+                    double calculationForDouble = numberOneDouble / numberTwoDouble;
                     System.out.println("Result:" + " " + calculationForDouble);
                 } catch (ArithmeticException error) {
                     System.out.println("Zero is not dividable\n");
-                    number1.calculations();
                 }
             }
         } else {
-            if (numberOne == 0) {
+            if (numberOneInt == 0 && numberTwoInt == 0) {
                 System.out.println("Zero is not dividable\n");
-                number1.calculations();
             } else {
                 try {
-                    calculationForInteger = numberOne / numberTwo;
+                    int calculationForInteger = numberOneInt / numberTwoInt;
                     System.out.println("Result:" + " " + calculationForInteger);
                 } catch (ArithmeticException error) {
                     System.out.println("Zero is not dividable\n");
-                    number1.calculations();
                 }
-            }
-        }
-    }
-}
-
-class RangeOfNumber {
-
-    Calculator calculator = new Calculator();
-
-    boolean outOfRange;
-
-    public void rangeOfNumberInt(int number1, int number2) {
-        int resultOfAddition = number1 + number2;
-        int resultOfMultiplication = number1 * number2;
-
-        if (resultOfAddition == Integer.MAX_VALUE || resultOfMultiplication == Integer.MAX_VALUE) {
-            for (int i = 0; i < 2; i++) {
-                resultOfAddition = Math.addExact(resultOfAddition, 1);
-                resultOfMultiplication = Math.addExact(resultOfMultiplication, 1);
-            }
-        }
-        else if (calculator.isInteger) {
-            try {
-                outOfRange = false;
-            } catch (IllegalArgumentException error) {
-                System.out.println("Out of Range" + error);
-            }
-        }
-    }
-
-    public void rangeOfNumberDouble(double number1, double number2) {
-        double resultOfAddition = number1 + number2;
-        double resultOfMultiplication = number1 * number2;
-
-        if (resultOfAddition == Double.MAX_VALUE || resultOfMultiplication == Double.MAX_VALUE) {
-            throw new ArithmeticException("Out of range");
-        }
-        else if (!calculator.isInteger) {
-            try {
-                outOfRange = false;
-            } catch (IllegalArgumentException error) {
-                System.out.println("Out of Range" + error);
             }
         }
     }
