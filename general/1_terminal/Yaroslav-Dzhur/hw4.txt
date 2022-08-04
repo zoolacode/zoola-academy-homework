@@ -1,1 +1,0 @@
-jq '.messages[] .text|strings' result.json
