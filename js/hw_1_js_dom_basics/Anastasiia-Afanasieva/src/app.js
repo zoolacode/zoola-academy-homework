@@ -1,30 +1,33 @@
-const meshContainer = document.querySelector(".mesh");
-const gameParamsContainer = document.querySelector(".game-params-container");
+'use strict';
+
+const mesh = document.querySelector('.mesh');
+const gameParamsContainer = document.querySelector('.game-params-container');
 const itemsPerRow = 5;
 const itemsPerColumn = 5;
-const meshContainerWidth = meshContainer.clientWidth;
-const meshContainerHeight = meshContainer.clientHeight;
-const scoreContainer = document.querySelector(".score");
-const selectGameSpeed = document.querySelector(".select-speed");
-const itemWidth = meshContainerWidth / itemsPerRow;
-const itemHeight = meshContainerHeight / itemsPerColumn;
-const itemsQuantity = (meshContainerWidth / itemWidth) * (meshContainerHeight / itemHeight);
+const meshWidth = mesh.clientWidth;
+const meshHeight = mesh.clientHeight;
+const scoreContainer = document.querySelector('.score-number');
+const selectGameSpeed = document.querySelector('.game-speed__select');
+const itemWidth = meshWidth / itemsPerRow;
+const itemHeight = meshHeight / itemsPerColumn;
+const itemsQuantity = (meshWidth / itemWidth) * (meshHeight / itemHeight);
 const successClickPoint = 1;
 const doubleClickPoint = 2;
 const clickOutsideElementPoint = 3;
-const limitScore = 7;
+const missedClickPoint = 5;
+const limitScore = 20;
 
-function appendItems() {
-  const newItem = document.createElement("div");
-  newItem.className = "item";
-  meshContainer.append(newItem);
+function appendItemsOnMesh() {
+  const newItem = document.createElement('div');
+  newItem.className = 'mesh__item';
+  mesh.append(newItem);
 }
 
 for (let i = 0; i < itemsQuantity; i++) {
-  appendItems();
+  appendItemsOnMesh();
 }
 
-const meshSize = meshContainer.children.length;
+const meshSize = mesh.children.length;
 
 /**
  * @description A function that will run our game using SetInterval
@@ -48,9 +51,9 @@ let gameIterationDuration;
  */
 let isClicked = false;
 /**
- * @description Status of click outside of highlighted element
+ * @description Status of click on highlighted element
  */
-let isClickedOutOfElement = false;
+let isClickedOnElement = false;
 /**
  * @description A function that checks if index is different from previous
  */
@@ -61,30 +64,6 @@ let randomIndex;
 let highlightedElement;
 
 selectGameSpeed.addEventListener('change', setGameSpeed);
-meshContainer.addEventListener('click', handleClickOutsideElement, true);
-
-function setIntervalImmediately(func, interval) {
-  func();
-   return gameInterval = setInterval(func, interval);
-}
-
-function resetPrevGameResult() {
-  if (highlightedElement) {
-    highlightedElement.className = "item";
-  }
-
-  clearResultNotification();
-  clearInterval(gameInterval);
-
-  scoreContainer.innerText = '0';
-  handleScoreColor();
-  currentScore = 0;
-}
-
-function startNewGame() {
-  resetPrevGameResult();
-  setIntervalImmediately(runGameIteration, gameIterationDuration);
-}
 
 function setGameSpeed(e) {
   clearStartButton();
@@ -94,50 +73,74 @@ function setGameSpeed(e) {
   gameIterationDuration = e.target.value;
 }
 
-function stopGameIteration(element) {
-    clearInterval(gameInterval);
-    element.removeEventListener('click', handleClick);
-    meshContainer.removeEventListener('click', handleClickOutsideElement, true);
+function startNewGame() {
+  const startButton = document.querySelector('.start-game__button');
+
+  startButton.innerText = 'Start';
+  mesh.addEventListener('click', handleClickOutsideElement);
+  resetPrevGameResult();
+  setIntervalImmediately(runGameIteration, gameIterationDuration);
 }
 
-function handleScoreColor() {
-  if (+scoreContainer.innerText < 0) {
-    scoreContainer.classList.add('danger');
+function setIntervalImmediately(func, interval) {
+  if (currentScore <= -limitScore || currentScore >= limitScore) {
+    createResultNotification(currentScore);
+    stopGameIteration(highlightedElement);
   } else {
-    scoreContainer.classList.remove('danger');
+    func();
+
+    return gameInterval = setInterval(func, interval);
   }
 }
 
+function resetPrevGameResult() {
+  if (highlightedElement) {
+    highlightedElement.className = 'mesh__item';
+  }
+
+  clearResultNotification();
+  clearInterval(gameInterval);
+
+  scoreContainer.innerText = '0';
+  handleScoreColor();
+  currentScore = missedClickPoint;
+  isClicked = false;
+}
+
+function stopGameIteration(element) {
+  clearInterval(gameInterval);
+  element.removeEventListener('click', handleClick);
+  mesh.removeEventListener('click', handleClickOutsideElement);
+}
+
 function handleClick() {
-  if (isClicked) {
+  if (Boolean(isClicked)) {
     scoreContainer.innerText = currentScore -= doubleClickPoint;
   } else {
     scoreContainer.innerText = currentScore += successClickPoint;
-    // clearInterval(gameInterval);
-    // gameInterval = setIntervalImmediately(runGameIteration, gameIterationDuration);
+    isClickedOnElement = true;
   }
 
   handleScoreColor();
 
   isClicked = true;
 
-  if (currentScore <= -limitScore || currentScore >= limitScore) {
-    createResultNotification(currentScore);
-    stopGameIteration(highlightedElement);
-  }
+  clearInterval(gameInterval);
+  setIntervalImmediately(runGameIteration, gameIterationDuration);
 }
 
-function handleClickOutsideElement(element) {
-  if (element.target.classList.value === 'item') {
+function handleClickOutsideElement() {
+  if (Boolean(!isClickedOnElement)) {
     scoreContainer.innerText = currentScore -= clickOutsideElementPoint;
   }
 
-  if (currentScore <= -limitScore || currentScore >= limitScore) {
+  if (currentScore <= -limitScore) {
     createResultNotification(currentScore);
     stopGameIteration(highlightedElement);
   }
 
   handleScoreColor();
+  isClickedOnElement = false;
 }
 
 function runGameIteration() {
@@ -151,10 +154,10 @@ function runGameIteration() {
     deactivateElement();
   }
 
-  const activeElement = meshContainer.children[randomIndex];
+  const activeElement = mesh.children[randomIndex];
 
-  if (!isClicked) {
-    scoreContainer.innerText = currentScore -= 5;
+  if (Boolean(!isClicked)) {
+    scoreContainer.innerText = currentScore -= missedClickPoint;
   }
 
   handleScoreColor();
@@ -164,7 +167,6 @@ function runGameIteration() {
     isClicked = false;
   }
 
-
   if (currentScore <= -limitScore || currentScore >= limitScore) {
     createResultNotification(currentScore);
     stopGameIteration(activeElement);
@@ -173,7 +175,7 @@ function runGameIteration() {
 
 function activateElement(element) {
   const variant = getVariantForIndex();
-  element.classList.add("item-highlighted", variant);
+  element.classList.add('item-highlighted', variant);
   element.addEventListener('click', handleClick);
   highlightedElement = element;
 
@@ -184,7 +186,7 @@ function activateElement(element) {
    */
   return function unhighlight() {
     element.removeEventListener('click', handleClick);
-    element.classList.remove("item-highlighted", variant);
+    element.classList.remove('item-highlighted', variant);
   };
 }
 
@@ -197,9 +199,9 @@ function getRandomNumber(max) {
 
 function getVariantForIndex() {
   const variants = [
-    "item-highlighted-1",
-    "item-highlighted-2",
-    "item-highlighted-3",
+    'item-highlighted-1',
+    'item-highlighted-2',
+    'item-highlighted-3',
   ];
   return variants[getRandomNumber(meshSize - 1) % variants.length];
 }
@@ -213,34 +215,45 @@ function getIndex() {
   return index;
 }
 
-function createResultNotification(result) {
-  const notification = document.createElement("div");
-  notification.className = "mesh-notification";
-  if (result <= -limitScore) {
-    notification.innerText = 'Oops! Try again!';
+function handleScoreColor() {
+  if (+scoreContainer.innerText < 0) {
+    scoreContainer.classList.add('danger-score');
   } else {
-    notification.innerText = 'Congratulations! You win';
+    scoreContainer.classList.remove('danger-score');
+  }
+}
+
+function createResultNotification(result) {
+  const notification = document.createElement('div');
+  const startButton = document.querySelector('.start-game__button');
+
+  notification.className = 'result-notification';
+  if (result <= -limitScore) {
+    notification.innerText = `Oops! Try again? ${String.fromCodePoint(0x1F340)}`;
+  } else {
+    notification.innerText = `Congrats! You win ${String.fromCodePoint(0x1F389)}`;
   }
 
+  startButton.innerText = 'Try again';
   gameParamsContainer.append(notification);
 }
 
 function clearResultNotification() {
-  const activeNotification = document.querySelector(".mesh-notification");
-  
+  const activeNotification = document.querySelector('.result-notification');
+
   if (activeNotification) {
     activeNotification.remove();
   }
 }
 
 function createStartButton() {
-  const startButtonContainer = document.createElement("div");
-  const startButton = document.createElement("button");
+  const startButtonContainer = document.createElement('div');
+  const startButton = document.createElement('button');
 
-  startButtonContainer.className = "start-game";
-  startButton.className = "start-button";
-  startButton.innerText = "Start"
-  
+  startButtonContainer.className = 'start-game';
+  startButton.className = 'start-game__button';
+  startButton.innerText = 'Start';
+
   startButtonContainer.append(startButton);
   gameParamsContainer.append(startButtonContainer);
 
@@ -248,7 +261,7 @@ function createStartButton() {
 }
 
 function clearStartButton() {
-  const startButtonContainer = document.querySelector(".start-game");
+  const startButtonContainer = document.querySelector('.start-game');
 
   if (startButtonContainer) {
     startButtonContainer.remove();

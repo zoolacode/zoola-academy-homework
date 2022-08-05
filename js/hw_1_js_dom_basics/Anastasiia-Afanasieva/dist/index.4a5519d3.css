@@ -1,7 +1,10 @@
-.page {
+* {
+  font-family: Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif;
+}
+
+.page-body {
   justify-content: space-evenly;
   margin: 0;
-  font-family: Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif;
   display: flex;
 }
 
@@ -16,7 +19,7 @@
   margin: 0;
 }
 
-.score {
+.score-number {
   width: 80px;
   height: 80px;
   color: #fff;
@@ -28,7 +31,7 @@
   display: flex;
 }
 
-.danger {
+.danger-score {
   background-color: #ec7b83;
 }
 
@@ -36,7 +39,7 @@
   margin-top: 15px;
 }
 
-.start-button {
+.start-game__button {
   color: #fff;
   width: 100px;
   cursor: pointer;
@@ -50,15 +53,17 @@
   text-align: center;
   border: 1px solid gray;
   margin-top: 15px;
+  padding: 15px;
 }
 
-.select-speed {
+.game-speed__select {
   text-align: center;
-  margin: 15px;
+  cursor: pointer;
+  margin-bottom: 16px;
   padding: 5px;
 }
 
-.mesh-notification {
+.result-notification {
   margin-top: 15px;
 }
 
@@ -75,7 +80,7 @@
   display: grid;
 }
 
-.item {
+.mesh__item {
   width: 20vh;
   height: 20vh;
 }
