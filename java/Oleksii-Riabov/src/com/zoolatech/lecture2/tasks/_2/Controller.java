@@ -5,15 +5,16 @@ import java.util.Scanner;
 public class Controller {
     Robot robot;
 
-    public void create() {
+    public void creation() {
         System.out.println("To create Robot with default values enter \"1\"" +
                 "\nTo create Robot with values initialization enter \"2\"");
 
-        while (true) {
+        String condition = "false";
+        do {
             Scanner scanner = new Scanner(System.in);
-            int inputValue;
             if (scanner.hasNextInt()) {
-                inputValue = scanner.nextInt();
+                int inputValue = scanner.nextInt();
+                scanner.nextLine();
                 if (inputValue == 1) {
                     robot = new Robot();
                     break;
@@ -27,35 +28,31 @@ public class Controller {
                     roomHeight--;
 
                     System.out.println("Enter Robot's default direction as String value (south, west, north or east).");
-                    String direction;
-                    outer:
-                    while (true) {
-                        Scanner input = new Scanner(System.in);
-                        String line = input.nextLine().toUpperCase();
+                    String direction = "SOUTH";
+
+                    do {
+                        String line = scanner.nextLine().toUpperCase();
 
                         switch (line) {
                             case "NORTH" -> {
                                 direction = "NORTH";
-                                break outer;
+                                condition = "exit";
                             }
                             case "SOUTH" -> {
                                 direction = "SOUTH";
-                                break outer;
+                                condition = "exit";
                             }
                             case "EAST" -> {
                                 direction = "EAST";
-                                break outer;
+                                condition = "exit";
                             }
                             case "WEST" -> {
                                 direction = "WEST";
-                                break outer;
+                                condition = "exit";
                             }
-                            default -> {
-                                System.out.println("Define correct direction.");
-                                continue outer;
-                            }
+                            default -> System.out.println("Define correct direction.");
                         }
-                    }
+                    } while (!"exit".equals(condition));
 
                     System.out.println("Enter Robot's starting width as integer value.");
                     int robotWidth = getValue();
@@ -64,62 +61,57 @@ public class Controller {
                     int robotHeight = getValue();
 
                     robot = new Robot(roomWidth, roomHeight, direction, robotWidth, robotHeight);
-                    break;
+
                 } else {
                     System.out.println("Enter \"1\" or \"2\"");
-                    continue;
                 }
             } else {
                 System.out.println("Enter integer value");
-                continue;
             }
-        }
-        System.out.println("You create Room of " + (robot.getRoom().width() + 1) + " titles height and of " +
-                "" + (robot.getRoom().height() + 1) + " titles wide (W-H(0-" + robot.getRoom().width() + ",0-"
-                + robot.getRoom().height() + "))," + "\nRobot's direction is: "
-                + robot.getDirection() + ", \nRobot's coordinates are: " +
-                "Width-Height(" + robot.getWidth() + "," + robot.getHeight() + ").\n");
+        } while(!"exit".equals(condition)); // false
+        System.out.println(robot);
     }
 
-    public void actions() {
-        Scanner input = new Scanner(System.in);
+    public static int getValue() {
+        String condition = "false";
+        int returnValue = 0;
+        do {
+            Scanner scanner = new Scanner(System.in);
+            if (scanner.hasNextInt()) {
+                returnValue = scanner.nextInt();
+                condition = "exit";
+            } else {
+                System.out.println("Enter integer value");
+            }
+        } while(!"exit".equals(condition));
+        return returnValue;
+    }
 
-        outer:
-        while (true) {
-            instructions();
+    public void makeActions() {
+        Scanner input = new Scanner(System.in);
+        String condition = "false";
+
+        do {
+            getInstructions();
             System.out.println("Enter action");
 
-            String line = input.nextLine().toUpperCase();
+            String line = input.nextLine().toUpperCase(); // try to refactor
             switch (line) {
                 case "M" -> {
-                    System.out.println("Enter number of titles to move as integer value.");
-                    while (true) {
-                        Scanner scanner = new Scanner(System.in);
-                        int titles;
-                        if (scanner.hasNextInt()) {
-                            titles = scanner.nextInt();
-                            if (titles == 1) {
-                                robot.move();
-                                coordinates();
-                                break;
-                            } else {
-                                robot.move(titles);
-                                coordinates();
-                                break;
-                            }
-                        } else {
-                            System.out.println("Enter integer value");
-                            continue;
-                        }
-                    }
+                    System.out.println("Enter number of tiles to move as integer value.");
+                    robot.move(getValue());
+                    System.out.println(this);
+                    System.out.println();
                 }
                 case "L" -> {
                     robot.turnLeft();
-                    coordinates();
+                    System.out.println(this);
+                    System.out.println();
                 }
                 case "R" -> {
                     robot.turnRight();
-                    coordinates();
+                    System.out.println(this);
+                    System.out.println();
                 }
                 case "C" -> {
                     robot.getCoordinates();
@@ -129,24 +121,17 @@ public class Controller {
                     System.out.println("Robot's direction is: " + robot.getDirection());
                     System.out.println();
                 }
-                case "I" -> instructions();
+                case "I" -> getInstructions();
                 case "EXIT" -> {
                     System.out.println("Program ends");
-                    break outer;
+                    condition = "exit";
                 }
                 default -> System.out.println("Please enter valid value\n");
             }
-        }
+        } while(!"exit".equals(condition));
     }
 
-    public void coordinates() {
-        System.out.println("Robot's direction is: " + robot.getDirection() + "\nRoom's size is:" +
-                " W-H(0-" + robot.getRoom().width() + ",0-" + robot.getRoom().height() + ")," +
-                " \nRobot's coordinates are: W-H(" + robot.getWidth() + "," + robot.getHeight() + ").");
-        System.out.println();
-    }
-
-    public void instructions() {
+    public void getInstructions() {
         System.out.println("""
                 To move Robot enter "m"
                 To turn Robot left enter "l"
@@ -158,15 +143,10 @@ public class Controller {
                 """);
     }
 
-    public static int getValue() {
-        while (true) {
-            Scanner scanner = new Scanner(System.in);
-            if (scanner.hasNextInt()) {
-                return scanner.nextInt();
-            } else {
-                System.out.println("Enter integer value");
-                continue;
-            }
-        }
+    @Override
+    public String toString() {
+        return "Robot's direction is: " + robot.getDirection() + "\nRoom's size is:" +
+                " W-H(0-" + robot.getRoom().width() + ",0-" + robot.getRoom().height() + ")," +
+                " \nRobot's coordinates are: W-H(" + robot.getWidth() + "," + robot.getHeight() + ").";
     }
 }
