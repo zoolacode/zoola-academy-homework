@@ -1,16 +1,14 @@
 package com.zoolatech.lecture2.tasks._2;
 
 public class Robot {
+
     private final Room room;
-    Direction direction;
+    private Direction direction;
     private int width;
     private int height;
 
     public Robot() {
-        this.room = new Room(1, 1);
-        this.direction = Direction.SOUTH;
-        this.width = 0;
-        this.height = 0;
+        this(1, 1, "SOUTH", 0, 0);
     }
 
     public Robot(int roomWidth, int roomHeight, String direction, int robotsStartingWidth, int robotStartingHeight) {
@@ -36,74 +34,58 @@ public class Robot {
         return height;
     }
 
-    public void warning() {
-        System.out.println("The Robot reach the end of a room and can't move forward, please change Robot's direction.");
+    public void move(int tiles) {
+        switch (direction) {
+            case NORTH -> {
+                this.height -= tiles;
+                checkLocation();
+            }
+            case SOUTH -> {
+                this.height += tiles;
+                checkLocation();
+            }
+            case EAST -> {
+                this.width += tiles;
+                checkLocation();
+            }
+            case WEST -> {
+                this.width -= tiles;
+                checkLocation();
+            }
+        }
     }
 
     public void checkLocation() {
-        if (this.width < 0 & this.height < 0) {
-            this.width = 0;
+        if (this.height < 0) {
             this.height = 0;
-            warning();
-        } else if (this.width > room.width & this.height > room.height) {
-            this.width = room.width();
-            this.height = room.height();
-            warning();
-        } else if (this.height < 0) {
-            this.height = 0;
-            warning();
+            printWarning();
         } else if (this.height > room.height()) {
             this.height = room.height();
-            warning();
+            printWarning();
         } else if (this.width < 0) {
             this.width = 0;
-            warning();
+            printWarning();
         } else if (this.width > room.width()) {
             this.width = room.width();
-            warning();
+            printWarning();
         }
     }
 
-    public void move() {
-        switch (direction) {
-            case NORTH -> {
-                this.height--;
-                checkLocation();
-            }
-            case SOUTH -> {
-                this.height++;
-                checkLocation();
-            }
-            case EAST -> {
-                this.width++;
-                checkLocation();
-            }
-            case WEST -> {
-                this.width--;
-                checkLocation();
-            }
-        }
+    public void printWarning() {
+        System.out.println("The Robot reach the end of a room and can't move forward, please change Robot's direction.");
     }
 
-    public void move(int titles) {
-        switch (direction) {
-            case NORTH -> {
-                this.height -= titles;
-                checkLocation();
-            }
-            case SOUTH -> {
-                this.height += titles;
-                checkLocation();
-            }
-            case EAST -> {
-                this.width += titles;
-                checkLocation();
-            }
-            case WEST -> {
-                this.width -= titles;
-                checkLocation();
-            }
-        }
+    public void getCoordinates() {
+        System.out.println("Current Robot's coordinates are (W-" + width + ",H-" + height + ")");
+    }
+
+    @Override
+    public String toString() {
+        return  "You create Room of " + (room.width() + 1) + " tiles height and of " +
+                "" + (room.height() + 1) + " tiles wide (W-H(0-" + room.width() + ",0-"
+                + room.height() + "))," + "\nRobot's direction is: "
+                + direction + ", \nRobot's coordinates are: " +
+                "Width-Height(" + width + "," + height + ").\n";
     }
 
     public void turnLeft() {
@@ -112,13 +94,6 @@ public class Robot {
 
     public void turnRight() {
         this.direction = direction.turnRight();
-    }
-
-    public void getCoordinates() {
-        System.out.println("Current Robot's coordinates are (W-" + width + ",H-" + height + ")");
-    }
-
-    public record Room(int width, int height) {
     }
 
     public enum Direction {
@@ -171,4 +146,6 @@ public class Robot {
 
         public abstract Direction turnRight();
     }
+
+    public record Room(int width, int height) {}
 }
