@@ -11,9 +11,10 @@ public class Task2 {
     public static void main(String[] args) {
         BinarySearchTree bst = new BinarySearchTree();
         bst.add(10);
-        bst.add(10);
         bst.add(20);
-        bst.add(60);
-        bst.add(60);
+        bst.add(5);
+        bst.add(3);
+        bst.add(40);
+        bst.add(15);
     }
 }
