@@ -16,7 +16,7 @@ package com.zoolatech.lecture2.tasks._2;
 public class Task2 {
     public static void main(String[] args) {
         Controller controller = new Controller();
-        controller.create();
-        controller.actions();
+        controller.creation();
+        controller.makeActions();
     }
 }
