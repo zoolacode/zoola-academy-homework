@@ -33,17 +33,6 @@ public class BinarySearchTree {
         }
     }
 
-//    private Node addRecursive(Node current, int value) {
-//        if (current == null) {
-//            return new Node(value);
-//        }
-//        if (value < current.value) {
-//            current.leftChild = addRecursive(current.leftChild, value);
-//        } else if (value > current.value) {
-//            current.rightChild = addRecursive(current.rightChild, value);
-//        }
-//        return current;
-//    }
     public void add(int value) {
         if (rootNode == null) {
             rootNode = new Node(value);
