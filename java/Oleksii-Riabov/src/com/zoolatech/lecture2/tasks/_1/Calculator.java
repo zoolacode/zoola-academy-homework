@@ -13,67 +13,63 @@ import java.util.Scanner;
  */
 
 public class Calculator {
-    double value;
 
-    public Calculator(double value) {
-        this.value = value;
+    private static double value;
+
+    public static void main(String[] args) {
+        System.out.println("Define first value");
+        Calculator.value = getDoubleValue();
+        System.out.println("First value is " + value + "\n");
+
+        System.out.println("Define second value");
+        double secondValue = getDoubleValue();
+        System.out.println("Second value is " + secondValue+ "\n");
+
+        Scanner input = new Scanner(System.in);
+
+        showInstructions();
+
+        String condition = "false";
+        do {
+            System.out.println("\nEnter evaluation sign to evaluate values");
+
+            String line = input.nextLine().toLowerCase();
+            switch (line) {
+                case "+" -> evaluateNumbers(secondValue, '+');
+                case "-" -> evaluateNumbers(secondValue, '-');
+                case "*" -> evaluateNumbers(secondValue, '*');
+                case "/" -> evaluateNumbers(secondValue, '/');
+                case "1" -> System.out.println("First value is " + value);
+                case "2" -> System.out.println("Second value is " + secondValue);
+                case "i" -> showInstructions();
+                case "exit" -> {
+                    System.out.println("Program ends");
+                    condition = "exit";
+                }
+                default -> {
+                    System.out.println("Please enter valid value\n");
+                    showInstructions();
+                }
+            }
+        } while(!"exit".equals(condition));
     }
 
-    public double getValue() {
-        return value;
-    }
-
-    public static void numbersEvaluationMethod(double number1, double number2, char c) {
-        switch (c) {
-            case '+' -> addition(number1, number2);
-            case '-' -> subtraction(number1, number2);
-            case '*' -> multiplication(number1, number2);
-            case '/' -> division(number1, number2);
-            default -> throw new IllegalArgumentException("Enter symbol of an operation");
-        }
-    }
-
-    public static void fractionalPartCheck(double number) {
-        if (number % 1 == 0) {
-            System.out.println((int) number);
-        } else {
-            System.out.println(number);
-        }
-    }
-
-    public static void addition (double number1, double number2) {
-        fractionalPartCheck(number1 + number2);
-    }
-
-    public static void subtraction (double number1, double number2) {
-        fractionalPartCheck(number1 - number2);
-    }
-
-    public static void multiplication (double number1, double number2) {
-        fractionalPartCheck(number1 * number2);
-    }
-
-    public static void division (double number1, double number2) {
-        if (number2 == 0) {
-            throw new ArithmeticException("Divide by zero is not allowed!");
-        } else {
-            fractionalPartCheck(number1 / number2);
-        }
-    }
-
-    public static double doubleValue() {
-        while (true) {
+    public static double getDoubleValue() {
+        String condition = "false";
+        double returnValue = 0.0;
+        do {
             Scanner scanner = new Scanner(System.in);
             if (scanner.hasNextDouble()) {
-                return scanner.nextDouble();
+                returnValue = scanner.nextDouble();
+                condition = "exit";
             } else {
                 System.out.println("Enter numeric value");
-                continue;
             }
-        }
+        } while(!"exit".equals(condition));
+        return returnValue;
     }
 
-    public static void instructions() {
+    public static void showInstructions() {
         System.out.println("""
                 To add values enter "+"
                 To subtract values enter "-"
@@ -86,49 +82,41 @@ public class Calculator {
                 """);
     }
 
-    public static void main(String[] args) {
-        System.out.println("Define first value");
-        Calculator calculator = new Calculator(doubleValue());
-        System.out.println("First value is " + calculator.getValue()+ "\n");
+    public static void evaluateNumbers(double number2, char c) {
+        switch (c) {
+            case '+' -> add(number2);
+            case '-' -> subtract(number2);
+            case '*' -> multiply(number2);
+            case '/' -> divide(number2);
+            default -> throw new IllegalArgumentException("Enter symbol of an operation");
+        }
+    }
 
-        System.out.println("Define second value");
-        double secondValue = doubleValue();
-        System.out.println("Second value is " + secondValue+ "\n");
+    public static void add(double number2) {
+        checkFractionalPart(value + number2);
+    }
 
-        Scanner input = new Scanner(System.in);
+    public static void subtract(double number2) {
+        checkFractionalPart(value - number2);
+    }
 
-        instructions();
-        outer:
-        while (true) {
-//            instructions();
-            System.out.println("Enter evaluation sign to evaluate values");
+    public static void multiply(double number2) {
+        checkFractionalPart(value * number2);
+    }
 
-            String line = input.nextLine().toLowerCase();
-            switch (line) {
-                case "+" -> {
-                    numbersEvaluationMethod(calculator.getValue(), secondValue, '+');
-                }
-                case "-" -> {
-                    numbersEvaluationMethod(calculator.getValue(), secondValue, '-');
-                }
-                case "*" -> {
-                    numbersEvaluationMethod(calculator.getValue(), secondValue, '*');
-                }
-                case "/" -> {
-                    numbersEvaluationMethod(calculator.getValue(), secondValue, '/');
-                }
-                case "1" -> System.out.println("First value is " + calculator.getValue());
-                case "2" -> System.out.println("Second value is " + secondValue);
-                case "i" -> instructions();
-                case "exit" -> {
-                    System.out.println("Program ends");
-                    break outer;
-                }
-                default -> {
-                    System.out.println("Please enter valid value\n");
-                    instructions();
-                }
-            }
+    public static void divide(double number2) {
+        if (number2 == 0) {
+            throw new ArithmeticException("Divide by zero is not allowed!");
+        } else {
+            checkFractionalPart(value / number2);
+        }
+    }
+
+    public static void checkFractionalPart(double number) {
+        if (number % 1 == 0) {
+            System.out.println((int) number);
+        } else {
+            System.out.println(number);
         }
     }
 }
