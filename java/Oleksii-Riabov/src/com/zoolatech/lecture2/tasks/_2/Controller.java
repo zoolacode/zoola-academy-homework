@@ -68,7 +68,7 @@ public class Controller {
             } else {
                 System.out.println("Enter integer value");
             }
-        } while(!"exit".equals(condition)); // false
+        } while(!"exit".equals(condition));
         System.out.println(robot);
     }
 
@@ -95,7 +95,7 @@ public class Controller {
             getInstructions();
             System.out.println("Enter action");
 
-            String line = input.nextLine().toUpperCase(); // try to refactor
+            String line = input.nextLine().toUpperCase();
             switch (line) {
                 case "M" -> {
                     System.out.println("Enter number of tiles to move as integer value.");
