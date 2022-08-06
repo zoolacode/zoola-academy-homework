@@ -6,8 +6,8 @@ public class BinarySearchTree {
         rootNode = null;
     }
 
-    static class Node {
-        private int value;
+    private static class Node {
+        private final int value;
         private Node leftChild;
         private Node rightChild;
         public Node (int value) {
@@ -25,10 +25,7 @@ public class BinarySearchTree {
             current.leftChild = addRecursive(current.leftChild, value);
         } else if (value > current.value) {
             current.rightChild = addRecursive(current.rightChild, value);
-        } else {
-            return current;
         }
-
         return current;
     }
     public void add(int value) {
