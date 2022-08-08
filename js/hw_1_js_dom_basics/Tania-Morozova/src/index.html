@@ -4,33 +4,21 @@
     <link rel="stylesheet" href="app.css" />
   </head>
   <body>
-    <div class="score"></div>
+    <div class="modal modal__active js-start-modal">
+      <span class="modal__text">Let's start</span>
+      <button class="modal__button">Click me</button>
+    </div>
+    <div class="score">
+    </div>
     <div class="mesh">
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
+    </div>
+    <div class="modal modal__win">
+      <span>You win!</span>
+      <button class="modal__button">Try again</button>
+    </div>
+    <div class="modal modal__lose">
+      <span>You lose</span>
+      <button class="modal__button lose-button">Try again</button>
     </div>
     <script src="app.js"></script>
   </body>

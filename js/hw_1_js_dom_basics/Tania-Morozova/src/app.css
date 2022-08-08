@@ -5,6 +5,7 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  background: linear-gradient(90deg, rgba(30,32,38,1) 0%, rgba(43,53,65,1) 30%, rgba(66,74,83,1) 37%, rgba(66,74,83,1) 63%, rgba(43,53,65,1) 70%, rgba(30,32,38,1) 100%);
 }
 
 .mesh {
@@ -12,28 +13,18 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   width: 100vh;
   height: 100vh;
-  background-color: #419884;
+  background-color: #1e2026;
 }
 
 .item {
   width: calc(100vh / 5);
   height: calc(100vh / 5);
+  border-radius: 50%;
 }
 
 .item-highlighted {
   cursor: pointer;
-}
-
-.item-highlighted.item-highlighted-1 {
-  background-color: #f2db63;
-}
-
-.item-highlighted.item-highlighted-2 {
-  background-color: #cc4040;
-}
-
-.item-highlighted.item-highlighted-3 {
-  background-color: #abce29;
+  box-shadow: 0 5px 27px 16px rgba(30, 32, 38, 0.2) inset;
 }
 
 .score {
@@ -41,11 +32,181 @@ body {
   top: 5px;
   left: 5px;
   font-size: 46px;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #cc4040;
+  background-color: #2c8338;
+  padding: 4px;
   color: #fff;
+  box-shadow: 0 5px 27px 16px rgba(30, 32, 38, 0.2) inset;
+  border-radius: 4px;
+}
+
+.negative-score {
+  background-color: #cc4040;
+}
+
+.modal {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #1e2026;
+  font-weight: bold;
+  visibility: hidden;
+  gap: 80px;
+  color: #f0fff7;
+}
+
+
+.modal__active {
+  visibility: visible;
+}
+
+.modal__text {
+  font-size: 64px;
+
+  text-shadow:
+          0 0 7px #fff,
+          0 0 21px #fff,
+          0 0 82px #0fa,
+          0 0 102px #0fa;
+
+  animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+            0 0 4px #fff,
+            0 0 19px #fff,
+            0 0 80px #0fa,
+            0 0 100px #0fa;
+  }
+
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+
+.modal__button {
+  width: 200px;
+  height: 60px;
+  background: none;
+  text-decoration: none;
+  cursor: pointer;
+
+  color: #f0fff7ff;
+  text-transform: uppercase;
+  font-size: 20px;
+
+  border-radius: 12px;
+  outline: thick double #5fbd9d;
+  border: #5fbd9d 2px solid;
+
+  text-shadow: 0 0 40px rgba(0, 0, 255, 0.3), 0 0 40px #0fa;
+  box-shadow: inset 0 0 8px 0 #0fa, 0 0 8px 0 #0fa;
+}
+
+
+.modal__button:hover {
+  background: rgba(0, 255, 170, 0.1);
+}
+
+.modal__button:active {
+  box-shadow: inset 0 0 24px 0 #0fa, 0 0 24px 0 #0fa;
+}
+
+.lose-button {
+  outline: thick double #cc4040;
+  border: #851b1e 2px solid;
+  color: #cc4040;
+
+  text-shadow: 0 0 40px rgba(0, 0, 255, 0.3), 0 0 40px #6c0a19;
+  box-shadow: inset 0 0 8px 0 #ff0026, 0 0 8px 0 #d5253a;
+}
+
+.lose-button:hover {
+  background: rgba(120, 8, 8, 0.1);
+}
+
+.lose-button:active {
+  box-shadow: inset 0 0 24px 0 #cc4040, 0 0 24px 0 #cc4040;
+}
+
+
+.modal__lose {
+  background: url("https://img2.goodfon.ru/wallpaper/nbig/1/b6/friday-the-13th-the-game-gun.jpg") no-repeat center top fixed;
+  background-size: cover;
+
+  font-size: 80px;
+
+  text-shadow:
+          0 0 7px #261b1b,
+          0 0 21px #1c1717,
+          0 0 82px #cc4040,
+          0 0 102px #cc4040;
+
+  color: #cc4040;
+  animation: lose 1.5s infinite alternate;
+}
+
+@keyframes lose {
+
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+            0 0 4px #312424,
+            0 0 19px #2d2323,
+            0 0 80px #cc4040,
+            0 0 100px #cc4040;
+  }
+
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+.modal__win {
+  background: url("https://img3.akspic.ru/crops/4/6/0/4/6/164064/164064-goroda_kiberpank-kiberpank_2077-kiberpank-nauchnaya_fantastika-cifrovoe_iskusstvo-2560x1440.jpg") no-repeat center top fixed;
+  background-size: cover;
+  font-size: 80px;
+
+  text-shadow:
+          0 0 7px #fff,
+          0 0 21px #fff,
+          0 0 82px #2fb7c0,
+          0 0 102px #33c4bf;
+
+  color: #a7ccca;
+  animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+
+  0%, 18%, 25%, 57%, 100% {
+    text-shadow:
+            0 0 4px #179093,
+            0 0 19px #46a284,
+            0 0 80px #2cabab,
+            0 0 100px #2fd0be;
+  }
+
+  20%, 24%, 55% {
+    text-shadow:
+            0 0 4px rgba(24, 146, 148, 0.7),
+            0 0 19px rgba(70, 163, 132, 0.7),
+            0 0 80px rgba(44, 171, 171, 0.7),
+            0 0 100px rgba(48, 209, 190, 0.7);
+
+  }
 }
