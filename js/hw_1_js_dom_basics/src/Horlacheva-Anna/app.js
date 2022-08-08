@@ -1,6 +1,5 @@
 const meshContainer = document.querySelector(".mesh");
 const scoreContainer = document.querySelector(".score");
-const meshSize = meshContainer.children.length;
 
 for(i = 0; i <= 24; i++){
     let item = document.createElement('div');
