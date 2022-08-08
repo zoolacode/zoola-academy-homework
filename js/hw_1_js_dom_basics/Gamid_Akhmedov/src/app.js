@@ -23,7 +23,7 @@ scoreContainer.innerText = currentScore;
  */
 let gameIterationDuration = 1500;
 
-let prevIndex = 4
+let prevIndex
 
 
 let interval = setInterval(runGameIteration, gameIterationDuration);
@@ -34,18 +34,17 @@ let restart = () => {
 }
 
 
+
 function runGameIteration() {
-  
   if (deactivateElement) {
     deactivateElement();
   }
   
-  
-  let randomIndex = getRandomNumber(meshSize - 1);
+  let randomIndex;
 
-   if (randomIndex == prevIndex) {
-    randomIndex %= getRandomNumber(meshSize - 1)
-  }
+  do {
+    randomIndex = getRandomNumber(meshSize - 1);
+  } while (randomIndex === prevIndex);
 
   const activeElement = meshContainer.children[randomIndex];
   prevIndex = randomIndex
@@ -56,7 +55,6 @@ function runGameIteration() {
       //if (currentClicks === 0) {
         currentScore += 1
         currentClicks += 1
-        scoreContainer.innerText = currentScore;
         if(currentScore <= -20 || currentScore >= 20) {
           clearInterval(interval)
         } else {
@@ -74,9 +72,7 @@ function runGameIteration() {
     }
     
     e.stopImmediatePropagation()
-
     console.log('click');
-    
   })
   
   if (activeElement) {
@@ -86,7 +82,7 @@ function runGameIteration() {
   if (currentClicks === 0) {
     currentScore -= 5
   }
-  
+
   scoreContainer.innerText = currentScore;
   currentClicks = 0
 
@@ -101,6 +97,8 @@ function runGameIteration() {
   }
 }
 
+
+
 function activateElement(element) {
   const variant = getVariantForIndex();
   element.classList.add("item-highlighted", variant);
@@ -109,6 +107,8 @@ function activateElement(element) {
     element.classList.remove("item-highlighted", variant);
   };
 }
+
+
 
 /**
  * @description This function takes an integer and returns a random integer between 0 and the given number

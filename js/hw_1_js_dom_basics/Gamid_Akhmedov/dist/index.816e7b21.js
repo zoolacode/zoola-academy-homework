@@ -17,7 +17,7 @@ scoreContainer.innerText = currentScore;
 /**
  * @description Game speed
  */ let gameIterationDuration = 1500;
-let prevIndex = 4;
+let prevIndex;
 let interval = setInterval(runGameIteration, gameIterationDuration);
 let restart = ()=>{
     runGameIteration();
@@ -25,8 +25,9 @@ let restart = ()=>{
 };
 function runGameIteration() {
     if (deactivateElement) deactivateElement();
-    let randomIndex = getRandomNumber(meshSize - 1);
-    if (randomIndex == prevIndex) randomIndex %= getRandomNumber(meshSize - 1);
+    let randomIndex;
+    do randomIndex = getRandomNumber(meshSize - 1);
+    while (randomIndex === prevIndex);
     const activeElement = meshContainer.children[randomIndex];
     prevIndex = randomIndex;
     meshContainer.addEventListener("click", (e)=>{
@@ -34,7 +35,6 @@ function runGameIteration() {
             //if (currentClicks === 0) {
             currentScore += 1;
             currentClicks += 1;
-            scoreContainer.innerText = currentScore;
             if (currentScore <= -20 || currentScore >= 20) clearInterval(interval);
             else {
                 clearInterval(interval);
