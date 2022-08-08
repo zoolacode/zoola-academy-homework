@@ -1,7 +1,7 @@
 4154
-102C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist133044157966295787 1
+102C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist133044200042728869 1
 142C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\caniuse-lite\data\regions\DM.js133043606306013623 0
-108C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\src\app.js133044157965386663 0
+108C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\src\app.js133044200041831468 0
 161C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\caniuse-lite\data\features\font-variant-numeric.js133043606307110302 0
 168C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\htmlnano\docs\versioned_docs\version-2.0.0\040-presets.md133043606294443984 0
 129C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\msgpackr\pack.d.ts133043606288830805 0
@@ -46,7 +46,7 @@
 145C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\@parcel\core\src\ReporterRunner.js133043606317120599 0
 153C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\@parcel\core\lib\requests\TargetRequest.js133043606317621878 0
 149C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\type-fest\source\conditional-keys.d.ts133043606285283386 0
-109C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\src\app.css133043690626760990 0
+109C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\src\app.css133044182758472199 0
 158C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\@jridgewell\resolve-uri\dist\resolve-uri.umd.js133043606278586518 0
 138C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\@jridgewell\gen-mapping\src133043606286682192 1
 115C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\package-lock.json133043606374246323 0
@@ -83,7 +83,7 @@
 159C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\@parcel\package-manager\test\fixtures\packages\a133043606312988725 1
 148C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\@parcel\runtime-js\lib\helpers\worker133043606299126789 1
 134C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\supports-color\index.js133043606279099718 0
-112C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\src\index.html133043691417823176 0
+112C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\src\index.html133044173304944754 0
 149C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\@parcel\events\test\Disposable.test.js133043606315683729 0
 136C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\@parcel\transformer-babel133043606302058020 1
 162C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\mdb_load.c133043606291962030 0
@@ -1089,7 +1089,7 @@
 134C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\svgo\lib\svgo\config.js133043606287368781 0
 140C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\terser\lib\compress\inline.js133043606291267338 0
 149C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\@parcel\core\test\EntryRequest.test.js133043606314448444 0
-120C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist\index.816e7b21.js133044157966215793 0
+120C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist\index.816e7b21.js133044200042678784 0
 148C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\terser\lib\compress\native-objects.js133043606291962030 0
 136C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\lmdb\dependencies\lz4\lib133043606302027973 1
 143C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\term-size\vendor\macos\term-size133043606282320403 0
@@ -4149,7 +4149,7 @@
 120C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\.bin\svgo133043606369507455 0
 124C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\.bin\svgo.ps1133043606369507455 0
 126C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\node_modules\.bin\terser.ps1133043606369507455 0
-121C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist\index.4a5519d3.css133044152976446313 0
-125C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist\index.4a5519d3.css.map133044152976526271 0
-124C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist\index.816e7b21.js.map133044157966275797 0
-113C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist\index.html133044152983767953 0
+121C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist\index.4a5519d3.css133044182759271675 0
+125C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist\index.4a5519d3.css.map133044182759311758 0
+124C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist\index.816e7b21.js.map133044200042708857 0
+113C:\Users\Gamid\Desktop\zoola_homework\zoola-academy-homework\js\hw_1_js_dom_basics\Gamid_Akhmedov\dist\index.html133044178657541685 0

@@ -69,3 +69,23 @@ body {
   background-color: #cc4040;
   color: #fff;
 }
+
+.button_start {
+  position: absolute;
+  top: 100px;
+  left: 5px;
+  font-size: 20px;
+  width: 80px;
+  height: 40px;
+
+  cursor: pointer;
+}
+
+.button_start:hover {
+  background-color: rgb(189, 189, 189);
+}
+
+.button_start:active {
+  background-color: rgb(108, 108, 108);
+  color: #fff;
+}

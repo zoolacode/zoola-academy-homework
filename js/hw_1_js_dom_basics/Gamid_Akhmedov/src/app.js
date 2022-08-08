@@ -1,13 +1,7 @@
 const meshContainer = document.querySelector(".mesh");
 const scoreContainer = document.querySelector(".score");
+const startBtn = document.querySelector(".button_start")
 
-for (let i = 0; i < 25; i++) {
-  let element = document.createElement("div")
-  element.classList.add("item")
-  meshContainer.appendChild(element)
-}
-
-const meshSize = meshContainer.children.length;
 /**
  * @description A function to be executed after each game iteration, is set to null by default
  */
@@ -25,8 +19,24 @@ let gameIterationDuration = 1500;
 
 let prevIndex
 
+for (let i = 0; i < 25; i++) {
+  let element = document.createElement("div")
+  element.classList.add("item")
+  meshContainer.appendChild(element)
+}
 
-let interval = setInterval(runGameIteration, gameIterationDuration);
+const meshSize = meshContainer.children.length;
+
+
+let interval
+
+const onClick = () => {
+  interval = setInterval(runGameIteration, gameIterationDuration)
+
+  startBtn.removeEventListener('click', onClick)
+};
+
+startBtn.addEventListener('click', onClick)
 
 let restart = () => {
   runGameIteration()
@@ -48,32 +58,31 @@ function runGameIteration() {
 
   const activeElement = meshContainer.children[randomIndex];
   prevIndex = randomIndex
-  
-  
-  meshContainer.addEventListener('click', (e) => {
+
+  const meshClick = (e) => {
     if (e.target.classList.contains("item-highlighted")) {
-      //if (currentClicks === 0) {
+      if (currentScore > -20) {
+        meshContainer.removeEventListener('click', meshClick)
         currentScore += 1
         currentClicks += 1
-        if(currentScore <= -20 || currentScore >= 20) {
+        scoreContainer.innerText = currentScore;
+        if(currentScore >= 20) {
           clearInterval(interval)
         } else {
           clearInterval(interval)
           restart()
         }
-
-        //currentClicks += 1
-      /*}  else {
-        currentScore -= 2
-        currentClicks += 1
-      } */
+      } else {
+        meshContainer.removeEventListener('click', meshClick)
+      }
     } else {
       currentScore -= 3
     }
-    
     e.stopImmediatePropagation()
-    console.log('click');
-  })
+  }
+  
+  meshContainer.addEventListener('click', meshClick)
+  
   
   if (activeElement) {
     deactivateElement = activateElement(activeElement)
@@ -92,7 +101,7 @@ function runGameIteration() {
     meshContainer.style.backgroundColor = "#ba7474"
   }
   
-  if(currentScore <= -20 || currentScore >= 20) {
+  if (currentScore <= -20) {
     clearInterval(interval)
   }
 }
