@@ -14,8 +14,10 @@ let currentScore = 0;
  * @description Game speed
  */
 let gameIterationDuration = 1000;
+let counterClick = 0;
 
-setInterval(runGameIteration, gameIterationDuration);
+const intervalId = setInterval(runGameIteration, gameIterationDuration);
+
 
 function runGameIteration() {
   /**
@@ -31,9 +33,10 @@ function runGameIteration() {
 
   if (activeElement) {
     deactivateElement = activateElement(activeElement, randomIndex);
+    activeElement.addEventListener('click', changeGameCounter);
   }
 
-  scoreContainer.innerText = currentScore;
+  stopGame(currentScore, activeElement);
 }
 
 function activateElement(element, index) {
@@ -47,6 +50,14 @@ function activateElement(element, index) {
    */
   return function unhighlight() {
     element.classList.remove("item-highlighted", variant);
+    element.removeEventListener('click', changeGameCounter);
+
+    if (counterClick === 0) {
+      currentScore -= 5;
+      scoreContainer.innerText = currentScore;
+    }
+
+    counterClick = 0;
   };
 }
 
@@ -64,4 +75,27 @@ function getVariantForIndex(index) {
     "item-highlighted-3",
   ];
   return variants[index % variants.length];
+}
+
+/**
+ * @description This function changes the value of counterClick and, depending on its value, changes the currentScore
+ */
+function changeGameCounter() {
+  counterClick += 1;
+
+  counterClick > 1
+      ? currentScore -= 2
+      : currentScore += 1;
+
+  scoreContainer.innerText = currentScore;
+}
+/**
+ * @description This function that checks the score, stops the game under certain conditions.
+ */
+function stopGame(score, element) {
+  if (score >= 20 || score <= -20) {
+    clearInterval(intervalId);
+    element.removeEventListener('click', changeGameCounter);
+    deactivateElement = null;
+  }
 }
