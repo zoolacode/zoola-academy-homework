@@ -1,9 +1,9 @@
 const meshContainer = document.querySelector(".mesh");
 const scoreContainer = document.querySelector(".score");
 const gameStart = document.querySelector(".btn_start ");
-const fastModeBtn = document.querySelector(".mode_500");
-const normalModeBtn = document.querySelector(".mode_1000");
-const slowModeBtn = document.querySelector(".mode_1500");
+const fastModeBtn = document.querySelector(".fastMode-500");
+const normalModeBtn = document.querySelector(".mediumMode-1000");
+const slowModeBtn = document.querySelector(".slowMode-1500");
 
 fastModeBtn.addEventListener('click', fastMode);
 normalModeBtn.addEventListener('click', mediumMode);
