@@ -1,3 +1,8 @@
 .idea/
 **/.DS_Store
 /java/Anton-Kozyk/Anton-Kozyk.iml
+/js/hw_1_js_dom_basics/Sasha_Kulyk/node_modules
+.DS_Store
+js/hw_1_js_dom_basics/Sasha_Kulyk/.parcel-cache
+js/hw_1_js_dom_basics/Sasha_Kulyk/dist
+

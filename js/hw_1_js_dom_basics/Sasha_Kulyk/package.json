@@ -1,0 +1,15 @@
+{
+  "name": "hw-1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel src/index.html"
+  },
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  },
+  "dependencies": {
+    "notiflix": "^3.2.5"
+  }
+}
