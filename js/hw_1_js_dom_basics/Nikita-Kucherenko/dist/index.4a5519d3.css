@@ -9,9 +9,29 @@ body {
 .mesh {
   width: 100vh;
   height: 100vh;
-  background-color: #419884;
+  background-color: #1d1f1f;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   display: grid;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(.3);
+  }
+
+  50% {
+    border-radius: 50%;
+    transform: scale(1);
+  }
+
+  100% {
+    border-radius: 0;
+    transform: scale(.3);
+  }
 }
 
 .item {
@@ -21,6 +41,8 @@ body {
 
 .item-highlighted {
   cursor: pointer;
+  transition: all .1s ease-in;
+  animation: scale 1s;
 }
 
 .item-highlighted.item-highlighted-1 {
@@ -47,6 +69,23 @@ body {
   position: absolute;
   top: 5px;
   left: 5px;
+}
+
+.popup {
+  width: 300px;
+  background: #f2db63;
+  border: 1px solid #cc4040;
+  padding: 10px 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.btn {
+  color: #f2db63;
+  background: #cc4040;
+  font-size: 20px;
 }
 
 /*# sourceMappingURL=index.4a5519d3.css.map */

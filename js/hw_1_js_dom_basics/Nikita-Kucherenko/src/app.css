@@ -12,7 +12,25 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   width: 100vh;
   height: 100vh;
-  background-color: #419884;
+  background-color: #1d1f1f;
+
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1);
+    border-radius: 50%;
+  }
+  100% {
+    transform: scale(0.3);
+    border-radius: 0;
+  }
 }
 
 .item {
@@ -20,8 +38,11 @@ body {
   height: calc(100vh / 5);
 }
 
+
 .item-highlighted {
   cursor: pointer;
+  animation: scale 1s;
+  transition: all 100ms ease-in;
 }
 
 .item-highlighted.item-highlighted-1 {
@@ -49,3 +70,24 @@ body {
   background-color: #cc4040;
   color: #fff;
 }
+
+.popup {
+  width: 300px;
+  border: 1px solid #cc4040;
+  padding: 10px 20px;
+  background: #f2db63;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.btn {
+  background: #cc4040;
+  color: #f2db63;
+
+  font-size: 20px;
+}
+
+
