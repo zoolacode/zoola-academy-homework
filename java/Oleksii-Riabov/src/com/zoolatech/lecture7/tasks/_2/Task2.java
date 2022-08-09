@@ -24,11 +24,7 @@ public class Task2 {
         Runnable additionTask = () -> {
             for (int i = 0; i < 10; i++) {
                 explicitLockCalculator.add(200);
-            }
-            for (int i = 0; i < 10; i++) {
                 synchronizedCalculator.add(200);
-            }
-            for (int i = 0; i < 10; i++) {
                 atomicCalculator.add(200);
             }
         };
@@ -36,11 +32,7 @@ public class Task2 {
         Runnable subtractionTask = () -> {
             for (int i = 0; i < 10; i++) {
                 explicitLockCalculator.subtract(100);
-            }
-            for (int i = 0; i < 10; i++) {
                 synchronizedCalculator.subtract(100);
-            }
-            for (int i = 0; i < 10; i++) {
                 atomicCalculator.subtract(100);
             }
         };
