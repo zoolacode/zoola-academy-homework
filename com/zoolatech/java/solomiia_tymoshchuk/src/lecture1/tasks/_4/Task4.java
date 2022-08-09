@@ -1,8 +1,5 @@
-package general.lecture1.tasks._4;
+package com.zoolatech.java.solomiia_tymoshchuk.src.lecture1.tasks._4;
 
-import general.lecture1.exceptions.NumberOutOfRangeException;
-
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -13,14 +10,13 @@ import java.util.Scanner;
  **/
 public class Task4 {
     int[] numbers = new int[]{1, 2, 3, 4, 5};
-    Integer[] allNumbers = {1, 2, 3, 4, 5, 6, 7};
 
     public String defineMood() throws NumberOutOfRangeException {
         String statement = null;
         System.out.println("Enter the digit");
         Scanner sc = new Scanner(System.in);
-        Integer number = sc.nextInt();
-        if (!(Arrays.asList(allNumbers).contains(number))) {
+        int number = sc.nextInt();
+        if (number>7 || number<1) {
             throw new NumberOutOfRangeException("Numbers is out of required range");
         }
         for (Integer day : numbers) {

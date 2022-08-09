@@ -1,4 +1,4 @@
-package general.lecture1.tasks._10;
+package com.zoolatech.java.solomiia_tymoshchuk.src.lecture1.tasks._10;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -11,10 +11,6 @@ import java.util.Scanner;
  * If the user guesses the number correctly - the program should output “That’s it!” and finish.
  **/
 public class Task10 {
-
-    void printSentence(String sentence) {
-        System.out.println(sentence);
-    }
 
     void guessNumber(int N) {
         Scanner sc = new Scanner(System.in);
@@ -34,10 +30,13 @@ public class Task10 {
         }
     }
 
-    public static void main(String[] args) {
-        int N = 5;
-        Task10 task10 = new Task10();
-        task10.guessNumber(N);
+    void printSentence(String sentence) {
+        System.out.println(sentence);
+    }
 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Task10 task10 = new Task10();
+        task10.guessNumber(sc.nextInt());
     }
 }

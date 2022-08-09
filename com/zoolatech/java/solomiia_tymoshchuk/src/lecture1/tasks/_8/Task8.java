@@ -1,4 +1,4 @@
-package general.lecture1.tasks._8;
+package com.zoolatech.java.solomiia_tymoshchuk.src.lecture1.tasks._8;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +12,22 @@ import java.util.Scanner;
  * Create two versions of the program: one should use the for loop, second - the while loop.
  **/
 public class Task8 {
-    Scanner sc = new Scanner(System.in);
-    int number = sc.nextInt();
-    List<Integer> newarr = new ArrayList<Integer>();
+    int number;
+    public Task8(int number){
+        this.number = number;
 
-    void checkDivision() {
+    }
+    List<Integer> newarr = new ArrayList<>();
+
+    //for loop version of program
+    void checkDivisionForLoop() {
         for (int i = 1; i <= number; i++) {
             newarr.add(i);
         }
         checkNumbers();
     }
 
+    //while loop version of program
     void checkDivisionWhileLoop() {
         int i = 1;
         while (i <= number) {
@@ -45,8 +50,11 @@ public class Task8 {
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int number = sc.nextInt();
         System.out.println("Enter number");
-        Task8 task8 = new Task8();
+        Task8 task8 = new Task8(number);
         task8.checkDivisionWhileLoop();
+        task8.checkDivisionForLoop();
     }
 }

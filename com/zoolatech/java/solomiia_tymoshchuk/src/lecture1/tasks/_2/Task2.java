@@ -1,4 +1,4 @@
-package general.lecture1.tasks._2;
+package com.zoolatech.java.solomiia_tymoshchuk.src.lecture1.tasks._2;
 
 import java.util.Scanner;
 
@@ -8,18 +8,16 @@ import java.util.Scanner;
  **/
 public class Task2 {
 
-    public Double convertSpeedValueToMs(double distance, double time) {
-        double convertedDistance = distance / time;
-        return convertedDistance;
+    public double convertSpeedValueToMs(double distance, double time) {
+        return distance / time;
     }
 
-    public Double convertSpeedValueToKh(double distance, double time) {
+    public double convertSpeedValueToKh(double distance, double time) {
         int secondsInHour = 3600;
         int metersInKm = 1000;
         double hours = time / secondsInHour;
         double kms = distance / metersInKm;
-        double calculatedValue = kms / hours;
-        return calculatedValue;
+        return kms / hours;
     }
 
     void calculatedDistanceValue() {

@@ -1,4 +1,4 @@
-package general.lecture1.tasks._6;
+package com.zoolatech.java.solomiia_tymoshchuk.src.lecture1.tasks._6;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -11,11 +11,11 @@ import java.util.Scanner;
  * Create two versions of the program: one should use the if-else statement, second - the switch statement.
  **/
 public class Task6 {
-    private int number;
-    private int number1 ;
-    private String operator;
+    private final int number;
+    private final int number1 ;
+    private final char operator;
 
-    public Task6(int number, int number1, String operator){
+    public Task6(int number, int number1, char operator){
         this.number = number;
         this.number1 = number1;
         this.operator = operator;
@@ -23,34 +23,24 @@ public class Task6 {
 
     void calculateNumbersSwitchCase() {
         switch (operator) {
-            case "+":
-                System.out.println(number + number1);
-                break;
-            case "-":
-                System.out.println(number - number1);
-                break;
-            case "*":
-                System.out.println(number * number1);
-                break;
-            case "/":
-                System.out.println(number / number1);
-                break;
-            case "%":
-                System.out.println(number % number1);
-                break;
+            case '+' -> System.out.println(number + number1);
+            case '-' -> System.out.println(number - number1);
+            case '*' -> System.out.println(number * number1);
+            case '/' -> System.out.println(number / number1);
+            case '%' -> System.out.println(number % number1);
         }
     }
 
     void calculateNumbersIfWay() {
-        if (Objects.equals(operator, "+")) {
+        if (Objects.equals(operator, '+')) {
             System.out.println(number + number1);
-        } else if (Objects.equals(operator, "-")) {
+        } else if (Objects.equals(operator, '-')) {
             System.out.println(number - number1);
-        } else if (Objects.equals(operator, "*")) {
+        } else if (Objects.equals(operator, '*')) {
             System.out.println(number * number1);
-        } else if (Objects.equals(operator, "/")) {
+        } else if (Objects.equals(operator, '/')) {
             System.out.println(number / number1);
-        } else if (Objects.equals(operator, "%")) {
+        } else if (Objects.equals(operator, '%')) {
             System.out.println(number % number1);
         }
     }
@@ -59,8 +49,7 @@ public class Task6 {
         Scanner sc = new Scanner(System.in);
         int number = sc.nextInt();
         int number1 = sc.nextInt();
-        String operator = sc.next();
-        System.out.println("Enter two numbers and the math operator");
+        char operator = sc.next().charAt(0);
         Task6 task6 = new Task6(number, number1, operator);
         task6.calculateNumbersIfWay();
     }

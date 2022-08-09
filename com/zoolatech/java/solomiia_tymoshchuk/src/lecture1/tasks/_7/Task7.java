@@ -1,4 +1,4 @@
-package general.lecture1.tasks._7;
+package com.zoolatech.java.solomiia_tymoshchuk.src.lecture1.tasks._7;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +12,18 @@ import java.util.Scanner;
  * second - the while loop.
  **/
 public class Task7 {
-    Scanner sc = new Scanner(System.in);
-    int number = sc.nextInt();
-    List<Integer> newarr = new ArrayList<Integer>();
+    int number;
+    public Task7(int number){
+        this.number = number;
+    }
+    List<Integer> newarr = new ArrayList<>();
 
     void oddNumbers() {
         for (int k = number; k > 0; k--) {
             if (k % 2 != 0) {
-                newarr.add(k);
+                System.out.println(k);
             }
         }
-        newarr.forEach(System.out::println);
     }
 
     void oddNumbersWhile() {
@@ -37,8 +38,9 @@ public class Task7 {
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         System.out.println("Enter number");
-        Task7 task7 = new Task7();
+        Task7 task7 = new Task7(sc.nextInt());
 //        task7.oddNumbersWhile();
         task7.oddNumbers();
     }
