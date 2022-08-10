@@ -19,32 +19,43 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class Restaurant {
     public static void main(String[] args) throws FileNotFoundException {
-        LinkedBlockingQueue<String> newOrders = new LinkedBlockingQueue<>();
-        Scanner fScn = new Scanner(new File("java/Anton-Kozyk/src/com/zoolatech/lecture8/tasks/_1/customers.txt"));
+        class Order {
+            final String name;
+            final int id;
 
+            public Order(String name, int id) {
+                this.name = name;
+                this.id = id;
+            }
+
+            @Override
+            public String toString() {
+                return "ID " + id + ", for: " + name;
+            }
+        }
+
+        LinkedBlockingQueue<Order> newOrders = new LinkedBlockingQueue<>();
+        String[] customerNames = {"Jack", "Alban", "Sam", "James", "Merry", "Mac"};
         Thread customers = new Thread(() -> {
             int id = 1;
-            String name;
-            while (!Thread.currentThread().isInterrupted() && fScn.hasNextLine()) {
+            for (String name : customerNames) {
                 try {
-                    name = fScn.nextLine();
-                    System.out.println("\nNew order from " + name + ". ID: " + id);
-                    String order = "ID: " + id + "; name: " + name;
-                    newOrders.put(order);
+                    Order newOrder = new Order(name, id);
+                    System.out.println("\nNew order from " + newOrder.name + ". ID: " + newOrder.id);
+                    newOrders.put(newOrder);
                     Thread.sleep(4000);
                     id++;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            fScn.close();
         });
 
-        LinkedBlockingQueue<String> ordersInProgress = new LinkedBlockingQueue<>();
+        LinkedBlockingQueue<Order> ordersInProgress = new LinkedBlockingQueue<>();
         Thread chefs = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
-                    String order = newOrders.take();
+                    Order order = newOrders.take();
                     System.out.println(order + " -> taken by the chef");
                     Thread.sleep(2000);
                     ordersInProgress.put(order);
