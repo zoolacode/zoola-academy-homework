@@ -40,7 +40,7 @@ public class Number7 {
             if (maxNumber % 2 != 0) {
                 System.out.println(maxNumber);
             }
-            maxNumber-=1;
+            maxNumber--;
         }
         System.out.println("Turning of...\nDone :D");
     }

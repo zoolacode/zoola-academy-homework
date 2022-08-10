@@ -41,14 +41,7 @@ public class Number4 {
     }
 
     //MARK: Private Method
-    static private boolean containsDays(int day) {
+     private static boolean containsDays(int day) {
         return (day >= 1 && day <= 5);
     }
 }
-/*
-record RangeOfDays(int min, int max) {
-    public boolean containsDays(int day) {
-        return (day >= min && day <= max);
-    }
-  }
-*/
