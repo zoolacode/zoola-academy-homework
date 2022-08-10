@@ -22,6 +22,7 @@ const scoreContainer = document.querySelector(".score");
   let numberOfElements = 25;
 
   let colorNumber = null;
+  let squareNum = null;
   /**
   * @description Round interval
   */
@@ -95,7 +96,15 @@ function runGameIteration() {
     deactivateElement();
   }
 
-  const randomIndex = getRandomNumber(meshSize - 1);
+  let randomIndex = getRandomNumber(meshSize - 1);
+  if(squareNum){
+    while (squareNum === randomIndex) {
+      randomIndex = getRandomNumber(meshSize - 1);
+    }
+  }
+
+  squareNum = randomIndex;
+  
   const activeElement = meshContainer.children[randomIndex];
 
   if (activeElement) {
@@ -193,7 +202,6 @@ function getVariantForIndex(index) {
     }
   }
   colorNumber = tmpNum;
-  console.log(colorNumber)
   return variants[colorNumber];
 }
 
@@ -201,7 +209,7 @@ function updateGame() {
   var select = document.getElementById('type');
   var option = select.options[select.selectedIndex];
   let additiveConditions = document.getElementsByClassName("type-game-add")
-  console.log(option.value)
+  
   if(option.value === "updated"){
     for (let index = 0; index < additiveConditions.length; index++) {
       const element = additiveConditions[index];
