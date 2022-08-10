@@ -36,8 +36,20 @@ body {
   background-color: #abce29;
 }
 
-.score {
-  position: absolute;
+.item-highlighted.item-highlighted-4 {
+  background-color: #0004f9;
+}
+
+.item-highlighted.item-highlighted-5 {
+  background-color: #e129cc;
+}
+
+.item-highlighted.item-highlighted-6 {
+  background-color: #00e1fe;
+}
+
+.score  {
+  /* position: absolute; */
   top: 5px;
   left: 5px;
   font-size: 46px;
@@ -48,4 +60,20 @@ body {
   justify-content: center;
   background-color: #cc4040;
   color: #fff;
+}
+
+.positive-score{
+  background-color: #009903;
+}
+
+.negative-score{
+  background-color: #cc4040;
+}
+
+.type-game-add{
+  display: none;
+}
+
+.type-game-add-active{
+  display: block;
 }
