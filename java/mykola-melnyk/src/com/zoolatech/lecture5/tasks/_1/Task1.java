@@ -13,16 +13,13 @@ import java.util.Arrays;
  */
 
 public class Task1 {
-    private int N;
-    private int[] numbers;
 
     public static void main(String[] args) {
-        Task1 task1 = new Task1();
-        System.out.println(task1.nSmallest(1, 3, 2, 1));
-        System.out.println(task1.nSmallest(5, 3, 2, 1));
+        System.out.println(nSmallest(1, 1, 2, 3));
+        System.out.println(nSmallest(5, 3, 2, 1));
     }
 
-    public int nSmallest(int N, int... numbers) {
+    public static int nSmallest(int N, int... numbers) {
         if (N > numbers.length) {
             return -1;
         }
