@@ -13,10 +13,10 @@ package com.zoolatech.lecture3.tasks._1;
 
 public class Task1 {
     public static void main(String[] args) {
-        Violinist violinist = new Violinist("Jack Black");
-        Guitarist guitarist1 = new Guitarist("Josh Bush");
-        Guitarist guitarist2 = new Guitarist("Josh Washington");
-        Pianist pianist = new Pianist("Sam Winchester");
+        Musician violinist = new Musician("Jack Black", new Violin());
+        Musician guitarist1 = new Musician("Josh Bush", new Guitar());
+        Musician guitarist2 = new Musician("Josh Washington", new Guitar());
+        Musician pianist = new Musician("Sam Winchester", new Piano());
         Orchestra orchestra = new Orchestra();
 
         orchestra.add(violinist);
@@ -35,4 +35,3 @@ public class Task1 {
         System.out.println(guitarist1.equals(guitarist2));
     }
 }
-

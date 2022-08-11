@@ -2,12 +2,12 @@ package com.zoolatech.lecture3.tasks._3;
 
 import java.util.Objects;
 
-public non-sealed class Triangle extends Figure implements Shape {
+public non-sealed class Triangle implements Shape {
     private double sideA;
     private double sideB;
     private double sideC;
 
-    Triangle(double sideA, double sideB, double sideC){
+    public Triangle(double sideA, double sideB, double sideC) {
         this.sideA = sideA;
         this.sideB = sideB;
         this.sideC = sideC;
@@ -15,25 +15,23 @@ public non-sealed class Triangle extends Figure implements Shape {
 
     @Override
     public double findPerimeter() {
-        double trianglePerimeter = sideA + sideB + sideC;
-        return trianglePerimeter;
+        return sideA + sideB + sideC;
     }
 
     @Override
     public double findArea() {
         double semiPerimeter = findPerimeter() / 2;
-        double triangleArea = Math.sqrt(semiPerimeter * (semiPerimeter - sideA) *
+        return Math.sqrt(semiPerimeter * (semiPerimeter - sideA) *
                 (semiPerimeter - sideB) * (semiPerimeter - sideC));
-        return triangleArea;
     }
 
     @Override
-    void printArea() {
+    public void printArea() {
         System.out.println("Triangle area: " + findArea());
     }
 
     @Override
-    void printPerimeter() {
+    public void printPerimeter() {
         System.out.println("Triangle perimeter: " + findPerimeter());
     }
 

@@ -7,12 +7,12 @@ public class Orchestra {
 
     void add(Musician musician) {
         orchestra.add(musician);
-        System.out.println(musician.name + " added to orchestra");
+        System.out.println(musician.getName() + " added to orchestra");
     }
 
     void remove(Musician musician) {
         orchestra.remove(musician);
-        System.out.println(musician.name + " removed from orchestra");
+        System.out.println(musician.getName() + " removed from orchestra");
     }
 
     void playMusic() {

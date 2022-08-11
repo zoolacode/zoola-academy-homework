@@ -30,7 +30,14 @@ public class Task2 {
                 5,
                 7);
 
-        MainValidator validator = new MainValidator();
+        MainValidator validator = new MainValidator(new StringIsNotEmptyValidator("First name"),
+                new StringIsNotEmptyValidator("Second name"),
+                new StringIsNotEmptyValidator("Country"),
+                new EmailValidator("Email"),
+                new PhoneNumberValidator("Phone number"),
+                new NumberIsInRangeValidator("Birth day"),
+                new NumberIsInRangeValidator("Birth month"),
+                new NumberIsBiggerValidator("User ID"));
 
         System.out.println(validator.isValid(peter));
     }

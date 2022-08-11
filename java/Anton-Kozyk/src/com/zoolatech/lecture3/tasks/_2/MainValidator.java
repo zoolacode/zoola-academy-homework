@@ -1,31 +1,26 @@
 package com.zoolatech.lecture3.tasks._2;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainValidator implements Validating {
-    private List<Validator> validators = new ArrayList<>();
-    private boolean validationResult = true;
+public class MainValidator implements Validatable {
+    private List<Validator> validators;
+
+    public MainValidator(StringIsNotEmptyValidator firstNameValidator, StringIsNotEmptyValidator secondNameValidator,
+                         StringIsNotEmptyValidator countryValidator, EmailValidator emailValidator,
+                         PhoneNumberValidator phoneNumberValidator, NumberIsInRangeValidator birthDayValidator,
+                         NumberIsInRangeValidator birthMonthValidator, NumberIsBiggerValidator userIdValidator) {
+        this.validators = List.of(firstNameValidator, secondNameValidator, countryValidator,
+                emailValidator, phoneNumberValidator, birthDayValidator,
+                birthMonthValidator, userIdValidator);
+    }
 
     @Override
     public boolean isValid(UserAccount account) {
-        validators.add(new StringIsNotEmptyValidator("First name"));
-        validators.add(new StringIsNotEmptyValidator("Second name"));
-        validators.add(new StringIsNotEmptyValidator("Country"));
-        validators.add(new EmailValidator("Email"));
-        validators.add(new PhoneNumberValidator("Phone number"));
-        validators.add(new NumberIsInRangeValidator("Birth day"));
-        validators.add(new NumberIsInRangeValidator("Birth month"));
-        validators.add(new NumberIsBiggerValidator("User ID"));
-
         for (Validator validator : validators) {
             if (!validator.isValid(account)) {
-                validationResult = false;
+                return false;
             }
         }
-
-        return validationResult;
+        return true;
     }
 }
-
-

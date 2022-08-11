@@ -2,32 +2,30 @@ package com.zoolatech.lecture3.tasks._3;
 
 import java.util.Objects;
 
-public non-sealed class Circle extends Figure implements Shape {
+public non-sealed class Circle implements Shape {
     private double radius;
 
-    Circle(double radius) {
+    public Circle(double radius) {
         this.radius = radius;
     }
 
     @Override
     public double findPerimeter() {
-        double circlePerimeter = 2 * Math.PI * radius;
-        return circlePerimeter;
+        return 2 * Math.PI * radius;
     }
 
     @Override
     public double findArea() {
-        double circleArea = Math.PI * Math.pow(radius, 2);
-        return circleArea;
+        return Math.PI * Math.pow(radius, 2);
     }
 
     @Override
-    void printArea() {
+    public void printArea() {
         System.out.println("Circle area: " + findArea());
     }
 
     @Override
-    void printPerimeter() {
+    public void printPerimeter() {
         System.out.println("Circle perimeter: " + findPerimeter());
     }
 

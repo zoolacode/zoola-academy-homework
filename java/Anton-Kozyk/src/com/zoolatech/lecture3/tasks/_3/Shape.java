@@ -4,4 +4,8 @@ public sealed interface Shape permits Circle, Triangle, Rectangle {
     double findPerimeter();
 
     double findArea();
+
+    void printPerimeter();
+
+    void printArea();
 }

@@ -2,34 +2,32 @@ package com.zoolatech.lecture3.tasks._3;
 
 import java.util.Objects;
 
-public non-sealed class Rectangle extends Figure implements Shape {
+public non-sealed class Rectangle implements Shape {
     private double weight;
     private double height;
 
-    Rectangle(double weight, double height) {
+    public Rectangle(double weight, double height) {
         this.weight = weight;
         this.height = height;
     }
 
     @Override
     public double findPerimeter() {
-        double rectanglePerimeter = 2 * (weight * height);
-        return rectanglePerimeter;
+        return 2 * (weight * height);
     }
 
     @Override
     public double findArea() {
-        double rectangleArea = weight * height;
-        return rectangleArea;
+        return weight * height;
     }
 
     @Override
-    void printArea() {
+    public void printArea() {
         System.out.println("Rectangle area: " + findArea());
     }
 
     @Override
-    void printPerimeter() {
+    public void printPerimeter() {
         System.out.println("Rectangle perimeter: " + findPerimeter());
     }
 

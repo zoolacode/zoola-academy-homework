@@ -22,13 +22,13 @@ public class Task3 {
         Rectangle rectangle1 = new Rectangle(6, 6);
         Rectangle rectangle2 = new Rectangle(3, 3);
 
-        ArrayList<Figure> figures = new ArrayList<>();
+        ArrayList<Shape> figures = new ArrayList<>();
         figures.add(circle1);
         figures.add(triangle1);
         figures.add(rectangle1);
         figures.add(rectangle2);
 
-        for (Figure fig : figures) {
+        for (Shape fig : figures) {
             System.out.println(fig);
             fig.printArea();
             fig.printPerimeter();

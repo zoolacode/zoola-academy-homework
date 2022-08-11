@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._2;
 
-abstract class Validator implements Validating {
+abstract class Validator implements Validatable {
     String fieldName;
 
     Validator(String fieldName) {

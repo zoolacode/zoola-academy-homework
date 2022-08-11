@@ -11,7 +11,7 @@ public sealed abstract class Reporter permits CsvReporter, PdfReporter, DocRepor
         this.fileName = fileName;
     }
 
-    void generate() {
+    public void generate() {
         createFile();
         addHeaderData();
         addFileData();
