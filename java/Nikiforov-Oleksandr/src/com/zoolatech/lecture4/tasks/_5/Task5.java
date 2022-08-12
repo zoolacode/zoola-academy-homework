@@ -22,7 +22,7 @@ public class Task5 {
                 return x.subtract(y);
             }
         },
-        Multiply('*') {
+        MULTIPLY('*') {
             BigInteger apply(BigInteger x, BigInteger y) {
                 return x.multiply(y);
             }
@@ -33,7 +33,7 @@ public class Task5 {
             }
         },
 
-        Mod('%') {
+        MOD('%') {
             BigInteger apply(BigInteger x, BigInteger y) {
                 return x.mod(y);
             }

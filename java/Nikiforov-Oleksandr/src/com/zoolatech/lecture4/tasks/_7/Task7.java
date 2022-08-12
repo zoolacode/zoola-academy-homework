@@ -17,43 +17,46 @@ public class Task7 {
     public static void outputDigits(String digits) {
         char[] charArray = digits.toCharArray();
         StringBuilder result = new StringBuilder();
-        for (char c : charArray) {
-            switch (c) {
+        for (char digitNumber : charArray) {
+            result.append(digitNumber);
+            String stringNumber;
+            switch (digitNumber) {
                 case '1' -> {
-                    result.append(c).append("(one)");
+                    stringNumber = "(one)";
                 }
                 case '2' -> {
-                    result.append(c).append("(two)");
+                    stringNumber = "(two)";
                 }
                 case '3' -> {
-                    result.append(c).append("(three)");
+                    stringNumber = "(three)";
                 }
                 case '4' -> {
-                    result.append(c).append("(four)");
+                    stringNumber = "(four)";
                 }
                 case '5' -> {
-                    result.append(c).append("(five)");
+                    stringNumber = "(five)";
                 }
                 case '6' -> {
-                    result.append(c).append("(six)");
+                    stringNumber = "(six)";
                 }
                 case '7' -> {
-                    result.append(c).append("(seven)");
+                    stringNumber = "(seven)";
                 }
                 case '8' -> {
-                    result.append(c).append("(eight)");
+                    stringNumber = "(eight)";
                 }
                 case '9' -> {
-                    result.append(c).append("(nine)");
+                    stringNumber = "(nine)";
                 }
                 case '0' -> {
-                    result.append(c).append("(zero)");
+                    stringNumber = "(zero)";
                 }
                 default -> {
                     System.out.println("Input error!");
                     return;
                 }
             }
+            result.append(stringNumber);
         }
         System.out.println(result);
     }

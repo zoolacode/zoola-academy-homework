@@ -2,6 +2,7 @@ package com.zoolatech.lecture4.tasks._4;
 
 import java.util.Scanner;
 import java.util.Objects;
+import java.util.SortedMap;
 
 /**
  * Create an enum class that represents the following weight units: gram, kilogram, ounce, pound, ton.
@@ -13,7 +14,7 @@ import java.util.Objects;
 
 public class Task4 {
     enum Weight {
-        Gram("g", 1), Kilogram("kg", 1000), Ounce("oz", 28.35f), Pound("lb", 453.592f), Ton("t", 1000000);
+        GRAM("g", 1), KILOGRAM("kg", 1000), OUNCE("oz", 28.35f), POUND("lb", 453.592f), TON("t", 1000000);
         private final String abbreviation;
         private final float coefficient;
 
@@ -30,10 +31,33 @@ public class Task4 {
             return abbreviation;
         }
 
-        public void convertation(float value, Weight weight) {
-            float result = value * coefficient / weight.coefficient;
-            System.out.println(value + abbreviation + " = " + result + weight.abbreviation);
+        public float convertation(float value, Weight weight) {
+            return value * coefficient / weight.coefficient;
         }
+
+        public void printEquality(float value, Weight weight) {
+            float convertedValue = convertation(value, weight);
+            System.out.println(value + abbreviation + " = " + convertedValue + weight.abbreviation);
+        }
+
+        public Weight getClearType(String weightType) {
+            weightType = weightType.toUpperCase();
+            if (weightType.equals(this.toString())) {
+                return this;
+            }
+            return null;
+        }
+    }
+
+    public static void findWeightType(String weightType) {
+        for (Weight weight : Weight.values()) {
+            Weight resultType = weight.getClearType(weightType);
+            if (resultType != null) {
+                System.out.println("Coefficient of " + resultType + " is " + resultType.getCoefficient());
+                return;
+            }
+        }
+        System.out.println("No similar types for " + weightType);
     }
 
     public static void main(String[] args) {
@@ -41,26 +65,18 @@ public class Task4 {
             System.out.println("Abbreviation for " + weight + " is " + weight.getAbbreviation());
         }
 
-        Weight.Kilogram.convertation(12, Weight.Ounce);
-        Weight.Pound.convertation(1500.5f, Weight.Ton);
-        Weight.Ounce.convertation(100, Weight.Pound);
+        float value1 = 12;
+        float value2 = 1500.5f;
+        float value3 = 100;
 
+        Weight.KILOGRAM.printEquality(value1, Weight.OUNCE);
+        Weight.POUND.printEquality(value2, Weight.TON);
+        Weight.OUNCE.printEquality(value3, Weight.POUND);
 
-        System.out.print("Enter the type to know its coefficient: ");
+        System.out.println("Enter the type to know its coefficient: ");
         Scanner sc = new Scanner(System.in);
         String weightType = sc.next();
-        getCoefficient(weightType);
-    }
-
-    public static void getCoefficient(String weightType) {
-        weightType = weightType.toLowerCase();
-        weightType = weightType.substring(0, 1).toUpperCase() + weightType.substring(1);
-        for (Weight weight : Weight.values()) {
-            if (Objects.equals(weightType, weight.toString())) {
-                System.out.println("Coefficient of " + weightType + " is " + weight.getCoefficient());
-                return;
-            }
-        }
-        System.out.println("No similar types!");
+        findWeightType(weightType);
     }
 }
+

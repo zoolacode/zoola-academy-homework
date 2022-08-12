@@ -13,20 +13,35 @@ package com.zoolatech.lecture4.tasks._3;
 public class Task3 {
     public static void main(String[] args) {
         StringModifier stringUp = (expression) -> {
-            String result = expression.toUpperCase();
-            return result;
+            String modifiedExpression = expression.toUpperCase();
+            return "'" + expression + "' -> modified: '" + modifiedExpression + "'";
         };
         StringModifier stringDown = (expression) -> {
-            String result = expression.toLowerCase();
-            return result;
+            String modifiedExpression = expression.toLowerCase();
+            return "'" + expression + "' -> modified: '" + modifiedExpression + "'";
         };
 
-        String expression = "LonDoN IS tHe CaPItaL of GREAt britaIn";
-        printResult(expression, stringUp);
-        printResult(expression, stringDown);
+        String expression1 = "LonDoN IS tHe CaPItaL of GREAt britaIn";
+        String expression2 = "lOreM IpSUM hAS bEEN the INDUStRy StANDarD dumMy";
+        String expression3 = "tHere ARe mANY VARIAtIons oF PaSSaGES of lorEm iPsum AvAiLaBLe";
+
+        printResult(expression1, stringUp);
+        printResult(expression2, stringDown);
+        printResult(expression3, stringUp, stringDown);
     }
 
-    public static void printResult(String expression, StringModifier stringModifier) {
-        System.out.println("'" + expression + "' -> modified:'" + stringModifier.modify(expression) + "'");
+//    public static void printResult(String expression, StringModifier stringModifier) {
+//        System.out.println(stringModifier.modify(expression));
+//    }
+//
+//    public static void printResult(String expression, StringModifier stringModifier1, StringModifier stringModifier2) {
+//        System.out.println(stringModifier1.modify(expression));
+//        System.out.println(stringModifier2.modify(expression));
+//    }
+
+    public static void printResult(String expression, StringModifier... stringModifiers) {
+        for (StringModifier stringModifier : stringModifiers) {
+            System.out.println(stringModifier.modify(expression));
+        }
     }
 }
