@@ -15,7 +15,7 @@ public class Task5 {
         System.out.println(kth1.add(6));
         System.out.println(kth1.add(4));
 
-        System.out.println("\n\n");
+        System.out.println("\n");
 
         KthLargest kth2 = new KthLargest(3);
         System.out.println(kth2.add(1));

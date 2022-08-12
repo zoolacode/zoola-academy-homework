@@ -1,6 +1,8 @@
 package com.zoolatech.lecture5.tasks._1;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -13,34 +15,46 @@ import java.util.Scanner;
 public class Task1 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Input N: ");
-        int n = sc.nextInt();
-        ArrayList<Integer> arrayList = createArrayList();
-        findValue(arrayList, n);
-    }
+        System.out.println("Input: ");
 
-    public static ArrayList<Integer> createArrayList() {
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("Input list value(Input -1 to stop): ");
-            int inputInt = sc.nextInt();
-            if (inputInt == -1) {
-                break;
-            }
-            arrayList.add(inputInt);
-        }
-        return arrayList;
-    }
+        String[] inputNumbers = sc.nextLine().split(", ");
+        int n = getN(inputNumbers);
+        int[] numbers = getNumbers(inputNumbers);
+        int[] sortedNumbers = getSortedNumbers(numbers);
 
-    public static void findValue(ArrayList<Integer> arrayList, int n) {
-        if (arrayList.size() < n) {
+        int foundNumber = findNthSmallest(n, sortedNumbers);
+
+        if (foundNumber == -1) {
             System.out.println(-1);
-            return;
+        } else {
+            System.out.println(foundNumber + "(the " + n + "th smallest number in the array " + Arrays.toString(numbers) + " is " + foundNumber + ": " + Arrays.toString(sortedNumbers) + ")");
         }
-        ArrayList<Integer> sortedList = new ArrayList<>(arrayList);
-        Collections.sort(sortedList);
-        int value = sortedList.get(n - 1);
-        System.out.println(value + "(the " + n + "th smallest number in the array " + arrayList + " is " + value + ":" + sortedList + ")");
+    }
+
+    private static int getN(String[] inputNumbers) {
+        return Integer.parseInt(inputNumbers[0]);
+    }
+
+    private static int[] getNumbers(String[] inputNumbers) {
+        int arrLength = inputNumbers.length - 1;
+        int[] intNumbers = new int[arrLength];
+        for (int i = 0; i < arrLength; i++) {
+            intNumbers[i] = Integer.parseInt(inputNumbers[i + 1]);
+        }
+        return intNumbers;
+    }
+
+    public static int[] getSortedNumbers(int[] numbers) {
+        int[] sortedNumbers = Arrays.copyOf(numbers, numbers.length);
+        Arrays.sort(sortedNumbers);
+        return sortedNumbers;
+    }
+
+    public static int findNthSmallest(int n, int... numbers) {
+        int foundValue = -1;
+        if (numbers.length >= n) {
+            foundValue = numbers[n - 1];
+        }
+        return foundValue;
     }
 }

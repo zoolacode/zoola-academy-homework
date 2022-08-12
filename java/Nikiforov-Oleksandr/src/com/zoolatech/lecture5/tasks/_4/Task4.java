@@ -1,6 +1,9 @@
 package com.zoolatech.lecture5.tasks._4;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Create a method that accepts a string, counts all unique non-space character occurrences and displays each character
@@ -17,17 +20,15 @@ public class Task4 {
     }
 
     public static void countCharacters(String inputStr) {
-        char[] charArray = inputStr.replaceAll("\\s+","").toCharArray();
-        HashMap<Character, Integer> charHashMap = new HashMap<Character, Integer>();
+        char[] charArray = inputStr.toCharArray();
+        TreeMap<Character, Integer> charHashMap = new TreeMap<>();
         for (char c : charArray) {
-            if (charHashMap.containsKey(c)) {
-                charHashMap.put(c, charHashMap.get(c) + 1);
-            } else {
-                charHashMap.put(c, 1);
+            if (c != ' '){
+                charHashMap.put(c, charHashMap.getOrDefault(c, 0) + 1);
             }
         }
         System.out.println(inputStr);
-        for (HashMap.Entry element : charHashMap.entrySet()) {
+        for (Map.Entry element : charHashMap.entrySet()) {
             System.out.println(element.getKey() + " - " + element.getValue());
         }
     }
