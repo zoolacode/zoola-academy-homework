@@ -27,7 +27,6 @@ public class Task2 {
                 "vasyapetrash@gmail.com", "0501234569",
                 15, 8);
 
-        AccountValidator accountValidator = new AccountValidator();
-        System.out.println(accountValidator.isValid(userAccount));
+        System.out.println("\nIs user account valid: " + new AccountValidator(userAccount).isValid());
     }
 }
