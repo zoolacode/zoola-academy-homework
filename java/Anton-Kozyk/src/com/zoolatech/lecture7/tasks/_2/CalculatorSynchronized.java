@@ -1,7 +1,7 @@
 package com.zoolatech.lecture7.tasks._2;
 
 public class CalculatorSynchronized extends Calculator {
-    CalculatorSynchronized(int value) {
+    public CalculatorSynchronized(int value) {
         super(value);
     }
 

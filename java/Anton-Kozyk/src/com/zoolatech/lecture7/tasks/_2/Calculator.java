@@ -3,7 +3,7 @@ package com.zoolatech.lecture7.tasks._2;
 public class Calculator {
     private int value;
 
-    Calculator(int value) {
+    public Calculator(int value) {
         this.value = value;
     }
 

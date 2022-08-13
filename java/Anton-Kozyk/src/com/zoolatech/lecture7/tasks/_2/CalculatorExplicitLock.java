@@ -4,11 +4,11 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class CalculatorExplicitLock extends Calculator {
-    CalculatorExplicitLock(int value) {
+    public CalculatorExplicitLock(int value) {
         super(value);
     }
 
-    Lock lock = new ReentrantLock();
+    private Lock lock = new ReentrantLock();
 
     @Override
     public int addition(int anotherValue) {

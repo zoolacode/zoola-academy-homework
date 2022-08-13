@@ -3,7 +3,7 @@ package com.zoolatech.lecture7.tasks._2;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CalculatorAtomic {
-    AtomicInteger atomicInteger;
+    private AtomicInteger atomicInteger;
 
     public CalculatorAtomic(AtomicInteger atomicInteger) {
         this.atomicInteger = atomicInteger;
