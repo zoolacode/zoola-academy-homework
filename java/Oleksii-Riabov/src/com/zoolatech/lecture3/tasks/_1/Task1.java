@@ -16,10 +16,10 @@ package com.zoolatech.lecture3.tasks._1;
 
 public class Task1 {
     public static void main(String[] args) {
-        Musician yura = new Musician("Yura", new Instrument("violin", "view-view-view"));
-        Musician bogdan = new Musician("Bogdan", new Instrument("cello", "uuw-uuw-uuw"));
-        Musician alex = new Musician("Alex", new Instrument("percussion", "bom-bom-tun-tun"));
-        Musician edik = new Musician("Edik", new Instrument("vocal", "Wir sind des Geyers schwarzer Haufen..."));
+        Musician yura = new Musician("Yura", new Violin());
+        Musician bogdan = new Musician("Bogdan", new Cello());
+        Musician alex = new Musician("Alex", new Percussion());
+        Musician edik = new Musician("Edik", new Vocal());
 
         Orchestra haufen = new Orchestra();
         haufen.add(yura);
@@ -37,10 +37,10 @@ public class Task1 {
         haufen.remove(edik);
         System.out.println();
 
-        Musician tormentor  = new Musician("Tormentor", new Instrument("electric guitar", "dzhy-dzhy-dzhy"));
-        Musician kingOvHell = new Musician("King ov Hell", new Instrument("bass guitar", "pom-pom-pom"));
-        Musician erichsen = new Musician("Erichsen", new Instrument("drums", "tu-tu-tic"));
-        Musician gaahl = new Musician("Gaahl", new Instrument("harsh vocals", "Go! Tide thy float I am guilt and I am god..."));
+        Musician tormentor  = new Musician("Tormentor", new Violin());
+        Musician kingOvHell = new Musician("King ov Hell", new Cello());
+        Musician erichsen = new Musician("Erichsen", new Percussion());
+        Musician gaahl = new Musician("Gaahl", new Vocal());
 
         Orchestra gorgoroth = new Orchestra();
         gorgoroth.add(tormentor);

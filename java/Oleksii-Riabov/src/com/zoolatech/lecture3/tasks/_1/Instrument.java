@@ -1,19 +1,8 @@
 package com.zoolatech.lecture3.tasks._1;
 
-public class Instrument {
-    private final String name;
-    private final String sound;
+public interface Instrument {
 
-    public String getName() {
-        return name;
-    }
+    String getName();
 
-    public Instrument(String name, String sound) {
-        this.name = name;
-        this.sound = sound;
-    }
-
-    public void sound() {
-        System.out.println(sound);
-    }
+    void sound();
 }
