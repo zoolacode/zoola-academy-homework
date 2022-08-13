@@ -23,7 +23,7 @@ public class Container {
         }
 
         public boolean hasValueChanged() {
-            return !(value == originalValue);
+            return value != originalValue;
         }
     }
 }

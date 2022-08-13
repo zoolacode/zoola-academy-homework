@@ -10,16 +10,6 @@ public enum WeightUnit {
     private final String abbreviation;
     private final double inGram;
 
-    static WeightUnit getValueByName(String name) {
-        try {
-            String unitName = name.toUpperCase();
-            return valueOf(unitName);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getLocalizedMessage());
-            return null;
-        }
-    }
-
     WeightUnit(String abbreviation, double inGram) {
         this.abbreviation = abbreviation;
         this.inGram = inGram;
@@ -36,5 +26,14 @@ public enum WeightUnit {
                 " " + result + " " + this.getAbbreviation());
         return result;
     }
-}
 
+    public static WeightUnit getValueByName(String name) {
+        try {
+            String unitName = name.toUpperCase();
+            return valueOf(unitName);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getLocalizedMessage());
+            return null;
+        }
+    }
+}

@@ -11,26 +11,37 @@ import java.math.BigDecimal;
 
 public class Task5 {
     public static void main(String[] args) {
-        System.out.println(calculator(new BigDecimal("150"), new BigDecimal("100000000000000000000000000"), 'd'));
-        System.out.println(calculator(new BigDecimal("150"), new BigDecimal("0"), '%'));
-        System.out.println(calculator(new BigDecimal("25.3"), new BigDecimal("8"), '%'));
+        Calculator.printResult(new BigDecimal("150"), new BigDecimal("100000000000000000000000000"), 'd');
+        Calculator.printResult(new BigDecimal("150"), new BigDecimal("0"), '/');
+        Calculator.printResult(new BigDecimal("25.3"), new BigDecimal("8"), '%');
+    }
+}
+
+class Calculator {
+    private static BigDecimal calculate(BigDecimal firstNum, BigDecimal secondNum, char operation) {
+        return switch (operation) {
+            case '+' -> firstNum.add(secondNum);
+            case '-' -> firstNum.subtract(secondNum);
+            case '*' -> firstNum.multiply(secondNum);
+            case '%' -> firstNum.remainder(secondNum);
+            case '/' -> firstNum.divide(secondNum);
+            default -> throw new IllegalStateException("Unexpected operation: " + operation);
+        };
     }
 
-    static BigDecimal calculator(BigDecimal firstNum, BigDecimal secondNum, char operation) {
+    public static void printResult(BigDecimal firstNum, BigDecimal secondNum, char operation) {
+        if (secondNum.equals(new BigDecimal("0")) && (operation == '/' || operation == '%')) {
+            System.out.println("Division by zero is forbidden");
+            return;
+        }
+
         try {
-            return switch (operation) {
-                case '+' -> firstNum.add(secondNum);
-                case '-' -> firstNum.subtract(secondNum);
-                case '*' -> firstNum.multiply(secondNum);
-                case '%' -> firstNum.remainder(secondNum);
-                case '/' -> firstNum.divide(secondNum);
-                default -> throw new IllegalStateException("Unexpected operation: " + operation);
-            };
+            System.out.println(firstNum + " " +
+                    operation + " " +
+                    secondNum + " = " +
+                    calculate(firstNum, secondNum, operation));
         } catch (IllegalStateException e) {
             System.out.println(e.getLocalizedMessage());
-        } catch (ArithmeticException e) {
-            System.out.println("Division by zero is forbidden");
         }
-        return null;
     }
 }

@@ -31,7 +31,7 @@ public class Task3 {
 
     }
 
-    static String modifyString(String str, StringModifier lambda) {
-        return lambda.modify(str);
+    static String modifyString(String str, StringModifier action) {
+        return action.modify(str);
     }
 }

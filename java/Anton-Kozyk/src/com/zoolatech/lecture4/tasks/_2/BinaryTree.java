@@ -3,7 +3,7 @@ package com.zoolatech.lecture4.tasks._2;
 public class BinaryTree {
     private Node root;
 
-    static class Node {
+    private static class Node {
         private int value;
 
         public Node(int value) {
@@ -12,17 +12,9 @@ public class BinaryTree {
 
         Node leftBranch;
         Node rightBranch;
-
-        public void setLeftBranch(Node leftBranch) {
-            this.leftBranch = leftBranch;
-        }
-
-        public void setRightBranch(Node rightBranch) {
-            this.rightBranch = rightBranch;
-        }
     }
 
-    void insert(int value) {
+    public void insert(int value) {
         Node node = new Node(value);
 
         if (root == null) {
@@ -36,7 +28,7 @@ public class BinaryTree {
             if (value > actualNode.value) {
 
                 if (actualNode.rightBranch == null) {
-                    actualNode.setRightBranch(node);
+                    actualNode.rightBranch = node;
                     return;
                 } else {
                     actualNode = actualNode.rightBranch;
@@ -45,7 +37,7 @@ public class BinaryTree {
             } else if (value < actualNode.value) {
 
                 if (actualNode.leftBranch == null) {
-                    actualNode.setLeftBranch(node);
+                    actualNode.leftBranch = node;
                     return;
                 } else {
                     actualNode = actualNode.leftBranch;
