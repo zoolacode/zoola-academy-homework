@@ -12,15 +12,13 @@ const scoreContainer = document.querySelector(".score");
   * @description Count clicks
   */
  let countClicks = 0;
- //let clicks = myClick(0);
+
  scoreContainer.innerText = currentScore;
  /**
   * @description Game speed
   */
   let gameIterationDuration = 1000;
-
   let numberOfElements = 25;
-
   let colorNumber = null;
   let squareNum = null;
   /**
@@ -44,6 +42,16 @@ const scoreContainer = document.querySelector(".score");
   */
   let winScore = 1;
 
+   /**
+  * @description Miss click score
+  */
+    let missCkickScore = -3;
+  
+/**
+  * @description Over click score
+  */
+ let overCkickScore = -2;
+  
 /**
 * @description Setting of Updatad version the game
 */
@@ -72,7 +80,7 @@ function start(){
   for(var i = 0; i<numberOfElements;i++){
     var container = document.createElement("div")
     container.classList.add("Item");
-    container.addEventListener('click',missClick)
+    container.addEventListener('click',onMissClick)
     meshContainer.appendChild(container)
   }
 
@@ -88,13 +96,13 @@ function runGameIteration() {
    * Alternatively, this could be written like following: deactivateElement?.()
    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
    */
-  if(winStream>2){
-    updateScore(3)
-  }
+  
   
   if (deactivateElement) {
     deactivateElement();
   }
+
+  
 
   let randomIndex = getRandomNumber(meshSize - 1);
   if(squareNum){
@@ -111,17 +119,30 @@ function runGameIteration() {
     deactivateElement = activateElement(activeElement, randomIndex);
   }
   
+  if(winStream>2){
+    updateScore(3)
+  }
+
   if(Math.abs(currentScore)>=winScoreAbs){
     activeElement.classList.remove("item-highlighted");
     clearInterval(nIntervId);
     nIntervId = null;
+    winStream = 0;
+
+    let children = meshContainer.children;
+    //console.log(scoreContainer)
+    for(var i=0; i<children.length; i++){
+        var child = children[i];
+        child.removeEventListener('click',onMissClick)
+    }
   }
+  
 }
 
 function activateElement(element, index) {
   const variant = getVariantForIndex(index);
   element.classList.add("item-highlighted", variant);
-  element.removeEventListener('click',missClick)
+  element.removeEventListener('click',onMissClick)
   element.addEventListener("click",myClick)
 
   /**
@@ -136,19 +157,16 @@ function activateElement(element, index) {
     countClicks = 0;
     element.classList.remove("item-highlighted", variant);
     element.removeEventListener("click", myClick)
-    element.addEventListener('click',missClick)
+    element.addEventListener('click',onMissClick)
     
   };
 }
 
-/**
-  * @description Click logic
-  */
 function myClick() {
   countClicks++
   winStream++
   if(countClicks>1){
-    updateScore(-2)
+    updateScore(overCkickScore)
     winStream = 0;
   } else {
     updateScore(winScore)
@@ -159,9 +177,9 @@ function myClick() {
   }
 }
 
-function missClick(){
+function onMissClick(){
   winStream = 0;
-  updateScore(-3)
+  updateScore(missCkickScore)
 }
 
 /**
@@ -197,7 +215,7 @@ function getVariantForIndex(index) {
   ];
   let tmpNum = getRandomNumber(variants.length-1);
   if(colorNumber){
-    while(colorNumber == tmpNum){
+    while(colorNumber === tmpNum){
       tmpNum = getRandomNumber(variants.length-1) ;
     }
   }

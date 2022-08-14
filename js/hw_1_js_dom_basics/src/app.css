@@ -48,10 +48,16 @@ body {
   background-color: #00e1fe;
 }
 
+.settings{
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: flex-start;
+}
 .score  {
-  /* position: absolute; */
+  /* position: relative;
   top: 5px;
-  left: 5px;
+  left: 5px; */
   font-size: 46px;
   width: 80px;
   height: 80px;
