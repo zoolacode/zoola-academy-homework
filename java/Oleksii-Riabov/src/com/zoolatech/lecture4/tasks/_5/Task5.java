@@ -16,22 +16,20 @@ public class Task5 {
         Scanner scanner = new Scanner(System.in);
 
         BigDecimal number1;
-        BigDecimal number2;
-
-        char operator;
-
         if(scanner.hasNextBigDecimal()){
             number1 = scanner.nextBigDecimal();
         } else {
             throw new IllegalArgumentException("Enter numeric value");
         }
 
+        BigDecimal number2;
         if(scanner.hasNextBigDecimal()){
             number2 = scanner.nextBigDecimal();
         } else {
             throw new IllegalArgumentException("Enter numeric value");
         }
 
+        char operator;
         if(scanner.hasNext()){
             operator = scanner.next().charAt(0);
         } else {
@@ -42,14 +40,14 @@ public class Task5 {
     }
 
     public static void numbersEvaluationCaseMethod(BigDecimal number1, BigDecimal number2, char c) {
-        switch (c) {
-            case '+' -> printResult(number1.add(number2));
-            case '-' -> printResult(number1.subtract(number2));
-            case '*' -> printResult(number1.multiply(number2));
-            case '/' -> printResult(number1.divide(number2, 5, RoundingMode.CEILING));
-            case '%' -> printResult(number1.remainder(number2));
+        printResult(switch (c) {
+            case '+' -> number1.add(number2);
+            case '-' -> number1.subtract(number2);
+            case '*' -> number1.multiply(number2);
+            case '/' -> number1.divide(number2, 5, RoundingMode.CEILING);
+            case '%' -> number1.remainder(number2);
             default -> throw new IllegalArgumentException("Enter symbol of an operation");
-        }
+        });
     }
 
     public static void printResult(BigDecimal result){
