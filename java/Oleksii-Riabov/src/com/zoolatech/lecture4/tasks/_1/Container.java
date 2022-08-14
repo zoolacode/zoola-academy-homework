@@ -1,7 +1,7 @@
 package com.zoolatech.lecture4.tasks._1;
 
 public class Container {
-    String value;
+    private String value;
 
     public Container(String value) {
         this.value = value;
@@ -16,13 +16,13 @@ public class Container {
     }
 
     public class ContainerUpdatesListener {
-        String innerValue;
+        private final String innerValue;
 
         public ContainerUpdatesListener() {
             this.innerValue = value;
         }
 
-        boolean hasValueChanged() {
+        public boolean hasValueChanged() {
             return !innerValue.equals(value);
         }
     }
