@@ -12,14 +12,15 @@ import java.util.List;
 
 public class Task2 {
     public static void main(String[] args) {
-        Order order1 = new Order("1", "Ukraine", 150000, "Store");
-        Order order2 = new Order("1", "Ukraine", 200, "Store");
-        Order order3 = new Order("2", "Ukraine", 500, "Store");
-        Order order4 = new Order("3", "Ukraine", 200000, "Website");
-        Order order5 = new Order("4", "USA", 100, "Store");
-        Order order6 = new Order("5", "USA", 10000, "Store");
+        Order order1 = new Order("1", "Ukraine", 150000, Marketplace.STORE);
+        Order order2 = new Order("1", "Ukraine", 200, Marketplace.STORE);
+        Order order3 = new Order("2", "Ukraine", 500, Marketplace.STORE);
+        Order order4 = new Order("3", "Ukraine", 200000, Marketplace.WEBSITE);
+        Order order5 = new Order("4", "USA", 100, Marketplace.STORE);
+        Order order6 = new Order("5", "USA", 10000, Marketplace.STORE);
         List<Order> orders = List.of(order1, order2, order3, order4, order5, order6);
 
         Order.averagePrice(orders).forEach((k, v) -> System.out.println(k + " -> " + v));
+        System.out.println();
     }
 }

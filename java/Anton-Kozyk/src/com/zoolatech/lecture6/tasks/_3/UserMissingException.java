@@ -4,7 +4,4 @@ public class UserMissingException extends Exception {
     public UserMissingException(String errorMessage) {
         super(errorMessage);
     }
-
-    public UserMissingException() {
-    }
 }

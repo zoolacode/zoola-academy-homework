@@ -1,6 +1,8 @@
 package com.zoolatech.lecture6.tasks._3;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class Cache implements UserCache {
     private List<User> cache = new ArrayList<>();
@@ -8,7 +10,7 @@ public class Cache implements UserCache {
     @Override
     public Optional<User> findUser(String id) {
         return cache.stream()
-                .filter(user -> user.getId().equals(id))
+                .filter(user -> user.id().equals(id))
                 .findFirst();
     }
 

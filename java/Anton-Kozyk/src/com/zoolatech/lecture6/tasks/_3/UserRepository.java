@@ -10,16 +10,16 @@ public class UserRepository {
     }
 
     public String findUserEmail(String id) throws UserMissingException {
-        if (userCache.findUser(id).isEmpty()) {
-            if (userTable.findUser(id).isEmpty()) {
-                throw new UserMissingException("No user with ID '" + id + "' was found...");
-            } else {
-                System.out.println("<Found in user list>");
-                return userTable.findUser(id).get().getEmail();
-            }
-        } else {
-            System.out.println("<Found in cache>");
-            return userCache.findUser(id).get().getEmail();
-        }
+        return userCache.findUser(id).map(user -> {
+                    System.out.println("Found in cache");
+                    return user.email();
+                })
+                .orElseGet(() -> userTable
+                        .findUser(id)
+                        .map(user -> {
+                            System.out.println("Found in user list");
+                            return user.email();
+                        })
+                        .orElse("No user with ID '" + id + "' was found..."));
     }
 }
