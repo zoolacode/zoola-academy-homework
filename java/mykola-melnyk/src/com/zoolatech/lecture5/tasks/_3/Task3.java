@@ -1,5 +1,7 @@
 package com.zoolatech.lecture5.tasks._3;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,12 +18,12 @@ import java.util.Set;
  */
 
 public class Task3 {
-    public static Set uniqStr2(String... words) {
-        Set<String> set = new HashSet<>();
-        for (String str : words) {
-            set.add(str.toLowerCase());
+    public static Set<CustomString> uniqStr2(String... words) {
+        ArrayList<CustomString> arrayListOfCustomString = new ArrayList<>();
+        for (String string:words) {
+            arrayListOfCustomString.add(new CustomString(string));
         }
-        return set;
+        return new HashSet<CustomString>(arrayListOfCustomString);
     }
 
     public static void main(String[] args) {
