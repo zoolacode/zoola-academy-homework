@@ -16,16 +16,16 @@ import java.util.Arrays;
 public class Task1 {
 
     public static void main(String[] args) {
-        System.out.println(smallestElement(4, 1, 5, 2, 3, 7));
-        System.out.println(smallestElement(3, 1, 2));
+        System.out.println(findMinArrElem(4, 1, 5, 2, 3, 7));
+        System.out.println(findMinArrElem(3, 1, 2));
     }
 
-    public static int smallestElement(int value, int... numbers) {
-        if (value > numbers.length) {
+    public static int findMinArrElem(int minArrElem, int... numbers) {
+        if (minArrElem > numbers.length) {
             return -1;
         } else {
             Arrays.sort(numbers);
-            return numbers[value -1];
+            return numbers[minArrElem -1];
         }
     }
 }
