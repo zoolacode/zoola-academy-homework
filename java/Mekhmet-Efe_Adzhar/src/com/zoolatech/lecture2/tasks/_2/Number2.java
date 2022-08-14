@@ -31,15 +31,16 @@ public class Number2 {
         Direction direction = Direction.values()[Integer.parseInt(scanner.next())];
         System.out.println(direction.toString() + "\n");
 
-        System.out.println("1.Move Forward. Type N steps:\n2.Change Direction;\n3.Get coordinates;\n4.Get directions;\n5.Exit");
+        System.out.println("1.Move Forward.\n2.Change Direction;\n3.Get coordinates;\n4.Get directions;\n5.Exit");
 
         while (!exit) {
             switch (scanner.nextInt()) {
-                case 1:
-                    robotGame.moveForward();
-                    System.out.println("Moving On");
-                    break;
-                case 2:
+                case 1 -> {
+                    System.out.println("Type N steps");
+                    int steps = scanner.nextInt();
+                    robotGame.moveForward(steps);
+                }
+                case 2 -> {
                     System.out.println("1.Turn Left;\n2.Turn Right;");
                     if (scanner.nextInt() == 1) {
                         robotGame.turnLeft();
@@ -49,19 +50,13 @@ public class Number2 {
                         robotGame.turnRight();
                         System.out.println("Turned right");
                     }
-                    break;
-                case 3:
-                    System.out.println(robotGame.getCoordinates());
-                    break;
-                case 4:
-                    robotGame.getDirection();
-                    break;
-                case 5:
+                }
+                case 3 -> System.out.println(robotGame.getCoordinates());
+                case 4 -> robotGame.getDirection();
+                case 5 -> {
                     System.out.println("Shutting down");
                     exit = true;
-                    break;
-                default:
-                    break;
+                }
             }
         }
     }
@@ -102,43 +97,50 @@ class RobotGame {
         System.out.println(direction);
     }
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }
-
-
-    public void moveForward() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Type N steps");
-        int n = scanner.nextInt();
-
-        if (direction == Direction.SOUTH) {
-            if (y < height) {
-                y += n;
+    public void moveForward(int n) {
+        if (n > height || n > width) {
+            System.out.println("Amount of steps are greater than a width or height of a room");
+        }
+        else if ((n + y) > height || (n + x) > width) {
+            System.out.println("Can't move forward. Out of bounds.");
+        }
+        else {
+            if (direction == Direction.SOUTH) {
+                if (y < height) {
+                    y += n;
+                }
+                if (y == height) {
+                    System.out.println("WARNING. OUT OF RANGE");
+                }
+            } else if (direction == Direction.NORTH) {
+                if (y > 0) {
+                    y -= n;
+                }
+                if (y < n) {
+                    System.out.println("Out of Bounds");
+                }
+                if (y == 0) {
+                    System.out.println("WARNING. OUT OF RANGE");
+                }
+            } else if (direction == Direction.WEST) {
+                if (x > 0) {
+                    x -= n;
+                }
+                if (x < n) {
+                System.out.println("Out of Bounds");
+                   }
+                if (x == 0) {
+                    System.out.println("WARNING. OUT OF RANGE");
+                }
+            } else if (direction == Direction.EAST) {
+                if (x < width) {
+                    x += n;
+                }
+                if (x >= width) {
+                    System.out.println("WARNING. OUT OF RANGE");
+                }
             }
-            if (y == height) {
-                System.out.println("WARNING. OUT OF RANGE");
-            }
-        } else if (direction == Direction.NORTH) {
-            if (y > 0) {
-                y -= n;
-            } else if (y <= 0) {
-                System.out.println("WARNING. OUT OF RANGE");
-            }
-        } else if (direction == Direction.WEST) {
-            if (x > 0) {
-                x -= n;
-            }
-            if (x <= 0) {
-                System.out.println("WARNING. OUT OF RANGE");
-            }
-        } else if (direction == Direction.EAST) {
-            if (x < width) {
-                x += n;
-            }
-            if (x >= width) {
-                System.out.println("WARNING. OUT OF RANGE");
-            }
+            System.out.println("Moving On");
         }
     }
 
