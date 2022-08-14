@@ -4,33 +4,45 @@
     <link rel="stylesheet" href="./app.css" />
   </head>
   <body>
-    <div class="score"></div>
+    <div class="settings">
+      <div class="score"></div>
+      <div class="type-game">
+        <label for="typeGame">Choose a type:</label>
+        <select name="Type Game" id="type" onChange="updateGame()">
+          <option value="simple">Simple</option>
+          <option value="updated">Updated</option>
+        </select>
+      </div>
+      <div class="type-game-add">
+        <label for="typeGame">Choose a speed(ms):</label>
+        <select name="Type Game" id="speed" onChange="updateSpeed()">
+          <option value="1500">Easy(1500ms)</option>
+          <option value="1000">Medium(1000ms)</option>
+          <option value="500">Hard(500ms)</option>
+        </select>
+      </div>
+      <div class="type-game-add">
+        <label for="typeGame">Lose raund score:</label>
+        <select name="Lose raund score" id="loseRaund" onChange="updateLoseRaund()">
+          <option value="-1">-1</option>
+          <option value="-3">-3</option>
+          <option value="-5">-5</option>
+        </select>
+      </div>
+      <div class="type-game-add">
+        <label for="typeGame">Win raund score:</label>
+        <select name="Win raund score" id="winRaund" onChange="updateWinRaund()">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+        <button name="Start button" type="button" onclick="startGame()">Start</button>
+      <div >
+
+      </div>
+    </div>
     <div class="mesh">
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
     </div>
     <script src="./app.js"></script>
   </body>
