@@ -2,6 +2,9 @@ package com.zoolatech.lecture6.tasks._2;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -14,17 +17,54 @@ import java.util.stream.Collectors;
 public class Task2 {
     public static void main(String[] args) {
         List<Order> orders = List.of(
-                new Order("1", ShopType.Store, 1.23f, "Ukraine"),
-                new Order("2", ShopType.Store, 4.56f, "Ukraine"),
-                new Order("3", ShopType.Store, 1.23f, "USA"),
-                new Order("4", ShopType.Website, 1.23f, "USA"));
+                new Order("1", ShopType.STORE, 1.23f, "Ukraine"),
+                new Order("2", ShopType.STORE, 4.56f, "Ukraine"),
+                new Order("2", ShopType.STORE, 4.56f, "Ukraine"),
+                new Order("3", ShopType.STORE, 1.23f, "USA"),
+                new Order("3", ShopType.STORE, 1.25f, "USA"),
+                new Order("4", ShopType.WEBSITE, 1.23f, "USA"));
         averagePrice(orders)
                 .forEach((k, v) -> System.out.println(k + " -> " + String.format("%.2f", v)));
     }
 
     public static Map<String, Double> averagePrice(List<Order> orders) {
         return orders.stream()
+                .filter(shop -> shop.getType().equals(ShopType.STORE))
+                .filter(distinctByKey(Order::getId))
                 .collect(Collectors.groupingBy(Order::getCountry,
                         Collectors.averagingDouble(Order::getPrice)));
+    }
+
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
+        Map<Object, Boolean> map = new ConcurrentHashMap<>();
+        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
+}
+
+
+record Order(String id, ShopType type, float price, String country) {
+    public float getPrice() {
+        return price;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public ShopType getType() {
+        return type;
+    }
+
+    public String toString() {
+        return "Order{" +
+                "id='" + id + '\'' +
+                ", type=" + type +
+                ", price=" + price +
+                ", country='" + country + '\'' +
+                '}';
     }
 }

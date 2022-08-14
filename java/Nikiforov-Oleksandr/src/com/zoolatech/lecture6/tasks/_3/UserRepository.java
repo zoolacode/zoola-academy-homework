@@ -12,14 +12,15 @@ public class UserRepository {
     }
 
     public String findUserEmail(String id) throws UserMissingException {
-        Optional<User> user = cache.findUser(id);
-        if (user.isPresent()) {
-            return user.get().getEmail();
+        Optional<User> userCache = cache.findUser(id);
+        Optional<User> userTable = table.findUser(id);
+
+        User foundUser = userCache.orElse(userTable.orElse(null));
+
+        if (foundUser != null){
+            return foundUser.getEmail();
         }
-        Optional<User> user1 = table.findUser(id);
-        if (user1.isPresent()) {
-            return user1.get().getEmail();
-        }
+
         throw new UserMissingException("Cannot find user " + id + " in table and cache");
     }
 }

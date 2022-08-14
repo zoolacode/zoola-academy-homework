@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserTableClass implements UserTable {
-    List<User> userstable = List.of(new User("1", "user1email@gmail.com"),
+    private List<User> userstable = List.of(new User("1", "user1email@gmail.com"),
             new User("1", "user1email@gmail.com"),
             new User("2", "user2email@gmail.com"),
             new User("3", "user3email@gmail.com"),

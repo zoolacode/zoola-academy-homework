@@ -4,7 +4,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +26,7 @@ public class Task1 {
                 new City("Dnipro", "Ukraine", 966400),
                 new City("Odessa", "Ukraine", 993120),
                 new City("Rome", "Italy", 2873000),
+                new City("Milan", "Italy", 1352310),
                 new City("Milan", "Italy", 1352000),
                 new City("Turin", "Italy", 886837)
         );
@@ -39,18 +42,44 @@ public class Task1 {
 
     public static boolean isBiggerPopulation(List<City> cities, int populationToCheck) {
         return cities.stream()
-                .allMatch(city -> city.getPopulation()>populationToCheck);
+                .allMatch(city -> city.getPopulation() > populationToCheck);
     }
 
-    public static City biggestCity(List<City> cities, String countryToFind){
+    public static City biggestCity(List<City> cities, String countryToFind) {
         return cities.stream()
                 .filter(city -> city.getCountry().equalsIgnoreCase(countryToFind))
                 .max(Comparator.comparing(City::getPopulation))
                 .orElseThrow(NoSuchElementException::new);
     }
 
-    public static Map<String, City> mapCities(List<City> cities){
+    public static Map<String, City> mapCities(List<City> cities) {
         return cities.stream()
+                .filter(distinctByKey(City::getName))
                 .collect(Collectors.toMap(City::getName, Function.identity()));
+    }
+
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
+        Map<Object, Boolean> map = new ConcurrentHashMap<>();
+        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
+}
+
+
+record City(String name, String country, int population) {
+    public String getName() {
+        return name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public String toString() {
+        return country + " has city " + name +
+                " with population " + population;
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UsersCacheClass implements UserCache {
-    List<User> userscache = List.of(new User("1", "user1email@gmail.com"),
+    private List<User> userscache = List.of(new User("1", "user1email@gmail.com"),
             new User("1", "user1email@gmail.com"),
             new User("2", "user2email@gmail.com"),
             new User("6", "user6email@gmail.com"));
