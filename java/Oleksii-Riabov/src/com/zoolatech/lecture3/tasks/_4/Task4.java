@@ -26,7 +26,6 @@ public class Task4 {
                         new DocReporter("docHeaderData",
                                 "docFileData",
                                 "docFileName"))
-                .peek(s -> System.out.println())
                 .forEach(Reporter::generate);
     }
 }
