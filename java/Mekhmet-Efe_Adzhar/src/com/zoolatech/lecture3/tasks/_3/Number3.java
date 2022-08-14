@@ -1,7 +1,7 @@
 package com.zoolatech.lecture3.tasks._3;
 
 /*
-Create an hierarchy of 3 classes:
+Create a hierarchy of 3 classes:
 Circle, Triangle, Rectangle, and a basic interface
 Shape that provides methods to find a perimeter and an area for each shape.
 In the main method, create a list of three objects and display their perimeter and area.
@@ -37,35 +37,29 @@ public class Number3 {
         shapes.add(2, rectangle);
         System.out.println("Rectangle: " + rectangle + "\n");
 
+        System.out.println("List have this Shapes:");
         for (Shape shape : shapes) {
             String string = shape.toString();
-            System.out.println("List have this Shapes:");
-            System.out.println(string + "\n");
+            System.out.println(string);
         }
         System.out.println();
-
-        for (Shape shape : shapes) {
             System.out.println("Circle Perimeter: " + circle.getPerimeter() + "\n" + "Circle Area: " + circle.getArea());
             System.out.println("Triangle Perimeter: " + triangle.getPerimeter() + "\n" + "Triangle Area: " + triangle.getArea());
             System.out.println("Rectangle Perimeter: " + rectangle.getPerimeter() + "\n" + "Rectangle Area: " + rectangle.getArea() + "\n");
-            break;
-        }
 
         for (Shape shape : shapes) {
             System.out.println("Checking if two object references of these types are the same ");
-            Scanner scanner1 = new Scanner(System.in);
             System.out.println("Input a radius of a new Circle");
             shape = new Circle(scanner.nextDouble());
-            shape.getArea();
-            System.out.println("Two object references states are :" + " " + shape.toString().equals(circle.toString()));
+            System.out.println("Two object references states are :" + " " + shape.equals(circle));
             System.out.println("Second object references states is " + shape);
             System.out.println("Input a sides of a new Triangle");
-            shape = new Triangle(scanner1.nextDouble(), scanner1.nextDouble(), scanner1.nextDouble());
-            System.out.println("Two object references states are :" + " " + shape.toString().equals(triangle.toString()));
+            shape = new Triangle(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble());
+            System.out.println("Two object references states are :" + " " + shape.equals(triangle));
             System.out.println("Second object references states is " + shape);
             System.out.println("Input a sides of a new Rectangle");
-            shape = new Rectangle(scanner1.nextDouble(), scanner1.nextDouble());
-            System.out.println("Two object references states are :" + " " + shape.toString().equals(rectangle.toString()));
+            shape = new Rectangle(scanner.nextDouble(), scanner.nextDouble());
+            System.out.println("Two object references states are :" + " " + shape.equals(rectangle));
             System.out.println("Second object references states is " + shape);
             break;
         }
@@ -79,7 +73,7 @@ sealed interface Shape permits Circle, Triangle, Rectangle {
 
 final class Circle implements Shape {
 
-    private final double PI = 3.14159;
+    private static final double PI = 3.14159;
     private final double radius;
 
     public Circle(double r) {
@@ -151,7 +145,9 @@ final class Triangle implements Shape {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Triangle triangle = (Triangle) o;
-        return Double.compare(triangle.side1, side1) == 0 && Double.compare(triangle.side2, side2) == 0 && Double.compare(triangle.side3, side3) == 0;
+        return Double.compare(triangle.side1, side1) == 0
+                && Double.compare(triangle.side2, side2) == 0
+                && Double.compare(triangle.side3, side3) == 0;
     }
 
     @Override
