@@ -4,71 +4,65 @@ public enum Weight {
     GRAM ("g"){
         @Override
         public double convert(double d, Weight weight) {
-            switch (weight) {
-                case GRAM -> {return d;}
-                case KILOGRAM -> {return d * 1_000;}
-                case OUNCE -> {return d * 28.35;}
-                case POUND -> {return d * 453.59;}
-                case TON -> {return d * 1_000_000;}
-                default -> throw new IllegalArgumentException(INCORRECT_VALUE);
-            }
+            return switch (weight) {
+                case GRAM -> d;
+                case KILOGRAM -> d * 1_000;
+                case OUNCE -> d * 28.35;
+                case POUND -> d * 453.59;
+                case TON -> d * 1_000_000;
+            };
         }
     },
     KILOGRAM ("kg") {
         @Override
         public double convert(double d, Weight weight) {
-            switch (weight) {
-                case GRAM -> {return d * 0.001;}
-                case KILOGRAM -> {return d;}
-                case OUNCE -> {return d * 0.02834952;}
-                case POUND -> {return d * 0.4536;}
-                case TON -> {return d * 1_000;}
-                default -> throw new IllegalArgumentException(INCORRECT_VALUE);
-            }
+            return switch (weight) {
+                case GRAM -> d * 0.001;
+                case KILOGRAM -> d;
+                case OUNCE -> d * 0.02834952 ;
+                case POUND -> d * 0.4536;
+                case TON -> d * 1_000;
+            };
         }
     },
     OUNCE ("oz") {
         @Override
         public double convert(double d, Weight weight) {
-            switch (weight) {
-                case GRAM -> {return d * 0.03527396195;}
-                case KILOGRAM -> {return d * 35.27396195;}
-                case OUNCE -> {return d;}
-                case POUND -> {return d * 16;}
-                case TON -> {return d * 35_274;}
-                default -> throw new IllegalArgumentException(INCORRECT_VALUE);
-            }
+            return switch (weight) {
+                case GRAM -> d * 0.03527396195;
+                case KILOGRAM -> d * 35.27396195;
+                case OUNCE -> d;
+                case POUND -> d * 16;
+                case TON -> d * 35_274;
+            };
         }
     },
     POUND ("lb") {
         @Override
         public double convert(double d, Weight weight) {
-            switch (weight) {
-                case GRAM -> {return d * 0.0022046226218;}
-                case KILOGRAM -> {return d * 2.205;}
-                case OUNCE -> {return d * 0.0625;}
-                case POUND -> {return d;}
-                case TON -> {return d * 2204.6226218;}
-                default -> throw new IllegalArgumentException(INCORRECT_VALUE);
-            }
+            return switch (weight) {
+                case GRAM -> d * 0.0022046226218;
+                case KILOGRAM -> d * 2.205;
+                case OUNCE -> d * 0.0625;
+                case POUND -> d;
+                case TON -> d * 2204.6226218;
+            };
         }
     },
     TON ("t") {
         @Override
         public double convert(double d, Weight weight) {
-            switch (weight) {
-                case GRAM -> {return d * 0.000_001;}
-                case KILOGRAM -> {return d * 0.001;}
-                case OUNCE -> {return d * 0.00003125;}
-                case POUND -> {return d * 0.00045359237;}
-                case TON -> {return d;}
-                default -> throw new IllegalArgumentException(INCORRECT_VALUE);
-            }
+            return switch (weight) {
+                case GRAM -> d * 0.000_001;
+                case KILOGRAM -> d * 0.001;
+                case OUNCE -> d * 0.00003125;
+                case POUND -> d * 0.00045359237;
+                case TON -> d;
+            };
         }
     };
 
     private final String value;
-    private static final String INCORRECT_VALUE = "Incorrect value";
 
     Weight(String value) {
         this.value = value;
