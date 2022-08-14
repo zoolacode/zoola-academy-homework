@@ -19,13 +19,11 @@ public class Task4 {
         SortedMap<Character, Integer> sortedMap = new TreeMap<>();
 
         for (char ch : line.toCharArray()) {
-            if (!sortedMap.containsKey(ch) && ch != ' ') {
-                sortedMap.put(ch, 1);
-            } else if (ch != ' ') {
-                sortedMap.put(ch, sortedMap.get(ch) + 1);
+            if (ch != ' ') {
+                sortedMap.put(ch, sortedMap.getOrDefault(ch, 0) + 1);
             }
         }
 
-        sortedMap.forEach((Key, V) -> System.out.println(Key + " - " + V));
+        sortedMap.forEach((key, value) -> System.out.println(key + " - " + value));
     }
 }
