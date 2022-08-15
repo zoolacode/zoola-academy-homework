@@ -25,9 +25,6 @@ for (let i = 0; i < itemsQuantity; i++) {
 
 const meshSize = mesh.children.length;
 
-console.log(meshSize);
-console.log(itemsQuantity);
-
 /**
  * @description A function that will run our game using SetInterval
  * The number id value returned by setInterval() function and it’s passed into the clearInterval() function to clear the interval
