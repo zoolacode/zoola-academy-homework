@@ -1,6 +1,7 @@
 package com.zoolatech.lecture5.tasks._3;
 
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * Create a method that accepts a list of words, and displays only
@@ -23,6 +24,7 @@ public class Task3 {
     }
 
     public static void displayUniqueWords(List<String> list) {
-        list.stream().map(String::toLowerCase).distinct().forEach(System.out::println);
+        TreeSet<String> unique = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        list.stream().filter(unique::add).forEach(System.out::println);
     }
 }
