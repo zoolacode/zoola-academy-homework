@@ -10,8 +10,6 @@ const successClickPoint = 1;
 const doubleClickPoint = 2;
 const clickOutsideElementPoint = 3;
 const missedClickPoint = 5;
-const upperLimit = 20;
-const lowerLimit = -20;
 
 function appendItemsOnMesh() {
   const newItem = document.createElement('div');
@@ -79,7 +77,7 @@ function startNewGame() {
 }
 
 function setIntervalImmediately(func, interval) {
-  if (currentScore <= lowerLimit || currentScore >= upperLimit) {
+  if (isGameEnded(currentScore)) {
     createResultNotification(currentScore);
     stopGameIteration(highlightedElement);
   } else {
@@ -109,6 +107,13 @@ function stopGameIteration(element) {
   mesh.removeEventListener('click', handleClickOutsideElement);
 }
 
+function isGameEnded(score) {
+  const upperLimit = 20;
+  const lowerLimit = -20;
+
+  return (score <= lowerLimit || score >= upperLimit);
+}
+
 function handleClick() {
   if (Boolean(isClicked)) {
     currentScore -= doubleClickPoint;
@@ -133,7 +138,7 @@ function handleClickOutsideElement() {
     scoreContainer.innerText = currentScore;
   }
 
-  if (currentScore <= lowerLimit) {
+  if (isGameEnded(currentScore)) {
     createResultNotification(currentScore);
     stopGameIteration(highlightedElement);
   }
@@ -167,7 +172,7 @@ function runGameIteration() {
     isClicked = false;
   }
 
-  if (currentScore <= lowerLimit || currentScore >= upperLimit) {
+  if (isGameEnded(currentScore)) {
     createResultNotification(currentScore);
     stopGameIteration(activeElement);
   }
@@ -229,7 +234,7 @@ function createResultNotification(result) {
   const startButton = document.querySelector('.start-game__button');
 
   notification.className = 'result-notification';
-  if (result <= lowerLimit) {
+  if (isGameEnded(result)) {
     notification.innerText = `Oops! Try again? ${String.fromCodePoint(0x1F340)}`;
   } else {
     notification.innerText = `Congrats! You win ${String.fromCodePoint(0x1F389)}`;
@@ -263,8 +268,10 @@ function createStartButton() {
 
 function clearStartButton() {
   const startButtonContainer = document.querySelector('.start-game');
+  const startButton = document.querySelector('.start-game__button');
 
   if (startButtonContainer) {
     startButtonContainer.remove();
+    startButton.removeEventListener('click', startNewGame);
   }
 }
