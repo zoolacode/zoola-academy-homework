@@ -15,20 +15,21 @@ public class TaskSeven {
     }
 
     private static String convert(String string) {
-        String[] strs = string.split("");
+        char[] chars = string.toCharArray();
         StringBuilder builder = new StringBuilder();
-        for (String str : strs) {
-            switch (str) {
-                case "1" -> builder.append(str).append("(one)");
-                case "2" -> builder.append(str).append("(two)");
-                case "3" -> builder.append(str).append("(three)");
-                case "4" -> builder.append(str).append("(four)");
-                case "5" -> builder.append(str).append("(five)");
-                case "6" -> builder.append(str).append("(six)");
-                case "7" -> builder.append(str).append("(seven)");
-                case "8" -> builder.append(str).append("(eight)");
-                case "9" -> builder.append(str).append("(nine)");
-                case "0" -> builder.append(str).append("(zero)");
+        for (char character : chars) {
+            builder.append(character);
+            switch (character) {
+                case '1' -> builder.append("(one)");
+                case '2' -> builder.append("(two)");
+                case '3' -> builder.append("(three)");
+                case '4' -> builder.append("(four)");
+                case '5' -> builder.append("(five)");
+                case '6' -> builder.append("(six)");
+                case '7' -> builder.append("(seven)");
+                case '8' -> builder.append("(eight)");
+                case '9' -> builder.append("(nine)");
+                case '0' -> builder.append("(zero)");
             }
         }
         return builder.toString();

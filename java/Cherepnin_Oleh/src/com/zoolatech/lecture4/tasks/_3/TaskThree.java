@@ -13,12 +13,14 @@ import java.util.Locale;
  */
 public class TaskThree {
     public static void main(String[] args) {
-        show("hola", s -> s.toUpperCase(Locale.ROOT));
-        show("ALOHA", s -> s.toLowerCase(Locale.ROOT));
+        show("hola", s -> s + " -> modified: " + s.toUpperCase(Locale.ROOT));
+        show("ALOHA", s -> s + " -> modified: " + s.toLowerCase(Locale.ROOT));
     }
 
-    public static void show(String str, StringModifier modifier) {
-        System.out.println(str + " -> modified: " + modifier.modify(str));
+    public static void show(String str, StringModifier... modifiers) {
+        for (StringModifier modifier : modifiers) {
+            System.out.println(modifier.modify(str));
+        }
     }
 }
 

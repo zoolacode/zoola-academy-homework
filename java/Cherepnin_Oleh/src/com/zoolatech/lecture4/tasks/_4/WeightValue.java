@@ -1,20 +1,20 @@
 package com.zoolatech.lecture4.tasks._4;
 
 public class WeightValue {
-    Weight type;
+    Weight weight;
     double value;
 
     public WeightValue(Weight type, double value) {
-        this.type = type;
+        this.weight = type;
         this.value = value;
     }
 
-    public void calculateTo(String name){
-        type.calculate(name, value);
+    public void calculateTo(String weightName) {
+        System.out.println(weight + " " + value + " in " + weightName + ": " + weight.calculate(weightName, value));
     }
 
-    public Weight getType() {
-        return type;
+    public Weight getWeight() {
+        return weight;
     }
 
     public double getValue() {

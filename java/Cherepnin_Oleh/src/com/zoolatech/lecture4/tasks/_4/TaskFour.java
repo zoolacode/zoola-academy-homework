@@ -11,33 +11,21 @@ import java.util.Scanner;
  * the method should return an enum value for the gram unit).
  */
 public class TaskFour {
-    static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        WeightValue weightValue = new WeightValue(getWeight(), initValue());
-        convertValue(weightValue);
-    }
-
-    private static Weight getWeight() {
         System.out.println("Input weight type (g, kg, oz, lb, t):");
         String str = scanner.next();
-        Weight weight = Arrays.stream(Weight.values())
-                .filter(w -> w.getString().equalsIgnoreCase(str))
-                .findFirst()
-                .get();
-        return weight;
+        WeightValue weightValue = new WeightValue(Weight.getWeight(str), initValue());
+
+        System.out.println("Input type to convert:");
+        String convertType = scanner.next();
+        weightValue.calculateTo(convertType);
     }
 
     private static double initValue() {
         System.out.println("Input value:");
-        double value = scanner.nextDouble();
-        return value;
-    }
-
-    private static void convertValue(WeightValue weightValue) {
-        System.out.println("Input type to convert:");
-        String convertType = scanner.next();
-        weightValue.calculateTo(convertType);
+        return scanner.nextDouble();
     }
 }
 

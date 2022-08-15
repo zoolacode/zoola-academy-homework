@@ -3,9 +3,6 @@ package com.zoolatech.lecture4.tasks._2;
 public class Tree {
     private Node head;
 
-    public Tree() {
-    }
-
     public boolean add(int value) {
         Node newNode = new Node(value);
 
@@ -23,16 +20,14 @@ public class Tree {
                 if (current.getLeft() == null) {
                     current.setLeft(newNode);
                     return true;
-                } else if (current.getLeft() != null) {
+                } else {
                     current = current.getLeft();
-                    continue;
                 }
-            }
-            if (value > current.getValue()) {
+            } else if (value > current.getValue()) {
                 if (current.getRight() == null) {
                     current.setRight(newNode);
                     return true;
-                } else if (current.getRight() != null) {
+                } else {
                     current = current.getRight();
                 }
             }
@@ -50,39 +45,4 @@ public class Tree {
             showNodes(startNode.getRight());
         }
     }
-
-    private class Node {
-        private int value;
-        private Node left;
-        private Node right;
-
-        public Node(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-
-        public Node getLeft() {
-            return left;
-        }
-
-        public Node getRight() {
-            return right;
-        }
-
-        public void setLeft(Node left) {
-            this.left = left;
-        }
-
-        public void setRight(Node right) {
-            this.right = right;
-        }
-
-        public void printNode() {
-            System.out.println(value);
-        }
-    }
 }
-
