@@ -2,20 +2,16 @@
 
 const mesh = document.querySelector('.mesh');
 const gameParamsContainer = document.querySelector('.game-params-container');
-const itemsPerRow = 5;
-const itemsPerColumn = 5;
-const meshWidth = mesh.clientWidth;
-const meshHeight = mesh.clientHeight;
 const scoreContainer = document.querySelector('.score-number');
 const selectGameSpeed = document.querySelector('.game-speed__select');
-const itemWidth = meshWidth / itemsPerRow;
-const itemHeight = meshHeight / itemsPerColumn;
-const itemsQuantity = (meshWidth / itemWidth) * (meshHeight / itemHeight);
+
+const itemsQuantity = 25;
 const successClickPoint = 1;
 const doubleClickPoint = 2;
 const clickOutsideElementPoint = 3;
 const missedClickPoint = 5;
-const limitScore = 20;
+const upperLimit = 20;
+const lowerLimit = -20;
 
 function appendItemsOnMesh() {
   const newItem = document.createElement('div');
@@ -28,6 +24,9 @@ for (let i = 0; i < itemsQuantity; i++) {
 }
 
 const meshSize = mesh.children.length;
+
+console.log(meshSize);
+console.log(itemsQuantity);
 
 /**
  * @description A function that will run our game using SetInterval
@@ -83,19 +82,19 @@ function startNewGame() {
 }
 
 function setIntervalImmediately(func, interval) {
-  if (currentScore <= -limitScore || currentScore >= limitScore) {
+  if (currentScore <= lowerLimit || currentScore >= upperLimit) {
     createResultNotification(currentScore);
     stopGameIteration(highlightedElement);
   } else {
     func();
 
-    return gameInterval = setInterval(func, interval);
+    gameInterval = setInterval(func, interval);
   }
 }
 
 function resetPrevGameResult() {
   if (highlightedElement) {
-    highlightedElement.className = 'mesh__item';
+    deactivateElement();
   }
 
   clearResultNotification();
@@ -115,9 +114,11 @@ function stopGameIteration(element) {
 
 function handleClick() {
   if (Boolean(isClicked)) {
-    scoreContainer.innerText = currentScore -= doubleClickPoint;
+    currentScore -= doubleClickPoint;
+    scoreContainer.innerText = currentScore;
   } else {
-    scoreContainer.innerText = currentScore += successClickPoint;
+    currentScore += successClickPoint;
+    scoreContainer.innerText = currentScore;
     isClickedOnElement = true;
   }
 
@@ -130,11 +131,12 @@ function handleClick() {
 }
 
 function handleClickOutsideElement() {
-  if (Boolean(!isClickedOnElement)) {
-    scoreContainer.innerText = currentScore -= clickOutsideElementPoint;
+  if (!isClickedOnElement) {
+    currentScore -= clickOutsideElementPoint;
+    scoreContainer.innerText = currentScore;
   }
 
-  if (currentScore <= -limitScore) {
+  if (currentScore <= lowerLimit) {
     createResultNotification(currentScore);
     stopGameIteration(highlightedElement);
   }
@@ -156,8 +158,9 @@ function runGameIteration() {
 
   const activeElement = mesh.children[randomIndex];
 
-  if (Boolean(!isClicked)) {
-    scoreContainer.innerText = currentScore -= missedClickPoint;
+  if (!isClicked) {
+    currentScore -= missedClickPoint;
+    scoreContainer.innerText = currentScore;
   }
 
   handleScoreColor();
@@ -167,7 +170,7 @@ function runGameIteration() {
     isClicked = false;
   }
 
-  if (currentScore <= -limitScore || currentScore >= limitScore) {
+  if (currentScore <= lowerLimit || currentScore >= upperLimit) {
     createResultNotification(currentScore);
     stopGameIteration(activeElement);
   }
@@ -203,7 +206,8 @@ function getVariantForIndex() {
     'item-highlighted-2',
     'item-highlighted-3',
   ];
-  return variants[getRandomNumber(meshSize - 1) % variants.length];
+
+  return variants[getRandomNumber(variants.length - 1)];
 }
 
 function getIndex() {
@@ -216,7 +220,7 @@ function getIndex() {
 }
 
 function handleScoreColor() {
-  if (+scoreContainer.innerText < 0) {
+  if (Number(scoreContainer.innerText) < 0) {
     scoreContainer.classList.add('danger-score');
   } else {
     scoreContainer.classList.remove('danger-score');
@@ -228,7 +232,7 @@ function createResultNotification(result) {
   const startButton = document.querySelector('.start-game__button');
 
   notification.className = 'result-notification';
-  if (result <= -limitScore) {
+  if (result <= lowerLimit) {
     notification.innerText = `Oops! Try again? ${String.fromCodePoint(0x1F340)}`;
   } else {
     notification.innerText = `Congrats! You win ${String.fromCodePoint(0x1F389)}`;
