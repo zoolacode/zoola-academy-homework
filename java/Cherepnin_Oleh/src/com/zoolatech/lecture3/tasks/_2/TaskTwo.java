@@ -30,8 +30,10 @@ public class TaskTwo {
                 "regan3@mail.com",
                 "380-203-15-16",
                 15, 2);
-        UserValidator.validate(user1);
-        UserValidator.validate(user2);
+
+        UserValidator validator = new UserValidator();
+        validator.isValid(user1);
+        validator.isValid(user2);
 
     }
 }

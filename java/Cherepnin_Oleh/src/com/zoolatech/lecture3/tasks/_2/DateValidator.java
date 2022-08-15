@@ -1,6 +1,10 @@
 package com.zoolatech.lecture3.tasks._2;
 
-public class DateValidator implements SmallerValidator {
+public class DateValidator extends AbstractSmallerValidator {
+
+    public DateValidator(String fieldName) {
+        super(fieldName);
+    }
 
     @Override
     public boolean isValid(User user) {

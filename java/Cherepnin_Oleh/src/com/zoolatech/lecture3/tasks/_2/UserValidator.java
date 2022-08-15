@@ -3,13 +3,15 @@ package com.zoolatech.lecture3.tasks._2;
 import java.util.List;
 
 public class UserValidator {
-    private static final List<SmallerValidator> VALIDATORS = List.of(
-            new NameValidator(),
-            new NumberValidator(),
-            new DateValidator(),
-            new EmailValidator());
+    private final List<SmallerValidator> VALIDATORS = List.of(
+            new NameValidator("firstName"),
+            new NameValidator("lastName"),
+            new NameValidator("country"),
+            new NumberValidator("phoneNumber"),
+            new DateValidator("birthDayMonth"),
+            new EmailValidator("email"));
 
-    public static boolean validate(User user) {
+    public boolean isValid(User user) {
         System.out.println("Start to validate user #" + user.getId());
         boolean result = true;
         for (SmallerValidator validator : VALIDATORS) {

@@ -1,17 +1,17 @@
 package com.zoolatech.lecture3.tasks._2;
 
-public class EmailValidator implements SmallerValidator {
+public class EmailValidator extends AbstractSmallerValidator {
 
-    private String regex = "[a-z_0-9]{3,}@[a-z]{3,6}\\.[a-z]{2,4}";
+    public EmailValidator(String fieldName) {
+        super(fieldName);
+    }
 
     @Override
     public boolean isValid(User user) {
-        if (user.getEmail().matches(regex)) {
+        if (ValidationPattern.EMAIL.getPattern().matcher(user.getEmail()).matches()) {
             return true;
         }
         System.out.println("Email is invalid");
         return false;
     }
-
-
 }
