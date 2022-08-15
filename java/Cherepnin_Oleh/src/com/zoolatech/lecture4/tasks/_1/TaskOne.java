@@ -11,7 +11,11 @@ package com.zoolatech.lecture4.tasks._1;
 public class TaskOne {
     public static void main(String[] args) {
         Container container = new Container("test");
+        Container.ContainerUpdatesListener updatesListener = container.new ContainerUpdatesListener();
+        System.out.println(updatesListener.hasValueChanged());
         container.setValue("test2");
+        System.out.println(updatesListener.hasValueChanged());
+
     }
 }
 
