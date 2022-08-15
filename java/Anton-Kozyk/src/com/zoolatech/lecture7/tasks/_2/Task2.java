@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Task2 {
     public static void main(String[] args) throws InterruptedException {
         Calculator calculator = new Calculator(0);
-        CalculatorAtomic calculatorAtomic = new CalculatorAtomic(new AtomicInteger(0));
+        CalculatorAtomic calculatorAtomic = new CalculatorAtomic(0);
         CalculatorExplicitLock calculatorExplicitLock = new CalculatorExplicitLock(0);
         CalculatorSynchronized calculatorSynchronized = new CalculatorSynchronized(0);
 

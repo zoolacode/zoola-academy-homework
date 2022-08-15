@@ -23,4 +23,3 @@ public class Calculator {
         this.value = value;
     }
 }
-

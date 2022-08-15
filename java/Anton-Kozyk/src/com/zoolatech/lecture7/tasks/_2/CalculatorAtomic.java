@@ -5,8 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CalculatorAtomic {
     private AtomicInteger atomicInteger;
 
-    public CalculatorAtomic(AtomicInteger atomicInteger) {
-        this.atomicInteger = atomicInteger;
+    public CalculatorAtomic(int value) {
+        this.atomicInteger = new AtomicInteger(value);
     }
 
     public void addition(int anotherValue) {
@@ -17,7 +17,7 @@ public class CalculatorAtomic {
         atomicInteger.addAndGet(-anotherValue);
     }
 
-    public AtomicInteger getValue() {
-        return atomicInteger;
+    public int getValue() {
+        return atomicInteger.intValue();
     }
 }

@@ -28,7 +28,3 @@ public class Task1 {
         System.out.println("This is " + Thread.currentThread().getName());
     }
 }
-
-
-
-
