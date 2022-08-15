@@ -16,15 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class Restaurant {
     public static void main(String[] args) {
-        class Order {
-            final String name;
-            final int id;
-
-            public Order(String name, int id) {
-                this.name = name;
-                this.id = id;
-            }
-
+        record Order(String name, int id) {
             @Override
             public String toString() {
                 return "ID " + id + ", for: " + name;
@@ -34,17 +26,20 @@ public class Restaurant {
         LinkedBlockingQueue<Order> newOrders = new LinkedBlockingQueue<>();
         String[] customerNames = {"Jack", "Alban", "Sam", "James", "Merry", "Mac"};
         Thread customers = new Thread(() -> {
-            int id = 1;
-            for (String name : customerNames) {
-                try {
-                    Order newOrder = new Order(name, id);
-                    System.out.println("\nNew order from " + newOrder.name + ". ID: " + newOrder.id);
-                    newOrders.put(newOrder);
-                    Thread.sleep(4000);
-                    id++;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            while (!Thread.currentThread().isInterrupted()) {
+                int id = 1;
+                for (String name : customerNames) {
+                    try {
+                        Order newOrder = new Order(name, id);
+                        System.out.println("\nNew order from " + newOrder.name + ". ID: " + newOrder.id);
+                        newOrders.put(newOrder);
+                        Thread.sleep(4000);
+                        id++;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+                break;
             }
         });
 

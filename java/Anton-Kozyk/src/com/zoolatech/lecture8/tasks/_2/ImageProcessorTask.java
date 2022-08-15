@@ -10,7 +10,7 @@ public class ImageProcessorTask extends RecursiveAction {
     private final int toWidth;
     private final int fromHeight;
     private final int toHeight;
-    final int[][] image;
+    private final int[][] image;
 
     public ImageProcessorTask(int[][] image) {
         this(0, image.length, 0, image[0].length, image);
