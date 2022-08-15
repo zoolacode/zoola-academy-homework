@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._4;
 
-public class DocReporter extends AbstractReporter {
+public final class DocReporter extends AbstractReporter {
     public DocReporter(String header, String data, String name) {
         super(header, data, name);
     }
@@ -10,7 +10,26 @@ public class DocReporter extends AbstractReporter {
     }
 
     @Override
-    protected void convert() {
-        System.out.println("File successfully convert to DOC format");
+    protected void addName() {
+        super.addName();
+        System.out.println(".doc\"");
+    }
+
+    @Override
+    protected void addHeader() {
+        super.addHeader();
+        System.out.println("doc format");
+    }
+
+    @Override
+    protected void addData() {
+        super.addData();
+        System.out.println("doc format");
+    }
+
+    @Override
+    protected void closeFile() {
+        System.out.print("File:\"" + name + ".doc\" ");
+        super.closeFile();
     }
 }

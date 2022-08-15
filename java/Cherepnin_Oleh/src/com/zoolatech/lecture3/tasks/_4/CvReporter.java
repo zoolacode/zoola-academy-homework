@@ -1,6 +1,7 @@
 package com.zoolatech.lecture3.tasks._4;
 
-public class CvReporter extends AbstractReporter {
+public final class CvReporter extends AbstractReporter {
+
     public CvReporter(String header, String data, String name) {
         super(header, data, name);
     }
@@ -10,7 +11,26 @@ public class CvReporter extends AbstractReporter {
     }
 
     @Override
-    protected void convert() {
-        System.out.println("File successfully convert to Cv format");
+    protected void addName() {
+        super.addName();
+        System.out.println(".cv\"");
+    }
+
+    @Override
+    protected void addHeader() {
+        super.addHeader();
+        System.out.println("cv file");
+    }
+
+    @Override
+    protected void addData() {
+        super.addData();
+        System.out.println("cv file");
+    }
+
+    @Override
+    protected void closeFile() {
+        System.out.print("File:\"" + name + ".cv\" ");
+        super.closeFile();
     }
 }
