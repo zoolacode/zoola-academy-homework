@@ -1,8 +1,5 @@
 package com.zoolatech.lecture8.tasks._1;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -18,7 +15,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 
 public class Restaurant {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         class Order {
             final String name;
             final int id;
