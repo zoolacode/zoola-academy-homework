@@ -2,3 +2,5 @@
 **/.DS_Store
 **/*.iml
 /out/
+**/node_modules
+**/dist
