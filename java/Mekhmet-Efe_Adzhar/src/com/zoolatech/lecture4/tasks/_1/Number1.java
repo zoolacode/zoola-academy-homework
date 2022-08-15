@@ -11,7 +11,6 @@ instance of the ContainerUpdatesListener class was created, and false - otherwis
 
 public class Number1 {
     public static void main(String[] args) {
-
         Container container = new Container(5);
         Container.ContainerUpdatesListener containerUpdatesListener = container.new ContainerUpdatesListener();
         container.setNumber(3);
@@ -22,15 +21,11 @@ public class Number1 {
 }
 
 class Container {
-
     private int number;
-
-    ContainerUpdatesListener containerUpdatesListener = new ContainerUpdatesListener();
 
     public Container(int number) {
         this.number = number;
     }
-
 
     public int getNumber() {
         return number;
@@ -41,10 +36,10 @@ class Container {
     }
 
     class ContainerUpdatesListener {
-        int integer = number;
+        private final int newInteger = number;
 
         public boolean hasValueChanged() {
-            return Container.this.number != integer;
+            return Container.this.number != newInteger;
         }
     }
 }
