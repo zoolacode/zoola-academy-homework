@@ -18,88 +18,71 @@ Inside of the main method, create a couple of instances of all classes and play 
 public class Number1 {
 
     public static void main(String[] args) {
-        boolean exit = false;
-        String string;
         Number1 number1 = new Number1();
         Scanner scanner = new Scanner(System.in);
         ArrayList<Musicians> list = new ArrayList<>();
-        number1.chooseInstrument(list);
         Orchestra orchestra = new Orchestra(list);
+        orchestra.addMusician(number1.chooseInstrument());
 
         System.out.println("Orchestra:");
         System.out.println("1. Musician Info.\n2. Add Musician\n3. Remove Musician\n4. Play!\n5. Exit");
+        boolean exit = false;
         while (!exit) {
             switch (scanner.nextInt()) {
                 case 1 -> {
-                    string = orchestra.toString();
-                    System.out.println(string);
+                    String orchestraList = orchestra.toString();
+                    System.out.println(orchestraList);
                     System.out.print("Amount of musicians:");
                     orchestra.amountOfMusicians();
                 }
-                case 2 -> {
-                    number1.chooseInstrument(list);
-                }
+                case 2 -> orchestra.addMusician(number1.chooseInstrument());
                 case 3 -> {
                     System.out.println("Choose witch one is removed: Starting from 0 to N-1");
                     orchestra.removeMusician(scanner.nextInt());
                 }
-                case 4 -> {
-                    orchestra.play();
-                }
+                case 4 -> orchestra.play();
                 case 5 -> exit = true;
                 default -> System.out.println("ERROR");
             }
         }
     }
 
-    public void chooseInstrument(ArrayList<Musicians> list) {
+    public Musicians chooseInstrument() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Musician name:");
         Musicians musicians = new Musicians(scanner.next());
         System.out.print("Name is:");
         musicians.getName();
-        Orchestra orchestra = new Orchestra(list);
         System.out.println("What is his/her instrument?:");
         System.out.println("1. Piano\n2. Violin\n3. Guitar");
 
         switch (scanner.nextInt()) {
             case 1 -> {
-                Instruments piano = new Piano("PIN PIN PIN", "Piano");
-                System.out.print("Instrument is: ");
-                piano.getName();
+                Piano piano = new Piano();
+                System.out.print("Instrument is: " + piano.getName());
                 musicians.setInstrument(piano);
-                orchestra.addMusician(musicians);
             }
             case 2 -> {
-                Instruments violin = new Violin("VI VI VI", "Violin");
-                System.out.print("Instrument is: ");
-                violin.getName();
+                Violin violin = new Violin();
+                System.out.print("Instrument is: " +  violin.getName());
                 musicians.setInstrument(violin);
-                orchestra.addMusician(musicians);
             }
             case 3 -> {
-                Instruments guitar = new Guitar("DSUCH DSUCH DSUCH", "Violin");
-                System.out.print("Instrument is: ");
-                guitar.getName();
+                Guitar guitar = new Guitar();
+                System.out.print("Instrument is: " + guitar.getName());
                 musicians.setInstrument(guitar);
-                orchestra.addMusician(musicians);
             }
             default -> throw new IllegalStateException("Unexpected value: " + scanner.nextInt());
         }
+        return musicians;
     }
 }
 
-class Orchestra {
-
-    private ArrayList<Musicians> list;
-
-    public Orchestra(ArrayList<Musicians> list) {
-        this.list = list;
-    }
+record Orchestra(ArrayList<Musicians> list) {
 
     public void play() {
         for (Musicians musicians : list) {
-            musicians.instrument.getSound();
+            System.out.println(musicians.getSoundOfInstrument());
         }
     }
 
@@ -108,8 +91,8 @@ class Orchestra {
     }
 
     public void removeMusician(int integer) {
-        var variable = this.list.remove(integer);
-        System.out.println("Removed" + variable);
+        var removedMusician = this.list.remove(integer);
+        System.out.println("Removed" + removedMusician);
     }
 
     public void amountOfMusicians() {
@@ -124,12 +107,10 @@ class Orchestra {
 }
 
 class Musicians {
-
-    Instruments instrument;
     private static int id = 0;
-    private int incrementId = ++id;
-
-    private String name;
+    private Instruments instrument;
+    private final int incrementId = ++id;
+    private final String name;
 
     @Override
     public String toString() {
@@ -153,52 +134,87 @@ class Musicians {
         System.out.println(instrument);
     }
 
+    public String getSoundOfInstrument() {
+      return  instrument.getSound();
+    }
+
     public static int getId() {
         return id;
     }
 }
 
 class Instruments {
-    private final String sound;
-    private final String name;
 
-    public Instruments(String sound, String name) {
-        this.sound = sound;
-        this.name = name;
+   private String name;
+   private String sound;
+
+    public String getName() {
+        return name;
     }
 
-    public void getName() {
-        System.out.println(name);
-    }
-
-    public void getSound() {
-        System.out.println(sound);
+    public String getSound() {
+       return sound;
     }
 
     @Override
     public String toString() {
-        return "His/Her instrument is " + name + ", " +
-                "it makes sound: " + sound;
+        return "His/Her instrument is " + getName() + ", " +
+                "it makes sound: " + getSound();
     }
 }
 
 class Piano extends Instruments {
 
-    public Piano(String sound, String name) {
-        super(sound, name);
+    @Override
+    public String getSound() {
+      return "PIN PIN PIN";
+    }
+
+    @Override
+    public String getName() {
+        return "Piano";
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
 
 class Violin extends Instruments {
 
-    public Violin(String sound, String name) {
-        super(sound, name);
+
+    @Override
+    public String getSound() {
+        return "VI VI VI";
+    }
+
+    @Override
+    public String getName() {
+        return "Violin";
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
 
 class Guitar extends Instruments {
 
-    public Guitar(String sound, String name) {
-        super(sound, name);
+
+    @Override
+    public String getSound() {
+        return "DUSH DUSH DUSH";
+    }
+
+    @Override
+    public String getName() {
+        return "Guitar";
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
