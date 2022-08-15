@@ -2,6 +2,7 @@ package com.zoolatech.lecture5.tasks._5;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * Create a class KthLargest with a single method int add(int value) that
@@ -31,25 +32,29 @@ public class Task5 {
     static class KthLargest {
 
         private final int k;
-        private final List<Integer> list;
+        private final PriorityQueue<Integer> min = new PriorityQueue<>();
 
         public KthLargest(int k) {
             this.k = k;
-            this.list = new ArrayList<>();
         }
 
-        public int add(int value) {
-            list.add(value);
-            if (list.size() < k) {
-                return -1;
+        public List<Integer> add(int value) {
+            List<Integer> list = new ArrayList<>();
+            if(min.size() < k) {
+                min.add(value);
             } else {
-                return list.stream().
-                        sorted()
-                        .skip(list.size() - (long) k)
-                        .mapToInt(i -> i)
-                        .summaryStatistics()
-                        .getMin();
+                if (value > min.peek()) {
+                    min.poll();
+                    min.add(value);
+                }
             }
+
+            if (min.size() >= k) {
+                list.add(min.peek());
+            } else {
+                list.add(-1);
+            }
+            return list;
         }
     }
 }
