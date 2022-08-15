@@ -1,8 +1,7 @@
 package com.zoolatech.lecture5.tasks._4;
 
-import java.util.LinkedHashMap;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Create a method that accepts a string, counts all unique non-space character
@@ -30,9 +29,10 @@ public class Task4 {
     }
 
     public static void countUniqueCharacters(String str) {
-        Stream.of(str.replaceAll("\\s+", "").split(""))
-                .sorted()
-                .collect(Collectors.groupingBy(s -> s, LinkedHashMap::new, Collectors.counting()))
+        str.chars()
+                .mapToObj(c -> (char) c)
+                .filter(e -> !e.equals(' '))
+                .collect(Collectors.groupingBy(s -> s, TreeMap::new, Collectors.counting()))
                 .forEach((k, v) -> System.out.println(k + " - " + v));
     }
 }
