@@ -20,152 +20,196 @@ In the main method, create a user account and user account validator objects.
 The validator needs to contain all validation rules that can be applied to user account objects.
 */
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Number2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Account account = new Account();
-        Validator validator = new Validator();
+
+        NumberRangeValidator numberRangeValidator = new NumberRangeValidator();
+        StringIsNotEmpty stringIsNotEmpty = new StringIsNotEmpty();
+        UserEmailValidator userEmailValidator = new UserEmailValidator();
+        PhoneNumberValidator phoneNumberValidator = new PhoneNumberValidator();
+
+        Validator validator = new Validator(numberRangeValidator,
+                stringIsNotEmpty,
+                stringIsNotEmpty ,
+                userEmailValidator,
+                phoneNumberValidator,
+                numberRangeValidator);
+
         System.out.println("Type user id:");
-        account.userId = scanner.nextInt();
+        account.setUserId(scanner.nextInt());
+        numberRangeValidator.isValid(account);
+
         System.out.println("Type user name:");
-        account.firstName = scanner.next();
+        account.setFirstName(scanner.next());
+        stringIsNotEmpty.isValid(account);
+
         System.out.println("Type user last name:");
-        account.lastName = scanner.next();
+        account.setLastName(scanner.next());
+        stringIsNotEmpty.isValid(account);
+
         System.out.println("Type your country");
-        System.out.println("Ukraine, USA, Canada, Mexico, Poland, Germany, France, Italy, Turkey");
-        account.country = scanner.next();
+        account.setCountry(scanner.next());
+        stringIsNotEmpty.isValid(account);
+
         System.out.println("Type user email:");
-        account.userEmail = scanner.next();
+        account.setUserEmail(scanner.next());
+        userEmailValidator.isValid(account);
+
         System.out.println("Type user phone number:");
-        account.phoneNumber = scanner.next();
+        account.setPhoneNumber(scanner.next());
+        phoneNumberValidator.isValid(account);
+
         System.out.println("Type birth day");
-        account.birthDay = scanner.nextInt();
+        account.setBirthDay(scanner.nextInt());
+        numberRangeValidator.isValid(account);
+
         System.out.println("And birthday month");
-        account.birthMonth = scanner.nextInt();
+        account.setBirthMonth(scanner.nextInt());
+        numberRangeValidator.isValid(account);
+
         validator.isValid(account);
     }
 }
 
 interface Verification {
-    public boolean isValid(Account account);
+    boolean isValid(Account account);
 }
 
 class Account {
-    int userId;
-    String firstName;
-    String lastName;
-    String country;
-    String userEmail;
-    String phoneNumber;
-    int birthDay;
-    int birthMonth;
+   private int userId;
+   private String firstName;
+   private String lastName;
+   private String country;
+   private String userEmail;
+   private String phoneNumber;
+   private int birthDay;
+   private int birthMonth;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setBirthDay(int birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public void setBirthMonth(int birthMonth) {
+        this.birthMonth = birthMonth;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public int getBirthDay() {
+        return birthDay;
+    }
+
+    public int getBirthMonth() {
+        return birthMonth;
+    }
 }
 
 class Validator implements Verification {
-    userIdValidator userIdValidator = new userIdValidator();
-    nameValidation nameValidation = new nameValidation();
-    countryValidation countryValidation = new countryValidation();
-    userEmailValidator userEmailValidator = new userEmailValidator();
-    phoneNumberValidator phoneNumberValidator = new phoneNumberValidator();
-    birthDayAndBirthMonthValidator birthDayAndBirthMonthValidator = new birthDayAndBirthMonthValidator();
+    List<Verification> verifications;
 
-    @Override
-    public boolean isValid(Account account) {
-        if (
-                userIdValidator.isValid(account)
-                        && nameValidation.isValid(account)
-                        && countryValidation.isValid(account)
-                        && userEmailValidator.isValid(account)
-                        && phoneNumberValidator.isValid(account)
-                        && birthDayAndBirthMonthValidator.isValid(account)
-        ) {
-            System.out.println("User id is: " + account.userId);
-            System.out.println("User name is: " + account.firstName + " " + account.lastName);
-            System.out.println("User country is: " + account.country);
-            System.out.println("User email is: " + account.userEmail);
-            System.out.println("User phone number is: " + account.phoneNumber);
-            System.out.println("User birthday is: " + account.birthDay + "/" + account.birthMonth);
-            return true;
-        }
-        return false;
+    public Validator(NumberRangeValidator userIdValidator,
+                     StringIsNotEmpty nameValidation,
+                     StringIsNotEmpty countryValidation,
+                     UserEmailValidator userEmailValidator,
+                     PhoneNumberValidator phoneNumberValidator,
+                     NumberRangeValidator birthDayAndBirthMonthValidator) {
+        this.verifications = List.of(userIdValidator, nameValidation, countryValidation,
+                userEmailValidator, phoneNumberValidator, birthDayAndBirthMonthValidator);
     }
-}
-
-class userIdValidator implements Verification {
 
     @Override
     public boolean isValid(Account account) {
-        if (account.userId > 0) {
-            System.out.println("User Id is Correct");
-            return true;
-        }
-        System.out.println("Invalid ID");
-        return false;
-    }
-}
-
-class nameValidation implements Verification {
-
-    @Override
-    public boolean isValid(Account account) {
-        if (account.firstName.length() > 0 && account.lastName.length() > 0) {
-            System.out.println("User First name and Last Name are Correct");
-            return true;
-        } else if (account.firstName.length() == 0) {
-            System.out.println("Invalid First name");
-            return false;
-        } else if (account.lastName.length() == 0) {
-            System.out.println("Invalid Last name");
-            return false;
-        }
-        System.out.println("Invalid user name");
-        return false;
-    }
-}
-
-class countryValidation implements Verification {
-
-    @Override
-    public boolean isValid(Account account) {
-        switch (account.country) {
-            case "Ukraine", "USA", "Canada", "Mexico", "Poland", "Germany", "France", "Italy", "Turkey" -> {
-                System.out.println("Country is correct");
-                return true;
-            }
-            default -> {
-                System.out.println("No country selected");
+        for (Verification verification : verifications) {
+            if (!verification.isValid(account)) {
+                System.out.println("Invalid account");
                 return false;
             }
         }
+        System.out.println("User id is: " + account.getUserId());
+        System.out.println("User name is: " + account.getFirstName() + " " + account.getLastName());
+        System.out.println("User country is: " + account.getCountry());
+        System.out.println("User email is: " + account.getUserEmail());
+        System.out.println("User phone number is: " + account.getPhoneNumber());
+        System.out.println("User birthday is: " + account.getBirthDay() + "/" + account.getBirthMonth());
+        return true;
     }
 }
 
-class userEmailValidator implements Verification {
+class UserEmailValidator implements Verification {
 
     @Override
     public boolean isValid(Account account) {
-        if (account.userEmail.length() > 0) {
-            for (int i = 0; i <= account.userEmail.length() - 1; i++) {
-                if (account.userEmail.contains("@")) {
+        if (account.getUserEmail().length() > 0) {
+            for (int i = 0; i <= account.getUserEmail().length() - 1; i++) {
+                if (account.getUserEmail().contains("@")) {
                     System.out.println("Email is correct");
                     return true;
                 }
             }
         }
-        System.out.println("Invalid Id");
+        System.out.println("Invalid Email");
         return false;
     }
 }
 
-class phoneNumberValidator implements Verification {
+class PhoneNumberValidator implements Verification {
 
     @Override
     public boolean isValid(Account account) {
-        if (account.phoneNumber.length() == 13) {
-            for (int i = 0; i < account.phoneNumber.length(); i++) {
-                if (account.phoneNumber.contains("+380")) {
+        if (account.getPhoneNumber().length() == 13) {
+            for (int i = 0; i < account.getPhoneNumber().length(); i++) {
+                if (account.getPhoneNumber().contains("+380")) {
                     System.out.println("Phone number is correct");
                     return true;
                 }
@@ -176,18 +220,35 @@ class phoneNumberValidator implements Verification {
     }
 }
 
-class birthDayAndBirthMonthValidator implements Verification {
+class StringIsNotEmpty implements Verification {
 
     @Override
     public boolean isValid(Account account) {
-        if (account.birthDay != 0 && account.birthDay <= 31) {
-            System.out.println("Birth Day is correct");
-            if (account.birthMonth != 0 && account.birthMonth <= 12) {
-                System.out.println("Birth Month is correct\n");
-                return true;
-            }
+        if (!account.getFirstName().isEmpty() || !account.getLastName().isEmpty() || !account.getCountry().isEmpty()) {
+            System.out.println("String is not Empty");
+            return true;
         }
-        System.out.println("Invalid birth data");
         return false;
+    }
+}
+
+class NumberRangeValidator implements Verification {
+
+    @Override
+    public boolean isValid(Account account) {
+        if((account.getUserId() > 0 && account.getUserId() <= 10)
+                || (account.getBirthMonth() > 0 && account.getBirthMonth() <= 31)
+                || (account.getBirthDay() > 0 && account.getBirthDay() <= 31)) {
+            System.out.println("Validating that number is in the range between X and Y");
+            return true;
+        }
+         else if(account.getUserId() > 10 || account.getBirthDay() > 31 || account.getBirthMonth() > 31) {
+             System.out.println("Validating that number is greater than X");
+             return false;
+         }
+         else  {
+             System.out.println("Validating that number is less than X");
+             return false;
+         }
     }
 }
