@@ -9,12 +9,11 @@ public class UserService {
     }
 
     public String findUserEmail(String id) {
-        String s = "Email is not found.";
         try {
             return userRepository.findUserEmail(id);
         } catch (UserMissingException e) {
             e.printStackTrace();
         }
-        return s;
+        return "Email is not found.";
     }
 }
