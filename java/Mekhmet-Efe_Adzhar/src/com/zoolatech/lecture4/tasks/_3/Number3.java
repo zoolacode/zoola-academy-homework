@@ -23,13 +23,20 @@ public class Number3 {
         number3.concatenation(stringOne, function);
 
         //MARK: UPPERCASE AND lowercase LAMBDAS
-        StringModifier upperCase = string -> ('"' + string + '"' + " -> modified: " + '"' + string.toUpperCase() + '"');
-        StringModifier lowerCase = string -> ('"' + string + '"' + " -> modified: " + '"' + string.toLowerCase() + '"');
+        StringModifier upperCase = string -> ('"' + string + "\" -> modified: \"" + string.toUpperCase());
+        StringModifier lowerCase = string -> ('"' + string + "\" -> modified: \"" + string.toLowerCase());
 
+        //MARK: //MARK: METHOD THAT ACCEPTS A STRING VALUE AND A LAMBDA EXPRESSION
         number3.transform(stringOne, lowerCase, upperCase);
+
+        //MARK: METHOD REFERENCE
+        System.out.println("Modified with method reference");
+        System.out.println(number3.modifyString(stringOne, String::toUpperCase));
+        System.out.println(number3.modifyString(stringOne, String::toLowerCase));
+
+
     }
 
-    //MARK: METHOD THAT ACCEPTS A STRING VALUE AND A LAMBDA EXPRESSION
     public void concatenation(String stringOne, Function<String, String> function) {
         System.out.println(function.apply(stringOne));
     }
@@ -42,6 +49,11 @@ public class Number3 {
             case 2 -> System.out.println(upperCase.modify(string));
         }
     }
+
+    public  String modifyString(String string, StringModifier stringModifier) {
+        return stringModifier.modify(string);
+    }
+
 }
 
 @FunctionalInterface
