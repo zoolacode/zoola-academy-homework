@@ -21,64 +21,33 @@ public class Number4 {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose format:");
         System.out.println("1 : .csv,\n2: .pdf,\n3: .doc");
+
         switch (scanner.nextInt()) {
-            case 1: {
+            case 1 -> {
                 System.out.println("Type file data, file name for .cvs file");
                 CsvReporter csvReporter = new CsvReporter(".cvs", scanner.next(), scanner.next());
                 csvReporter.generate();
             }
-            case 2: {
+            case 2 -> {
                 System.out.println("Type file data, file name for .pdf file");
                 PdfReporter pdfReporter = new PdfReporter(".pdf", scanner.next(), scanner.next());
                 pdfReporter.generate();
+
             }
-            case 3: {
+            case 3 -> {
                 System.out.println("Type file data, file name for .doc file");
                 DocReporter docReporter = new DocReporter(".doc", scanner.next(), scanner.next());
                 docReporter.generate();
             }
         }
     }
-
-    public void tabularData(String headerData, String fileData, String fileName) {
-        System.out.println("Opening a file test.txt");
-        int[][] data = new int[3][1];
-        for (int[] integer : data) {
-            if (integer == data[0]) {
-                System.out.println("Adding header data");
-                System.out.print("|---");
-                for (int i : integer) {
-                    String s = String.valueOf(i);
-                    System.out.print(headerData);
-                }
-                System.out.println("---|");
-            } else if (integer == data[1]) {
-                System.out.println("Adding file data");
-                System.out.print("|---");
-                for (int i : integer) {
-                    String s = String.valueOf(i);
-                    System.out.print(fileData);
-                }
-                System.out.println("---|");
-            } else if (integer == data[2]) {
-                System.out.println("Adding file name");
-                System.out.print("|---");
-                for (int i : integer) {
-                    String s = String.valueOf(i);
-                    System.out.print(fileName);
-                }
-                System.out.println("---|");
-            }
-        }
-        System.out.println("\nFile format and name: " + fileName + headerData + "\nFile data is: " + fileData);
-    }
 }
 
-sealed class Reported permits CsvReporter, PdfReporter, DocReporter {
+class Reported {
+
     String headerData;
     String fileData;
     String fileName;
-    Number4 number4 = new Number4();
 
     public Reported(String headerData, String fileData, String fileName) {
         this.headerData = headerData;
@@ -86,40 +55,148 @@ sealed class Reported permits CsvReporter, PdfReporter, DocReporter {
         this.fileName = fileName;
     }
 
-    public void generate() {
-        number4.tabularData(headerData, fileData, fileName);
+    public void tabularData(String headerData, String fileData, String fileName) {
+        System.out.println("\nFile format and name: " + fileName + headerData + "\nFile data is: " + fileData);
+        System.out.println("Closing file...");
+    }
+
+   public void createHeader(String headerData) {
+       System.out.println("Opening a file test.txt");
+        int[][] data = new int[1][1];
+        for (int[] integer : data) {
+            if (integer == data[0]) {
+                System.out.println("Adding header data");
+                System.out.print("|---");
+                for (int ignored : integer) {
+                    System.out.print(headerData);
+                }
+                System.out.println("---|");
+            }
+        }
+    }
+
+    public void createFileData(String fileData) {
+        int[][] data = new int[1][1];
+        for (int[] integer : data) {
+            if (integer == data[0]) {
+                System.out.print("|---");
+                for (int ignored : integer) {
+                    System.out.print(fileData);
+                }
+                System.out.println("---|");
+            }
+        }
+    }
+
+    public void createFileName(String fileName) {
+        int[][] data = new int[1][1];
+        for (int[] integer : data) {
+            if (integer == data[0]) {
+                System.out.print("|---");
+                for (int ignored : integer) {
+                    System.out.print(fileName);
+                }
+                System.out.println("---|");
+            }
+        }
     }
 }
 
-non-sealed class CsvReporter extends Reported {
+final class CsvReporter extends Reported {
 
     public CsvReporter(String headerData, String fileData, String fileName) {
         super(headerData, fileData, fileName);
     }
 
+    @Override
+    public void createHeader(String headerData) {
+        System.out.println("CSV created!");
+        super.createHeader(headerData);
+        System.out.println(".csv format");
+    }
+
+    @Override
+    public void createFileData(String fileData) {
+        System.out.println("Input data in CSV file");
+        super.createFileData(fileData);
+    }
+
+    @Override
+    public void createFileName(String fileName) {
+        System.out.println("Adding name to CSV file");
+        super.createFileName(fileName);
+    }
+
     public void generate() {
-        number4.tabularData(headerData, fileData, fileName);
+        createHeader(headerData);
+        createFileData(fileData);
+        createFileName(fileName);
+      tabularData(headerData, fileData, fileName);
     }
 }
 
-non-sealed class PdfReporter extends Reported {
+final class PdfReporter extends Reported {
+
 
     public PdfReporter(String headerData, String fileData, String fileName) {
         super(headerData, fileData, fileName);
     }
 
+    @Override
+    public void createHeader(String headerData) {
+        System.out.println("PDF created!");
+        super.createHeader(headerData);
+        System.out.println(".pdf format");
+    }
+
+    @Override
+    public void createFileData(String fileData) {
+        System.out.println("Input data in PDF file");
+        super.createFileData(fileData);
+    }
+
+    @Override
+    public void createFileName(String fileName) {
+        System.out.println("Adding name to PDF file");
+        super.createFileName(fileName);
+    }
+
     public void generate() {
-        number4.tabularData(headerData, fileData, fileName);
+        createHeader(headerData);
+        createFileData(fileData);
+        createFileName(fileName);
+        tabularData(headerData, fileData, fileName);
     }
 }
 
-non-sealed class DocReporter extends Reported {
+final class DocReporter extends Reported {
 
     public DocReporter(String headerData, String fileData, String fileName) {
         super(headerData, fileData, fileName);
     }
+    @Override
+    public void createHeader(String headerData) {
+        System.out.println("DOC created!");
+        super.createHeader(headerData);
+        System.out.println(".doc format");
+    }
+
+    @Override
+    public void createFileData(String fileData) {
+        System.out.println("Input data in DOC file");
+        super.createFileData(fileData);
+    }
+
+    @Override
+    public void createFileName(String fileName) {
+        System.out.println("Adding name to DOC file");
+        super.createFileName(fileName);
+    }
 
     public void generate() {
-        number4.tabularData(headerData, fileData, fileName);
+        createHeader(headerData);
+        createFileData(fileData);
+        createFileName(fileName);
+        tabularData(headerData, fileData, fileName);
     }
 }
