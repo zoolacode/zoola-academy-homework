@@ -1,21 +1,38 @@
 const meshContainer = document.querySelector(".mesh");
 const scoreContainer = document.querySelector(".score");
 const startGame = document.querySelector(".btn_start ");
-const mode_500 = document.querySelector(".mode_500");
-const mode_1000 = document.querySelector(".mode_1000");
-const mode_1500 = document.querySelector(".mode_1500");
+const mode500 = document.querySelector(".mode_500");
+const mode1000 = document.querySelector(".mode_1000");
+const mode1500 = document.querySelector(".mode_1500");
+const wonGame = document.querySelector(".won__game");
+const lostGame = document.querySelector(".lost__game");
+const againPlayWonBtn = document.querySelector(".won_game_btn");
+const againPlayLostBtn = document.querySelector(".lost_game_btn");
 
-for(i = 0; i <= 24; i++){
+const win = 20;
+const lose = -20;
+const numberOfSlote = 25;
+const fastGame = 500;
+const mediumGame = 1000;
+const slowGame = 1500;
+const missClickPenalty = 3;
+const afkPenalty = 5;
+const notAfkPlay = 1;
+const correctClick = 1;
+
+for(i = 1; i <= numberOfSlote; i++){
   let item = document.createElement('div');
-  item.className = 'item';
+  item.classList = 'item';
   meshContainer.append(item);
 };
 
 const meshSize = meshContainer.children.length;
 
-mode_500.addEventListener('click', fastMode);
-mode_1000.addEventListener('click', mediumMode);
-mode_1500.addEventListener('click', slowMode);
+mode500.addEventListener('click', onFastModeClick);
+mode1000.addEventListener('click', onMediumModeClick);
+mode1500.addEventListener('click', onSlowModeClick);
+againPlayWonBtn.addEventListener('click', () => wonGame.style.visibility = 'hidden');
+againPlayLostBtn.addEventListener('click', () => lostGame.style.visibility = 'hidden');
 
 startGame.addEventListener('click', start);
 /**
@@ -59,75 +76,76 @@ function runGameIteration() {
   if (activeElement) {
     deactivateElement = activateElement(activeElement, randomIndex);
   };
-  
-  
-  
+
   scoreContainer.innerText = currentScore;
 
   penalty = 0;
 
-  gameEnd();
+  gameOver();
 };
 
 function start() {
   deactivateElement = null;
   currentScore = 0;
   intervalID = setInterval(runGameIteration, gameIterationDuration);
-  };
+  mode500.removeEventListener('click', onFastModeClick);
+  mode1000.removeEventListener('click', onMediumModeClick);
+  mode1500.removeEventListener('click', onSlowModeClick);
+  startGame.removeEventListener('click', start);
+};
 
-function gameEnd() {
-  if (currentScore >= 20) {
+function gameOver() {
+  if(currentScore >= win || currentScore <= lose) {
+    if(currentScore >= win) {
+      wonGame.style.visibility = 'visible';
+    } else if(currentScore <= lose) {
+      lostGame.style.visibility = 'visible';
+    };
     deactivateElement();
     clearInterval(intervalID);
-    alert('You won');
-  } else if (currentScore <= -20) {
-    deactivateElement();
-    clearInterval(intervalID);
-    alert('You lost');
+    mode500.addEventListener('click', onFastModeClick);
+    mode1000.addEventListener('click', onMediumModeClick);
+    mode1500.addEventListener('click', onSlowModeClick);
+    startGame.addEventListener('click', start);
+    
   };
 };
 
-function slowMode() {
-  gameIterationDuration = 1500;
-  mode_500.style.backgroundColor = '#ff7b47';
-  mode_1000.style.backgroundColor = '#ff7b47';
-  mode_1500.style.backgroundColor = 'green';
+function onSlowModeClick() {
+  gameIterationDuration = slowGame;
+  mode500.style.backgroundColor = '#ff7b47';
+  mode1000.style.backgroundColor = '#ff7b47';
+  mode1500.style.backgroundColor = 'green';
 };
 
-function mediumMode() {
-  gameIterationDuration = 1000;
-  mode_500.style.backgroundColor = '#ff7b47';
-  mode_1000.style.backgroundColor = 'green';
-  mode_1500.style.backgroundColor = '#ff7b47';
+function onMediumModeClick() {
+  gameIterationDuration = mediumGame;
+  mode500.style.backgroundColor = '#ff7b47';
+  mode1000.style.backgroundColor = 'green';
+  mode1500.style.backgroundColor = '#ff7b47';
 };
 
-function fastMode() {
-  gameIterationDuration = 500;
-  mode_500.style.backgroundColor = 'green';
-  mode_1000.style.backgroundColor = '#ff7b47';
-  mode_1500.style.backgroundColor = '#ff7b47';
+function onFastModeClick() {
+  gameIterationDuration = fastGame;
+  mode500.style.backgroundColor = 'green';
+  mode1000.style.backgroundColor = '#ff7b47';
+  mode1500.style.backgroundColor = '#ff7b47';
 };
 
-function score(e) {
+function onScoreClick(e) {
   e.stopPropagation();
-  ++penalty;
-  if (penalty <= 1) {
-    ++currentScore;
-    scoreContainer.innerText = currentScore;
-    clearInterval(intervalID);
-    deactivateElement();
-    intervalID = setInterval(runGameIteration, gameIterationDuration);
-    runGameIteration();
-  } else {
-    --currentScore;
-    --currentScore;
-    scoreContainer.innerText = currentScore;
-  };
+  penalty = notAfkPlay;
+  currentScore += correctClick;
+  scoreContainer.innerText = currentScore;
+  clearInterval(intervalID);
+  deactivateElement();
+  intervalID = setInterval(runGameIteration, gameIterationDuration);
+  runGameIteration();
 };
 
 function afk() {
   if (penalty === 0) {
-    currentScore -= 5;
+    currentScore -= afkPenalty;
   };
 };
 
@@ -139,16 +157,16 @@ function scoreboardColor() {
   };
 };
 
-function missTarget() {
-  currentScore -= 3;
+function onMissTargetClick() {
+  currentScore -= missClickPenalty;
   scoreContainer.innerText = currentScore;
 };
 
 function activateElement(element, index) {
   const variant = getVariantForIndex(index);
   element.classList.add("item-highlighted", variant);
-  element.addEventListener('click', score);
-  meshContainer.addEventListener('click', missTarget)
+  element.addEventListener('click', onScoreClick);
+  meshContainer.addEventListener('click', onMissTargetClick);
 
   /**
    * `activateElement` returns a clean-up function that we can later execute to undo any changes made to the active element.
@@ -157,8 +175,8 @@ function activateElement(element, index) {
    */
   return function unhighlight() {
     element.classList.remove("item-highlighted", variant);
-    element.removeEventListener('click', score);
-    meshContainer.removeEventListener('click', missTarget);
+    element.removeEventListener('click', onScoreClick);
+    meshContainer.removeEventListener('click', onMissTargetClick);
     afk();
     scoreboardColor();
   };
