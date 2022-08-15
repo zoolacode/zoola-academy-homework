@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./app.css" />
+    <title>Zoolatech Game</title>
+  </head>
+  <body class="page-body">
+    <div class="game-params-container">
+      <div class="score-title">
+        <p class="score-title__header">Your score</p>
+      </div>
+      <div class="score-number">
+        <p class="score-number__points">0</p>
+      </div>
+      <div class="game-speed">
+        <p class="game-speed__header">Game speed</p>
+        <select class="game-speed__select" name="initialValue" value="1000">
+          <option class="game-speed__select-option" value="initialValue" hidden>
+            Select game speed
+          </option>
+          <option class="game-speed__select-option" value="1500">
+            1500 ms
+          </option>
+          <option class="game-speed__select-option" value="1000">
+            1000 ms
+          </option>
+          <option class="game-speed__select-option" value="500">500 ms</option>
+        </select>
+      </div>
+    </div>
+    <div class="mesh-container">
+      <div class="mesh"></div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
