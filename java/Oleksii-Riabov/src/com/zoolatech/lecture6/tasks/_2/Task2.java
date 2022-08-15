@@ -1,6 +1,10 @@
 package com.zoolatech.lecture6.tasks._2;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -18,11 +22,11 @@ public class Task2 {
 
     public static void main(String[] args) {
         List<Order> list = new ArrayList<>();
-        list.add(new Order("1", "store", 1.23, "Ukraine"));
-        list.add(new Order("2", "store", 4.56, "Ukraine"));
-        list.add(new Order("3", "store", 1.23, "USA"));
-        list.add(new Order("4", "website", 1.23, "USA"));
-        list.add(new Order("4", "website", 10.23, "USA"));
+        list.add(new Order("1", "store", 1.23f, "Ukraine"));
+        list.add(new Order("2", "store", 4.56f, "Ukraine"));
+        list.add(new Order("3", "store", 1.23f, "USA"));
+        list.add(new Order("4", "website", 1.23f, "USA"));
+        list.add(new Order("4", "website", 10.23f, "USA"));
 
         System.out.println(getAverageOrderPrice(list));
     }
@@ -41,8 +45,8 @@ public class Task2 {
             WEBSITE, STORE
         }
 
-        public Order(String id, String storeOrders, double price, String country) {
-            this(id, StoreOrders.valueOf(storeOrders.toUpperCase()), (float) price, country);
+        public Order(String id, String storeOrders, float price, String country) {
+            this(id, StoreOrders.valueOf(storeOrders.toUpperCase()), price, country);
         }
 
         @Override
