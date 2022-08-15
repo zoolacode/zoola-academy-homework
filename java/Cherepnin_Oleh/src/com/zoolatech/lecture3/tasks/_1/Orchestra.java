@@ -3,10 +3,13 @@ package com.zoolatech.lecture3.tasks._1;
 import java.util.Set;
 
 public class Orchestra {
-    private Set<Musician> musicians;
+    private Set<Musician> musicians = new HashSet<>();
+
+    public Orchestra() {
+    }
 
     public Orchestra(Set<Musician> musicians) {
-        this.musicians = musicians;
+        this.musicians.addAll(musicians);
     }
 
     public void addMusician(Musician musician) {
