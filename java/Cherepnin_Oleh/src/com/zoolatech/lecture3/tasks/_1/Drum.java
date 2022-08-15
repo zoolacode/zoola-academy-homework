@@ -8,7 +8,7 @@ public class Drum extends MusicInstrument {
 
     @Override
     public String makeSound() {
-        return new StringBuilder(getName()).append(": bum-bum").toString();
+        return getName() + ": bum-bum";
     }
 
     @Override

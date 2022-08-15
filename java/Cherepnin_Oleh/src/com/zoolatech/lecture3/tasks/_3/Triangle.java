@@ -13,21 +13,20 @@ public final class Triangle implements Shape {
     }
 
     public Triangle(int aLength, int bLength, int cLength) {
-        this.aLength = aLength;
-        this.bLength = bLength;
-        this.cLength = cLength;
+        if (checkTriangle(aLength, bLength, cLength)) {
+            this.aLength = aLength;
+            this.bLength = bLength;
+            this.cLength = cLength;
+        }else throw new IllegalArgumentException("Triangle does not exist");
     }
 
     @Override
     public double findPerimeter() {
         // P = a + b + c
-        if (checkTriangle()) {
-            return aLength + bLength + cLength;
-        }
-        throw new IllegalArgumentException("Triangle does not exist");
+        return aLength + bLength + cLength;
     }
 
-    private boolean checkTriangle() {
+    private boolean checkTriangle(int aLength, int bLength, int cLength) {
         // check if triangle was correctly built
         return aLength + bLength > cLength
                 && aLength + cLength > bLength

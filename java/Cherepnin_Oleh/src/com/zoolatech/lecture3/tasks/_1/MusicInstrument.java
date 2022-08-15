@@ -20,11 +20,11 @@ public abstract class MusicInstrument {
         if (this == o) return true;
         if (!(o instanceof MusicInstrument)) return false;
         MusicInstrument that = (MusicInstrument) o;
-        return getName().equals(that.getName());
+        return name.equals(that.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName());
+        return Objects.hash(name);
     }
 }

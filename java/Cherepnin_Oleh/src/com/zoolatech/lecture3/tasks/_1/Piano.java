@@ -8,7 +8,7 @@ public class Piano extends MusicInstrument {
 
     @Override
     public String makeSound() {
-        return new StringBuilder(getName()).append(": na-na-na").toString();
+        return getName() + ": na-na-na";
     }
 
     @Override

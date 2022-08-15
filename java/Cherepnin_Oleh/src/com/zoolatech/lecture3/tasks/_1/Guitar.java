@@ -8,7 +8,7 @@ public class Guitar extends MusicInstrument {
 
     @Override
     public String makeSound() {
-        return new StringBuilder(getName()).append(": brin-brin").toString();
+        return getName() + ": brin-brin");
     }
 
     @Override
