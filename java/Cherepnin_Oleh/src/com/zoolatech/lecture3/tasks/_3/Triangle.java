@@ -24,7 +24,7 @@ public final class Triangle implements Shape {
         if (checkTriangle()) {
             return aLength + bLength + cLength;
         }
-        throw new ArithmeticException("Triangle does not exist");
+        throw new IllegalArgumentException("Triangle does not exist");
     }
 
     private boolean checkTriangle() {
