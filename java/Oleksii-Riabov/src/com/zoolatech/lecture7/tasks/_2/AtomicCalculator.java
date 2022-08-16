@@ -10,19 +10,19 @@ public class AtomicCalculator {
           this.value = new AtomicInteger(value);
     }
 
-    public synchronized void add(int value2) {
-        this.value.accumulateAndGet(value2, Integer::sum);
+    public void add(int value2) {
+        this.value.addAndGet(value2);
     }
 
-    public synchronized void subtract(int value2) {
+    public void subtract(int value2) {
         this.value.accumulateAndGet(value2, Math::subtractExact);
     }
 
-    public synchronized int getValue() {
+    public int getValue() {
        return this.value.get();
     }
 
-    public synchronized void setValue(int value) {
+    public void setValue(int value) {
         this.value.set(value);
     }
 }
