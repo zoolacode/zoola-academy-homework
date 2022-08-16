@@ -15,17 +15,25 @@ public class Task1 {
 
     public static void main(String[] args) {
         Thread thread = new Thread(() -> {
+            Random random = new Random();
                 while (!Thread.currentThread().isInterrupted()) {
-                    System.out.println(new Random().nextInt());
+                    System.out.println(random.nextInt());
                 }
+
+            System.out.println(Thread.currentThread().getName() + " thread finish it's execution");
         });
+
         thread.start();
 
-        try {
-            Thread.sleep(1000);
-            thread.interrupt();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        do {
+            try {
+                Thread.sleep(1000);
+                thread.interrupt();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        } while (thread.isAlive());
+
+        System.out.println(Thread.currentThread().getName() + " thread finish it's execution");
     }
 }
