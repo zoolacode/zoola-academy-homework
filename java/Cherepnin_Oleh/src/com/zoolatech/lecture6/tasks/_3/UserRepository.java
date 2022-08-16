@@ -16,14 +16,10 @@ public class UserRepository {
 
     public String findUserEmail(String id) throws UserMissingException {
 
-        Optional<User> user = cache.findUser(id);
-        if (user.isPresent()) {
-            return user.get().getEmail();
-        }
-        user = table.findUser(id);
-        if (user.isPresent()) {
-            return user.get().getEmail();
-        }
-        throw new UserMissingException("User with id: " + id + " does not exist");
+        return cache.findUser(id)
+                .map(User::email)
+                .orElse(table.findUser(id)
+                        .map(User::email)
+                        .orElseThrow(() -> new UserMissingException("User with id: " + id + " does not exist")));
     }
 }

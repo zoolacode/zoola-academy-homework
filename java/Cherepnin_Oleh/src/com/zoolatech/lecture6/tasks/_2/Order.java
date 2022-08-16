@@ -2,55 +2,34 @@ package com.zoolatech.lecture6.tasks._2;
 
 import java.util.Objects;
 
-public class Order {
-    private String id;
-    private StoreType type;
-    private float price;
-    private String country;
+public record Order(String id, StoreType storeType, float price, String country) {
     private static int idCounter = 1;
 
     public Order(StoreType type, float price, String country) {
-        this.id = String.valueOf(idCounter);
-        this.type = type;
-        this.price = price;
-        this.country = country;
+        this(String.valueOf(idCounter), type, price, country);
         idCounter++;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Order)) return false;
-        Order order = (Order) o;
-        return Float.compare(order.getPrice(), getPrice()) == 0 && getId().equals(order.getId()) && getType() == order.getType() && getCountry().equals(order.getCountry());
+        if (!(o instanceof Order order)) return false;
+        return Float.compare(order.price, price) == 0
+                && Objects.equals(id, order.id)
+                && storeType == order.storeType
+                && Objects.equals(country, order.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getType(), getPrice(), getCountry());
+        return Objects.hash(id, storeType, price, country);
     }
 
     @Override
     public String toString() {
-        return "order" + id + "(\"" + id +
-                "\", \"" + type +
+        return "order#" + id + "(\"" + id +
+                "\", \"" + storeType +
                 "\", " + price +
                 ", \"" + country + "\")";
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public StoreType getType() {
-        return type;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public String getCountry() {
-        return country;
     }
 }

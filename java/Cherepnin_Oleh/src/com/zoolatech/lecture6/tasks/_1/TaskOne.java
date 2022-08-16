@@ -39,21 +39,21 @@ public class TaskOne {
     public static boolean checkPopulation(List<City> cities, int population) {
         return cities
                 .stream()
-                .noneMatch(c -> c.getPopulation() < population);
+                .allMatch(c -> c.population() > population);
     }
 
     public static City findCityBiggestPopulation(List<City> cities, String country) {
         return cities
                 .stream()
-                .filter(city -> city.getCountry().equals(country))
-                .max(Comparator.comparingInt(City::getPopulation))
+                .filter(city -> city.country().equals(country))
+                .max(Comparator.comparingInt(City::population))
                 .get();
     }
 
     public static Map<String, City> convertToMap(List<City> cities) {
         return cities
                 .stream()
-                .collect(Collectors.toMap(City::getName, Function.identity(), (city, city2) -> city));
+                .collect(Collectors.toMap(City::name, Function.identity(), (city, city2) -> city));
     }
 }
 

@@ -3,14 +3,14 @@ package com.zoolatech.lecture6.tasks._2;
 public enum StoreType {
     STORE("store"),
     WEBSITE("website");
-    private String string;
+    private String name;
 
-    StoreType(String string) {
-        this.string = string;
+    StoreType(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return string;
+        return name;
     }
 }

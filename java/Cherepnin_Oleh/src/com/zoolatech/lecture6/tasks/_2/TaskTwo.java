@@ -32,9 +32,10 @@ public class TaskTwo {
 
     private static Map<String, Double> getAveragePriceInCountry(List<Order> orders) {
         return orders.stream()
+                .filter(order -> order.storeType().equals(StoreType.STORE))
                 .collect(Collectors.groupingBy(
-                        Order::getCountry,
-                        Collectors.averagingDouble(Order::getPrice)));
+                        Order::country,
+                        Collectors.averagingDouble(Order::price)));
     }
 }
 
