@@ -13,13 +13,16 @@ package com.zoolatech.lecture5.tasks._5;
  */
 public class TaskFive {
     public static void main(String[] args) {
-        KthLargest largest = new KthLargest(2);
-        System.out.println(largest.add(1));
+        KthLargest largest = new KthLargest(3);
         System.out.println(largest.add(2));
+        System.out.println(largest.add(1));
+        System.out.println(largest.add(4));
+        System.out.println(largest.add(3));
         System.out.println(largest.add(5));
         System.out.println(largest.add(6));
-        System.out.println(largest.add(4));
         System.out.println(largest.add(7));
+        System.out.println(largest.add(8));
+        System.out.println(largest.add(9));
     }
 }
 

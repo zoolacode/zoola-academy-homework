@@ -1,11 +1,9 @@
 package com.zoolatech.lecture5.tasks._5;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class KthLargest {
-    private List<Integer> values = new ArrayList<>();
+    private final Queue<Integer> values = new PriorityQueue<>();
     private final int kLargest;
 
     public KthLargest(int kLargest) {
@@ -13,11 +11,18 @@ public class KthLargest {
     }
 
     public int add(int value) {
-        values.add(value);
         if (values.size() < kLargest) {
-            return -1;
+            values.offer(value);
+            if (values.size() < kLargest) {
+                return -1;
+            }
+            return values.peek();
         }
-        Collections.sort(values);
-        return values.get(values.size() - kLargest);
+
+        if (values.peek() <= value) {
+            values.poll();
+            values.offer(value);
+        }
+        return values.peek();
     }
 }

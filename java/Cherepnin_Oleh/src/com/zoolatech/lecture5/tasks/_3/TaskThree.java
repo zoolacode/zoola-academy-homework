@@ -1,9 +1,6 @@
 package com.zoolatech.lecture5.tasks._3;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -19,36 +16,20 @@ import java.util.stream.Collectors;
  */
 public class TaskThree {
     public static void main(String[] args) {
-        String[] fruits = {"apple", "Apple", "orange", "orange", "pear", "peach", "Pear", "peach"};
+        List<String> fruits = List.of("apple", "Apple", "orange", "orange", "pear", "peach", "Pear", "peach");
         displayUnique(fruits);
+        System.out.println("------------------------------------");
         displayUniqueIgnoreCase(fruits);
     }
 
-    static void displayUnique(String[] stringList) {
-        List<String> distinct = Arrays.stream(stringList)
-                .distinct()
-                .collect(Collectors.toList());
-        System.out.println(distinct);
+    static void displayUnique(List<String> list) {
+        Set<String> uniqueValues = new HashSet<>(list);
+        uniqueValues.forEach(System.out::println);
     }
 
-    static void displayUniqueIgnoreCase(String[] stringArray) {
-        List<String> distinct = new ArrayList<>();
-
-        for (String str : stringArray) {
-            if (!checkSimilar(distinct, str)) {
-                distinct.add(str);
-            }
-        }
-        System.out.println(distinct);
-    }
-
-    private static boolean checkSimilar(List<String> strings, String str) {
-        Iterator<String> iterator = strings.iterator();
-        while (iterator.hasNext()) {
-            if (str.equalsIgnoreCase(iterator.next())) {
-                return true;
-            }
-        }
-        return false;
+    static void displayUniqueIgnoreCase(List<String> list) {
+        Set<String> uniqueValues = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        uniqueValues.addAll(list);
+        uniqueValues.forEach(System.out::println);
     }
 }

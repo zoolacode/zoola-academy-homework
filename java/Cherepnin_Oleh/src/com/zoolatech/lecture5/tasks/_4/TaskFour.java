@@ -27,14 +27,11 @@ public class TaskFour {
 
     static void countCharacters(String string) {
         Map<Character, Integer> map = new TreeMap<>();
-        char[] chars = string.replaceAll(" ", "").toCharArray();
+        char[] chars = string.toCharArray();
 
         for (char aChar : chars) {
-            if (map.containsKey(aChar)) {
-                map.put(aChar, map.get(aChar) + 1);
-            } else {
-                map.put(aChar, 1);
-            }
+            if(aChar != ' ')
+                map.put(aChar, map.getOrDefault(aChar, 0) + 1);
         }
         map.forEach((k, v) -> System.out.println(k + " - " + v));
     }

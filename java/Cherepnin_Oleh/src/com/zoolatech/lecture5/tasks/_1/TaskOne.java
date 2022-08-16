@@ -29,27 +29,12 @@ public class TaskOne {
         return ints;
     }
 
-    public static String findNSmallestNumber(int n, int... array) {
-        if (n >= array.length) {
-            return "-1";
+    public static int findNSmallestNumber(int n, int... array) {
+        if (n > array.length) {
+            return -1;
         }
-        int[] ints = copyArray(array);
-        Arrays.sort(ints);
-        int nSmallest = ints[n - 1];
-        StringBuilder builder = new StringBuilder();
-        return builder.append(nSmallest).append(" (the ").append(n)
-                .append("th smallest number in the array: ")
-                .append(Arrays.toString(array))
-                .append(" is ").append(nSmallest)
-                .append(": ")
-                .append(Arrays.toString(ints)).toString();
-    }
 
-    private static int[] copyArray(int[] array) {
-        int[] ints = Arrays.copyOf(array, array.length);
-        for (int i = 0; i < ints.length; i++) {
-            ints[i] = array[i];
-        }
-        return ints;
+        Arrays.sort(array);
+        return array[n - 1];
     }
 }
