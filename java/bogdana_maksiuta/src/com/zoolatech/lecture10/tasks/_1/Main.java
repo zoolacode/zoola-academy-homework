@@ -49,12 +49,10 @@ public class Main {
                     throw new RuntimeException(e);
                 }
             } else {
-                try (RandomAccessFile file = new RandomAccessFile(directionToTaskFolder + "error.log", "rw")
-                ) {
+                try (FileWriter fw = new FileWriter(directionToTaskFolder + "error.log", true);
+                     BufferedWriter bufferedWriter = new BufferedWriter(fw)) {
                     String errorMessage = "File with name \"" + userChoice + "\" does not exist";
-                    file.seek(file.length());
-                    file.writeBytes("\n" + errorMessage);
-
+                    bufferedWriter.write(errorMessage + "\n");
                     System.out.println(errorMessage);
                     System.out.println("Choose the file " + filesList);
                 } catch (IOException e) {
