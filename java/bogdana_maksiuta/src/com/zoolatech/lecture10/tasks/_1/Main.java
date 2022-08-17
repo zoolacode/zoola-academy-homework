@@ -21,7 +21,7 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String directionToTaskFolder = "/home/dana/Documents/zoola/java/bogdana_maksiuta/src/com/zoolatech/lecture10/tasks/_1/";
+        String directionToTaskFolder = "src/com/zoolatech/lecture10/tasks/_1/";
         File folder = new File(directionToTaskFolder + "db");
 
         ArrayList<String> filesList = new ArrayList<>();
