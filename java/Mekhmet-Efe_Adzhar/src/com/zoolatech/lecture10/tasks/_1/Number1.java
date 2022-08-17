@@ -13,10 +13,13 @@ draw file names again and write invalid filename to a new file called "error.log
 */
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Number1 {
     public static void main(String[] args) throws IOException, NoFileException {
-        while (true) {
+        System.out.println("1. Start\n2. Exit");
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.nextInt() != 2) {
             Menu.menu();
         }
     }

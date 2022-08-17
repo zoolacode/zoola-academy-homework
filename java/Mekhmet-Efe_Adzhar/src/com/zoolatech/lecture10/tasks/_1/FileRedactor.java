@@ -1,8 +1,7 @@
 package com.zoolatech.lecture10.tasks._1;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.util.Date;
 
 final class FileRedactor {
 
@@ -18,7 +17,6 @@ final class FileRedactor {
                 throw new NoFileException();
             }
         }
-        System.out.println("4. Exit");
     }
 
     public static void generateFiles(String string, File file) throws IOException, NoFileException {
@@ -46,13 +44,11 @@ final class FileRedactor {
     }
 
     private static void errorLog(File file, String string) throws IOException, NoFileException {
-        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file + "/error.log"))) {
-            Scanner scanner = new Scanner(file + "/error.log");
-            if (scanner.hasNextLine()) {
-                outputStream.write(string.getBytes(StandardCharsets.UTF_8));
-                outputStream.flush();
-            }
-            System.out.println("Written invalid filename to error.log\n");
+        int counter = 0;
+        try (FileWriter fileWriter = new FileWriter(file + "/error.log",true)){
+            fileWriter.write(string + " invalid input number: "+ new Date() + "\n");
         }
+        System.out.println("Written invalid filename to error.log\n");
+        System.out.println("1. Start\n2. Exit");
     }
 }
