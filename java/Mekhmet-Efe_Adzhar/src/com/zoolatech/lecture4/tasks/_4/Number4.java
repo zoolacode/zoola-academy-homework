@@ -10,10 +10,10 @@ and method that allows to get the enum value by a string representation, that ca
 
 public class Number4 {
     public static void main(String[] args) {
-        Weight weight;
-        System.out.println(Weight.abbreviation(Weight.KILOGRAM));
-        System.out.println(Weight.enumValueByAString("lb"));
-        System.out.println(Weight.convertValue(1, Weight.GRAM, Weight.KILOGRAM));
+        Weight weight = Weight.abbreviation;
+        System.out.println(weight.abbreviation(Weight.KILOGRAM));
+        System.out.println(weight.enumValueByAString("GrAm"));
+        System.out.println(weight.convertValue(1, Weight.KILOGRAM));
     }
 }
 
@@ -22,110 +22,58 @@ enum Weight {
     KILOGRAM,
     OUNCE,
     POUND,
-    TON;
+    TON,
+    abbreviation();
 
-    static String abbreviation(Weight weight) {
+    public String abbreviation(Weight weight) {
         return switch (weight) {
             case GRAM -> "gr";
             case KILOGRAM -> "kg";
             case OUNCE -> "oz";
             case POUND -> "lb";
             case TON -> "t";
+            case abbreviation -> null;
         };
     }
 
-    static String convertValue(float mass, Weight sourceUnit, Weight convertTo) {
-        //MARK: GRAM
-        if (sourceUnit == GRAM && convertTo == KILOGRAM) {
-            System.out.println("Converting Gram to Kilogram...");
-            return ((mass / 1000) + " " + KILOGRAM);
-        } else if (sourceUnit == GRAM && convertTo == OUNCE) {
-            System.out.println("Converting Gram to Kilogram...");
-            return ((mass / 28.35) + " " + OUNCE);
-        } else if (sourceUnit == GRAM && convertTo == POUND) {
-            System.out.println("Converting Gram to Kilogram...");
-            return ((mass / 453.6) + " " + POUND);
-        } else if (sourceUnit == GRAM && convertTo == TON) {
-            System.out.println("Converting Gram to Kilogram...");
-            return ((mass / 1000000) + " " + TON);
-
-            //MARK: KILOGRAM
-        } else if (sourceUnit == KILOGRAM && convertTo == GRAM) {
-            System.out.println("Converting Kilogram to Gram...");
-            return ((mass * 1000) + " " + GRAM);
-        } else if (sourceUnit == KILOGRAM && convertTo == OUNCE) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass * 35.274) + " " + OUNCE);
-        } else if (sourceUnit == KILOGRAM && convertTo == POUND) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass * 2.205) + " " + POUND);
-        } else if (sourceUnit == KILOGRAM && convertTo == TON) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass / 1000) + " " + POUND);
-
-            //MARK: OUNCE
-        } else if (sourceUnit == OUNCE && convertTo == GRAM) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass * 28.35) + " " + GRAM);
-        } else if (sourceUnit == OUNCE && convertTo == KILOGRAM) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass / 35.274) + " " + KILOGRAM);
-        } else if (sourceUnit == OUNCE && convertTo == POUND) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass / 16) + " " + POUND);
-        } else if (sourceUnit == OUNCE && convertTo == TON) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass / 283495231250000F) + " " + TON);
-
-            //MARK: POUND
-        } else if (sourceUnit == POUND && convertTo == GRAM) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass * 453.6) + " " + GRAM);
-        } else if (sourceUnit == POUND && convertTo == KILOGRAM) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass / 2.205) + " " + KILOGRAM);
-        } else if (sourceUnit == POUND && convertTo == OUNCE) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass * 16) + " " + OUNCE);
-        } else if (sourceUnit == POUND && convertTo == TON) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass / 2205) + " " + TON);
-
-            //MARK: TON
-        } else if (sourceUnit == TON && convertTo == GRAM) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass * 1000000) + " " + GRAM);
-        } else if (sourceUnit == TON && convertTo == KILOGRAM) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass * 1000) + " " + KILOGRAM);
-        } else if (sourceUnit == TON && convertTo == OUNCE) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass * 35270) + " " + OUNCE);
-        } else if (sourceUnit == TON && convertTo == POUND) {
-            System.out.println("Converting Kilograms to OUNCE...");
-            return ((mass * 2205) + " " + POUND);
+    public float convertValue(float mass, Weight sourceUnit) {
+        switch (sourceUnit) {
+            case GRAM -> {
+                System.out.println("Converting Gram to Kilogram...");
+                return mass / 1000;
+            }
+            case KILOGRAM -> {
+                System.out.println("Converting Kilogram to Ounce...");
+                return mass * 35.274F;
+            }
+            case OUNCE -> {
+                System.out.println("Converting Ounce to Pound...");
+                return mass * 2.205F;
+            }
+            case POUND -> {
+                System.out.println("Converting Pounds to Ton...");
+                return mass / 2205F;
+            }
+            case TON -> {
+                System.out.println("Converting Ton to Pounds...");
+                return mass * 2205F;
+            }
         }
-        return "ERROR";
+        return mass;
     }
 
-    static Weight enumValueByAString(String string) {
-        switch (string) {
-            case "GRAM", "Gram", "gram", "gr" -> {
-                return GRAM;
-            }
-            case "KILOGRAM", "Kilogram", "kilogram", "kg" -> {
-                return KILOGRAM;
-            }
-            case "OUNCE", "Ounce", "ounce", "oz" -> {
-                return OUNCE;
-            }
-            case "POUND", "Pound", "pound", "lb" -> {
-                return POUND;
-            }
-            case "TON", "Ton", "ton", "t" -> {
-                return TON;
-            }
+    public Weight enumValueByAString(String string) {
+        if (string.equalsIgnoreCase("GRAM")) {
+            return GRAM;
+        } else if (string.equalsIgnoreCase("KILOGRAM")) {
+            return KILOGRAM;
+        } else if (string.equalsIgnoreCase("OUNCE")) {
+            return OUNCE;
+        } else if (string.equalsIgnoreCase("POUND")) {
+            return POUND;
+        } else if (string.equalsIgnoreCase("TON")) {
+            return TON;
         }
-        return GRAM;
+        return abbreviation;
     }
 }
