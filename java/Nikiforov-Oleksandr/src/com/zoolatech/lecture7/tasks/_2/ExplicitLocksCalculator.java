@@ -2,36 +2,30 @@ package com.zoolatech.lecture7.tasks._2;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ExplicitLocksCalculator extends Calculator{
+public class ExplicitLocksCalculator extends Calculator {
     private final ReentrantLock lock = new ReentrantLock();
+
     public ExplicitLocksCalculator(int value) {
         super(value);
     }
 
     @Override
-    public void add(int valueToAdd){
+    public void add(int valueToAdd) {
         lock.lock();
-        try{
+        try {
             super.add(valueToAdd);
-            System.out.println("Add - "+valueToAdd);
-        }finally {
+        } finally {
             lock.unlock();
         }
     }
 
     @Override
-    public void subtract(int valueToSubtract){
+    public void subtract(int valueToSubtract) {
         lock.lock();
-        try{
+        try {
             super.subtract(valueToSubtract);
-            System.out.println("Subtract - "+valueToSubtract);
-        }finally {
+        } finally {
             lock.unlock();
         }
-    }
-
-    @Override
-    public Object getValue() {
-        return value;
     }
 }

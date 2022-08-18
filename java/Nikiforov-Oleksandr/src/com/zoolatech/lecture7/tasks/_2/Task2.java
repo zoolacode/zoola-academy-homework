@@ -14,8 +14,8 @@ package com.zoolatech.lecture7.tasks._2;
 public class Task2 {
     public static void main(String[] args) throws InterruptedException {
         //ExplicitLocksCalculator calculator = new ExplicitLocksCalculator(25);
-        SynchronizedCalculator calculator = new SynchronizedCalculator(25);
-        //AtomicCalculator calculator = new AtomicCalculator(25);
+        //SynchronizedCalculator calculator = new SynchronizedCalculator(25);
+        AtomicCalculator calculator = new AtomicCalculator(25);
         Thread threadAdd = new Thread(() -> {
             for (int i = 25; i > 0; i--) {
                 calculator.add(i);

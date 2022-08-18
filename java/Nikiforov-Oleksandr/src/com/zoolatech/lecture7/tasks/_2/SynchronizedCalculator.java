@@ -9,23 +9,12 @@ public class SynchronizedCalculator extends Calculator {
     }
 
     @Override
-    public void add(int valueToAdd) {
-        synchronized (this) {
-            super.add(valueToAdd);
-            System.out.println("Add - " + valueToAdd);
-        }
+    public synchronized void add(int valueToAdd) {
+        super.add(valueToAdd);
     }
 
     @Override
-    public void subtract(int valueToSubtract) {
-        synchronized (this) {
-            super.subtract(valueToSubtract);
-            System.out.println("Subtract - " + valueToSubtract);
-        }
-    }
-
-    @Override
-    public Object getValue() {
-        return value;
+    public synchronized void subtract(int valueToSubtract) {
+        super.subtract(valueToSubtract);
     }
 }

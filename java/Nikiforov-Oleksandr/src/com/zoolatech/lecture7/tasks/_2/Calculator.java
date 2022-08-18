@@ -1,6 +1,5 @@
 package com.zoolatech.lecture7.tasks._2;
 
-import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Calculator {
     protected int value;
@@ -11,11 +10,15 @@ public abstract class Calculator {
 
     public void add(int valueToAdd) {
         value += valueToAdd;
+        System.out.println("Add - " + valueToAdd);
     }
 
     public void subtract(int valueToSubtract) {
         value -= valueToSubtract;
+        System.out.println("Subtract - " + valueToSubtract);
     }
 
-    public abstract <T> T getValue();
+    public int getValue(){
+        return value;
+    }
 }
