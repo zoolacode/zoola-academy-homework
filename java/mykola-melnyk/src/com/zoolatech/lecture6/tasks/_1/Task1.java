@@ -1,6 +1,7 @@
 package com.zoolatech.lecture6.tasks._1;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -26,7 +27,7 @@ public class Task1 {
     private static City biggestHere(ArrayList<City> cityList, String countryName) {
         Stream<City> cityStream = cityList.stream()
                 .filter(city -> city.getCountry().equalsIgnoreCase(countryName))
-                .sorted()
+                .sorted(Comparator popComp = new PopulationComparator())
     }
 
     public static <T> void show(String title, Stream<T> stream) {
