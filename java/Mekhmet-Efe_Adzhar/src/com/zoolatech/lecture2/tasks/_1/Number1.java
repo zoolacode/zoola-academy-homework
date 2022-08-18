@@ -15,7 +15,7 @@ import java.lang.ArithmeticException;
 
 public class Number1 {
     static Scanner scanner = new Scanner(System.in);
-     static Calculator calculator = new Calculator(0);
+    static Calculator calculator;
 
     public static void main(String[] args) {
 
@@ -23,47 +23,28 @@ public class Number1 {
         Scanner scanner = new Scanner(System.in);
 
         if (scanner.nextInt() == 1) {
-            calculations();
+            calculation();
         } else {
             throw new IllegalArgumentException("Unknown" + scanner.nextInt());
         }
     }
 
-    public static void calculations() {
+    private static void calculation() {
         System.out.println("Input first number:");
-        if (scanner.hasNextInt()) {
-            integerCalc();
-        } else if (scanner.hasNextDouble()) {
-            doubleCalc();
-        }
+        calculator = new Calculator(scanner.nextDouble());
+        System.out.println("Input second double");
+        double numberTwoDouble = scanner.nextDouble();
+        operations(numberTwoDouble);
     }
 
-    private static void integerCalc() {
-        calculator = new Calculator(scanner.nextInt());
-        calculator.setInteger(true);
-        System.out.println("Input second integer");
-        int numberTwo = scanner.nextInt();
+    private static void operations(double numberTwo) {
+        System.out.println("Input operation:");
         char operation = scanner.next().charAt(0);
         switch (operation) {
             case '+' -> calculator.addition(numberTwo);
             case '-' -> calculator.subtraction(numberTwo);
             case '*' -> calculator.multiplication(numberTwo);
             case '/' -> calculator.division(numberTwo);
-            default -> System.out.println("Error");
-        }
-    }
-
-    private static void doubleCalc() {
-        calculator = new Calculator(scanner.nextDouble());
-        calculator.setInteger(false);
-        System.out.println("Input second double");
-        double numberTwoDouble = scanner.nextDouble();
-        char operation = scanner.next().charAt(0);
-        switch (operation) {
-            case '+' -> calculator.addition(numberTwoDouble);
-            case '-' -> calculator.subtraction(numberTwoDouble);
-            case '*' -> calculator.multiplication(numberTwoDouble);
-            case '/' -> calculator.division(numberTwoDouble);
             default -> System.out.println("ERROR");
         }
     }
@@ -72,82 +53,36 @@ public class Number1 {
 
 class Calculator {
 
-    private boolean isInteger;
-    private final double numberOne;
-
-    public double getNumberOne() {
-        return numberOne;
-    }
+    private double numberOne;
 
     public Calculator(double numberOne) {
         this.numberOne = numberOne;
     }
 
-    public void setInteger(boolean integer) {
-        isInteger = integer;
-    }
-
     public void addition(double numberTwoDouble) {
-        if (isInteger) {
-            int numberOneInt = (int)numberOne;
-            int numberTwoInt = (int) numberTwoDouble;
-            int calculationForInteger = numberOneInt + numberTwoInt;
-            System.out.println("Result:" + " " + calculationForInteger);
-        } else {
-            double calculationForDouble = numberOne + numberTwoDouble;
-            System.out.println("Result:" + " " + calculationForDouble);
-        }
+        numberOne += numberTwoDouble;
+        System.out.println("Result:" + " " + numberOne);
     }
 
     public void subtraction(double numberTwoDouble) {
-        if (isInteger) {
-            int numberOneInt = (int) numberOne;
-            int numberTwoInt = (int) numberTwoDouble;
-
-            int calculationForInteger = numberOneInt - numberTwoInt;
-            System.out.println("Result:" + " " + calculationForInteger);
-        } else {
-            double calculationForDouble = numberOne - numberTwoDouble;
-            System.out.println("Result:" + " " + calculationForDouble);
-        }
+        numberOne -= numberTwoDouble;
+        System.out.println("Result:" + " " + numberOne);
     }
 
     public void multiplication(double numberTwoDouble) {
-        if (isInteger) {
-            int numberOneInt = (int) numberOne;
-            int numberTwoInt = (int) numberTwoDouble;
-            int calculationForInteger = numberOneInt * numberTwoInt;
-            System.out.println("Result:" + " " + calculationForInteger);
-        } else {
-            double calculationForDouble = numberOne * numberTwoDouble;
-            System.out.println("Result:" + " " + calculationForDouble);
-        }
+        numberOne *= numberTwoDouble;
+        System.out.println("Result:" + " " + numberOne);
     }
 
     public void division(double numberTwoDouble) {
-        int numberOneInt = (int) numberOne;
-        int numberTwoInt = (int) numberTwoDouble;
-        if (!isInteger) {
-            if (numberTwoDouble == 0.0) {
-                System.out.println("Zero is not dividable\n");
-            } else {
-                try {
-                    double calculationForDouble = numberOne / numberTwoDouble;
-                    System.out.println("Result:" + " " + calculationForDouble);
-                } catch (ArithmeticException error) {
-                    System.out.println("Zero is not dividable\n");
-                }
-            }
+        if (numberTwoDouble == 0.0) {
+            System.out.println("Zero is not dividable\n");
         } else {
-            if (numberTwoInt == 0) {
+            try {
+                numberOne /= numberTwoDouble;
+                System.out.println("Result:" + " " + numberOne);
+            } catch (ArithmeticException error) {
                 System.out.println("Zero is not dividable\n");
-            } else {
-                try {
-                    int calculationForInteger = numberOneInt / numberTwoInt;
-                    System.out.println("Result:" + " " + calculationForInteger);
-                } catch (ArithmeticException error) {
-                    System.out.println("Zero is not dividable\n");
-                }
             }
         }
     }
