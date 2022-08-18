@@ -130,44 +130,28 @@ class Musicians {
         this.instrument = instrument;
     }
 
-    public void getInstrument() {
-        System.out.println(instrument);
-    }
-
     public String getSoundOfInstrument() {
       return  instrument.getSound();
     }
-
-    public static int getId() {
-        return id;
-    }
 }
 
-class Instruments {
+interface Instruments {
+    String name = "";
+    String sound = "";
 
-   private String name;
-   private String sound;
+   default String getSound() {
+        return sound;
+    }
 
-    public String getName() {
+    default String getName() {
         return name;
     }
-
-    public String getSound() {
-       return sound;
-    }
-
-    @Override
-    public String toString() {
-        return "His/Her instrument is " + getName() + ", " +
-                "it makes sound: " + getSound();
-    }
 }
 
-class Piano extends Instruments {
-
+class Piano implements Instruments {
     @Override
     public String getSound() {
-      return "PIN PIN PIN";
+        return "PIN PIN PIN";
     }
 
     @Override
@@ -177,13 +161,12 @@ class Piano extends Instruments {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "His/Her instrument is " + getName() + ", " +
+                "it makes sound: " + getSound();
     }
 }
 
-class Violin extends Instruments {
-
-
+class Violin implements Instruments {
     @Override
     public String getSound() {
         return "VI VI VI";
@@ -196,13 +179,12 @@ class Violin extends Instruments {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "His/Her instrument is " + getName() + ", " +
+                "it makes sound: " + getSound();
     }
 }
 
-class Guitar extends Instruments {
-
-
+class Guitar implements Instruments {
     @Override
     public String getSound() {
         return "DUSH DUSH DUSH";
@@ -215,6 +197,7 @@ class Guitar extends Instruments {
 
     @Override
     public String toString() {
-        return super.toString();
+       return "His/Her instrument is " + getName() + ", " +
+                "it makes sound: " + getSound();
     }
 }
