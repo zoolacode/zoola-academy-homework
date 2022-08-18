@@ -14,17 +14,17 @@ import java.util.Arrays;
 
 public class Task1 {
 
-    public static void main(String[] args) {
-        System.out.println(nSmallest(1, 1, 2, 3));
-        System.out.println(nSmallest(5, 3, 2, 1));
-    }
-
     public static int nSmallest(int N, int... numbers) {
         if (N > numbers.length) {
             return -1;
         }
         Arrays.sort(numbers);
         return numbers[N - 1];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(nSmallest(1, 1, 2, 3));
+        System.out.println(nSmallest(5, 3, 2, 1));
     }
 
 }

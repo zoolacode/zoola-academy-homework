@@ -15,56 +15,6 @@ import java.util.*;
  */
 
 public class Task3 {
-    public static Set<CustomString> uniqStr2(String... words) {
-        ArrayList<CustomString> arrayListOfCustomString = new ArrayList<>();
-        for (String string : words) {
-            arrayListOfCustomString.add(new CustomString(string));
-        }
-        return new HashSet<>(arrayListOfCustomString);
-    }
-
-    public static Set<CustomString> uniqStr3(String... words) {
-        ArrayList<CustomString> arrayListOfCustomString = new ArrayList<>();
-        for (String string : words) {
-            arrayListOfCustomString.add(new CustomString(string));
-        }
-        return new TreeSet<>(arrayListOfCustomString);
-    }
-
-    public static Set<String> uniqStr4(String... words) {
-        TreeSet<String> myTreeSet = new TreeSet<>(new CaseAgnosticComparator());
-        myTreeSet.addAll(Arrays.asList(words));
-        return myTreeSet;
-    }
-
-    public static Set<String> uniqStr5(String... words) {
-
-        Comparator<String> comparator = new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                if (o1.equalsIgnoreCase(o2)) {
-                    return 0;
-                }
-                return o1.compareTo(o2);
-            }
-        };
-        TreeSet<String> myTreeSet = new TreeSet<>(comparator);
-        myTreeSet.addAll(Arrays.asList(words));
-        return myTreeSet;
-    }
-
-    public static Set<String> uniqStr6(String... words) {
-
-        Comparator<String> comparator = (o1, o2) -> {
-            if (o1.equalsIgnoreCase(o2)) {
-                return 0;
-            }
-            return o1.compareTo(o2);
-        };
-        TreeSet<String> myTreeSet = new TreeSet<>(comparator);
-        myTreeSet.addAll(Arrays.asList(words));
-        return myTreeSet;
-    }
 
     public static Set<String> uniqStr7(String... words) {
         Comparator<String> comparator = new CaseAgnosticComparator()::compare;
@@ -74,10 +24,6 @@ public class Task3 {
     }
 
     public static void main(String[] args) {
-//        System.out.println(Task3.uniqStr2("apple", "Apple", "Banana", "banana"));
-        System.out.println(Task3.uniqStr4("apple", "Apple", "orange", "pear", "apple", "banana", "orange"));
-        System.out.println(Task3.uniqStr5("apple", "Apple", "orange", "pear", "apple", "banana", "orange"));
-        System.out.println(Task3.uniqStr6("apple", "Apple", "orange", "pear", "apple", "banana", "orange"));
         System.out.println(Task3.uniqStr7("apple", "Apple", "orange", "pear", "apple", "banana", "orange"));
     }
 }
