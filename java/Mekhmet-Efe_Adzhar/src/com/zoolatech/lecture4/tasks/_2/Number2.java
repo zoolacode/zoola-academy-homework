@@ -9,8 +9,8 @@ The tree should also have a method that accepts a value and adds it to the tree.
 
 public class Number2 {
     public static void main(String[] args) {
-        BinaryTree binaryTree = new BinaryTree();
-        BinaryTree.Node node = binaryTree.new Node(12);
+        Node node = new Node(12);
+        BinaryTree binaryTree = new BinaryTree(node);
         binaryTree.insert(node, 15);
         binaryTree.insert(node, 10);
         binaryTree.insert(node, 20);
@@ -19,61 +19,87 @@ public class Number2 {
         binaryTree.delete(node, 13);
         binaryTree.delete(node, 10);
         binaryTree.order(node);
+        System.out.println("ROOT NODE: " + binaryTree.getRootNodeValue());
     }
 }
 
-class BinaryTree {
+record BinaryTree(Node rootNode) {
 
-    class Node {
-        int value;
-        Node leftChild;
-        Node rightChild;
-
-        public Node(int value) {
-            this.value = value;
-        }
+    public int getRootNodeValue() {
+        return rootNode.getValue();
     }
 
     public Node insert(Node node, int value) {
         if (node == null) {
             node = new Node(value);
-        } else if (value <= node.value) {
-            node.leftChild = insert(node.leftChild, value);
+        } else if (value <= node.getValue()) {
+            node.setLeftChild(insert(node.getLeftChild(), value));
         } else {
-            node.rightChild = insert(node.rightChild, value);
+            node.setRightChild(insert(node.getRightChild(), value));
         }
         return node;
     }
 
-    void order(Node node) {
+    public void order(Node node) {
         if (node != null) {
-            order(node.leftChild);
-            System.out.println(node.value);
-            order(node.rightChild);
+            order(node.getLeftChild());
+            System.out.println(node.getValue());
+            order(node.getRightChild());
         }
     }
 
     public Node delete(Node node, int value) {
-        if (node == null) {
-            node = new Node(value);
-        }
-        if (value < node.value) {
-            node.leftChild = delete(node.leftChild, value);
-        } else if (value > node.value) {
-            node.rightChild = delete(node.rightChild, value);
+        if (value < node.getValue()) {
+            node.setLeftChild(delete(node.getLeftChild(), value));
+        } else if (value > node.getValue()) {
+            node.setRightChild(delete(node.getRightChild(), value));
         } else {
-            if (node.rightChild == null && node.leftChild == null) {
+            if (node.getRightChild() == null && node.getLeftChild() == null) {
                 node = null;
-            } else if (node.rightChild == null) {
-                node = node.leftChild;
-            } else if (node.leftChild == null) {
-                node = node.rightChild;
+            } else if (node.getRightChild() == null) {
+                node = node.getLeftChild();
+            } else if (node.getLeftChild() == null) {
+                node = node.getRightChild();
             } else {
-                Node temp = node.rightChild;
-                node.value = temp.value;
-                node.rightChild = delete(node.rightChild, temp.value);
+                Node temp = node.getRightChild();
+                node.setValue(temp.getValue());
+                node.setRightChild(delete(node.getRightChild(), temp.getValue()));
             }
         }
         return node;
+    }
+}
+
+class Node {
+    private int value;
+    private Node leftChild;
+    private Node rightChild;
+
+    public Node(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public Node getLeftChild() {
+        return leftChild;
+    }
+
+    public Node getRightChild() {
+        return rightChild;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public void setLeftChild(Node leftChild) {
+        this.leftChild = leftChild;
+    }
+
+    public void setRightChild(Node rightChild) {
+        this.rightChild = rightChild;
     }
 }
