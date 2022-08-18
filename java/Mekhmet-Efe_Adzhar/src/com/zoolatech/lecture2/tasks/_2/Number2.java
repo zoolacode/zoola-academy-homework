@@ -75,7 +75,7 @@ class RobotGame {
     private final int height;
     private int x;
     private int y;
-    Direction direction;
+    private Direction direction;
 
     public RobotGame(int width, int height, int x, int y, Direction direction) {
         this.width = width;
@@ -101,35 +101,26 @@ class RobotGame {
         if (n > height || n > width) {
             System.out.println("Amount of steps are greater than a width or height of a room");
         }
-        else if ((n + y) > height || (n + x) > width) {
-            System.out.println("Can't move forward. Out of bounds.");
-        }
         else {
             if (direction == Direction.SOUTH) {
                 if (y < height) {
                     y += n;
                 }
-                if (y == height) {
+                if (y >= height) {
                     System.out.println("WARNING. OUT OF RANGE");
                 }
             } else if (direction == Direction.NORTH) {
                 if (y > 0) {
                     y -= n;
                 }
-                if (y < n) {
-                    System.out.println("Out of Bounds");
-                }
-                if (y == 0) {
+                if (y <= 0) {
                     System.out.println("WARNING. OUT OF RANGE");
                 }
             } else if (direction == Direction.WEST) {
                 if (x > 0) {
                     x -= n;
                 }
-                if (x < n) {
-                System.out.println("Out of Bounds");
-                   }
-                if (x == 0) {
+                if (x <= 0) {
                     System.out.println("WARNING. OUT OF RANGE");
                 }
             } else if (direction == Direction.EAST) {
