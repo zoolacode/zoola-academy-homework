@@ -1,8 +1,10 @@
 package com.zoolatech.lecture6.tasks._1;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -22,13 +24,21 @@ public class Task1 {
         long populationCount = cityList.stream().filter(city -> city.getPopulation() > population).count();
         if (cityList.size() == populationCount) return true;
         else return false;
-    }
+    } //Subtask a)
 
     private static City biggestHere(ArrayList<City> cityList, String countryName) {
-        Stream<City> cityStream = cityList.stream()
-                .filter(city -> city.getCountry().equalsIgnoreCase(countryName))
-                .sorted(Comparator popComp = new PopulationComparator())
-    }
+        List<City> biggestCity = cityList.stream().filter(city -> city.getCountry().equalsIgnoreCase(countryName)).sorted(new PopulationComparator()).toList();
+        return biggestCity.get(biggestCity.size() - 1);
+    } // Subtask b) ver 1
+
+    private static City biggestHere2(ArrayList<City> cityList, String countryName) {
+        Optional<City> biggest = cityList.stream().filter(city -> city.getCountry().equalsIgnoreCase(countryName)).max(new PopulationComparator());
+        return biggest.get();
+    } // Subtask b) ver 2
+
+    private static Map<String, City> cityMap(ArrayList<City> cityList) {
+        return cityList.stream().collect(Collectors.toMap(City::getName, City::getCity));
+    }  // Subtask c)
 
     public static <T> void show(String title, Stream<T> stream) {
         final int SIZE = 10;
@@ -40,12 +50,13 @@ public class Task1 {
             else System.out.print("...");
         }
         System.out.println();
-    }
+    }  // prints a stream
 
     public static void main(String[] args) {
         City tokyo = new City("Tokyo", "Japan", 37_340_000);
         City delhi = new City("Delhi", "India", 31_181_000);
         City shanghai = new City("Shanghai", "China", 27_796_000);
+        City beijing = new City("Beijing", "China", 22_366_000);
         City saoPaulo = new City("Sao Paulo", "Brazil", 22_043_028);
         City mexico = new City("Mexico", "Mexico", 21_919_000);
         ArrayList<City> cities = new ArrayList<>();
@@ -54,9 +65,14 @@ public class Task1 {
         cities.add(shanghai);
         cities.add(saoPaulo);
         cities.add(mexico);
+        cities.add(beijing);
 
         Stream<City> cityStream = cities.stream();
         show("cities", cityStream);
+
         System.out.println(checkPopulationIsBigger(cities, 2_000_000));
+        System.out.println(biggestHere(cities, "china"));
+        System.out.println(biggestHere2(cities, "china"));
+        System.out.println(cityMap(cities));
     }
 }
