@@ -10,33 +10,36 @@ import java.util.TreeMap;
 
 public class Number7 {
     public static void main(String[] args) {
-        String string = "12345";
+        String string = "54321";
         StringRepresentDigits stringRepresentDigits = new StringRepresentDigits();
-        stringRepresentDigits.representStringDigets(string);
+        stringRepresentDigits.representStringDigits(string);
     }
 }
 
 class StringRepresentDigits {
 
-    public void representStringDigets(String string) {
-        Map<Integer, String> numbersMap = new TreeMap<Integer, String>();
+    public void representStringDigits(String string) {
+        Map<Integer, String> numbersMap = new TreeMap<>();
+        numbersMap.put(0, "zero");
         numbersMap.put(1, "one");
         numbersMap.put(2, "two");
         numbersMap.put(3, "three");
         numbersMap.put(4, "four");
         numbersMap.put(5, "five");
+        numbersMap.put(6, "six");
+        numbersMap.put(7, "seven");
+        numbersMap.put(8, "eight");
+        numbersMap.put(9, "nine");
 
-        int[] ints = new int[string.length() + 1];
-        for (int i = 0; i <= string.length(); i++) {
-            ints[i] = i;
+        char[] chars = new char[string.length()];
+        int[] ints = new int[string.length()];
+        for (int i = 0; i < chars.length; i++) {
+            chars[i] = string.charAt(i);
+            ints[i] = Integer.parseInt(String.valueOf(chars[i]));
         }
 
-        for (Map.Entry<Integer, String> entry : numbersMap.entrySet()) {
-            for (int i = 0; i <= ints.length + 1; i++) {
-                if (entry.getKey() == i) {
-                    System.out.print(entry.getKey() + "(" + entry.getValue() + ")" + ' ');
-                }
-            }
+        for (int i = 0; i <= ints.length - 1; i++) {
+            System.out.print(ints[i] + "(" + numbersMap.get(ints[i]) + ") ");
         }
     }
 }
