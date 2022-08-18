@@ -1,6 +1,8 @@
 package com.zoolatech.lecture6.tasks._1;
 
-public class City {
+import java.util.Comparator;
+
+public class City implements Comparator {
     private String name;
     private String country;
     private int population;
@@ -11,6 +13,18 @@ public class City {
         this.population = population;
     }
 
+    public int getPopulation() {
+        return population;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
     @Override
     public String toString() {
         return "City{" +
@@ -18,6 +32,11 @@ public class City {
                 ", country='" + country + '\'' +
                 ", population=" + population +
                 '}';
+    }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        return 0;
     }
 }
 

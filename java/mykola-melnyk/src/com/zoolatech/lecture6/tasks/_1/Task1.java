@@ -17,17 +17,21 @@ import java.util.stream.Stream;
 
 public class Task1 {
 
-    private static void checkPopulationIsBigger(ArrayList<City> cityList, int population) {
-        Stream<City> cityStream = cityList.stream()
-                .filter()
+    private static boolean checkPopulationIsBigger(ArrayList<City> cityList, int population) {
+        long populationCount = cityList.stream().filter(city -> city.getPopulation() > population).count();
+        if (cityList.size() == populationCount) return true;
+        else return false;
+    }
 
+    private static City biggestHere(ArrayList<City> cityList, String countryName) {
+        Stream<City> cityStream = cityList.stream()
+                .filter(city -> city.getCountry().equalsIgnoreCase(countryName))
+                .sorted()
     }
 
     public static <T> void show(String title, Stream<T> stream) {
         final int SIZE = 10;
-        List<T> firstElements = stream
-                .limit(SIZE + 1)
-                .toList();
+        List<T> firstElements = stream.limit(SIZE + 1).toList();
         System.out.println(title + ": ");
         for (int i = 0; i < firstElements.size(); i++) {
             if (i > 0) System.out.println(", ");
@@ -36,6 +40,7 @@ public class Task1 {
         }
         System.out.println();
     }
+
     public static void main(String[] args) {
         City tokyo = new City("Tokyo", "Japan", 37_340_000);
         City delhi = new City("Delhi", "India", 31_181_000);
@@ -51,5 +56,6 @@ public class Task1 {
 
         Stream<City> cityStream = cities.stream();
         show("cities", cityStream);
+        System.out.println(checkPopulationIsBigger(cities, 2_000_000));
     }
 }
