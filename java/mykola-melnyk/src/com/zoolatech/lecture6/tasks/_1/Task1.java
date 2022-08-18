@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,7 +38,7 @@ public class Task1 {
     } // Subtask b) ver 2
 
     private static Map<String, City> cityMap(ArrayList<City> cityList) {
-        return cityList.stream().collect(Collectors.toMap(City::getName, City::getCity));
+        return cityList.stream().collect(Collectors.toMap(City::getName, Function.identity()));
     }  // Subtask c)
 
     public static <T> void show(String title, Stream<T> stream) {

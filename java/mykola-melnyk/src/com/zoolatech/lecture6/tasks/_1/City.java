@@ -25,10 +25,6 @@ public class City {
         return country;
     }
 
-    public City getCity() {
-        return this;
-    }
-
     @Override
     public String toString() {
         return "City{" +
