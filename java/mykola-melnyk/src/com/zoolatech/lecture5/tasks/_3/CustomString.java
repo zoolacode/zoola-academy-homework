@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 
 
-public class CustomString {
+public class CustomString implements Comparable<CustomString> {
     private final String string;
 
     public CustomString(String aString) {
@@ -37,5 +37,13 @@ public class CustomString {
     @Override
     public String toString() {
         return string.toLowerCase();
+    }
+
+    @Override
+    public int compareTo(CustomString o) {
+        if (string.equalsIgnoreCase(o.string)) {
+            return 0;
+        }
+        return string.compareTo(o.string);
     }
 }

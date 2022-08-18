@@ -1,9 +1,6 @@
 package com.zoolatech.lecture5.tasks._4;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Create a method that accepts a string, counts all unique non-space character occurrences and
@@ -20,7 +17,7 @@ import java.util.Map;
  */
 
 public class Task4 {
-    public static void charOccur(String string) {
+    public static void charOccur(String string) {   // method 1;
         string = string.replaceAll(" ", ""); // removed spaces
         char[] chars = string.toCharArray();
         Arrays.sort(chars);
@@ -37,7 +34,41 @@ public class Task4 {
                 charTable.put(ch, 1);
             }
         }
-        for (Map.Entry<Character, Integer> entry : charTable.entrySet()) {  // print output
+        customMapPrint(charTable);
+    }
+
+    private static void charOccur2(String string) {  // method 2, using treemap and iterator
+        TreeMap<Character, Integer> myMap = new TreeMap<>();
+        for (int i = 0; i < string.length(); i++) {
+            Character ch = string.charAt(i);
+            if (ch != ' ') {
+                if (myMap.containsKey(ch)) {
+                    myMap.put(ch, myMap.get(ch) + 1);
+                } else {
+                    myMap.put(ch, 1);
+                }
+            }
+        }
+        customMapPrint(myMap);
+    }
+
+    private static void charOccur3(String string) { // method 3, using treemap, array and for each loop
+        TreeMap<Character, Integer> myMap = new TreeMap<>();
+        char[] chars = string.toCharArray();
+        for (char ch : chars) {
+            if (ch != ' ') {
+                if (myMap.containsKey(ch)) {
+                    myMap.put(ch, myMap.get(ch) + 1);
+                } else {
+                    myMap.put(ch, 1);
+                }
+            }
+        }
+        customMapPrint(myMap);
+    }
+
+    private static void customMapPrint(Map<Character, Integer> map) {
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {  // print output
             System.out.print(entry.getKey() + " - ");
             System.out.println(entry.getValue());
         }
@@ -45,5 +76,8 @@ public class Task4 {
 
     public static void main(String[] args) {
         Task4.charOccur("Hello World");
+        Task4.charOccur2("Hello World");
+        Task4.charOccur3("Hello World");
     }
+
 }
