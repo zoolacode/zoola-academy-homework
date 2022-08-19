@@ -136,16 +136,10 @@ class Musicians {
 }
 
 interface Instruments {
-    String name = "";
-    String sound = "";
 
-   default String getSound() {
-        return sound;
-    }
+    String getSound();
 
-    default String getName() {
-        return name;
-    }
+    String getName();
 }
 
 class Piano implements Instruments {
