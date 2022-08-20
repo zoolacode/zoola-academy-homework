@@ -22,36 +22,30 @@ import java.util.stream.Stream;
 public class Task1 {
 
     private static boolean checkPopulationIsBigger(ArrayList<City> cityList, int population) {
-        long populationCount = cityList.stream().filter(city -> city.getPopulation() > population).count();
-        if (cityList.size() == populationCount) return true;
-        else return false;
+        long populationCount = cityList.stream()
+                .filter(city -> city.getPopulation() > population)
+                .count();
+        return cityList.size() == populationCount;
     } //Subtask a)
 
     private static City biggestHere(ArrayList<City> cityList, String countryName) {
-        List<City> biggestCity = cityList.stream().filter(city -> city.getCountry().equalsIgnoreCase(countryName)).sorted(new PopulationComparator()).toList();
+        List<City> biggestCity = cityList.stream()
+                .filter(city -> city.getCountry().equalsIgnoreCase(countryName))
+                .sorted(new PopulationComparator())
+                .toList();
         return biggestCity.get(biggestCity.size() - 1);
     } // Subtask b) ver 1
 
     private static City biggestHere2(ArrayList<City> cityList, String countryName) {
-        Optional<City> biggest = cityList.stream().filter(city -> city.getCountry().equalsIgnoreCase(countryName)).max(new PopulationComparator());
-        return biggest.get();
+        Optional<City> biggest = cityList.stream()
+                .filter(city -> city.getCountry().equalsIgnoreCase(countryName))
+                .max(new PopulationComparator());
+        return biggest.orElseThrow(() ->new IllegalArgumentException("Invalid Country " + countryName));
     } // Subtask b) ver 2
 
     private static Map<String, City> cityMap(ArrayList<City> cityList) {
         return cityList.stream().collect(Collectors.toMap(City::getName, Function.identity()));
     }  // Subtask c)
-
-    public static <T> void show(String title, Stream<T> stream) {
-        final int SIZE = 10;
-        List<T> firstElements = stream.limit(SIZE + 1).toList();
-        System.out.println(title + ": ");
-        for (int i = 0; i < firstElements.size(); i++) {
-            if (i > 0) System.out.println(", ");
-            if (i < SIZE) System.out.print(firstElements.get(i));
-            else System.out.print("...");
-        }
-        System.out.println();
-    }  // prints a stream
 
     public static void main(String[] args) {
         City tokyo = new City("Tokyo", "Japan", 37_340_000);
@@ -69,11 +63,16 @@ public class Task1 {
         cities.add(beijing);
 
         Stream<City> cityStream = cities.stream();
-        show("cities", cityStream);
 
         System.out.println(checkPopulationIsBigger(cities, 2_000_000));
         System.out.println(biggestHere(cities, "china"));
         System.out.println(biggestHere2(cities, "china"));
+        try {
+            System.out.println(biggestHere2(cities, "chna"));
+        } catch (Exception e) {
+            System.out.println("Failed to determine the largest city");
+            e.printStackTrace(System.out);
+        }
         System.out.println(cityMap(cities));
     }
 }
