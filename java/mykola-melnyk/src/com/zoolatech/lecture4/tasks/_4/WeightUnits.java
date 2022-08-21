@@ -1,9 +1,9 @@
 package com.zoolatech.lecture4.tasks._4;
 
 public enum WeightUnits {
-    GRAM("g"), KILOGRAM("kg"), OUNCE("oz"),
-    POUND("lb"), TON("t");
+    GRAM("g"), KILOGRAM("kg"), OUNCE("oz"), POUND("lb"), TON("t");
     private final String abbreviation;
+
     WeightUnits(String abbreviation) {
         this.abbreviation = abbreviation;
     }
@@ -13,10 +13,9 @@ public enum WeightUnits {
     }
 
     public double convertFrom(double value, WeightUnits sourceUnit) {
-        double result = 0;
         switch (this) {
             case GRAM -> {
-                result = switch (sourceUnit) {
+                return switch (sourceUnit) {
                     case GRAM -> value;
                     case KILOGRAM -> value * 1000;
                     case OUNCE -> value * 28.35;
@@ -25,7 +24,7 @@ public enum WeightUnits {
                 };
             }
             case KILOGRAM -> {
-                result = switch (sourceUnit) {
+                return switch (sourceUnit) {
                     case GRAM -> value / 1000;
                     case KILOGRAM -> value;
                     case OUNCE -> value / 35.274;
@@ -34,56 +33,55 @@ public enum WeightUnits {
                 };
             }
             case OUNCE -> {
-                result = switch (sourceUnit) {
-                case GRAM -> value / 28.35;
-                case KILOGRAM -> value * 35.274;
-                case OUNCE -> value;
-                case POUND -> value * 16;
-                case TON -> value * 35270;
+                return switch (sourceUnit) {
+                    case GRAM -> value / 28.35;
+                    case KILOGRAM -> value * 35.274;
+                    case OUNCE -> value;
+                    case POUND -> value * 16;
+                    case TON -> value * 35270;
                 };
             }
             case POUND -> {
-                result = switch (sourceUnit) {
-                case GRAM -> value / 453.6;
-                case KILOGRAM -> value * 2.205;
-                case OUNCE -> value / 16;
-                case POUND -> value;
-                case TON -> value * 2205;
+                return switch (sourceUnit) {
+                    case GRAM -> value / 453.6;
+                    case KILOGRAM -> value * 2.205;
+                    case OUNCE -> value / 16;
+                    case POUND -> value;
+                    case TON -> value * 2205;
                 };
             }
             case TON -> {
-                result = switch (sourceUnit) {
-                case GRAM -> value / 1_000_000;
-                case KILOGRAM -> value / 1000;
-                case OUNCE -> value / 35270;
-                case POUND -> value / 2205;
-                case TON -> value;
+                return switch (sourceUnit) {
+                    case GRAM -> value / 1_000_000;
+                    case KILOGRAM -> value / 1000;
+                    case OUNCE -> value / 35270;
+                    case POUND -> value / 2205;
+                    case TON -> value;
                 };
             }
         }
-        return result;
+        return value;
     }
 
-    public WeightUnits getUnit(String name) {
-        WeightUnits unit = null;
+    public static WeightUnits getUnit(String name) {
         switch (name.toUpperCase()) {
             case "GRAM" -> {
-                unit = WeightUnits.GRAM;
+                return WeightUnits.GRAM;
             }
             case "KILOGRAM" -> {
-                unit = WeightUnits.KILOGRAM;
+                return WeightUnits.KILOGRAM;
             }
             case "OUNCE" -> {
-                unit = WeightUnits.OUNCE;
+                return WeightUnits.OUNCE;
             }
             case "POUND" -> {
-                unit = WeightUnits.POUND;
+                return WeightUnits.POUND;
             }
             case "TON" -> {
-                unit = WeightUnits.TON;
+                return WeightUnits.TON;
             }
         }
-        return unit;
+        return null;
     }
 }
 

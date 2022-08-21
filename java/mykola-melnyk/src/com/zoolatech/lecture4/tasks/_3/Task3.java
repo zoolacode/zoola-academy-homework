@@ -18,20 +18,13 @@ public class Task3 {
     }
 
     public static void main(String[] args) {
-        StringModifier toUpperCase = string -> {
-            return "modified: " + string.toUpperCase();
-        };
-        StringModifier toLowerCase = string -> {
-            return "modified: " + string.toLowerCase();
-        };
+        StringModifier toUpperCase = string -> "modified: " + string.toUpperCase();
+        StringModifier toLowerCase = string -> "modified: " + string.toLowerCase();
 
         modifyString("Hello!", toUpperCase);
         modifyString("WHAZZZUUUPPP???", toLowerCase);
 
         modifyString("howdy", String::toUpperCase);
         modifyString("BYOB is for BOOZE", String::toLowerCase);
-
     }
-
-
 }

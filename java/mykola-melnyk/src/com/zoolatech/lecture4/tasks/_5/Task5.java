@@ -17,24 +17,12 @@ public class Task5 {
         char operator = in.next().charAt(0);
         System.out.println("Enter second number:");
         BigDecimal secondnum = in.nextBigDecimal();
-        BigDecimal result = null;
         switch (operator) {
-            case '+' -> {
-                result = firstnum.add(secondnum);
-            }
-            case '-' -> {
-                result = firstnum.subtract(secondnum);
-            }
-            case '*' -> {
-                result = firstnum.multiply(secondnum);
-            }
-            case '/' -> {
-                result = firstnum.divide(secondnum);
-            }
-            case '%' -> {
-                result = firstnum.remainder(secondnum);
-            }
+            case '+' -> System.out.println("Result is: " + firstnum.add(secondnum));
+            case '-' -> System.out.println("Result is: " + firstnum.subtract(secondnum));
+            case '*' -> System.out.println("Result is: " + firstnum.multiply(secondnum));
+            case '/' -> System.out.println("Result is: " + firstnum.divide(secondnum));
+            case '%' -> System.out.println("Result is: " + firstnum.remainder(secondnum));
         }
-        System.out.println("Result is: " + result);
     }
 }

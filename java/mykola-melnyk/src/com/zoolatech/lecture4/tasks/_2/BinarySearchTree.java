@@ -2,9 +2,6 @@ package com.zoolatech.lecture4.tasks._2;
 
 public class BinarySearchTree {
     private Node rootNode;
-    public BinarySearchTree () {
-        rootNode = null;
-    }
 
     private static class Node {
         private final int value;
@@ -12,8 +9,14 @@ public class BinarySearchTree {
         private Node rightChild;
         public Node (int value) {
             this.value = value;
-            leftChild = null;
-            rightChild = null;
+        }
+    }
+
+    public void add(int value) {
+        if (rootNode == null) {
+            rootNode = new Node(value);
+        } else {
+            addRecursive(rootNode, value);
         }
     }
 
@@ -30,14 +33,6 @@ public class BinarySearchTree {
             } else {
                 addRecursive(current.leftChild, value);
             }
-        }
-    }
-
-    public void add(int value) {
-        if (rootNode == null) {
-            rootNode = new Node(value);
-        } else {
-            addRecursive(rootNode, value);
         }
     }
 
