@@ -1,9 +1,7 @@
 package com.zoolatech.lecture5.tasks._4;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Create a method that accepts a string, counts all unique non-space character occurrences and
@@ -20,30 +18,29 @@ import java.util.Map;
  */
 
 public class Task4 {
-    public static void charOccur(String string) {
-        string = string.replaceAll(" ", ""); // removed spaces
+    private static void charOccur3(String string) {
+        TreeMap<Character, Integer> myMap = new TreeMap<>();
         char[] chars = string.toCharArray();
-        Arrays.sort(chars);
-        string = new String(chars);  // sorted alphabetically
-        System.out.println(string);  // test, to see if the string is as we want
-        HashMap<Character, Integer> charTable = new LinkedHashMap<>();  //create hashmap
-        int length = string.length();
-        Character ch;
-        for (int i = 0; i < length; i++) {
-            ch = string.charAt(i);
-            if (charTable.containsKey(ch)) {
-                charTable.put(ch, charTable.get(ch) + 1);
-            } else {
-                charTable.put(ch, 1);
+        for (char ch : chars) {
+            if (ch != ' ') {
+                if (myMap.containsKey(ch)) {
+                    myMap.put(ch, myMap.get(ch) + 1);
+                } else {
+                    myMap.put(ch, 1);
+                }
             }
         }
-        for (Map.Entry<Character, Integer> entry : charTable.entrySet()) {  // print output
+        customMapPrint(myMap);
+    }
+
+    private static void customMapPrint(Map<Character, Integer> map) {
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
             System.out.print(entry.getKey() + " - ");
             System.out.println(entry.getValue());
         }
     }
 
     public static void main(String[] args) {
-        Task4.charOccur("Hello World");
+        Task4.charOccur3("Hello World");
     }
 }

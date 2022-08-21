@@ -1,7 +1,6 @@
 package com.zoolatech.lecture5.tasks._3;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Create a method that accepts a list of words, and displays only unique one (order can be random). Bonus task:
@@ -16,16 +15,15 @@ import java.util.Set;
  */
 
 public class Task3 {
-    public static Set uniqStr2(String... words) {
-        Set<String> set = new HashSet<>();
-        for (String str : words) {
-            set.add(str.toLowerCase());
-        }
-        return set;
+
+    public static Set<String> uniqStr7(String... words) {
+        Comparator<String> comparator = new CaseAgnosticComparator()::compare;
+        TreeSet<String> myTreeSet = new TreeSet<>(comparator);
+        myTreeSet.addAll(Arrays.asList(words));
+        return myTreeSet;
     }
 
     public static void main(String[] args) {
-        System.out.println(Task3.uniqStr2("apple", "Apple", "Banana", "banana"));
-        System.out.println(Task3.uniqStr2("apple", "orange", "pear", "apple", "banana", "orange"));
+        System.out.println(Task3.uniqStr7("apple", "Apple", "orange", "pear", "apple", "banana", "orange"));
     }
 }

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class KthLargest {
     private final int k;
-    private final LinkedList<Integer> numbers = new LinkedList();
+    private final LinkedList<Integer> numbers = new LinkedList<>();
 
     public KthLargest(int k) {
         this.k = k;
