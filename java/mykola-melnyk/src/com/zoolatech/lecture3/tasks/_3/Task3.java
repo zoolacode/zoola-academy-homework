@@ -28,9 +28,9 @@ public class Task3 {
         shape.add(circle);
         shape.add(triangle);
         shape.add(rectangle);
-        for (Shape e : shape) {
-            e.printArea();
-            e.printPerimeter();
+        for (Shape shape1 : shape) {
+            shape1.printArea();
+            shape1.printPerimeter();
         }
 
         for (Shape e : shape) {

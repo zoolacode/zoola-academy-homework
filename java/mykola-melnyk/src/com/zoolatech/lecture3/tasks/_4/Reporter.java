@@ -29,12 +29,17 @@ public abstract class Reporter {
         addFileData();
         closeFile();
     }
-    public abstract void createFile();
-    public abstract void addHeaderData();
-    public abstract void addFileData();
-    public abstract void closeFile();
 
+    void createFile()  {
+        System.out.printf("Creating a file with name %s. \n", this.getFileName());
+    }
 
+    abstract void addHeaderData();
 
+    abstract void addFileData();
+
+    void closeFile()  {
+        System.out.printf("Closing a file with name %s. \n", this.getFileName());
+    }
 
 }

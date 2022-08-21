@@ -18,8 +18,8 @@ public class Orchestra {
     }
 
     public void perform() {
-        for (var e : orchestra) {
-            e.engageMusician();
+        for (var musician : orchestra) {
+            musician.engageMusician();
         }
     }
 }
