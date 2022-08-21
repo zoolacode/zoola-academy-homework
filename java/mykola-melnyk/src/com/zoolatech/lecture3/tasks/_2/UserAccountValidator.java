@@ -1,7 +1,12 @@
 package com.zoolatech.lecture3.tasks._2;
 
-import com.zoolatech.lecture3.tasks._2.validators.*;
-
+import com.zoolatech.lecture3.tasks._2.validators.BiggerThan;
+import com.zoolatech.lecture3.tasks._2.validators.StringNotEmpty;
+import com.zoolatech.lecture3.tasks._2.validators.ValidEmail;
+import com.zoolatech.lecture3.tasks._2.validators.Validator;
+import com.zoolatech.lecture3.tasks._2.validators.ValidPhoneNumber;
+import com.zoolatech.lecture3.tasks._2.validators.LessThan;
+import com.zoolatech.lecture3.tasks._2.validators.NumberRangeXY;
 import java.util.ArrayList;
 
 public class UserAccountValidator implements Validator {
@@ -21,8 +26,8 @@ public class UserAccountValidator implements Validator {
     }
 
     public boolean isValid(UserAccount account) {
-        for (Validator e : validatorList) {
-            if (!e.isValid(account)) {
+        for (Validator validator : validatorList) {
+            if (!validator.isValid(account)) {
                 return false;
             }
         }

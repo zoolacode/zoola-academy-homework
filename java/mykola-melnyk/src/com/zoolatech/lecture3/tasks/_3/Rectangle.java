@@ -1,8 +1,8 @@
 package com.zoolatech.lecture3.tasks._3;
 
 public final class Rectangle implements Shape {
-    double a;
-    double b;
+    private final double a;
+    private final double b;
 
     public Rectangle(double a, double b) {
         this.a = a;

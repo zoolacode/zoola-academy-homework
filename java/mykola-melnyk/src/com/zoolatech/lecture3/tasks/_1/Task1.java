@@ -33,8 +33,6 @@ public class Task1 {
         vocalist.sayHello();
 
         var vocalist2 = new Vocalist("Till Lindemann");
-        // check if equal (name&instrument)
-        vocalist2.isEqual(vocalist);
 
         var drum = new Drum();
         drum.playSound();
