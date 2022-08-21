@@ -37,8 +37,9 @@ public class Calculator {
     }
 
     public void divide(double operand) {
-        System.out.println("Keep in mind that division by 0 is ignored!");
-        while (operand != 0) {     // added patch to ignore division by 0, as requested.
+        if (operand == 0) {
+            System.out.println("Keep in mind that division by 0 is ignored!");
+        } else {
             storedValue /= operand;
         }
     }
