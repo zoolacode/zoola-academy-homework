@@ -18,6 +18,16 @@ public class Task3 {
         User Mykola = new User("1", "123");
         User Violet = new User("2", "234");
         User Max = new User("3", "345");
+        User Valeriia = new User("4", "456");
+        User Oleg = new User("5", "567");
+        User Viktoriia = new User("6", "678");
+        DefaultUserTable myDefaultUserTable = new DefaultUserTable(Mykola, Violet, Max);
+        DefaultUserCache myDefaultUserCache = new DefaultUserCache(Valeriia, Oleg, Viktoriia);
+        UserRepository myUserRepository = new UserRepository(myDefaultUserCache, myDefaultUserTable);
+        UserService myUserService = new UserService(myUserRepository);
+        System.out.println(myUserService.findUserEmail("1"));
+        System.out.println(myUserService.findUserEmail("5"));
+        System.out.println(myUserService.findUserEmail("10"));
 
     }
 }

@@ -7,7 +7,8 @@ public class UserRepository {
     private UserTable myUserTable;
 
     public UserRepository(UserCache cache, UserTable table) {
-
+        myUserCache = cache;
+        myUserTable = table;
     }
 
     public String findUserEmail(String id) throws UserMissingException{

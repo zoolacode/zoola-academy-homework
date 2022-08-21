@@ -3,6 +3,10 @@ package com.zoolatech.lecture6.tasks._3;
 public class UserService {
     UserRepository userRepoInst;
 
+    public UserService(UserRepository userRepoInst) {
+        this.userRepoInst = userRepoInst;
+    }
+
     public String findUserEmail(String id) {
         try {
             return userRepoInst.findUserEmail(id);
