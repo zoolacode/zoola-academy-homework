@@ -8,11 +8,13 @@ public class UserValidator {
             new NameValidator("lastName"),
             new NameValidator("country"),
             new NumberValidator("phoneNumber"),
-            new DateValidator("birthDayMonth"),
+            new NumberInRangeValidator("birthMonth"),
+            new NumberIsBiggerValidator("birthDay"),
+            new NumberIsLessValidator("birthDay"),
             new EmailValidator("email"));
 
     public boolean isValid(User user) {
-        System.out.println("Start to validate user #" + user.getId());
+        System.out.println("Start validating user #" + user.getId());
         boolean result = true;
         for (SmallerValidator validator : VALIDATORS) {
             if (!validator.isValid(user)) {

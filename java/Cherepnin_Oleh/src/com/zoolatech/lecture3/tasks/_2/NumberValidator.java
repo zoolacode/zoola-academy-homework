@@ -7,10 +7,11 @@ public class NumberValidator extends AbstractSmallerValidator {
 
     @Override
     public boolean isValid(User user) {
+        System.out.println("validating that " + fieldName + " is valid");
         if (ValidationPattern.NUMBER.getPattern().matcher(user.getPhoneNumber()).matches()) {
             return true;
         }
-        System.out.println("Phone number is invalid");
+        printMassage();
         return false;
     }
 }

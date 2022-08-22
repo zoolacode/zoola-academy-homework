@@ -6,4 +6,8 @@ public abstract class AbstractSmallerValidator implements SmallerValidator {
     public AbstractSmallerValidator(String fieldName) {
         this.fieldName = fieldName;
     }
+
+    protected void printMassage() {
+        System.out.println("Field '" + fieldName + "' is invalid");
+    }
 }

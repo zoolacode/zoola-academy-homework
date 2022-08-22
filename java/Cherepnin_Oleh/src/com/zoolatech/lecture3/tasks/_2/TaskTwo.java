@@ -22,7 +22,7 @@ public class TaskTwo {
                 "Italy",
                 "jiovana13jojo.com",
                 "30-203-24-25",
-                29, 2);
+                31, 0);
 
         User user2 = new User("John",
                 "Regan",
@@ -34,7 +34,6 @@ public class TaskTwo {
         UserValidator validator = new UserValidator();
         validator.isValid(user1);
         validator.isValid(user2);
-
     }
 }
 

@@ -7,10 +7,11 @@ public class NameValidator extends AbstractSmallerValidator {
     }
 
     protected boolean checkField(String name) {
+        System.out.println("validating that " + fieldName + " is not empty");
         if (name.isBlank()) {
-            System.out.println(fieldName + " is blank");
+            System.out.println("Field '" + fieldName + "' is blank");
         } else if (!ValidationPattern.NAME.getPattern().matcher(name).matches()) {
-            System.out.println(fieldName + " is invalid");
+            printMassage();
         } else return true;
         return false;
     }

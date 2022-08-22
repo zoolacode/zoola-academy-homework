@@ -8,10 +8,11 @@ public class EmailValidator extends AbstractSmallerValidator {
 
     @Override
     public boolean isValid(User user) {
+        System.out.println("validating that " + fieldName + " is valid");
         if (ValidationPattern.EMAIL.getPattern().matcher(user.getEmail()).matches()) {
             return true;
         }
-        System.out.println("Email is invalid");
+        printMassage();
         return false;
     }
 }
