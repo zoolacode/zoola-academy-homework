@@ -15,6 +15,8 @@ public class TaskThree {
     public static void main(String[] args) {
         show("hola", s -> s + " -> modified: " + s.toUpperCase(Locale.ROOT));
         show("ALOHA", s -> s + " -> modified: " + s.toLowerCase(Locale.ROOT));
+        show("ALOHA", String::toLowerCase);
+        show("Hello", String::toUpperCase);
     }
 
     public static void show(String str, StringModifier... modifiers) {
