@@ -20,6 +20,6 @@ public class UserService {
         } catch (UserMissingException e) {
             System.out.println(e.getLocalizedMessage());
         }
-        return "Something went wrong...";
+        return null;
     }
 }
