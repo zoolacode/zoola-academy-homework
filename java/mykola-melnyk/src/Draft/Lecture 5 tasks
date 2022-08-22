@@ -1,0 +1,45 @@
+Coding tasks
+
+1. Create a method that accepts an integer N and a variable amount of other integer numbers. The method needs to return the value of the Nth (1-based) smallest element in the array. Return -1 if the amount of passed integers is less than N.
+Input: 4, 1, 5, 2, 3, 7
+Output: 5 (the 4th smallest number in the array 1, 5, 2, 3, 7 is 5: 1 2 3 5 7)
+Input: 3, 1, 2
+Output: -1
+
+
+2. Create a generic method that accepts a list of values (not only numbers) and returns the max value.
+Input:  1, 5, 7, 3, 5
+Output:
+
+
+3. Create a method that accepts a list of words, and displays only unique one (order can be random). Bonus task: treat strings in a different case as the same one: “Apple” and “apple” should be treated as the same string (don’t use any methods that create a new string object - like toUpperCase or toLowerCase - you can work only with a given input).
+Input: [“apple”, “orange”, “pear”, “apple”, “banana”, “orange”]
+Output: apple
+			orange
+			pear
+			banana
+
+
+4. Create a method that accepts a string, counts all unique non-space character occurrences and displays each character with an amount of occurrences (output should be sorted by a character value in ascending order). Also, add a couple of examples that use your method.
+Input: “Hello World”
+Output: H - 1
+W - 1
+d - 1
+e - 1
+l - 3
+o - 2
+r - 1
+
+
+5. Create a class KthLargest with a single method int add(int value) that accepts a value and returns the kth largest value in a stream of numbers (the amount of numbers is increasing). Number k should be passed during the object construction. Return -1 if the number of values seen so far is less than k.
+new KthLargest(2)
+add(1) // -1
+add(2) // 1
+add(5) // 2
+add(6) // 5
+add(4) // 5
+
+
+
+
+
