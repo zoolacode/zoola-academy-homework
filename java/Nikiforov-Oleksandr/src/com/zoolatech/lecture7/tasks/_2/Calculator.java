@@ -17,8 +17,4 @@ public abstract class Calculator {
         value -= valueToSubtract;
         System.out.println("Subtract - " + valueToSubtract);
     }
-
-    public int getValue(){
-        return value;
-    }
 }

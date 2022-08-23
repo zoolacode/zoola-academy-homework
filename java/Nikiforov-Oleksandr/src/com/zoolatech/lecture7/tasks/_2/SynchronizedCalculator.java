@@ -17,4 +17,8 @@ public class SynchronizedCalculator extends Calculator {
     public synchronized void subtract(int valueToSubtract) {
         super.subtract(valueToSubtract);
     }
+
+    public synchronized int getValue(){
+        return value;
+    }
 }

@@ -28,4 +28,13 @@ public class ExplicitLocksCalculator extends Calculator {
             lock.unlock();
         }
     }
+
+    public int getValue(){
+        lock.lock();
+        try {
+            return value;
+        }finally {
+            lock.unlock();
+        }
+    }
 }
