@@ -17,25 +17,15 @@ public class Number5 {
     }
 
     public static BigDecimal calculations(BigDecimal numberOne, char operation, BigDecimal numberTwo) {
+        BigDecimal result = new BigDecimal(0);
         switch (operation) {
-            case '+' -> {
-                return numberOne.add(numberTwo);
-            }
-            case '-' -> {
-                return numberOne.subtract(numberTwo);
-            }
-            case '*' -> {
-                return numberOne.multiply(numberTwo);
-            }
-            case '/' -> {
-                return numberOne.divide(numberTwo);
-            }
-            case '%' -> {
-                return numberOne.remainder(numberTwo);
-            }
-            default -> {
-                return null;
-            }
+            case '+' -> result = numberOne.add(numberTwo);
+            case '-' -> result = numberOne.subtract(numberTwo);
+            case '*' -> result = numberOne.multiply(numberTwo);
+            case '/' -> result = numberOne.divide(numberTwo);
+            case '%' -> result = numberOne.remainder(numberTwo);
+            default -> System.out.println("Error");
         }
+        return result;
     }
 }

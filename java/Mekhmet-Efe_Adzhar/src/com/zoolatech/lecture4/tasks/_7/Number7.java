@@ -31,11 +31,9 @@ class StringRepresentDigits {
         numbersMap.put(8, "eight");
         numbersMap.put(9, "nine");
 
-        char[] chars = new char[string.length()];
         int[] ints = new int[string.length()];
-        for (int i = 0; i < chars.length; i++) {
-            chars[i] = string.charAt(i);
-            ints[i] = Integer.parseInt(String.valueOf(chars[i]));
+        for (int i = 0; i < string.length(); i++) {
+            ints[i] = Integer.parseInt(String.valueOf(string.charAt(i)));
         }
 
         for (int i = 0; i <= ints.length - 1; i++) {
