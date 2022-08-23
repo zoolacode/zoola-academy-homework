@@ -1114,6 +1114,11 @@ lmdb@2.5.2:
     "@lmdb/lmdb-linux-x64" "2.5.2"
     "@lmdb/lmdb-win32-x64" "2.5.2"
 
+maquette@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.npmjs.org/maquette/-/maquette-3.5.2.tgz#93267808543d0314890dd77c2043a7dcfafa87f6"
+  integrity sha512-mC8PTusWT2MQi9G3dwY+WXej99BUIZUix/88OD/LSJLfbInYhKBxWjcBiUfjlcrV+IS2UQ0yXTgT3Fis6l0BDw==
+
 mdn-data@2.0.14:
   version "2.0.14"
   resolved "https://registry.npmjs.org/mdn-data/-/mdn-data-2.0.14.tgz#7113fc4281917d63ce29b43446f701e68c25ba50"
