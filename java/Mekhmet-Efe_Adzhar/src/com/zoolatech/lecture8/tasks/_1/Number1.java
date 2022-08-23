@@ -19,11 +19,9 @@ Note: both chefs and delivery persons need to run in the separate thread.
 
 public class Number1 {
     public static void main(String[] args) throws InterruptedException {
-        Lock lock = new ReentrantLock();
-
         Restaurant restaurant = new Restaurant();
-        AtomicInteger atomicInteger = new AtomicInteger(1);
-        Order order = new Order(atomicInteger, "Efe");
+        int id = 1;
+        Order order = new Order(id, "Efe");
 
         BlockingQueue<String> orderQueue = new ArrayBlockingQueue<>(1);
         BlockingQueue<String> ordersTaken = new ArrayBlockingQueue<>(1);
@@ -83,30 +81,23 @@ public class Number1 {
 }
 
 class Restaurant {
-    Lock lock = new ReentrantLock();
 
     public String acceptOrder(Order order) {
-        lock.lock();
-        try {
-            return order.getId() + " " + order.getCustomerName();
-        } finally {
-            lock.unlock();
-        }
+        return order.getId() + " " + order.getCustomerName();
     }
 }
 
 class Order {
-    AtomicInteger id;
-    volatile String customerName;
-    Lock lock = new ReentrantLock();
+    private final int id;
+    private final String customerName;
 
-    public Order(AtomicInteger id, String customerName) {
+    public Order(int id, String customerName) {
         this.id = id;
         this.customerName = customerName;
     }
 
     public int getId() {
-        return id.incrementAndGet() - 1;
+        return id;
     }
 
     public String getCustomerName() {
@@ -114,11 +105,6 @@ class Order {
     }
 
     public void getOrder() {
-        lock.lock();
-        try {
-            System.out.println("Order number : " + getId() + " is delivered to a customer by name: " + getCustomerName());
-        } finally {
-            lock.unlock();
-        }
+        System.out.println("Order number : " + getId() + " is delivered to a customer by name: " + getCustomerName());
     }
 }
