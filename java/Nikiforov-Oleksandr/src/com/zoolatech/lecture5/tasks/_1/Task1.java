@@ -1,9 +1,6 @@
 package com.zoolatech.lecture5.tasks._1;
 
-import java.awt.image.AreaAveragingScaleFilter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 
 /**

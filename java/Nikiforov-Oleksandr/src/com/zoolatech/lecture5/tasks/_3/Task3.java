@@ -1,7 +1,6 @@
 package com.zoolatech.lecture5.tasks._3;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.HashSet;
 import java.util.TreeSet;
@@ -31,7 +30,7 @@ public class Task3 {
     public static void withoutRepeatsCase(List<String> stringList) {
         // bonus task
         TreeSet<String> treeSet = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        Collections.addAll(treeSet, stringList.toArray(new String[stringList.size()]));
+        treeSet.addAll(stringList);
         for (String str : treeSet) {
             System.out.println(str);
         }
