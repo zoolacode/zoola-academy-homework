@@ -15,7 +15,6 @@ import java.util.concurrent.RecursiveAction;
 public class TaskTwo {
     public static void main(String[] args) {
         int[][] image = new int[70][50];
-        int counter = 11;
         for (int i = 0; i < image.length; i++) {
             for (int j = 0; j < image[i].length; j++) {
                 image[i][j] = j + 1;
