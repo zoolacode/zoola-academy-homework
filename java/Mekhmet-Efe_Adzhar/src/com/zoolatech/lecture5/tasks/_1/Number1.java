@@ -15,8 +15,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class Number1 {
-    ArrayList<Integer> arrayList = new ArrayList<>();
-
     public static void main(String[] args) {
         int n = 4;
         Number1 number1 = new Number1();
@@ -24,6 +22,7 @@ public class Number1 {
     }
 
     public void task(int n, int... variables) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
         if (n > variables.length + 1) {
             System.out.println(-1);
         } else {

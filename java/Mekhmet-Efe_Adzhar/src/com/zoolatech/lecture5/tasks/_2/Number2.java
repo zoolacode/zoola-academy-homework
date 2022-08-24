@@ -20,7 +20,7 @@ public class Number2 {
 
     public static <T extends Comparable<T>> T largestElement(List<T> list) {
         T value = list.get(0);
-        for (int i = 1; i < list.size() - 1; i++) {
+        for (int i = 1; i < list.size(); i++) {
             if (value.compareTo(list.get(i)) < 0) {
                 value = list.get(i);
             }
