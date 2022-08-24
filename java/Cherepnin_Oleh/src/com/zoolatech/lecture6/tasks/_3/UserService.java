@@ -12,6 +12,6 @@ public class UserService {
         } catch (UserMissingException exception) {
             System.out.println(exception.getMessage());
         }
-        return "Something went wrong...";
+        return null;
     }
 }
