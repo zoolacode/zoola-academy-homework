@@ -64,24 +64,14 @@ public enum WeightUnits {
     }
 
     public static WeightUnits getUnit(String name) {
-        switch (name.toUpperCase()) {
-            case "GRAM" -> {
-                return WeightUnits.GRAM;
-            }
-            case "KILOGRAM" -> {
-                return WeightUnits.KILOGRAM;
-            }
-            case "OUNCE" -> {
-                return WeightUnits.OUNCE;
-            }
-            case "POUND" -> {
-                return WeightUnits.POUND;
-            }
-            case "TON" -> {
-                return WeightUnits.TON;
-            }
-        }
-        return null;
+        return switch (name.toUpperCase()) {
+            case "GRAM" -> WeightUnits.GRAM;
+            case "KILOGRAM" -> WeightUnits.KILOGRAM;
+            case "OUNCE" -> WeightUnits.OUNCE;
+            case "POUND" -> WeightUnits.POUND;
+            case "TON" -> WeightUnits.TON;
+            default -> throw new IllegalStateException("Unexpected value");
+        };
     }
 }
 
