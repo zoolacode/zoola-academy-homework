@@ -1,6 +1,11 @@
 .idea/
 **/.DS_Store
+<<<<<<< HEAD
 
 out/
 .DS_Store
 
+=======
+**/*.iml
+/out/
+>>>>>>> master
