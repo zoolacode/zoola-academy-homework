@@ -1,4 +1,4 @@
-package general;
+package com.zoolatech.lecture1.tasks._4;
 
 import java.util.*;
 import java.util.function.Function;

@@ -1,4 +1,4 @@
-package general;
+package com.zoolatech.lecture1.tasks._2;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,7 +20,7 @@ public class MaxValue {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int num = sc.nextInt();
-        ArrayList<Integer> list = new ArrayList<Integer>(num);
+        ArrayList<Integer> list = new ArrayList<>(num);
         list.add(sc.nextInt());
         System.out.println(max(list));
     }
