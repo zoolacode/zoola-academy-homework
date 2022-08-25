@@ -1,0 +1,13 @@
+{
+  "name": "hw-1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel src/game_of_snake/index.html",
+    "engine_game_example": "parcel src/engine_game_example/index.html"
+  },
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  }
+}

@@ -1,7 +1,16 @@
 .idea/
 **/.DS_Store
+<<<<<<< HEAD
 
 
 
 out/
 **/*.iml
+=======
+**/*.iml
+/out/
+**/node_modules
+**/dist
+**/.parcel-cache
+
+>>>>>>> master
