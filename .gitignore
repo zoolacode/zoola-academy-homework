@@ -7,4 +7,10 @@ out/
 **/.DS_Store
 **/*.iml
 /out/
+<<<<<<< HEAD
+>>>>>>> master
+=======
+**/node_modules
+**/dist
+**/.parcel-cache
 >>>>>>> master
