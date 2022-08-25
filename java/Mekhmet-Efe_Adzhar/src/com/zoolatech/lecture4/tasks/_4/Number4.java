@@ -11,6 +11,7 @@ and method that allows to get the enum value by a string representation, that ca
 public class Number4 {
     public static void main(String[] args) {
         Weight weight = Weight.GRAM;
+        System.out.println(weight.abbreviationOfCurrentWeight());
         System.out.println(Weight.GRAM.convertValue(1000, Weight.KILOGRAM));
         System.out.println(Weight.enumValueByAString("GrAm"));
         System.out.println(weight.convertValue(1, Weight.KILOGRAM));
@@ -28,6 +29,10 @@ enum Weight {
 
     Weight(String abbreviation) {
         this.abbreviation = abbreviation;
+    }
+
+    public String abbreviationOfCurrentWeight() {
+        return this.abbreviation;
     }
 
     public float convertValue(float mass, Weight sourceUnit) {
