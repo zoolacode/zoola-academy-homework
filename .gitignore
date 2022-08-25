@@ -13,6 +13,10 @@ out/
 =======
 **/node_modules
 **/dist
+<<<<<<< HEAD
 **/.parcel-cache
 
+>>>>>>> master
+=======
+**/.parcel-cache
 >>>>>>> master
