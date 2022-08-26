@@ -1,8 +1,6 @@
 package com.zoolatech.lecture7.tasks._1;
 
-import java.util.stream.Stream;
-
-public class Main {
+public class Task1 {
     public static void main(String[] args) throws InterruptedException {
         Runnable r = () -> {
             while (!Thread.currentThread().isInterrupted())
