@@ -25,9 +25,11 @@
 - Snake moves by one square in one second
 - Keyboard arrows can be used to change snake direction. Snake can only turn left or right, it can not go backwards.
 - Spacebar can be used to pause/play the game at any point. When game is on pause 120 seconds timer should also be stopped
+- All keyboard controls should stop working after game was ended and before the next game starts
 - When snake eats food, score is incremented by one
 - The current score is displayed somewhere on the user interface
-- Snake itself can be designed in a free manner - but it is important that it is clearly visible.
+- Snake can be designed in a free manner - but it is important that it is clearly visible.
+- When the game is over, there is a way to start a new one without browser window reload
 
 ### Details
 
