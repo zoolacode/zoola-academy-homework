@@ -23,7 +23,7 @@
 - Game ends when snake hits its body, or game board edge, or when 120 seconds elapse
 - Game should have visible timer
 - Snake moves by one square in one second
-- Keyboard arrows can be used to change snake direction
+- Keyboard arrows can be used to change snake direction. Snake can only turn left or right, it can not go backwards.
 - Spacebar can be used to pause/play the game at any point. When game is on pause 120 seconds timer should also be stopped
 - When snake eats food, score is incremented by one
 - The current score is displayed somewhere on the user interface
