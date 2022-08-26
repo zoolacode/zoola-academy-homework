@@ -4,16 +4,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class FileReader {
+public class FileProcessor {
     private File directory;
 
-    public FileReader(File directory) {
+    public FileProcessor(File directory) {
         this.directory = directory;
     }
 
-    public void directoryContent() {
+    public void printDirectoryContent() {
         System.out.println("Directory content:");
         String[] list = directory.list();
         for (String file : list) {
@@ -23,11 +24,12 @@ public class FileReader {
         }
     }
 
-    public void fileContent(File file) throws IOException {
+    public void printFileContent(File file) throws IOException {
         if (!file.exists()) {
             System.err.println("File '" + file.getName() + "' not found. Try again...\n");
             try (FileWriter fileWriter = new FileWriter(directory.getPath() + "/error.log", true)) {
-                fileWriter.write(file.getName() + " [" + new Date() + "]\n");
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                fileWriter.write(file.getName() + " [" + LocalDateTime.now().format(format) + "]\n");
             }
             return;
         }
