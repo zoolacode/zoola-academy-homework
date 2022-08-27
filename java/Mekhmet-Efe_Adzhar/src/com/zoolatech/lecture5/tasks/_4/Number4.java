@@ -15,36 +15,31 @@ o - 2
 r - 1
  */
 
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Number4 {
     public static void main(String[] args) {
-        //  String string = "Hello World";
         Number4 number4 = new Number4();
-        //number4.letterCounter(string);
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type a String");
         String secondString = scanner.nextLine();
         number4.letterCounter(secondString);
-
     }
 
     public void letterCounter(String string) {
-        int[] ints = new int[string.length()];
-        char[] chars = string.toCharArray();
+        Map<Character, Integer> map = new TreeMap<>();
+        char[] letters = string.toCharArray();
 
-        for (int i = 0; i < string.length(); i++) {
-            ints[i] = 1;
-            for (int j = i + 1; j < string.length(); j++) {
-                if (chars[i] == chars[j]) {
-                    ints[i]++;
-                    chars[j] = 'X';
-                }
-            }
+        for(char letter : letters) {
+            map.put(letter, map.getOrDefault(letter, 0)+ 1);
         }
-        for (int i = 0; i < ints.length; i++) {
-            if (chars[i] != ' ' && chars[i] != 'X')
-                System.out.println(chars[i] + "-" + ints[i]);
+
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            if (entry.getKey() != ' ') {
+                System.out.println(entry.getKey() + "-" + entry.getValue());
+            }
         }
     }
 }
