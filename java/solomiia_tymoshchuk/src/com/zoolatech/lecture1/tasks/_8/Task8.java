@@ -1,4 +1,4 @@
-package com.zoolatech.java.solomiia_tymoshchuk.src.lecture1.tasks._8;
+package com.zoolatech.lecture1.tasks._8;
 
 import java.util.ArrayList;
 import java.util.List;
