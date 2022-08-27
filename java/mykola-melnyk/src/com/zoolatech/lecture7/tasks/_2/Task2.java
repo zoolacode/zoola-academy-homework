@@ -2,22 +2,22 @@ package com.zoolatech.lecture7.tasks._2;
 
 public class Task2 {
     public static void main(String[] args) {
-        Calc_v_3 calc3 = new Calc_v_3(10);
-        Calc_v_2 calc2 = new Calc_v_2(10);
-        Calc_v_1 calc1 = new Calc_v_1(10);
+        Calc_v_3 calc3 = new Calc_v_3(1);
+        Calc_v_2 calc2 = new Calc_v_2(1);
+        Calc_v_1 calc1 = new Calc_v_1(1);
 
         Runnable r_3_plus = () ->
-                System.out.println( "3_plus: " + calc3.addition(5));
+                System.out.println( "3_plus: " + calc3.add(5));
         Runnable r_3_minus = () ->
                 System.out.println("3_minus: " + calc3.subtract(5));
 
         Runnable r_2_plus = () ->
-                System.out.println("2_plus: " + calc2.addition(5));
+                System.out.println("2_plus: " + calc2.add(5));
         Runnable r_2_minus = () ->
                 System.out.println("2_minus: " + calc2.subtract(5));
 
         Runnable r_1_plus = () ->
-                System.out.println("1_plus: " + calc1.addition(5));
+                System.out.println("1_plus: " + calc1.add(5));
         Runnable r_1_minus = () ->
                 System.out.println("1_minus: " + calc1.subtract(5));
 
