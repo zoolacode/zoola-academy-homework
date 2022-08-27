@@ -1,4 +1,4 @@
-package com.zoolatech.java.solomiia_tymoshchuk.src.lecture4.tasks._6;
+package com.zoolatech.lecture4.tasks._6;
 
 import java.util.Scanner;
 

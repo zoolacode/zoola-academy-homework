@@ -1,4 +1,4 @@
-package com.zoolatech.java.solomiia_tymoshchuk.src.lecture4.tasks._1;
+package com.zoolatech.lecture4.tasks._1;
 
 import java.util.Objects;
 

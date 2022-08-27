@@ -1,4 +1,4 @@
-package com.zoolatech.java.solomiia_tymoshchuk.src.lecture4.tasks._7;
+package com.zoolatech.lecture4.tasks._7;
 
 import java.util.HashMap;
 import java.util.Scanner;

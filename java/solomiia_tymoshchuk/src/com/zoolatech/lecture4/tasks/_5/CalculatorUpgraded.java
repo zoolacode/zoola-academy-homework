@@ -1,4 +1,4 @@
-package com.zoolatech.java.solomiia_tymoshchuk.src.lecture4.tasks._5;
+package com.zoolatech.lecture4.tasks._5;
 
 import java.math.BigDecimal;
 import java.util.Scanner;

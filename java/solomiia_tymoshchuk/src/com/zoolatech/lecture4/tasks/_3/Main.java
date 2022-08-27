@@ -1,4 +1,4 @@
-package com.zoolatech.java.solomiia_tymoshchuk.src.lecture4.tasks._3;
+package com.zoolatech.lecture4.tasks._3;
 
 public class Main {
     public static void main(String[] args) {

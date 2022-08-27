@@ -1,4 +1,4 @@
-package com.zoolatech.java.solomiia_tymoshchuk.src.lecture4.tasks._4;
+package com.zoolatech.lecture4.tasks._4;
 
 import java.util.Arrays;
 import java.util.Collection;
