@@ -1,6 +1,6 @@
 package com.zoolatech.lecture6.tasks._1;
 
-import java.util.*;
+import java.util.List;
 
 /*
 Class City has the following properties: string name, string country, int population.
