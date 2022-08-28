@@ -11,10 +11,7 @@ add(6) // 5
 add(4) // 5
 */
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Number5 {
     public static void main(String[] args) {
@@ -24,28 +21,27 @@ public class Number5 {
         System.out.println(kthLargest.add(5));
         System.out.println(kthLargest.add(6));
         System.out.println(kthLargest.add(4));
-
     }
 }
 
 class KthLargest {
-
+    private final PriorityQueue<Integer> integerPriorityQueue = new PriorityQueue<>();
     private final int value;
-    List<Integer> integerList = new ArrayList<>();
-    Iterator<Integer> iterator = integerList.iterator();
 
     public KthLargest(int value) {
         this.value = value;
     }
 
     public int add(int value) {
-        integerList.add(value);
-        if (iterator.hasNext()) {
-            if (integerList.get(integerList.size() - 1).compareTo(this.value) < 0) {
+        if (integerPriorityQueue.size() < this.value) {
+            integerPriorityQueue.add(value);
+            if (integerPriorityQueue.size() < this.value) {
                 return -1;
             }
+        } else if (integerPriorityQueue.element() <= value) {
+            integerPriorityQueue.poll();
+            integerPriorityQueue.add(value);
         }
-        Collections.sort(integerList);
-        return integerList.get(integerList.size() - this.value);
+        return integerPriorityQueue.element();
     }
 }
