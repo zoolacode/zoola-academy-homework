@@ -5,20 +5,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-interface CityMethods {
-    default boolean populationBiggerThanAPassedValue(List<City> cityList, int passedValue) {
+class CityMethods {
+
+    public boolean populationBiggerThanAPassedValue(List<City> cityList, int passedValue) {
         return cityList.stream()
-                .allMatch(city -> city.getPopulation() > passedValue);
+                .allMatch(city -> city.population() > passedValue);
     }
 
-    default String mostPopulatedCityForASpecificCountry(List<City> cityList, String country) {
+    public String mostPopulatedCityForASpecificCountry(List<City> cityList, String country) {
         return cityList.stream()
-                .filter(city -> country.equalsIgnoreCase(city.getCountry()))
-                .max(Comparator.comparingInt(City::getPopulation))
-                .map(City::getName).orElse("Error");
+                .filter(city -> country.equalsIgnoreCase(city.country()))
+                .max(Comparator.comparingInt(City::population))
+                .map(City::name).orElse("Error");
     }
 
-    default Map<String, City> citiesMap(List<City> cityList) {
-        return cityList.stream().collect(Collectors.toMap(City::getName, city -> city));
+    public Map<String, List<City>> citiesMap(List<City> cityList) {
+        return cityList.stream()
+                .collect(Collectors.groupingBy(City::name));
     }
 }
