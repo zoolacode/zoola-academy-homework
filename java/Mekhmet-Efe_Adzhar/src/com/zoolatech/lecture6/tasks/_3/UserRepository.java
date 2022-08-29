@@ -1,6 +1,13 @@
 package com.zoolatech.lecture6.tasks._3;
 
-record UserRepository(UserCache userCache, UserTable userTable) {
+class UserRepository {
+    private final UserCache userCache;
+    private final UserTable userTable;
+
+    public UserRepository(UserCache userCache, UserTable userTable) {
+        this.userCache = userCache;
+        this.userTable = userTable;
+    }
 
     public String findUserEmail(String id) throws UserMissingException {
         return userCache.findUser(id)
