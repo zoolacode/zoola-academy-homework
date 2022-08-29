@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-interface OrderCalc {
-    default Map<String, Double> orderPerEachCountry(List<Order> orderList) {
-        return orderList.stream()
-                .collect(Collectors.groupingBy(Order::getCountry, Collectors.averagingDouble(Order::getPrice)));
+class OrderCalc {
+    public Map<String, Double> orderPerEachCountry(List<Order> orderList) {
+       return orderList.stream()
+                .filter(order -> order.orderType().equals(OrderType.STORE))
+                .distinct()
+                .collect(Collectors.groupingBy(Order::country, Collectors.averagingDouble(Order::price)));
     }
 }
