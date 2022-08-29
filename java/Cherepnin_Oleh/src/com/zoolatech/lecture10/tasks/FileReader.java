@@ -1,7 +1,7 @@
 package com.zoolatech.lecture10.tasks;
 
 import java.io.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class FileReader {
     private String path;
@@ -14,7 +14,7 @@ public class FileReader {
         StringBuilder builder = new StringBuilder(path);
         File file = new File(builder.append(name).append(".txt").toString());
 
-        if (checkFile(file)) {
+        if (isFileExist(file)) {
             try (InputStream stream = new FileInputStream(file)) {
                 String result = new String(stream.readAllBytes());
                 System.out.println(result);
@@ -24,7 +24,7 @@ public class FileReader {
         }
     }
 
-    private boolean checkFile(File file) {
+    private boolean isFileExist(File file) {
         if (!file.exists()) {
             System.err.println("File '" + file.getName() + "' not found");
             writeLog(file.getName());
@@ -35,7 +35,7 @@ public class FileReader {
 
     private void writeLog(String file) {
         try (FileWriter fileWriter = new FileWriter(path + "error.log", true)) {
-            fileWriter.write(file + " [" + new Date() + "]\n");
+            fileWriter.write(file + " [" + LocalDateTime.now() + "]\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

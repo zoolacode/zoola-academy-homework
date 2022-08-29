@@ -18,12 +18,13 @@ public class Task {
     public static void main(String[] args) {
         FileReader fileReader = new FileReader("src/com/zoolatech/lecture10/tasks/db/");
         Scanner scanner = new Scanner(System.in);
-
+        String answer = "";
         do {
             System.out.println("Input file name (names, surnames, positions):");
             String fileName = scanner.next();
             fileReader.readFile(fileName);
             System.out.println("Repeat operation (press 'Y' to repeat):");
-        } while (scanner.next().equalsIgnoreCase("Y"));
+            answer = scanner.next();
+        } while ("Y".equalsIgnoreCase(answer));
     }
 }
