@@ -3,8 +3,8 @@ package com.zoolatech.lecture3.tasks._1;
 import java.util.ArrayList;
 
 public class Orchestra {
-    ArrayList<Musician> musicians = new ArrayList<>();
-    private String orchestraName;
+    private final ArrayList<Musician> musicians = new ArrayList<>();
+    private final String orchestraName;
 
     public Orchestra(String orchestraName) {
         this.orchestraName = orchestraName;
@@ -23,7 +23,7 @@ public class Orchestra {
     public void playAll() {
         System.out.println(orchestraName + " plays!");
         for (Musician musician : musicians) {
-            musician.instrument.play();
+            musician.getInstrument().play();
         }
     }
 }

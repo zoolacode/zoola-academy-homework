@@ -17,7 +17,7 @@ public non-sealed class Rectangle implements Shape {
 
     @Override
     public void perimetr() {
-        System.out.println("Perimetr of recatngle=" + (2 * a + 2 * b));
+        System.out.println("Perimetr of rectangle=" + (2 * a + 2 * b));
     }
 
     @Override

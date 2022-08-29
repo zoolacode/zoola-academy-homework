@@ -9,7 +9,12 @@ public abstract class MusicalInstrument {
         this.name = name;
     }
 
-    void play() {
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public void play() {
         System.out.println(this.sound);
     }
 }

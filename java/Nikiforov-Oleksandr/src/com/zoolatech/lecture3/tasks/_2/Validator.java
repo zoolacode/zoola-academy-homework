@@ -1,39 +1,44 @@
 package com.zoolatech.lecture3.tasks._2;
 
-import java.util.ArrayList;
+public interface Validator {
+    boolean isValid(UserAccount userAccount);
 
-public class Validator {
-    UserAccount userAccount;
-
-    public Validator(UserAccount userAccount) {
-        this.userAccount = userAccount;
-    }
-
-    public boolean isValid() {
-        ArrayList<ValidatorInterface> validators = new ArrayList<>();
-        UserIdValidator userIdValidator = new UserIdValidator(userAccount.userId);
-        validators.add(userIdValidator);
-        FirstNameValidator firstNameValidator = new FirstNameValidator(userAccount.firstName);
-        validators.add(firstNameValidator);
-        LastNameValidator lastNameValidator = new LastNameValidator(userAccount.lastName);
-        validators.add(lastNameValidator);
-        CountryValidator countryValidator = new CountryValidator(userAccount.country);
-        validators.add(countryValidator);
-        UserEmailValidator userEmailValidator = new UserEmailValidator(userAccount.userEmail);
-        validators.add(userEmailValidator);
-        PhoneNumberValidator phoneNumberValidator = new PhoneNumberValidator(userAccount.phonenumber);
-        validators.add(phoneNumberValidator);
-        BirthDayValidator birthDayValidator = new BirthDayValidator(userAccount.birthDay);
-        validators.add(birthDayValidator);
-        BirthMonthValidator birthMonthValidator = new BirthMonthValidator(userAccount.birthMonth);
-        validators.add(birthMonthValidator);
-
-        for (ValidatorInterface validator : validators) {
-            if (!validator.isValid()) {
-                return false;
+    default String getStringFieldValue(UserAccount userAccount, String fieldName) {
+        switch (fieldName) {
+            case ("firstName") -> {
+                return userAccount.getFirstName();
+            }
+            case ("lastName") -> {
+                return userAccount.getLastName();
+            }
+            case ("phonenumber") -> {
+                return userAccount.getPhonenumber();
+            }
+            case ("country") -> {
+                return userAccount.getCountry();
+            }
+            case ("userEmail") -> {
+                return userAccount.getUserEmail();
             }
         }
 
-        return true;
+        return "";
     }
+
+    default int getIntFieldValue(UserAccount userAccount, String fieldName) {
+        switch (fieldName) {
+            case ("userId") -> {
+                return userAccount.getUserId();
+            }
+            case ("birthDay") -> {
+                return userAccount.getBirthDay();
+            }
+            case ("birthMonth") -> {
+                return userAccount.getBirthMonth();
+            }
+        }
+
+        return 0;
+    }
+
 }

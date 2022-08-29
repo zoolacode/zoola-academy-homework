@@ -13,16 +13,16 @@ package com.zoolatech.lecture3.tasks._1;
 
 public class Task1 {
     public static void main(String[] args) {
-        Piano piano = new Piano("tra-la-la-la-la la-la-la", "Piano");
-        Cello cello = new Cello("vi-vi-vi-vi la-vi-vi-vi", "Cello");
-        Violin violin = new Violin("la-vi la-vi la-vi", "Violin");
+        Piano piano = new Piano();
+        Cello cello = new Cello();
+        Violin violin = new Violin();
 
         Musician pianist = new Musician("Adam", piano);
-        pianist.OutputMusician();
+        pianist.outputMusician();
         Musician violonist = new Musician("Eva", violin);
-        violonist.OutputMusician();
+        violonist.outputMusician();
         Musician cellist = new Musician("Alex", cello);
-        cellist.OutputMusician();
+        cellist.outputMusician();
 
         System.out.println();
         System.out.println("Are pianist and violonist the same? " + pianist.equals(violonist) + '\n');

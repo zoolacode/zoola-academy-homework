@@ -1,20 +1,18 @@
 package com.zoolatech.lecture3.tasks._4;
 
 public class CsvReporter extends Reporter {
-
+    private final String format = " in CSV format";
     public CsvReporter(String headerData, String fileData, String fileName) {
-        super(headerData, fileData, fileName);
+        super(headerData, fileData, fileName+".txt");
+    }
+    @Override
+    public void addHeaderData(){
+        super.addHeaderData();
+        System.out.println(format);
     }
 
-    @Override
-    void generate() {
-        openFile();
-        System.out.println(".txt");
-        addHeaderData();
-        System.out.println(".txt in CSV format");
-        addFileData();
-        System.out.println(".txt in CSV format");
-        closeFile();
-        System.out.println(".txt");
+    public void addFileData(){
+        super.addFileData();
+        System.out.println(format);
     }
 }

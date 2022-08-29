@@ -14,7 +14,6 @@ public non-sealed class Circle implements Shape {
     @Override
     public void area() {
         System.out.println("Area of circle=" + Math.PI * Math.pow(radius, 2));
-        ;
     }
 
     @Override

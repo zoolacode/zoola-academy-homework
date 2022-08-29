@@ -1,20 +1,24 @@
 package com.zoolatech.lecture3.tasks._2;
 
-public class PhoneNumberValidator implements ValidatorInterface {
-    private String phoneNumber;
+public class PhoneNumberValidator implements Validator {
+    private String fieldName;
+    private final String allowedSymbols= "+-()";
 
-    public PhoneNumberValidator(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public PhoneNumberValidator(String fieldName) {
+        this.fieldName = fieldName;
     }
 
     @Override
-    public boolean isValid() {
-        if (phoneNumber.isEmpty()) {
-            System.out.println("Field phone number is empty. Validation error");
-            return false;
-        } else {
-            System.out.println("Field phone number is not empty");
-            return true;
+    public boolean isValid(UserAccount userAccount) {
+        String phoneNumber = getStringFieldValue(userAccount, fieldName);
+        char[] charArray = phoneNumber.toCharArray();
+        for (char c : charArray) {
+            if (!(Character.isDigit(c) || allowedSymbols.indexOf(c) >= 0)) {
+                System.out.println("Phone number has illegal symbols. Validating error.");
+                return false;
+            }
         }
+        System.out.println("Phone number contains only legal symbols.");
+        return true;
     }
 }

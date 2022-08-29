@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Musician {
     private final String name;
-    MusicalInstrument instrument;
+    private final MusicalInstrument instrument;
 
     public Musician(String name, MusicalInstrument instrument) {
         this.name = name;
@@ -32,8 +32,12 @@ public class Musician {
 
     }
 
-    public void OutputMusician() {
-        System.out.println(toString());
+    public void outputMusician() {
+        System.out.println(this);
         instrument.play();
+    }
+
+    public MusicalInstrument getInstrument() {
+        return instrument;
     }
 }

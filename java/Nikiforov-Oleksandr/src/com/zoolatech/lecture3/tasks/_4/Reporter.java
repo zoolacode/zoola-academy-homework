@@ -11,10 +11,15 @@ public abstract class Reporter {
         this.fileName = fileName;
     }
 
-    abstract void generate();
+    public void generate(){
+        openFile();
+        addHeaderData();
+        addFileData();
+        closeFile();
+    }
 
     protected void openFile() {
-        System.out.print("Opening file " + fileName);
+        System.out.println("Opening file " + fileName);
     }
 
     protected void addHeaderData() {
