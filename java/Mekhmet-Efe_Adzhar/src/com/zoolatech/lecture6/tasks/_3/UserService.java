@@ -7,13 +7,12 @@ class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public String findUserEmail(String id) {
         try {
-            if (!userRepository.findUserEmail(id).isEmpty()) {
-                return userRepository.findUserEmail(id);
-            }
-        } catch (UserMissingException userRepository) {
-            System.out.println("Exception " + userRepository);
+            return userRepository.findUserEmail(id);
+        } catch (UserMissingException userMissingException) {
+            System.out.println("Exception " + userMissingException);
         }
         return null;
     }
