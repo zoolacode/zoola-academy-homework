@@ -23,11 +23,11 @@ public class Number3 {
 
         User user = new User("1", "user1gmail.com");
 
-        UserCache userCache = id -> Optional.empty();
+        UserCache userCache = id -> Optional.of(user);
         UserTable userTable = id -> Optional.empty();
 
         UserRepository userRepository = new UserRepository(userCache, userTable);
         UserService userService = new UserService(userRepository);
-        System.out.println(userService.findUserEmail(user.getUserId()));
+        System.out.println(userService.findUserEmail(user.userId()));
     }
 }

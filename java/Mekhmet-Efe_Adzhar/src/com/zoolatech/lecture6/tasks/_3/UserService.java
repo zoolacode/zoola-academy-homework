@@ -9,10 +9,9 @@ class UserService {
     }
 
     public String findUserEmail(String id) throws UserMissingException {
-        try {
+        if (!userRepository.findUserEmail(id).isEmpty()) {
             return userRepository.findUserEmail(id);
-        } catch (UserMissingException userMissingException) {
-            throw new UserMissingException(id + ": No such user in cash and table");
         }
+        return "No such user in cash and table";
     }
 }

@@ -1,11 +1,7 @@
 package com.zoolatech.lecture6.tasks._3;
 
 class UserMissingException extends Exception {
-    public UserMissingException(String errorMessage) {
-        super(errorMessage);
-    }
-
-    public UserMissingException() {
-        System.out.println("Error, User not found:");
+    public UserMissingException(String id) {
+        super("Error, User not found by id: " + id);
     }
 }
