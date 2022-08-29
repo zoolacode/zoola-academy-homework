@@ -1,5 +1,88 @@
 body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  position: relative;
   margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.mesh {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 100vh;
+  height: 100vh;
+  background-color: #419884;
+}
+
+.item {
+  width: calc(100vh / 25);
+  height: calc(100vh / 25);
+}
+
+.snakeBody {
+  background: rgb(0, 0, 0);
+  background-size: cover;
+  border-radius: 50%;
+
+}
+.snakeHead {
+  background: rgb(148, 12, 12);
+  background-size: cover;
+  border-radius: 40%;
+}
+.food {
+  background: green;
+  border: 50%;
+}
+
+.score {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 46px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #419884;
+  color: #fff;
+}
+
+.time {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 46px;
+  width: 100px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #419884;
+  color: #fff;
+}
+
+
+.alert {
+  position: fixed;
+  font-size: 50px;
+  color: white;
+  width: 100vw;
+  height: 100px;
+  display: none;
+  bottom: 0;
+  line-height: 100px;
+  text-align: center;
+}
+
+.alert-win {
+  display: block;
+  background-color: #abce29;
+}
+
+.alert-loss {
+  display: block;
+  background-color: #cc4040;
 }
