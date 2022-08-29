@@ -2,4 +2,142 @@ body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:root {
+  --squares: 25;
+  --board-size: calc(100vh - 10px);
+  --gap: 1px;
+  --square-size: calc(var(--board-size) / var(--squares) - var(--gap));
+}
+
+.container {
+  display: grid;
+  width: var(--board-size);
+  height: var(--board-size);
+  row-gap: var(--gap);
+  column-gap: var(--gap);
+  background-color: #3f51b5;
+  box-shadow: 2px 0px 4px 0px grey;
+  margin: 5px;
+}
+
+.square {
+  width: var(--square-size);
+  height: var(--square-size);
+}
+
+.square.food {
+  background-color: yellow;
+  border-radius: calc(var(--square-size) / 2);
+}
+
+.square.food-super {
+  background-color: #ff5722;
+  border-radius: calc(var(--square-size) / 2);
+}
+
+.square.snake {
+  background-color: cornflowerblue;
+  transition: all 0.3s;
+}
+
+.square.snake-speed {
+  background-color: #ff5722;
+}
+
+.square.snake-dead {
+  transform: scale(0);
+}
+
+.alert {
+  position: fixed;
+  font-size: 50px;
+  color: white;
+  width: 100vw;
+  height: 100px;
+  display: none;
+  line-height: 100px;
+  text-align: center;
+}
+
+.alert-win {
+  display: block;
+  background-color: #abce29;
+}
+
+.alert-loss {
+  display: block;
+  background-color: #ff5722;
+}
+
+.score {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 46px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3f51b5;
+  color: #fff;
+}
+
+.gametime {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 46px;
+  width: 130px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: yellow;
+  color: #3f51b5;
+}
+
+.superfood-timer {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 46px;
+  width: 130px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff5722;
+  color: white;
+  visibility: hidden;
+}
+
+.superfood-timer.active {
+  visibility: visible;
+}
+
+.pause-screen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  opacity: 0.4;
+  font-size: 60px;
+  text-align: center;
+  background-color: #4caf50;
+  padding-top: 100px;
+  text-transform: uppercase;
+}
+
+.pause-screen.active {
+  display: block;
 }

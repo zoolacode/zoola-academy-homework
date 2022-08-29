@@ -18,7 +18,7 @@
 - Snake can eat food and grow by one square
 - One piece of food appears whenever snake eats
 - One piece of food appears on the board when game starts
-- One piece of food appears on the board every 15 seconds even if snake didn't eat the previous one
+- Every 5 seconds (unless there is more than two pieces of food on the board already) - one piece of food should appear
 - Food always appears in places where there is no snake body or other food
 - Game ends when snake hits its body, or game board edge, or when 120 seconds elapse
 - Game should have visible timer
