@@ -2,7 +2,7 @@ package com.zoolatech.lecture6.tasks._3;
 
 class UserService {
 
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
