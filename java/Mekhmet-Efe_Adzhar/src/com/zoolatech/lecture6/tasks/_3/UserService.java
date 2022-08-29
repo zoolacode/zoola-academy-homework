@@ -1,12 +1,6 @@
 package com.zoolatech.lecture6.tasks._3;
 
-class UserService {
-
-    UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+record UserService(UserRepository userRepository) {
 
     public String findUserEmail(String id) throws UserMissingException {
         if (!userRepository.findUserEmail(id).isEmpty()) {
