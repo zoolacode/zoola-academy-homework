@@ -25,19 +25,13 @@ public class Task3 {
         String expression2 = "lOreM IpSUM hAS bEEN the INDUStRy StANDarD dumMy";
         String expression3 = "tHere ARe mANY VARIAtIons oF PaSSaGES of lorEm iPsum AvAiLaBLe";
 
-        printResult(expression1, stringUp);
-        printResult(expression2, stringDown);
+        printResult(expression1, String::toUpperCase);
+        printResult(expression1, String::toLowerCase);
+        printResult(expression2, String::toUpperCase);
+        printResult(expression2, String::toLowerCase);
         printResult(expression3, stringUp, stringDown);
     }
 
-//    public static void printResult(String expression, StringModifier stringModifier) {
-//        System.out.println(stringModifier.modify(expression));
-//    }
-//
-//    public static void printResult(String expression, StringModifier stringModifier1, StringModifier stringModifier2) {
-//        System.out.println(stringModifier1.modify(expression));
-//        System.out.println(stringModifier2.modify(expression));
-//    }
 
     public static void printResult(String expression, StringModifier... stringModifiers) {
         for (StringModifier stringModifier : stringModifiers) {

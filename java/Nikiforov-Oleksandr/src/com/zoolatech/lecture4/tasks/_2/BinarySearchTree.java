@@ -1,7 +1,7 @@
 package com.zoolatech.lecture4.tasks._2;
 
 public class BinarySearchTree {
-    private class Node {
+    static class Node {
         int key;
         Node left, right;
 
@@ -13,7 +13,7 @@ public class BinarySearchTree {
     private Node root;
 
     public BinarySearchTree(int value) {
-        new Node(value);
+        root = new Node(value);;
     }
 
     public void insert(int key) {

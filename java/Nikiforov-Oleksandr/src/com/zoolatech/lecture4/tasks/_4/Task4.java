@@ -1,8 +1,6 @@
 package com.zoolatech.lecture4.tasks._4;
 
 import java.util.Scanner;
-import java.util.Objects;
-import java.util.SortedMap;
 
 /**
  * Create an enum class that represents the following weight units: gram, kilogram, ounce, pound, ton.
@@ -40,25 +38,17 @@ public class Task4 {
             System.out.println(value + abbreviation + " = " + convertedValue + weight.abbreviation);
         }
 
-        public Weight getClearType(String weightType) {
-            weightType = weightType.toUpperCase();
-            if (weightType.equals(this.toString())) {
-                return this;
+        public static Weight findWeightType(String weightType) {
+            String upperCasedWeightType = weightType.toUpperCase();
+            for (Weight weight : values()) {
+                if (weight.name().equals(upperCasedWeightType)) {
+                    return weight;
+                }
             }
             return null;
         }
     }
 
-    public static void findWeightType(String weightType) {
-        for (Weight weight : Weight.values()) {
-            Weight resultType = weight.getClearType(weightType);
-            if (resultType != null) {
-                System.out.println("Coefficient of " + resultType + " is " + resultType.getCoefficient());
-                return;
-            }
-        }
-        System.out.println("No similar types for " + weightType);
-    }
 
     public static void main(String[] args) {
         for (Weight weight : Weight.values()) {
@@ -76,7 +66,7 @@ public class Task4 {
         System.out.println("Enter the type to know its coefficient: ");
         Scanner sc = new Scanner(System.in);
         String weightType = sc.next();
-        findWeightType(weightType);
+        System.out.println(Weight.findWeightType(weightType));
     }
 }
 
