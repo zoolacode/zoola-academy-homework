@@ -11,8 +11,7 @@ public class FileReader {
     }
 
     public void readFile(String name) {
-        StringBuilder builder = new StringBuilder(path);
-        File file = new File(builder.append(name).append(".txt").toString());
+        File file = new File(path + name + ".txt");
 
         if (isFileExist(file)) {
             try (InputStream stream = new FileInputStream(file)) {
