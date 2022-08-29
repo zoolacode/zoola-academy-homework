@@ -42,44 +42,21 @@ public class Task1 {
 
     public static boolean isBiggerPopulation(List<City> cities, int populationToCheck) {
         return cities.stream()
-                .allMatch(city -> city.getPopulation() > populationToCheck);
+                .allMatch(city -> city.population() > populationToCheck);
     }
 
     public static City biggestCity(List<City> cities, String countryToFind) {
         return cities.stream()
-                .filter(city -> city.getCountry().equalsIgnoreCase(countryToFind))
-                .max(Comparator.comparing(City::getPopulation))
+                .filter(city -> city.country().equalsIgnoreCase(countryToFind))
+                .max(Comparator.comparing(City::population))
                 .orElseThrow(NoSuchElementException::new);
     }
 
     public static Map<String, City> mapCities(List<City> cities) {
         return cities.stream()
-                .filter(distinctByKey(City::getName))
-                .collect(Collectors.toMap(City::getName, Function.identity()));
-    }
-
-    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
-        Map<Object, Boolean> map = new ConcurrentHashMap<>();
-        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+                .collect(Collectors.toMap(City::name, Function.identity(), (city, city2) -> city));
     }
 }
 
 
-record City(String name, String country, int population) {
-    public String getName() {
-        return name;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public int getPopulation() {
-        return population;
-    }
-
-    public String toString() {
-        return country + " has city " + name +
-                " with population " + population;
-    }
-}
+record City(String name, String country, int population) { }

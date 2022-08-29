@@ -29,10 +29,10 @@ public class Task2 {
 
     public static Map<String, Double> averagePrice(List<Order> orders) {
         return orders.stream()
-                .filter(shop -> shop.getType().equals(ShopType.STORE))
-                .filter(distinctByKey(Order::getId))
-                .collect(Collectors.groupingBy(Order::getCountry,
-                        Collectors.averagingDouble(Order::getPrice)));
+                .filter(shop -> shop.type().equals(ShopType.STORE))
+                .filter(distinctByKey(Order::id))
+                .collect(Collectors.groupingBy(Order::country,
+                        Collectors.averagingDouble(Order::price)));
     }
 
     public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
@@ -43,28 +43,5 @@ public class Task2 {
 
 
 record Order(String id, ShopType type, float price, String country) {
-    public float getPrice() {
-        return price;
-    }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public ShopType getType() {
-        return type;
-    }
-
-    public String toString() {
-        return "Order{" +
-                "id='" + id + '\'' +
-                ", type=" + type +
-                ", price=" + price +
-                ", country='" + country + '\'' +
-                '}';
-    }
 }

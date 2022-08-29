@@ -11,7 +11,7 @@ public class UserService {
         try{
             return repository.findUserEmail(id);
         }catch (UserMissingException e) {
-            return e.getMessage();
+            return null;
         }
     }
 }

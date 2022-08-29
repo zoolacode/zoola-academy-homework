@@ -16,7 +16,7 @@ public class UserTableClass implements UserTable {
     @Override
     public Optional<User> findUser(String id) {
         return userstable.stream()
-                .filter(user -> id.equals(user.getId()))
+                .filter(user -> id.equals(user.id()))
                 .findAny();
     }
 }

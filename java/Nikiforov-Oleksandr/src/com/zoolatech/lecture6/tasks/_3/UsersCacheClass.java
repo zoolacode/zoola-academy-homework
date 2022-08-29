@@ -12,7 +12,7 @@ public class UsersCacheClass implements UserCache {
     @Override
     public Optional<User> findUser(String id) {
         return userscache.stream()
-                .filter(user -> id.equals(user.getId()))
+                .filter(user -> id.equals(user.id()))
                 .findAny();
     }
 }

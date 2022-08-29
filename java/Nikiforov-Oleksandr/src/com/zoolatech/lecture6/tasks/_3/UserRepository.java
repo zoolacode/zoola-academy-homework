@@ -18,7 +18,7 @@ public class UserRepository {
         User foundUser = userCache.orElse(userTable.orElse(null));
 
         if (foundUser != null){
-            return foundUser.getEmail();
+            return foundUser.email();
         }
 
         throw new UserMissingException("Cannot find user " + id + " in table and cache");
