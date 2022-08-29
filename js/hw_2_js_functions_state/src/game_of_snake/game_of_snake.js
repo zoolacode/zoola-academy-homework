@@ -1,19 +1,26 @@
 import { createEngine, ENGINE_INITIALIZE_SIGNAL } from "../engine/engine";
-import {
-  renderGame,
-  renderGameAlert,
-  renderGameScore,
-  renderGameTime,
-  renderPauseScreen,
-  renderSuperFoodTimer,
-} from "./renderer";
+import { addGamePause } from "./game_pause";
+import { addGameTime } from "./game_timer";
+import { getIsGameEnded, getIsGameOnPause } from "./game_utils";
+import { renderGame } from "./game_renderer";
+import { addSnakeControls } from "./snake_controls";
+import { initialState } from "./game_constants";
 import {
   flattenSuperFood,
-  getRandomNumber,
   parseStringCoordinates,
   pipe,
   stringifyCoordinates,
 } from "./utils";
+import {
+  getAllFood,
+  getIsFoodThere,
+  getRandomFoodCoordinates,
+  removeFood,
+  removeSuperFood,
+} from "./snake_food/snake_food_utils";
+import { addSnakeFood } from "./snake_food/snake_food_engine";
+import { addGameEndAlert } from "./game_end_alert";
+import { addGameScore } from "./game_score";
 
 // Good luck!
 
@@ -22,55 +29,16 @@ const adjustedBoardSize = boardSize - 1;
 
 const engine = createEngine();
 
-const initialState = {
-  pause: false,
-  isGameEnded: false,
-  snake: ["10:10", "11:10", "12:10", "13:10", "14:10"],
-  direction: [1, 0],
-  directionCandidates: [],
-  food: {},
-  superFood: [],
-  frame: 0,
-  points: 0,
-  speed: 200,
-  gameTime: 0,
-  speedUp: false,
-  maxGameTime: 10,
-  boardSize: 25,
-};
 engine.addSignalReducer(ENGINE_INITIALIZE_SIGNAL, () => initialState);
 
 engine.addSignalReducer("restartGame", () => initialState);
 
-engine.addSideEffect({
-  onlyWhen: ({ prevState, state }) =>
-    prevState?.pause !== state.pause ||
-    prevState?.isGameEnded !== state.isGameEnded ||
-    prevState?.gameTime !== state.gameTime,
-  effect: ({ state }, emit) => {
-    if (getIsGameEnded(state) || getIsGameOnPause(state)) {
-      return;
-    }
-
-    const timeoutId = setTimeout(() => {
-      emit("incrementGameTime");
-    }, 1000);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  },
-});
-
-engine.addSignalReducer("incrementGameTime", (state) => {
-  const nextGameTime = state.gameTime + 1;
-
-  return {
-    ...state,
-    isGameEnded: nextGameTime > state.maxGameTime,
-    gameTime: nextGameTime,
-  };
-});
+addGameTime(engine);
+addGamePause(engine);
+addSnakeControls(engine);
+addSnakeFood(engine);
+addGameEndAlert(engine);
+addGameScore(engine);
 
 engine.addSideEffect({
   onlyWhen: ({ prevState, state }) =>
@@ -78,97 +46,6 @@ engine.addSideEffect({
     prevState?.snake !== state.snake ||
     prevState.isGameEnded !== state.isGameEnded,
   effect: ({ state }) => renderGame(state, boardSize),
-});
-
-engine.addSideEffect({
-  onlyWhen: ({ prevState, state }) =>
-    prevState?.isGameEnded !== state.isGameEnded,
-  effect: renderGameAlert,
-});
-
-engine.addSideEffect({
-  onlyWhen: ({ prevState, state }) => prevState?.pause !== state.pause,
-  effect: renderPauseScreen,
-});
-
-engine.addSideEffect({
-  onlyWhen: ({ prevState, state }) => !prevState || !getIsGameEnded(state),
-  effect: ({ state }, emit) => {
-    const onKeyUp = (e) => {
-      if (
-        !["ArrowUp", "ArrowRight", "ArrowLeft", "ArrowDown"].includes(e.code)
-      ) {
-        return;
-      }
-
-      const arrowToDirection = {
-        ArrowUp: [0, -1],
-        ArrowRight: [1, 0],
-        ArrowLeft: [-1, 0],
-        ArrowDown: [0, 1],
-      };
-      const nextDirection = arrowToDirection[e.code];
-      emit("changeDirection", nextDirection);
-    };
-
-    document.addEventListener("keyup", onKeyUp);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp);
-    };
-  },
-});
-
-engine.addSideEffect({
-  onlyWhen: ({ prevState }) => !prevState,
-  effect: (_, emit) => {
-    const onKeyUp = (e) => {
-      if (e.key === "Shift") {
-        emit("speedUp", false);
-      }
-    };
-
-    const onKeyDown = (e) => {
-      if (e.key === "Shift") {
-        emit("speedUp", true);
-      }
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("keyup", onKeyUp);
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("keyup", onKeyUp);
-    };
-  },
-});
-
-engine.addSignalReducer("speedUp", (state, value) => {
-  return {
-    ...state,
-    speedUp: value,
-    speed: value ? initialState.speed / 2 : initialState.speed,
-  };
-});
-
-engine.addSignalReducer("changeDirection", (state, nextDirection) => {
-  const prevDirection =
-    state.directionCandidates.length === 0
-      ? state.direction
-      : state.directionCandidates[state.directionCandidates.length - 1];
-
-  if (
-    !getIsSameDirection(prevDirection, nextDirection) &&
-    getCanChangeDirection(prevDirection, nextDirection)
-  ) {
-    return getNextFrameState({
-      ...state,
-      directionCandidates: [...state.directionCandidates, nextDirection],
-    });
-  }
-
-  return state;
 });
 
 engine.addSideEffect({
@@ -191,7 +68,23 @@ engine.addSideEffect({
   },
 });
 
-const getNextFrameState = (state) => {
+engine.addSignalReducer("changeDirection", (state, nextDirection) => {
+  const prevDirection = state.direction;
+
+  if (
+    !getIsSameDirection(prevDirection, nextDirection) &&
+    getCanChangeDirection(prevDirection, nextDirection)
+  ) {
+    return getNextFrame({
+      ...state,
+      direction: nextDirection,
+    });
+  }
+
+  return state;
+});
+
+const getNextFrame = (state) => {
   if (getIsGameEnded(state)) {
     return state;
   }
@@ -212,6 +105,7 @@ const getNextFrameState = (state) => {
   const isFoodThere = getIsFoodThere(nextHead, getAllFood(state));
   const isSuperFoodThere =
     isFoodThere && flattenSuperFood(state.superFood)[nextHead];
+
   const nextSnake = [...(isFoodThere ? snake : body), nextHead];
 
   const nextFood = isFoodThere
@@ -247,14 +141,6 @@ const getNextFrameState = (state) => {
     food: nextFood,
     frame: state.frame + 1,
     superFood: nextSuperFood,
-    direction:
-      state.directionCandidates.length === 0
-        ? state.direction
-        : state.directionCandidates[0],
-    directionCandidates:
-      state.directionCandidates.length === 0
-        ? state.directionCandidates
-        : state.directionCandidates.slice(1),
     points: isFoodThere
       ? state.points +
         (isSuperFoodThere ? superFoodInterest : normalFoodInterest)
@@ -262,159 +148,12 @@ const getNextFrameState = (state) => {
   };
 };
 
-engine.addSignalReducer("nextFrame", getNextFrameState);
-
-engine.addSideEffect({
-  onlyWhen: ({ prevState, state }) => prevState?.points !== state.points,
-  effect: renderGameScore,
-});
-
-engine.addSideEffect({
-  onlyWhen: ({ prevState, state }) => prevState?.gameTime !== state.gameTime,
-  effect: renderGameTime,
-});
-
-engine.addSideEffect({
-  onlyWhen: ({ prevState, state }) => prevState?.frame !== state.frame,
-  effect: ({ state }, emit) => {
-    if (state.frame === 0) {
-      emit("newFood");
-    }
-  },
-});
-
-engine.addSideEffect({
-  onlyWhen: ({ prevState, state }) => prevState?.gameTime !== state.gameTime,
-  effect: ({ state }, emit) => {
-    if (getIsGameOnPause(state) || getIsGameEnded(state)) {
-      return;
-    }
-
-    emit("removeExpiredSuperFood");
-
-    if (state.gameTime !== 0 && state.gameTime % 5 === 0) {
-      emit("newSuperFood");
-    }
-  },
-});
-
-engine.addSideEffect({
-  effect: ({ state }, emit) => {
-    if (getIsGameEnded(state)) {
-      return;
-    }
-
-    const onKeyUp = (e) => {
-      if (e.code === "Space") {
-        emit("togglePause");
-      }
-    };
-
-    document.addEventListener("keyup", onKeyUp);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp);
-    };
-  },
-});
-
-engine.addSignalReducer("removeExpiredSuperFood", (state) => {
-  const expiredSuperFood = state.superFood
-    .filter(({ expiresAt }) => state.gameTime >= expiresAt)
-    .map(({ location }) => location);
-
-  if (expiredSuperFood.length === 0) {
-    return state;
-  }
-
-  return {
-    ...state,
-    food: expiredSuperFood.reduce(
-      (acc, expiredLocation) => {
-        return {
-          ...acc,
-          [expiredLocation]: false,
-        };
-      },
-      { ...state.food }
-    ),
-    superFood: state.superFood.filter(
-      ({ expiresAt }) => state.gameTime < expiresAt
-    ),
-  };
-});
-
-engine.addSideEffect({
-  onlyWhen: ({ prevState, state }) =>
-    prevState?.gameTime !== state.gameTime ||
-    prevState.superFood !== state.superFood,
-  effect: renderSuperFoodTimer,
-});
-
-engine.addSignalReducer("newSuperFood", (state) => {
-  const superfoodExpirationTime = 5;
-  const superFoodCoordinates = getRandomFoodCoordinates(
-    getAllFood(state),
-    state.snake
-  );
-  return {
-    ...state,
-    superFood: [
-      ...state.superFood,
-      {
-        location: superFoodCoordinates,
-        expiresAt: state.gameTime + superfoodExpirationTime,
-      },
-    ],
-    food: {
-      ...state.food,
-      [superFoodCoordinates]: true,
-    },
-  };
-});
-
-engine.addSignalReducer("newFood", (state) => {
-  const allFood = Object.entries(state.food).filter(
-    ([_, value]) => value
-  ).length;
-
-  if (allFood > 2) {
-    return state;
-  }
-
-  const foodCoordinates = getRandomFoodCoordinates(
-    getAllFood(state),
-    state.snake
-  );
-
-  return {
-    ...state,
-    food: {
-      ...state.food,
-      [foodCoordinates]: true,
-    },
-  };
-});
-
-engine.addSignalReducer("togglePause", (state) => {
-  return {
-    ...state,
-    pause: !state.pause,
-  };
-});
+engine.addSignalReducer("nextFrame", getNextFrame);
 
 engine.start();
 
-function getIsGameEnded(state) {
-  return state.isGameEnded;
-}
-
 function getIsSameDirection([x1, y1], [x2, y2]) {
   return x1 === x2 && y1 === y2;
-}
-
-function getIsGameOnPause(state) {
-  return state.pause;
 }
 
 function getCanChangeDirection([x1, y1], [x2, y2]) {
@@ -459,68 +198,4 @@ function getIsSnakeBodyThere(targetCoordinate, snake) {
 function getIsWallThere(coordinates) {
   const [x, y] = parseStringCoordinates(coordinates);
   return x > adjustedBoardSize || y > adjustedBoardSize || x < 0 || y < 0;
-}
-
-function getIsFoodThere(coordinates, food) {
-  return food[coordinates];
-}
-
-function removeFood(coordinate, food) {
-  return {
-    ...food,
-    [coordinate]: false,
-  };
-}
-
-function getForbiddenFoodCoordinates(currentFood, currentSnake) {
-  return currentSnake.reduce(
-    (acc, coordinate) => {
-      return {
-        ...acc,
-        [coordinate]: true,
-      };
-    },
-    { ...currentFood }
-  );
-}
-
-function getRandomFoodCoordinates(
-  currentFood,
-  currentSnake,
-  forbiddenCoordinates = getForbiddenFoodCoordinates(currentFood, currentSnake)
-) {
-  const nextFoodCoordinates = [
-    getRandomNumber(adjustedBoardSize),
-    getRandomNumber(adjustedBoardSize),
-  ];
-
-  if (forbiddenCoordinates[nextFoodCoordinates]) {
-    return getRandomFoodCoordinates(
-      currentFood,
-      currentSnake,
-      forbiddenCoordinates
-    );
-  }
-
-  return stringifyCoordinates(nextFoodCoordinates);
-}
-
-function getAllFood(state) {
-  return state.superFood
-    .map(({ location }) => location)
-    .reduce(
-      (acc, location) => {
-        return {
-          ...acc,
-          [location]: true,
-        };
-      },
-      { ...state.food }
-    );
-}
-
-function removeSuperFood(superFood, coordinates) {
-  return superFood.filter(({ location }) => {
-    return location !== coordinates;
-  });
 }

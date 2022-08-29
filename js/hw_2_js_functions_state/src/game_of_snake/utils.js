@@ -33,3 +33,11 @@ export function flattenSuperFood(superFood) {
       };
     }, {});
 }
+
+export function adjustTimeToScreen(num) {
+  const str = String(num);
+  if (str.length < 2) {
+    return `0${str}`;
+  }
+  return str;
+}
