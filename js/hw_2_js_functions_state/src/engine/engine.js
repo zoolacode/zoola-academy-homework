@@ -57,7 +57,6 @@ export const createEngine = () => {
 
   const publicEmit = (signal, payload) => {
     // always run "emit" in the a Event Loop iteration to let all synchronous code complete
-    // завжди запускайте "emit" в ітерації циклу подій, щоб завершити роботу всього синхронного коду
     setTimeout(() => {
       try {
         emit(signal, payload);
@@ -101,5 +100,4 @@ function logError(type, err) {
 }
 
 // Initialize signal doesn't have to be a Symbol, but it's a valid use-case if you want to ensure uniqueness
-// Сигнал ініціалізації не обов’язково має бути символом, але це допустимий варіант використання, якщо ви хочете забезпечити унікальність
 export const ENGINE_INITIALIZE_SIGNAL = Symbol("ENGINE_INITIALIZE_SIGNAL");
