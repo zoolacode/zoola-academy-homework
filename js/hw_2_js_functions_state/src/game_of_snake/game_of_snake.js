@@ -18,8 +18,6 @@ const initialState = {
   ],
   food: [1 ,1],
   direction: 'down',
-
-  clickData: null,
 };
 
 const engine = createEngine();
