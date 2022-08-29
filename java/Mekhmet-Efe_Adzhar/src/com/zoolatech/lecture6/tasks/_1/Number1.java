@@ -13,7 +13,7 @@ where the key is the city name and a value - is a corresponding city object (not
 */
 
 public class Number1 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         City kiev = new City("Kiev", "Ukraine", 5000000);
         City poltava = new City("Poltava", "Ukraine", 300000);

@@ -12,11 +12,11 @@ class CityMethods {
                 .allMatch(city -> city.population() > passedValue);
     }
 
-    public String mostPopulatedCityForASpecificCountry(List<City> cityList, String country) {
+    public String mostPopulatedCityForASpecificCountry(List<City> cityList, String country) throws Exception {
         return cityList.stream()
                 .filter(city -> country.equalsIgnoreCase(city.country()))
                 .max(Comparator.comparingInt(City::population))
-                .map(City::name).orElse("Error");
+                .map(City::name).orElseThrow(Exception::new);
     }
 
     public Map<String, List<City>> citiesMap(List<City> cityList) {
