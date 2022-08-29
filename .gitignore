@@ -1,7 +1,7 @@
 .idea/
 **/.DS_Store
+out/
 **/*.iml
-/out/
 **/node_modules
 **/dist
 **/.parcel-cache
