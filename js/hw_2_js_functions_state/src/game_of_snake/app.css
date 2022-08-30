@@ -5,7 +5,7 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
-};
+}
 
 .mesh {
   display: grid;
@@ -13,29 +13,29 @@ body {
   width: 100vh;
   height: 100vh;
   background-color: #d3ecab;
-};
+}
 
 .item {
   width: calc(100vh / 25);
   height: calc(100vh / 25);
-};
+}
 
 .snakeBody {
   background: rgb(1, 60, 25);
   background-size: cover;
   border-radius: 50%;
-};
+}
 
 .snakeHead {
   background: rgb(2, 153, 32);
   background-size: cover;
   border-radius: 40%;
-};
+}
 
 .food {
   background: rgb(241, 30, 51);
   border: 50%;
-};
+}
 
 .score {
   position: absolute;
@@ -49,7 +49,7 @@ body {
   justify-content: center;
   background-color: #8095f4;
   color: rgb(246, 247, 245);
-};
+}
 
 .time {
   position: absolute;
@@ -63,7 +63,7 @@ body {
   justify-content: center;
   background-color: #caf737;
   color: #fff;
-};
+}
 
 .alert {
   position: fixed;
@@ -75,5 +75,5 @@ body {
   bottom: 0;
   line-height: 100px;
   text-align: center;
-};
+}
 
