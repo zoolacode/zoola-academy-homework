@@ -14,17 +14,23 @@ Implement three versions of the class:
 3. using atomic objects
 */
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Number2 {
     public static void main(String[] args) throws InterruptedException {
-        Number2 number2 = new Number2();
+
+        CalculationExplicitLocks calculationExplicitLocks = new CalculationExplicitLocks(5);
+        CalculatorSynchronized calculatorSynchronized = new CalculatorSynchronized(5);
+
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+
+        CalculateAtomicObjects calculateAtomicObjects = new CalculateAtomicObjects(5, atomicInteger);
 
         Runnable runnable = () -> {
             try {
-                synchronized (number2) {
-                    ThreadOperations.explicitLocks();
-                    ThreadOperations.synchronizedMethod();
-                    ThreadOperations.atomicOperation();
-                }
+                calculationExplicitLocks.explicitLocks();
+                calculatorSynchronized.synchronizedMethod();
+                calculateAtomicObjects.atomicOperation();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
