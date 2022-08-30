@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._1.musician;
 
-import com.zoolatech.lecture3.tasks._1.musical_instrument.*;
+import com.zoolatech.lecture3.tasks._1.musical_instruments.MusicalInstrument;
 
 import java.util.Objects;
 

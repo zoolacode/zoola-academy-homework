@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._3;
 
-public final class Circle implements Shape {
+public final class Circle implements Shapes {
     private double radius;
     public Circle(double radius) {
         this.radius = radius;

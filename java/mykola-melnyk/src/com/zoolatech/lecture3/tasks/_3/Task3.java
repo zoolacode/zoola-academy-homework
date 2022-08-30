@@ -24,16 +24,16 @@ public class Task3 {
 
         var rectangle = new Rectangle(2, 4);
 
-        ArrayList<Shape> shape = new ArrayList<>();
+        ArrayList<Shapes> shape = new ArrayList<>();
         shape.add(circle);
         shape.add(triangle);
         shape.add(rectangle);
-        for (Shape e : shape) {
+        for (Shapes e : shape) {
             e.printArea();
             e.printPerimeter();
         }
 
-        for (Shape e : shape) {
+        for (Shapes e : shape) {
             System.out.println(e);
         }
 

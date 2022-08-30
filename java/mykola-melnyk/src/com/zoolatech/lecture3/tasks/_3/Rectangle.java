@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._3;
 
-public final class Rectangle implements Shape {
+public final class Rectangle implements Shapes {
     double a;
     double b;
 

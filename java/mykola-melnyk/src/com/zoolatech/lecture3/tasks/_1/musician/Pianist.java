@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._1.musician;
 
-import com.zoolatech.lecture3.tasks._1.musical_instrument.Piano;
+import com.zoolatech.lecture3.tasks._1.musical_instruments.Piano;
 
 public class Pianist extends Musician {
     public Pianist(String name) {
