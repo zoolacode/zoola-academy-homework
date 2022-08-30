@@ -19,15 +19,10 @@ public class Container {
         private int firstValue;
 
         public ContainerUpdatesListener() {
-            Container.this.value = firstValue;
+            firstValue = value;
         }
         public boolean hasValueChanged() {
-            if (Container.this.value == firstValue) {
-                return false;
-
-            } else {
-                return true;
-            }
+            return Container.this.value != firstValue;
         }
     }
 }

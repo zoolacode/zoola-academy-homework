@@ -17,24 +17,14 @@ public class Task5 {
         char operator = in.next().charAt(0);
         System.out.println("Enter second number:");
         BigDecimal secondnum = in.nextBigDecimal();
-        BigDecimal result = null;
-        switch (operator) {
-            case '+' -> {
-                result = firstnum.add(secondnum);
-            }
-            case '-' -> {
-                result = firstnum.subtract(secondnum);
-            }
-            case '*' -> {
-                result = firstnum.multiply(secondnum);
-            }
-            case '/' -> {
-                result = firstnum.divide(secondnum);
-            }
-            case '%' -> {
-                result = firstnum.remainder(secondnum);
-            }
-        }
+        BigDecimal result = switch(operator) {
+            case '+' -> firstnum.add(secondnum);
+            case '-' -> firstnum.subtract(secondnum);
+            case '*' -> firstnum.multiply(secondnum);
+            case '/' -> firstnum.divide(secondnum);
+            case '%' -> firstnum.remainder(secondnum);
+            default -> throw new IllegalStateException("Unexpected value: " + operator);
+        };
         System.out.println("Result is: " + result);
     }
 }

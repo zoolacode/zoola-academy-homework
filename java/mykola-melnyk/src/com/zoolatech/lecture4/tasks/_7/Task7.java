@@ -9,6 +9,6 @@ package com.zoolatech.lecture4.tasks._7;
 
 public class Task7 {
     public static void main(String[] args) {
-        DigitToString.digitToString("12345");
+        DigitToString.convertToWord("12345");
     }
 }

@@ -33,8 +33,8 @@ public class Task3 {
             shape1.printPerimeter();
         }
 
-        for (Shape e : shape) {
-            System.out.println(e);
+        for (Shape shape1 : shape) {
+            System.out.println(shape1);
         }
 
         var circle2 = new Circle(11);

@@ -12,8 +12,8 @@ public class Task4 {
         WeightUnits weightUnits = WeightUnits.GRAM;
         System.out.println(weightUnits.getAbbreviation()); // methods to get an abbreviation for a unit
         System.out.println(WeightUnits.GRAM.convertFrom(1, WeightUnits.KILOGRAM)); // convert unit
-        System.out.println(weightUnits.getUnit("kiLOGRaM")); // get the enum value by a string
-        System.out.println(weightUnits.getUnit("kiLOGRaM").ordinal()); // another test
+        System.out.println(WeightUnits.getUnit("kiLOGRaM")); // get the enum value by a string
+        System.out.println(WeightUnits.getUnit("kiLOGRaM").ordinal()); // another test
     }
 
 
