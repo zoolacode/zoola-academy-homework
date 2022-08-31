@@ -23,11 +23,7 @@ public class Task4 {
         char[] chars = string.toCharArray();
         for (char ch : chars) {
             if (ch != ' ') {
-                if (myMap.containsKey(ch)) {
-                    myMap.put(ch, myMap.get(ch) + 1);
-                } else {
-                    myMap.put(ch, 1);
-                }
+                myMap.put(ch, myMap.getOrDefault(ch, 0) + 1);
             }
         }
         customMapPrint(myMap);
