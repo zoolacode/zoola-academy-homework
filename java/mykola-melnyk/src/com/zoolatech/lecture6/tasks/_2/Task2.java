@@ -1,6 +1,10 @@
 package com.zoolatech.lecture6.tasks._2;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import static com.zoolatech.lecture6.tasks._2.Type.STORE;
@@ -18,9 +22,16 @@ import static java.util.stream.Collectors.averagingDouble;
  */
 
 public class Task2 {
-    public static Map<String, Double> grouping(Stream<Order> stream) {
-        return stream
-                .collect(Collectors.groupingBy(Order::getCountry, averagingDouble(Order::getPrice)));
+
+    public static Map<String, Double> grouping(ArrayList<Order> myOrders) {
+        return myOrders.stream().filter(e -> e.orderType() == STORE)
+                .collect(Collectors.groupingBy(Order::country, averagingDouble(Order::price)));
+    }
+
+    public static Map<String, Double> groupingDistinct(ArrayList<Order> myOrders) {
+        return myOrders.stream().filter(e -> e.orderType() == STORE)
+                .distinct()
+                .collect(Collectors.groupingBy(Order::country, averagingDouble(Order::price)));
     }
 
     public static void main(String[] args) {
@@ -31,8 +42,7 @@ public class Task2 {
         Order order5 = new Order("4", WEBSITE, 9.9f, "USA");
         ArrayList<Order> myOrders = new ArrayList<>();
         Collections.addAll(myOrders, order1, order2, order3, order4, order5);
-        System.out.println(grouping(myOrders.stream()));;
-        HashSet<Order> orderSet = new HashSet<>(myOrders);
-        System.out.println(grouping(orderSet.stream()));;
+        System.out.println(grouping(myOrders));
+        System.out.println(groupingDistinct(myOrders));
     }
 }
