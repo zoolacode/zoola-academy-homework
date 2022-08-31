@@ -1,5 +1,87 @@
-body {
+html, body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: 0;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mesh {
+  display: grid;
+  grid-template-columns: repeat(25, 1fr);
+  width: 100vh;
+  height: 100vh;
+  background-color: #415798;
+}
+
+.item {
+  width: calc(100vh / 25);
+  height: calc(100vh / 25);
+  box-sizing: border-box;
+}
+
+.snake-body {
+  background-color: yellowgreen;
+  border: 1px solid grey;
+}
+
+.active-dish {
+  background-color: #ec7bbc;
+  border-radius: 20px;
+}
+
+.score {
+  font-size: 46px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #70ba3e;
+  color: #fff;
+}
+
+.timer {
+  font-size: 46px;
+  width: 160px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cc4040;
+  color: #fff;
+}
+
+.score-positive {
+  background-color: #70ba3e;
+}
+
+.score-negative {
+  background-color: #cc4040;
+}
+
+.alert {
+  position: fixed;
+  font-size: 50px;
+  color: white;
+  width: 100vw;
+  height: 100px;
+  display: none;
+  bottom: 0;
+  line-height: 100px;
+  text-align: center;
+}
+
+.alert-loss {
+  display: block;
+  background-color: #cc4040;
+}
+
+.pause {
+  background-color: #a9a6a56c;
+  opacity: 0.5;
 }

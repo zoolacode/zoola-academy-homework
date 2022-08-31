@@ -96,7 +96,7 @@ export const createEngine = () => {
 
 function logError(type, err) {
   console.log(`Engine: ${type} error`);
-  console.dir(err);
+  console.trace(err);
 }
 
 // Initialize signal doesn't have to be a Symbol, but it's a valid use-case if you want to ensure uniqueness
