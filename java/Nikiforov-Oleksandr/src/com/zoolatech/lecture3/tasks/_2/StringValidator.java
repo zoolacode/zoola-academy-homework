@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._2;
 
-public class StringValidator implements Validator {
+public class StringValidator extends UserAccountFieldExtractor implements Validator {
     private final String fieldName;
 
     public StringValidator(String fieldName) {

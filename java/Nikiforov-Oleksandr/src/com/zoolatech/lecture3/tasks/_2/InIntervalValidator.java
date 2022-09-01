@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._2;
 
-public class InIntervalValidator implements Validator {
+public class InIntervalValidator extends UserAccountFieldExtractor implements Validator {
     private  String fieldName;
     private final int x;
     private final int y;

@@ -1,7 +1,7 @@
 package com.zoolatech.lecture3.tasks._4;
 
 public class PdfReporter extends Reporter {
-    private final String format = " in PDF format";
+    private static final String FORMAT = " in PDF format";
     public PdfReporter(String headerData, String fileData, String fileName) {
         super(headerData, fileData, fileName+".pdf");
     }
@@ -9,11 +9,11 @@ public class PdfReporter extends Reporter {
     @Override
     public void addHeaderData(){
         super.addHeaderData();
-        System.out.println(format);
+        System.out.println(FORMAT);
     }
 
     public void addFileData(){
         super.addFileData();
-        System.out.println(format);
+        System.out.println(FORMAT);
     }
 }

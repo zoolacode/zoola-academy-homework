@@ -1,8 +1,9 @@
 package com.zoolatech.lecture3.tasks._2;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class UserEmailValidator implements Validator {
+public class UserEmailValidator extends UserAccountFieldExtractor implements Validator {
     private String fieldName;
 
     public UserEmailValidator(String fieldName) {

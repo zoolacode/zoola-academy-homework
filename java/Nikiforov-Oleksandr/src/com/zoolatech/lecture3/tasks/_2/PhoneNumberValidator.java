@@ -1,8 +1,8 @@
 package com.zoolatech.lecture3.tasks._2;
 
-public class PhoneNumberValidator implements Validator {
+public class PhoneNumberValidator extends UserAccountFieldExtractor implements Validator {
     private String fieldName;
-    private final String allowedSymbols= "+-()";
+    private static final String allowedSymbols= "+-()";
 
     public PhoneNumberValidator(String fieldName) {
         this.fieldName = fieldName;

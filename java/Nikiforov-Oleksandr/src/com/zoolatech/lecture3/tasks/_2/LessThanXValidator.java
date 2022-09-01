@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._2;
 
-public class LessThanXValidator implements Validator {
+public class LessThanXValidator extends UserAccountFieldExtractor implements Validator {
     private  String fieldName;
     private final int x;
 

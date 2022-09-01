@@ -1,6 +1,5 @@
 package com.zoolatech.lecture3.tasks._2;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class Task2 {
                 new StringValidator("lastName"), new StringValidator ("country"),
                 new UserEmailValidator("userEmail"), new PhoneNumberValidator("phonenumber"),
                 new InIntervalValidator("birthDay",1,31), new InIntervalValidator("birthMonth",1,12),
-                new LessThanXValidator("firstname", 25), new MoreThanXValidator("country", 30)));
+                new LessThanXValidator("firstname", 25), new MoreThanXValidator("country", 2)));
         MainValidator mainValidator = new MainValidator(validators);
         UserAccount userAccount = new UserAccount(1, "Oleksandr", "Nikiforov", "Ukraine", "nikiforovsh@gmail.com", "0997189890", 18, 7);
         if (mainValidator.isValid(userAccount)) {
