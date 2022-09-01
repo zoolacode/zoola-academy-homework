@@ -15,7 +15,7 @@ scoreContainer.innerText = currentScore;
 /**
  * @description Game speed
  */
-let gameIterationDuration = 1500;
+let gameIterationDuration = 500;
 
 let prevIndex
 
