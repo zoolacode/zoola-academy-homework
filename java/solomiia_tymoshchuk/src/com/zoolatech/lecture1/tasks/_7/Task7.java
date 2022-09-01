@@ -30,11 +30,10 @@ public class Task7 {
         int i = number;
         while (i >= 0) {
             if (i % 2 != 0) {
-                newarr.add(i);
+                System.out.println(i);
             }
             i--;
         }
-        newarr.forEach(System.out::println);
     }
 
     public static void main(String[] args) {

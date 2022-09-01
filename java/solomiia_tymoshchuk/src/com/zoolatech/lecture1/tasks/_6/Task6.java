@@ -32,7 +32,7 @@ public class Task6 {
     }
 
     void calculateNumbersIfWay() {
-        if (Objects.equals(operator, '+')) {
+        if (operator == '+') {
             System.out.println(number + number1);
         } else if (Objects.equals(operator, '-')) {
             System.out.println(number - number1);

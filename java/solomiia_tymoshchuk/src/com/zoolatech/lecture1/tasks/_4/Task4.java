@@ -20,7 +20,7 @@ public class Task4 {
             throw new NumberOutOfRangeException("Numbers is out of required range");
         }
         for (Integer day : numbers) {
-            if (number == day) {
+            if (day >= 1 && day <= 5) {
                 statement = "Need to go to work…";
                 break;
             } else {

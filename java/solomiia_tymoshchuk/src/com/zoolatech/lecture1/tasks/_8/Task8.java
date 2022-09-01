@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Create two versions of the program: one should use the for loop, second - the while loop.
  **/
 public class Task8 {
-    int number;
+    private int number;
     public Task8(int number){
         this.number = number;
 
@@ -21,9 +21,6 @@ public class Task8 {
 
     //for loop version of program
     void checkDivisionForLoop() {
-        for (int i = 1; i <= number; i++) {
-            newarr.add(i);
-        }
         checkNumbers();
     }
 
@@ -31,10 +28,15 @@ public class Task8 {
     void checkDivisionWhileLoop() {
         int i = 1;
         while (i <= number) {
-            newarr.add(i);
+            if (i % 3 == 0 && i % 2 == 0) {
+                System.out.println(i + "(by 2 and 3)");
+            } else if (i % 2 == 0) {
+                System.out.println(i + "(by 2)");
+            } else if (i % 3 == 0) {
+                System.out.println(i + "(by 3)");
+            }
             i++;
         }
-        checkNumbers();
     }
 
     void checkNumbers() {
@@ -55,6 +57,5 @@ public class Task8 {
         System.out.println("Enter number");
         Task8 task8 = new Task8(number);
         task8.checkDivisionWhileLoop();
-        task8.checkDivisionForLoop();
     }
 }

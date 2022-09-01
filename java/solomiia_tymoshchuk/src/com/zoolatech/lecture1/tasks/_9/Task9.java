@@ -7,7 +7,7 @@ import java.util.Scanner;
  * outputs all its digits in the reverse order on a new line.
  **/
 public class Task9 {
-    int number;
+    private final int number;
 
     public Task9(int number) {
         this.number = number;
