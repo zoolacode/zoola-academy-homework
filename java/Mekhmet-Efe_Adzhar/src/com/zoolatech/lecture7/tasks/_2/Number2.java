@@ -14,23 +14,18 @@ Implement three versions of the class:
 3. using atomic objects
 */
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Number2 {
     public static void main(String[] args) throws InterruptedException {
 
         CalculationExplicitLocks calculationExplicitLocks = new CalculationExplicitLocks(5);
         CalculatorSynchronized calculatorSynchronized = new CalculatorSynchronized(5);
-
-        AtomicInteger atomicInteger = new AtomicInteger(0);
-
-        CalculateAtomicObjects calculateAtomicObjects = new CalculateAtomicObjects(5, atomicInteger);
+        CalculateAtomicObjects calculateAtomicObjects = new CalculateAtomicObjects(5);
 
         Runnable runnable = () -> {
             try {
-                calculationExplicitLocks.explicitLocks();
-                calculatorSynchronized.synchronizedMethod();
-                calculateAtomicObjects.atomicOperation();
+                operations(calculationExplicitLocks);
+                operations(calculatorSynchronized);
+                operations(calculateAtomicObjects);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -41,5 +36,42 @@ public class Number2 {
         thread.join();
 
         System.out.println("Task is done");
+    }
+
+    public static void operations(Calculation calculation) throws InterruptedException {
+        Runnable taskAddition = () -> {
+            for (int i = 0; i < 1000; i++) {
+                calculation.addition(5);
+            }
+            System.out.println("Current Thread: " + Thread.currentThread().getName());
+        };
+
+        Runnable taskSubtraction = () -> {
+            for (int i = 0; i < 1000; i++) {
+                calculation.subtraction(5);
+            }
+            System.out.println("Current Thread: " + Thread.currentThread().getName());
+        };
+
+        Thread[] threads = new Thread[10];
+        for (int i = 0; i < threads.length; i++) {
+            threads[i] = new Thread(taskAddition);
+            threads[i].start();
+        }
+        for (Thread thread : threads) {
+            thread.join();
+        }
+        Thread.sleep(1000);
+        System.out.println("\n" + calculation.currentValue() + " Current thread: " + Thread.currentThread().getName());
+
+        for (int i = 0; i < threads.length; i++) {
+            threads[i] = new Thread(taskSubtraction);
+            threads[i].start();
+        }
+        for (Thread thread : threads) {
+            thread.join();
+        }
+        Thread.sleep(1000);
+        System.out.println("\n" + calculation.currentValue() + " Current thread: " + Thread.currentThread().getName());
     }
 }

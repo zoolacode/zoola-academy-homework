@@ -2,56 +2,29 @@ package com.zoolatech.lecture7.tasks._2;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CalculateAtomicObjects implements Operations {
-    private final AtomicInteger getValue;
-    private int value;
+public class CalculateAtomicObjects extends Calculation{
+    private final AtomicInteger value = new AtomicInteger(0);
 
-    public CalculateAtomicObjects(int value, AtomicInteger getValue) {
-        this.value = value;
-        this.getValue = getValue;
+    public CalculateAtomicObjects(int value) {
+        getInt(value);
     }
 
-    public AtomicInteger currentValueForAtomicInteger() {
-        return getValue;
+    private int getInt(int value) {
+        return value;
+    }
+
+    @Override
+    public int currentValue() {
+        return value.get();
     }
 
     @Override
     public int addition(int integer) {
-        value = integer;
-        return getValue.addAndGet(value);
+        return value.addAndGet(getInt(integer));
     }
 
     @Override
     public int subtraction(int integer) {
-        value = integer;
-        return getValue.get() - value;
-    }
-
-    public void atomicOperation() throws InterruptedException {
-
-        Runnable task = () -> {
-            for (int i = 0; i < 1000; i++) {
-                addition(5);
-            }
-            System.out.println("Current thread: " + Thread.currentThread().getName() + currentValueForAtomicInteger());
-        };
-
-        Runnable task2 = () -> {
-            for (int i = 0; i < 1000; i++) {
-                subtraction(5);
-            }
-            System.out.println("Current thread: " + Thread.currentThread().getName() + currentValueForAtomicInteger());
-        };
-
-        Thread[] threads = new Thread[10];
-        for (int i = 0; i < threads.length; i++) {
-            threads[i] = new Thread(task);
-            threads[i].start();
-        }
-        for (Thread thread : threads) {
-            thread.join();
-        }
-        Thread.sleep(1000);
-        System.out.println("\n" + currentValueForAtomicInteger() + " Current thread: " + Thread.currentThread().getName());
+        return value.get() - getInt(integer);
     }
 }
