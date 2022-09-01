@@ -26,11 +26,21 @@ html, body {
 
 .snake-body {
   background-color: yellowgreen;
-  border: 1px solid grey;
+  border: 1px solid #415798;
+}
+
+.snake-dead {
+  background-color: #cc4040;
+  border: 1px solid #415798;
 }
 
 .active-dish {
   background-color: #ec7bbc;
+  border-radius: 20px;
+}
+
+.active-bonus-dish {
+  background-color: #f3d825;
   border-radius: 20px;
 }
 
@@ -45,6 +55,12 @@ html, body {
   color: #fff;
 }
 
+.game-timer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .timer {
   font-size: 46px;
   width: 160px;
@@ -56,11 +72,22 @@ html, body {
   color: #fff;
 }
 
-.score-positive {
+.bonus-timer {
+  font-size: 46px;
+  width: 160px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cc4040;
+  color: #fff;
+}
+
+.timer-positive {
   background-color: #70ba3e;
 }
 
-.score-negative {
+.timer-negative {
   background-color: #cc4040;
 }
 
