@@ -1,2 +1,1 @@
 https://github.com/olnikiforov/zoolahw
-issues fixed in PR - https://github.com/olnikiforov/zoolahw/pull/1
