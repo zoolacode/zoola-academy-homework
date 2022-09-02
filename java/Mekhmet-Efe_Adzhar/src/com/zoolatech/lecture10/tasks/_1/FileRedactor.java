@@ -28,17 +28,22 @@ final class FileRedactor {
     public boolean generateFiles(String fileName) throws IOException {
         File[] files = file.listFiles();
         assert files != null;
-        return Arrays.stream(files)
-                .map(file1 -> file1.getName().equals(fileName) && file1.exists())
-                .findFirst()
-                .orElse(errorLog(fileName));
+            for (File fileInFiles : files) {
+                if (fileInFiles.exists() && fileInFiles.getName().equals(fileName)) {
+                    FileInputStream fileInputStream = new FileInputStream(file + "/" + fileName);
+                    String result = new String(fileInputStream.readAllBytes());
+                    System.out.println(result);
+                    return true;
+                }
+            }
+            return errorLog(fileName);
     }
 
     private boolean errorLog(String fileName) throws IOException {
         final LocalDate localDate = LocalDate.now();
         final LocalDateTime localDateTime = LocalDateTime.now();
         try (FileWriter fileWriter = new FileWriter(file + "/error.log", true)) {
-            fileWriter.write(fileName + " invalid input number: " + localDate + ", time: " + localDateTime + "\n");
+            fileWriter.write(fileName + " invalid input was made: " + localDate + ", time: " + localDateTime + "\n");
         }
         System.out.println("No file with such name");
         System.out.println("Written invalid filename to error.log");
