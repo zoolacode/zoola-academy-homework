@@ -16,7 +16,7 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Number1 {
-    public static void main(String[] args) throws IOException, NoFileException {
+    public static void main(String[] args) throws IOException {
         System.out.println("1. Start\n2. Exit");
         Scanner scanner = new Scanner(System.in);
         while (scanner.nextInt() != 2) {
