@@ -12,7 +12,7 @@ If user type invalid filename app should write message to err stream,
 draw file names again and write invalid filename to a new file called "error.log" (ideally data should be appended).
 */
 
-import java.io.*;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Number1 {
