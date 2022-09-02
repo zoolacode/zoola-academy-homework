@@ -6,18 +6,7 @@ enum Type {
     WEBSITE,
     STORE
 }
-public class Order {
-    private final String id;
-    private final Type orderType;
-    private final float price;
-    private final String country;
-
-    public Order(String id, Type orderType, float price, String country) {
-        this.id = id;
-        this.orderType = orderType;
-        this.price = price;
-        this.country = country;
-    }
+public record Order (String id, Type orderType, float price, String country) {
 
     @Override
     public boolean equals(Object o) {
@@ -30,17 +19,5 @@ public class Order {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public String getCountry() {
-        return country;
     }
 }
