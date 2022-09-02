@@ -1,6 +1,6 @@
 package com.zoolatech.lecture3.tasks._3;
 
-public sealed interface Shape
+public sealed interface Shapes
         permits Circle, Rectangle, Triangle {
      double calcPerimeter();
      double calcArea();

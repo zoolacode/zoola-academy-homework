@@ -1,9 +1,9 @@
 package com.zoolatech.lecture3.tasks._3;
 
-public final class Triangle implements Shape {
-    private final double a;
-    private final double b;
-    private final double c;
+public final class Triangle implements Shapes {
+    double a;
+    double b;
+    double c;
 
     public Triangle(double a, double b, double c) {
         this.a = a;

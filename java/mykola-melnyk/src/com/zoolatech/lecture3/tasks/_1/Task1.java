@@ -15,7 +15,7 @@ package com.zoolatech.lecture3.tasks._1;
  * method, create a couple of instances of all classes and play the music.
  */
 
-import com.zoolatech.lecture3.tasks._1.musical_instrument.*;
+import com.zoolatech.lecture3.tasks._1.musical_instruments.*;
 import com.zoolatech.lecture3.tasks._1.musician.*;
 
 public class Task1 {
