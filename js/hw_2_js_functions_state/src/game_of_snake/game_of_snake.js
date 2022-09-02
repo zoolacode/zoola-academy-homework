@@ -2,6 +2,9 @@ import { createEngine, ENGINE_INITIALIZE_SIGNAL } from "../engine/engine";
 
 const boardWidth = 25;
 const meshSize = boardWidth ** 2;
+const snakeSound = new Audio ('snakeSound.mp3')
+const gameOwerSound = new Audio ('GamwOverVoice .mp3')
+const eateFoodSound = new Audio ('eating.mp3')
 
 const initialState = {
   currentScore: 0,
@@ -112,10 +115,10 @@ engine.addSideEffect({
   });
   
   
-  addMovement(engine, {signal: "keyClickUp", direction: "up", dontMove: "down"});
-  addMovement(engine, {signal: "keyClickDown", direction: "down", dontMove: "up"});
-  addMovement(engine, {signal: "keyClickLeft", direction: "left", dontMove: "right"});
-  addMovement(engine, {signal: "keyClickRight", direction: "right", dontMove: "left"});
+  addMove(engine, {signal: "keyClickUp", direction: "up", dontMove: "down"});
+  addMove(engine, {signal: "keyClickDown", direction: "down", dontMove: "up"});
+  addMove(engine, {signal: "keyClickLeft", direction: "left", dontMove: "right"});
+  addMove(engine, {signal: "keyClickRight", direction: "right", dontMove: "left"});
   
   engine.addSignalReducer("pauseGame", (state) => {
     if (getIsGameEnded(state)) {
@@ -139,22 +142,22 @@ engine.addSideEffect({
     let snakeBodyFirstElem = [snakeHeadX, snakeHeadY];
   
     const movements = {
-      right: ([x, y]) => [x + 1, y],
-      left: ([x, y]) => [x - 1, y],
       up: ([x, y]) => [x, y - 1],
       down: ([x, y]) => [x, y + 1],
+      left: ([x, y]) => [x - 1, y],
+      right: ([x, y]) => [x + 1, y],
     };
   
     const moveSnakeHead = movements[state.direction];
     const snakeBodyFirstElemMove = moveSnakeHead(snakeBodyFirstElem);
     const gameLost = getIsSnakeHeadOutsideBoard(...snakeBodyFirstElemMove);
-    const snakeBodyWithExtraTail = snakeBodyWithTail(
+    const snakeBodyWithExtraTail = snakeBodyTail(
       gameLost,
       snakeBodyFirstElem,
       snakeBodyFirstElemMove,
       snakeBodyBefore
     );
-    const hasEatenFood = getHasEatenFood(snakeBodyFirstElemMove, foodX, foodY);
+    const hasEatenFood = getEateFood(snakeBodyFirstElemMove, foodX, foodY);
     const snakeBody = growSnake(
       hasEatenFood,
       snakeBodyBefore,
@@ -179,7 +182,7 @@ engine.addSideEffect({
   
     const snakeBody = [...state.snakeBody];
   
-    const food = generateNewFood(snakeBody);
+    const food = gatNewFood(snakeBody);
   
     return {
       ...state,
@@ -193,6 +196,7 @@ engine.addSideEffect({
     let alert = document.querySelector(".alert");
   
     if (!alert) {
+      gameOwerSound.play ();
       alert = document.createElement("div");
       alert.classList.add("alert");
       alert.innerHTML = 'The game ended, please press "Enter" to restart';
@@ -208,8 +212,6 @@ engine.addSideEffect({
     if (state.gameLost) {
       document.addEventListener("keyup", onAlertEnter);
       alert.classList.add(state.gameLost, "alert-loss");
-    } else {
-      alert.classList.remove("alert-loss");
     }
   
     return () => {
@@ -304,7 +306,8 @@ engine.addSideEffect({
     };
   }
   
-  function addMovement(engine, obj) {
+  function addMove(engine, obj) {
+    snakeSound.play();
     engine.addSignalReducer(obj.signal, (state) => {
       if (
         getIsGameEnded(state) ||
@@ -323,8 +326,9 @@ engine.addSideEffect({
     });
   }
   
-  function getHasEatenFood([snakeHeadX, snakeHeadY], foodX, foodY) {
+  function getEateFood([snakeHeadX, snakeHeadY], foodX, foodY) {
     if (snakeHeadX === foodX && snakeHeadY === foodY) {
+      eateFoodSound.play();
       return true;
     } else {
       return false;
@@ -372,7 +376,7 @@ engine.addSideEffect({
     }
   }
   
-  function snakeBodyWithTail(
+  function snakeBodyTail(
     gameLost,
     snakeBodyFirstElem,
     snakeBodyFirstElemMove,
@@ -389,7 +393,7 @@ engine.addSideEffect({
     return Math.floor(Math.random() * max);
   }
   
-  function generateNewFood(snakeBody) {
+  function gatNewFood(snakeBody) {
     let food = [getRandomNumber(25), getRandomNumber(25)];
     let foodOnSnake = snakeBody.filter(
       (item) => item[0] === food[0] && item[1] === food[1]
