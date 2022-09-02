@@ -3,7 +3,7 @@ package com.zoolatech.lecture7.tasks._2;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-class CalculationExplicitLocks extends Calculation{
+class CalculationExplicitLocks implements Operations{
     private final Lock lock = new ReentrantLock();
     private int value;
 
@@ -11,6 +11,7 @@ class CalculationExplicitLocks extends Calculation{
         this.value = value;
     }
 
+    @Override
     public int currentValue() {
         lock.lock();
         try {

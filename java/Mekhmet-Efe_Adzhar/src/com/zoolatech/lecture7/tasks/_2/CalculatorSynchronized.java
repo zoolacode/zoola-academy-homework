@@ -1,6 +1,6 @@
 package com.zoolatech.lecture7.tasks._2;
 
-public class CalculatorSynchronized extends Calculation {
+public class CalculatorSynchronized implements Operations {
 
     private int value;
 
@@ -8,6 +8,7 @@ public class CalculatorSynchronized extends Calculation {
         this.value = value;
     }
 
+    @Override
     public synchronized int currentValue() {
         return value;
     }

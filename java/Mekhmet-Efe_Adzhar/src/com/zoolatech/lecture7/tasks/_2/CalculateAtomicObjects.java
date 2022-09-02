@@ -2,11 +2,11 @@ package com.zoolatech.lecture7.tasks._2;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CalculateAtomicObjects extends Calculation{
+public class CalculateAtomicObjects implements Operations {
     private final AtomicInteger value = new AtomicInteger(0);
 
     public CalculateAtomicObjects(int value) {
-        getInt(value);
+        this.value.set(value);
     }
 
     private int getInt(int value) {
@@ -25,6 +25,6 @@ public class CalculateAtomicObjects extends Calculation{
 
     @Override
     public int subtraction(int integer) {
-        return value.get() - getInt(integer);
+        return value.addAndGet(-integer);
     }
 }

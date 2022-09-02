@@ -38,17 +38,17 @@ public class Number2 {
         System.out.println("Task is done");
     }
 
-    public static void operations(Calculation calculation) throws InterruptedException {
+    public static void operations(Operations operations) throws InterruptedException {
         Runnable taskAddition = () -> {
             for (int i = 0; i < 1000; i++) {
-                calculation.addition(5);
+                operations.addition(5);
             }
             System.out.println("Current Thread: " + Thread.currentThread().getName());
         };
 
         Runnable taskSubtraction = () -> {
             for (int i = 0; i < 1000; i++) {
-                calculation.subtraction(5);
+                operations.subtraction(5);
             }
             System.out.println("Current Thread: " + Thread.currentThread().getName());
         };
@@ -62,7 +62,7 @@ public class Number2 {
             thread.join();
         }
         Thread.sleep(1000);
-        System.out.println("\n" + calculation.currentValue() + " Current thread: " + Thread.currentThread().getName());
+        System.out.println("\n" + operations.currentValue() + " Current thread: " + Thread.currentThread().getName());
 
         for (int i = 0; i < threads.length; i++) {
             threads[i] = new Thread(taskSubtraction);
@@ -72,6 +72,6 @@ public class Number2 {
             thread.join();
         }
         Thread.sleep(1000);
-        System.out.println("\n" + calculation.currentValue() + " Current thread: " + Thread.currentThread().getName());
+        System.out.println("\n" + operations.currentValue() + " Current thread: " + Thread.currentThread().getName());
     }
 }
