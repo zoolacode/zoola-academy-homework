@@ -24,6 +24,16 @@ html, body {
   box-sizing: border-box;
 }
 
+.active-dish {
+  background-color: #ec7bbc;
+  border-radius: 20px;
+}
+
+.active-bonus-dish {
+  background-color: #f3d825;
+  border-radius: 20px;
+}
+
 .snake-body {
   background-color: yellowgreen;
   border: 1px solid #415798;
@@ -34,7 +44,7 @@ html, body {
   border: 1px solid #415798;
 }
 
-.active-dish {
+/* .active-dish {
   background-color: #ec7bbc;
   border-radius: 20px;
 }
@@ -42,7 +52,7 @@ html, body {
 .active-bonus-dish {
   background-color: #f3d825;
   border-radius: 20px;
-}
+} */
 
 .score {
   font-size: 46px;

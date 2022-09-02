@@ -2,8 +2,9 @@ import { createEngine, ENGINE_INITIALIZE_SIGNAL } from '../engine/engine';
 
 const boardWidth = 25;
 const meshSize = boardWidth ** 2;
-const timerLimitMs = 120900;
-const bonusTimerLimitMs = 5900;
+const timerLimitMs = 120000;
+
+const bonusDishLifeTime = 5000;
 const initialSnakeCoords = [
   getIndex(10, 10),
   getIndex(10, 11),
@@ -18,14 +19,14 @@ const initialState = {
     y: 14,
   },
   currentScore: 0,
-  gameTimer: timerLimitMs,
+  gameTimer: 0,
   direction: 'moveDown',
   gameLost: false,
   gameOn: true,
   snakeCoords: initialSnakeCoords,
-  dish: getRandomDishPosition(initialSnakeCoords, undefined, undefined),
-  bonusDish: undefined,
-  burnBonusTime: bonusTimerLimitMs,
+  dish: getRandomDishPosition(initialSnakeCoords, null, null),
+  bonusDish: null,
+  bonusDishExpiresTime: 0,
 };
 
 const engine = createEngine();
@@ -37,10 +38,7 @@ engine.addSignalReducer(ENGINE_INITIALIZE_SIGNAL, () => {
 engine.addSignalReducer('restartGame', () => {
   return {
     ...initialState,
-    dish: getRandomDishPosition(initialSnakeCoords, undefined, undefined),
-    bonusDish: undefined,
-    gameTimer: timerLimitMs,
-    burnBonusTime: bonusTimerLimitMs,
+    dish: getRandomDishPosition(initialSnakeCoords, null, null),
   };
 });
 
@@ -65,21 +63,15 @@ engine.addSideEffect({
 
 engine.addSideEffect({
   onlyWhen: ({ prevState, state }) =>
-    getIsStateChanged('gameTimer', { prevState, state }),
-  effect: ({ state }, emit) => {
-    if (state.burnBonusTime < 1000) {
-      emit('giveBonusDish');
-    }
-  },
-});
-
-engine.addSideEffect({
-  onlyWhen: ({ prevState, state }) =>
     getIsStateChanged('gameTimer', { prevState, state }) ||
     getIsStateChanged('gameOn', { prevState, state }),
   effect: ({ state }, emit) => {
     if (!state.gameOn || state.gameLost) {
       return;
+    }
+
+    if (state.gameTimer % bonusDishLifeTime === 0 && state.gameTimer !== 0) {
+      emit('giveBonusDish');
     }
 
     const timeoutId = setTimeout(() => {
@@ -116,7 +108,7 @@ engine.addSideEffect({
 
 engine.addSideEffect({
   onlyWhen: ({ prevState, state }) =>
-    getIsStateChanged('burnBonusTime', { prevState, state }),
+    getIsStateChanged('gameTimer', { prevState, state }),
   effect: renderGameBonusTimer,
 });
 
@@ -125,25 +117,39 @@ engine.addSideEffect({
 });
 
 engine.addSignalReducer('burnGameTime', (state) => {
-  if (state.gameTimer < 1000) {
+  if (state.gameTimer === timerLimitMs) {
     return {
       ...state,
       gameLost: true,
-      snakeCoords: [],
-      dish: undefined,
-      bonusDish: undefined,
-      burnBonusTime: bonusTimerLimitMs,
+      dish: null,
+      bonusDish: null,
+      bonusDishExpiresTime: 0,
     };
   } else {
     return {
       ...state,
-      gameTimer: state.gameTimer - 100,
-      burnBonusTime:
-        state.burnBonusTime < 1000
-          ? bonusTimerLimitMs
-          : state.burnBonusTime - 100,
+      gameTimer: state.gameTimer + 100,
+      bonusDish:
+        state.bonusDishExpiresTime === state.gameTimer ? null : state.bonusDish,
     };
   }
+});
+
+engine.addSignalReducer('giveBonusDish', (state) => {
+  if (getIsGameEnded(state)) {
+    return state;
+  }
+  const nextBonusDish = getRandomDishPosition(
+    state.snakeCoords,
+    state.dish,
+    state.bonusDish
+  );
+
+  return {
+    ...state,
+    bonusDish: nextBonusDish,
+    bonusDishExpiresTime: state.gameTimer + bonusDishLifeTime,
+  };
 });
 
 addMovement(engine, {
@@ -179,10 +185,10 @@ engine.addSignalReducer('moveSnake', (state) => {
   };
   const move = movements[state.direction];
   const nextSnakeHead = move(state.snakeHead);
-  const borderWidth = 26;
+  const borderWidth = 25;
   const isSnakeHitBorders =
-    nextSnakeHead.x === borderWidth ||
-    nextSnakeHead.y === borderWidth ||
+    nextSnakeHead.x > borderWidth ||
+    nextSnakeHead.y > borderWidth ||
     nextSnakeHead.x === 0 ||
     nextSnakeHead.y === 0;
   const isSnakeHitBody = state.snakeCoords.includes(
@@ -193,58 +199,39 @@ engine.addSignalReducer('moveSnake', (state) => {
     return {
       ...state,
       gameLost: true,
-      dish: undefined,
-      bonusDish: undefined,
-      burnBonusTime: bonusTimerLimitMs,
+      dish: null,
+      bonusDish: null,
+      bonusDishExpiresTime: 0,
     };
   }
 
-  let catchDishPoint;
   const snakeLength = state.snakeCoords.length;
   const snakeHeadCoordinates = [...state.snakeCoords][snakeLength - 1];
+  const hasEatenDish = getHasEatenDish(snakeHeadCoordinates, state.dish);
+  const hasEatenBonusDish = getHasEatenBonusDish(
+    snakeHeadCoordinates,
+    state.bonusDish
+  );
+
   const newData =
-    state.dish === snakeHeadCoordinates ||
-    state.bonusDish === snakeHeadCoordinates
+    hasEatenDish || hasEatenBonusDish
       ? [...state.snakeCoords]
       : state.snakeCoords.slice(1, snakeLength);
-
-  if (state.dish === snakeHeadCoordinates) {
-    catchDishPoint = 1;
-  } else if (state.bonusDish === snakeHeadCoordinates) {
-    catchDishPoint = 5;
-  }
-
-  return {
-    ...state,
-    snakeHead: nextSnakeHead,
-    currentScore:
-      state.dish === snakeHeadCoordinates ||
-      state.bonusDish === snakeHeadCoordinates
-        ? state.currentScore + catchDishPoint
-        : state.currentScore,
-    snakeCoords: [...newData, getIndex(nextSnakeHead.x, nextSnakeHead.y)],
-    dish:
-      state.dish === snakeHeadCoordinates
-        ? getRandomDishPosition(state.snakeCoords, state.dish, state.bonusDish)
-        : state.dish,
-    bonusDish:
-      state.bonusDish === snakeHeadCoordinates ? undefined : state.bonusDish,
-  };
-});
-
-engine.addSignalReducer('giveBonusDish', (state) => {
-  if (getIsGameEnded(state)) {
-    return state;
-  }
-  const nextBonusDish = getRandomDishPosition(
-    state.snakeCoords,
-    state.dish,
-    state.bonusDish
+  const nextScore = getNextScore(
+    state.currentScore,
+    hasEatenDish,
+    hasEatenBonusDish
   );
 
   return {
     ...state,
-    bonusDish: nextBonusDish,
+    snakeHead: nextSnakeHead,
+    currentScore: nextScore,
+    snakeCoords: [...newData, getIndex(nextSnakeHead.x, nextSnakeHead.y)],
+    dish: hasEatenDish
+      ? getRandomDishPosition(state.snakeCoords, state.dish, state.bonusDish)
+      : state.dish,
+    bonusDish: hasEatenBonusDish ? null : state.bonusDish,
   };
 });
 
@@ -303,7 +290,7 @@ function renderGameTimer({ state }) {
     timerContainer.appendChild(gameTimer);
   }
 
-  if (state.gameTimer < 10000) {
+  if (state.gameTimer > 110000) {
     gameTimer.classList.remove('timer-positive');
     gameTimer.classList.add('timer-negative');
   } else {
@@ -311,10 +298,10 @@ function renderGameTimer({ state }) {
     gameTimer.classList.add('timer-positive');
   }
 
-  const mins = convertToMins(state.gameTimer);
-  const secs = convertToSecs(state.gameTimer);
+  const { min, sec } = getMinSec(timerLimitMs - state.gameTimer + 900);
+  const timeStr = getTimeString(min, sec);
 
-  gameTimer.innerHTML = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  gameTimer.innerHTML = timeStr;
 }
 
 function renderGameBonusTimer({ state }) {
@@ -327,12 +314,14 @@ function renderGameBonusTimer({ state }) {
     gameTimerContainer.appendChild(gameBonusTimer);
   }
 
-  const mins = convertToMins(state.burnBonusTime);
-  const secs = convertToSecs(state.burnBonusTime);
+  const { min, sec } = getMinSec(
+    bonusDishLifeTime - (state.gameTimer % bonusDishLifeTime) + 900
+  );
+  const timeStr = getTimeString(min, sec);
 
-  gameBonusTimer.innerHTML = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  gameBonusTimer.innerHTML = timeStr;
 
-  if (state.bonusDish === undefined) {
+  if (state.bonusDish === null) {
     gameBonusTimer.classList.remove('bonus-timer');
     gameBonusTimer.innerHTML = '';
   }
@@ -427,16 +416,14 @@ function addMovement(framework, { ...direction }) {
 }
 
 function getRandomDishPosition(snakeCoords, dish, bonusDish) {
-  let items = [];
-  for (let i = 0; i < meshSize; i++) {
-    if (!snakeCoords.includes(i) && !dish !== i && !bonusDish !== i) {
-      items.push(i);
-    }
-  }
+  const items = [...Array(meshSize)]
+    .map((_, index) => index)
+    .filter(
+      (coord) =>
+        !snakeCoords.includes(coord) && dish !== coord && bonusDish !== coord
+    );
 
-  let result = items[Math.floor(Math.random() * items.length)];
-
-  return result;
+  return items[Math.floor(Math.random() * items.length)];
 }
 
 function getIsGameEnded(state) {
@@ -451,14 +438,34 @@ function getIndex(x, y) {
   return y * 25 - (25 - x) - 1;
 }
 
-function convertToMins(value) {
-  const mins = Math.floor(value / (60 * 1000));
+function getMinSec(value) {
+  const min = Math.floor(value / (60 * 1000));
+  const sec = Math.floor((value / 1000) % 60);
 
-  return mins;
+  return { min, sec };
 }
 
-function convertToSecs(value) {
-  const secs = Math.floor((value / 1000) % 60);
+function getTimeString(min, sec) {
+  return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+}
 
-  return secs;
+function getHasEatenDish(snakeHeadCoords, dishCoords) {
+  return dishCoords === snakeHeadCoords;
+}
+
+function getHasEatenBonusDish(snakeHeadCoords, bonusDishCoords) {
+  return bonusDishCoords === snakeHeadCoords;
+}
+
+function getNextScore(score, hasEatenDish, hasEatenBonusDish) {
+  const dishPoint = 1;
+  const bonusDishPoint = 5;
+
+  if (hasEatenDish) {
+    score += dishPoint;
+  } else if (hasEatenBonusDish) {
+    score += bonusDishPoint;
+  }
+
+  return score;
 }
