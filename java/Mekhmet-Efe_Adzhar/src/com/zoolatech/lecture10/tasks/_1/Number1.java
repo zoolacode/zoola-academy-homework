@@ -19,8 +19,9 @@ public class Number1 {
     public static void main(String[] args) throws IOException {
         System.out.println("1. Start\n2. Exit");
         Scanner scanner = new Scanner(System.in);
+        Menu menu = new Menu();
         while (scanner.nextInt() != 2) {
-            Menu.menu();
+            menu.menu();
         }
     }
 }
