@@ -1,6 +1,5 @@
 package com.zoolatech.lecture8.tasks._2;
 
-import java.util.Arrays;
 import java.util.concurrent.ForkJoinPool;
 
 /**
@@ -15,20 +14,22 @@ import java.util.concurrent.ForkJoinPool;
 
 public class Task2 {
     public static void main(String[] args) {
+        int imgSize = 20;
         ForkJoinPool pool = ForkJoinPool.commonPool(); // create a pool of threads
-        int[][] pixels = new int[100][100]; // create an array
+        int[][] pixels = new int[imgSize][imgSize]; // create an array
         int inc = 1; // fill with increment numbers
-        for (int i = 0; i < 100; ++i) {
-            for (int j = 0; j < 100; j++)
+        for (int i = 0; i < imgSize; i++) {
+            for (int j = 0; j < imgSize; j++)
                 pixels[i][j] = inc++;
         }
+
 
         ImageProcessorTask myImg = new ImageProcessorTask(pixels);
         pool.invoke(myImg); // start the task
 
-        for (int i = 0; i < 100; i++) {  // print the array
-            for (int j = 0; j < 100; j++) {
-                System.out.print(pixels[i][j] + " ");
+        for (int i = 0; i < imgSize; i++) {  // print the array
+            for (int j = 0; j < imgSize; j++) {
+                System.out.printf("%4d ", pixels[i][j]);
             }
 
             System.out.println();
