@@ -12,11 +12,16 @@ package com.zoolatech.lecture8.tasks._1;
  */
 
 public class Task1 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        Restaurant zoolaBar = new Restaurant();
         for (int i = 1; i <= 10;i++) {
             Order order = new Order(i,"customer " + i);
-            Restaurant.acceptOrder(order);
+            zoolaBar.acceptOrder(order);
         }
+
+        Thread.sleep(500);
+
+        zoolaBar.close();
     }
 
 }

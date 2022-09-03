@@ -2,32 +2,19 @@ package com.zoolatech.lecture8.tasks._1;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Restaurant {
-    static private final ExecutorService chefsThreadPool = Executors.newFixedThreadPool(5);
-    static private final ExecutorService deliveryThreadPool = Executors.newFixedThreadPool(10);
+    private final ExecutorService chefsThreadPool = Executors.newFixedThreadPool(5);
+    private final ExecutorService deliveryThreadPool = Executors.newFixedThreadPool(10);
 
-    public static void acceptOrder(Order order) {
-        chefsThreadPool.submit(() -> {
-                System.out.println("Cooking: " + order.id());
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            System.out.println(order.id() + " cooked.");
-            deliveryThreadPool.submit(() -> {
-                    System.out.println("Delivering: " + order.id());
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    System.out.println(order.id() + " delivered.");
 
-            });
-            System.out.println(order.id() + " sent for delivery");
-        });
+    public void acceptOrder(Order order) {
+        chefsThreadPool.submit(new ChefsTask (order, deliveryThreadPool));
     }
-
+    public void close() throws InterruptedException {
+        chefsThreadPool.awaitTermination(500, TimeUnit.MILLISECONDS);
+        chefsThreadPool.shutdown();
+        deliveryThreadPool.shutdown();
+    }
 }
