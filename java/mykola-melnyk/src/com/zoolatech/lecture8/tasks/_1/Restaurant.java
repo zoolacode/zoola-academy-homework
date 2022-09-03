@@ -4,8 +4,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Restaurant {
-    static private ExecutorService chefsThreadPool = Executors.newFixedThreadPool(5);
-    static private ExecutorService deliveryThreadPool = Executors.newFixedThreadPool(10);
+    static private final ExecutorService chefsThreadPool = Executors.newFixedThreadPool(5);
+    static private final ExecutorService deliveryThreadPool = Executors.newFixedThreadPool(10);
 
     public static void acceptOrder(Order order) {
         chefsThreadPool.submit(() -> {
