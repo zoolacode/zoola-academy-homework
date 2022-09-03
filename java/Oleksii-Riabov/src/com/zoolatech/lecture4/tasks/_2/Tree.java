@@ -2,6 +2,16 @@ package com.zoolatech.lecture4.tasks._2;
 
 public class Tree {
 
+    public static class Node {
+        int value;
+        Node leftNode;
+        Node rightNode;
+
+        Node(int value) {
+            this.value = value;
+        }
+    }
+
     private Node root;
 
     public void add(int value) {
