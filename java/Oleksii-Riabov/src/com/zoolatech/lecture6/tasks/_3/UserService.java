@@ -14,6 +14,6 @@ public class UserService {
         } catch (UserMissingException e) {
             e.printStackTrace();
         }
-        return "Email is not found.";
+        return null;
     }
 }
