@@ -20,7 +20,7 @@ public class Task {
         Scanner scanner = new Scanner(System.in);
         String answer = "";
         do {
-            System.out.println("Input file name (names, surnames, positions):");
+            System.out.println("Input file name (" + fileReader.getFilesAsString() + "):");
             String fileName = scanner.next();
             fileReader.readFile(fileName);
             System.out.println("Repeat operation (press 'Y' to repeat):");

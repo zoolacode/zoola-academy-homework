@@ -2,16 +2,21 @@ package com.zoolatech.lecture10.tasks;
 
 import java.io.*;
 import java.time.LocalDateTime;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FileReader {
     private String path;
+    private Pattern pattern = Pattern.compile(".txt");
 
     public FileReader(String path) {
         this.path = path;
     }
 
     public void readFile(String name) {
-        File file = new File(path + name + ".txt");
+        StringBuilder builder = new StringBuilder(path);
+        File file = new File(builder.append(name).append(".txt").toString());
 
         if (isFileExist(file)) {
             try (InputStream stream = new FileInputStream(file)) {
@@ -38,5 +43,14 @@ public class FileReader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getFilesAsString() {
+        String collect = Stream.of(new File(path).listFiles())
+                .filter(file -> !file.isDirectory())
+                .map(File::getName)
+                .filter(name -> !name.endsWith("log"))
+                .collect(Collectors.joining(", "));
+        return pattern.matcher(collect).replaceAll("");
     }
 }
