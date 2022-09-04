@@ -1,7 +1,5 @@
 package com.zoolatech.lecture5.tasks._5;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -38,9 +36,12 @@ public class Task5 {
             this.k = k;
         }
 
-        public List<Integer> add(int value) {
-            List<Integer> list = new ArrayList<>();
-            if(min.size() < k) {
+        public int add(int value) {
+            if(value < k) {
+                min.add(value);
+                return -1;
+            }
+            if(k > min.size()) {
                 min.add(value);
             } else {
                 if (value > min.peek()) {
@@ -48,13 +49,7 @@ public class Task5 {
                     min.add(value);
                 }
             }
-
-            if (min.size() >= k) {
-                list.add(min.peek());
-            } else {
-                list.add(-1);
-            }
-            return list;
+                return min.peek();
         }
     }
 }
