@@ -10,7 +10,7 @@ final class Menu {
         System.out.println("Hello and welcome to DB. Type a file name you need:)");
         File file = new File("java/Mekhmet-Efe_Adzhar/src/com/zoolatech/lecture10/tasks/_1/db");
         FileRedactor fileRedactor = new FileRedactor(file);
-        fileRedactor.showFiles();
-        fileRedactor.generateFiles(scanner.nextLine());
+        fileRedactor.showAllAvailableFiles();
+        System.out.println(fileRedactor.showFileContent(scanner.nextLine()));
     }
 }

@@ -15,47 +15,46 @@ final class FileRedactor {
         this.file = file;
     }
 
-    public void showFiles() {
+    public void showAllAvailableFiles() {
         File[] files = file.listFiles();
         int counter = 0;
 
-        assert files != null;
-        for (File value : files) {
-            if (value.isFile()) {
-                System.out.println("File number " + ++counter + " : " + value.getName());
+        if (files != null) {
+            for (File value : files) {
+                if (value.isFile()) {
+                    System.out.println("File number " + ++counter + " : " + value.getName());
+                }
             }
+        } else {
+            System.err.println("No files");
         }
     }
 
-    public void generateFiles(String fileName) throws IOException {
+    public String showFileContent(String fileName) throws IOException {
         File[] files = file.listFiles();
+
         if (files == null) {
             System.err.println("File is empty");
         } else {
             for (File fileInFiles : files) {
                 if (fileInFiles.exists() && fileInFiles.getName().equals(fileName)) {
                     try (FileInputStream fileInputStream = new FileInputStream(file + "/" + fileName)) {
-                        String result = new String(fileInputStream.readAllBytes());
-                        System.out.println(result);
-                        fileInputStream.close();
-                        System.out.println("1. Start\n2. Exit");
+                        return new String(fileInputStream.readAllBytes());
                     }
-                } else {
-                    logError(fileName);
                 }
-                break;
             }
         }
+        return logError(fileName);
     }
 
-    private void logError(String fileName) throws IOException {
+    private String logError(String fileName) throws IOException {
         final LocalDate localDate = LocalDate.now();
         final LocalDateTime localDateTime = LocalDateTime.now();
         try (FileWriter fileWriter = new FileWriter(file + "/error.log", true)) {
             fileWriter.write(fileName + " invalid input was made: " + localDate + ", time: " + localDateTime + "\n");
         }
         System.err.println("No file with such name");
-        System.out.println("Written invalid filename to error.log");
-        System.out.println("1. Start\n2. Exit");
+        System.err.println("Written invalid filename to error.log");
+        return "1. Start\n2. Exit";
     }
 }
