@@ -2,4 +2,109 @@ body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #222738;
+
+}
+
+
+.score {
+  position: absolute;
+  border-radius: 5px;
+  top: 25px;
+  left: 25px;
+  font-size: 1rem;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cc4040;
+  color: #fff;
+}
+
+.timer {
+  position: absolute;
+  border-radius: 5px;
+  top: 25px;
+  right: 25px;
+  font-size: 1rem;
+  width: 200px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:#0c0c13;
+  color: #fff;
+}
+
+span.timer-display {
+  font-size: 40px;
+}
+
+span.score-value {
+  font-size: 40px;
+}
+
+.grid {
+  width: 100vh;
+  height: 100vh;
+  grid-template-columns: repeat(25, calc(100vh/25));
+  /* grid-template-rows: repeat(25, calc(100vh/25)); */
+  display: grid;
+  /* border: 1px solid;  */
+  background-color: #0c0c13;
+  /* background-color: #cdde80; */
+  
+}
+
+.grid div {
+  /* width:  auto;
+  height: auto; */
+  /* width: calc(100vh/25);
+  height: calc(100vh/25); */
+  border:  1px solid #222738;
+   
+} 
+
+.snake {
+  background-color:cornflowerblue;
+}
+
+.alert {
+  position: fixed;
+  font-size: 50px;
+  color: white;
+  width: 100vw;
+  height: 100px;
+  display: none;
+  bottom: 0;
+  line-height: 100px;
+  text-align: center;
+}
+
+.alert-win {
+  display: block;
+  background-color: #abce29;
+}
+
+.alert-loss {
+  display: block;
+  background-color: #cc4040;
+}
+
+.apple {
+  background-color: rgb(248, 255, 31);
+} 
+
+
+.pause-game {
+  background-color: #2e3660;
+  opacity: 0.5;
+}
+
+.bonus-apple {
+  background-color: darkorange;
 }
