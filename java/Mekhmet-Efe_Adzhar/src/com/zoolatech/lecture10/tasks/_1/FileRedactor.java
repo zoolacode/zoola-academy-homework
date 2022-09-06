@@ -44,10 +44,11 @@ final class FileRedactor {
                 }
             }
         }
-        return logError(fileName);
+         logError(fileName);
+        return "1. Start\n2. Exit";
     }
 
-    private String logError(String fileName) throws IOException {
+    private void logError(String fileName) throws IOException {
         final LocalDate localDate = LocalDate.now();
         final LocalDateTime localDateTime = LocalDateTime.now();
         try (FileWriter fileWriter = new FileWriter(file + "/error.log", true)) {
@@ -55,6 +56,5 @@ final class FileRedactor {
         }
         System.err.println("No file with such name");
         System.err.println("Written invalid filename to error.log");
-        return "1. Start\n2. Exit";
     }
 }
