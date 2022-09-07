@@ -27,6 +27,8 @@ const initialState = {
   dish: getRandomDishPosition(initialSnakeCoords, null, null),
   bonusDish: null,
   bonusDishExpiresTime: 0,
+  speedUp: false,
+  portal: [],
 };
 
 const engine = createEngine();
@@ -51,13 +53,23 @@ engine.addSideEffect({
       return;
     }
 
-    const timeoutId = setTimeout(() => {
-      emit('moveSnake');
-    }, 100);
+    if (state.speedUp) {
+      const timeoutId = setTimeout(() => {
+        emit('moveSnake');
+      }, 50);
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    } else {
+      const timeoutId = setTimeout(() => {
+        emit('moveSnake');
+      }, 100);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
   },
 });
 
@@ -72,6 +84,7 @@ engine.addSideEffect({
 
     if (state.gameTimer % bonusDishLifeTime === 0 && state.gameTimer !== 0) {
       emit('giveBonusDish');
+      emit('openPortal');
     }
 
     const timeoutId = setTimeout(() => {
@@ -116,6 +129,10 @@ engine.addSideEffect({
   effect: renderSnakeDish,
 });
 
+engine.addSideEffect({
+  effect: renderPortal,
+});
+
 engine.addSignalReducer('burnGameTime', (state) => {
   if (state.gameTimer === timerLimitMs) {
     return {
@@ -149,6 +166,21 @@ engine.addSignalReducer('giveBonusDish', (state) => {
     ...state,
     bonusDish: nextBonusDish,
     bonusDishExpiresTime: state.gameTimer + bonusDishLifeTime,
+  };
+});
+
+engine.addSignalReducer('openPortal', (state) => {
+  if (getIsGameEnded(state)) {
+    return state;
+  }
+  const nextPortal = [
+    getRandomDishPosition(state.snakeCoords, state.dish, state.bonusDish),
+    getRandomDishPosition(state.snakeCoords, state.dish, state.bonusDish),
+  ];
+
+  return {
+    ...state,
+    portal: nextPortal,
   };
 });
 
@@ -212,7 +244,7 @@ engine.addSignalReducer('moveSnake', (state) => {
     snakeHeadCoordinates,
     state.bonusDish
   );
-
+  const hasHitPortal = getHasHitPortal(snakeHeadCoordinates, state.portal);
   const newData =
     hasEatenDish || hasEatenBonusDish
       ? [...state.snakeCoords]
@@ -222,10 +254,11 @@ engine.addSignalReducer('moveSnake', (state) => {
     hasEatenDish,
     hasEatenBonusDish
   );
+  const newSnakeHead = getNewSnakeHead(snakeHeadCoordinates, state.portal);
 
   return {
     ...state,
-    snakeHead: nextSnakeHead,
+    snakeHead: hasHitPortal ? newSnakeHead : nextSnakeHead,
     currentScore: nextScore,
     snakeCoords: [...newData, getIndex(nextSnakeHead.x, nextSnakeHead.y)],
     dish: hasEatenDish
@@ -342,9 +375,15 @@ function renderGameBoard({ state }, emit) {
     gameContainer.appendChild(meshContainer);
   }
 
-  state.snakeCoords.forEach((snakeCoord) =>
-    meshContainer.children[snakeCoord].classList.add('snake-body')
-  );
+  if (state.speedUp) {
+    state.snakeCoords.forEach((snakeCoord) =>
+      meshContainer.children[snakeCoord].classList.add('speed-up')
+    );
+  } else {
+    state.snakeCoords.forEach((snakeCoord) =>
+      meshContainer.children[snakeCoord].classList.add('snake-body')
+    );
+  }
 
   if (Boolean(state.gameLost)) {
     state.snakeCoords.forEach((snakeCoord) => {
@@ -383,6 +422,7 @@ function renderGameBoard({ state }, emit) {
   return () => {
     state.snakeCoords.forEach((snakeCoord) => {
       meshContainer.children[snakeCoord].classList.remove('snake-body');
+      meshContainer.children[snakeCoord].classList.remove('speed-up');
       meshContainer.children[snakeCoord].classList.remove('snake-dead');
     });
     document.removeEventListener('keydown', onKeyBoardClick);
@@ -402,12 +442,31 @@ function renderSnakeDish({ state }) {
   };
 }
 
+function renderPortal({ state }) {
+  let meshContainer = document.querySelector('.mesh');
+  state.portal.forEach((portalCoord) =>
+    meshContainer.children[portalCoord].classList.add('portal')
+  );
+
+  return () => {
+    state.portal.forEach((portalCoord) =>
+      meshContainer.children[portalCoord].classList.remove('portal')
+    );
+  };
+}
+
 function addMovement(framework, { ...direction }) {
   framework.addSignalReducer(direction.targetDirection, (state) => {
+    const speedUpCondition = getSpeedUpCondition(
+      state.direction,
+      direction.targetDirection
+    );
+
     if (state.direction !== direction.oppositeDirection) {
       return {
         ...state,
         direction: direction.targetDirection,
+        speedUp: speedUpCondition ? true : false,
       };
     }
 
@@ -436,6 +495,13 @@ function getIsStateChanged(stateKey, { prevState, state }) {
 
 function getIndex(x, y) {
   return y * 25 - (25 - x) - 1;
+}
+
+function getCoords(index) {
+  const x = (index % 25) + 1;
+  const y = index / 25 + 1;
+
+  return { x, y };
 }
 
 function getMinSec(value) {
@@ -468,4 +534,22 @@ function getNextScore(score, hasEatenDish, hasEatenBonusDish) {
   }
 
   return score;
+}
+
+function getSpeedUpCondition(currentDirection, nextDirection) {
+  return currentDirection === nextDirection;
+}
+
+function getHasHitPortal(snakeHeadCoords, portalCoords) {
+  return portalCoords.includes(snakeHeadCoords);
+}
+
+function getNewSnakeHead(coords, portalCoords) {
+  const hittedPortalIndex = portalCoords.indexOf(coords);
+  const snakeHead = getCoords(portalCoords[hittedPortalIndex === 0 ? 1 : 0]);
+
+  return {
+    x: snakeHead.x,
+    y: Math.floor(snakeHead.y),
+  };
 }

@@ -34,8 +34,19 @@ html, body {
   border-radius: 20px;
 }
 
+.portal {
+  background-color: #f3d825;
+  border: 3px solid grey;
+  border-radius: 2px;
+}
+
 .snake-body {
   background-color: yellowgreen;
+  border: 1px solid #415798;
+}
+
+.speed-up {
+  background-color: coral;
   border: 1px solid #415798;
 }
 
@@ -43,16 +54,6 @@ html, body {
   background-color: #cc4040;
   border: 1px solid #415798;
 }
-
-/* .active-dish {
-  background-color: #ec7bbc;
-  border-radius: 20px;
-}
-
-.active-bonus-dish {
-  background-color: #f3d825;
-  border-radius: 20px;
-} */
 
 .score {
   font-size: 46px;
