@@ -1,4 +1,4 @@
-package com.zoolatech.lecture9.tasks._1.examples;
+package com.zoolatech.lecture9.tasks.examples;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
