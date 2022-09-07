@@ -24,7 +24,7 @@ import java.util.Objects;
  */
 
 public class Task1 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         File db = new File("/home/x/IdeaProjects/zoola-academy-homework/java/mykola-melnyk/src/com/zoolatech/lecture9/tasks/_1/db/");
 
         FileBrowser myDir = new FileBrowser(db);
