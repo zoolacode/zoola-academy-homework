@@ -1,5 +1,81 @@
 body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  position: relative;
   margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 100vw;
+  max-height: 100vh;
 }
+
+.mesh {
+  display: grid;
+  grid-template-columns: repeat(25, 1fr);
+  width: 100vh;
+  height: 100vh;
+  background-color: #23675b;
+}
+
+.item {
+  border: 1px solid transparent;
+}
+
+.timer {
+  margin-left: 5%;
+  margin-top: 2%;
+  border: 1px solid black;
+  padding: 5px;
+  font-size: 50px;
+  max-width: 150px;
+  background-color: aqua;
+}
+
+.score {
+  margin-right: 5%;
+  margin-top: 2%;
+  border: 1px solid black;
+  padding: 5px;
+  font-size: 50px;
+  max-width: 150px;
+  background-color: aqua;
+}
+
+.food {
+  position: relative;
+  z-index: 0;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.snake {
+  position: relative;
+  z-index: 1000;
+  background-color: rgb(109, 220, 235);
+  border: 1px solid black;
+  border-radius: 15%;
+}
+
+.snakeHead {
+  position: relative;
+  z-index: 1000;
+  background-color: rgb(165, 14, 25);
+  border: 1px solid black;
+  border-radius: 30%;
+  transform: scale(1.1);
+}
+
+.alert {
+  position: absolute;
+  z-index: 10000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid;
+  padding: 20px;
+  background-color: red;
+  font-weight: bolder;
+}
+
+
