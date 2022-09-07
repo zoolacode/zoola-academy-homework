@@ -20,7 +20,7 @@ public class Task2 {
         int inc = 1; // fill with increment numbers
         for (int i = 0; i < imgSize; i++) {
             for (int j = 0; j < imgSize; j++)
-                pixels[i][j] = inc++;
+                pixels[i][j] = 1;
         }
 
 

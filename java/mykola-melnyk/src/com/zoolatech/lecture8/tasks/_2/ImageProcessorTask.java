@@ -29,7 +29,7 @@ public class ImageProcessorTask extends RecursiveAction {
         if ((toX - fromX <= MAX_SIZE) || (toY - fromY <= MAX_SIZE)) {
             for (int x = fromX; x < toX; x++) {
                 for (int y = fromY; y < toY; y++)
-                    pixels[x][y] *= 0;
+                    pixels[x][y] += 1;
             }
         } else {
             int midX = fromX + (toX - fromX) / 2;
