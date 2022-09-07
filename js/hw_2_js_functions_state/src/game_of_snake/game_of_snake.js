@@ -260,7 +260,6 @@ engine.addSideEffect({
 
   effect: ({ prevState, state }, emit) => {
     let boostCoefficient = state.boostCoefficient;
-    console.log("boostCoefficient", boostCoefficient, "Round: ", state.round);
 
     const timeoutId = setTimeout(() => {
       emit("moveSnake");
@@ -461,9 +460,6 @@ function checkingFoodOnHead(bodyArray, foodObjects) {
       newFoodObjects.push(element);
     }
 
-    if (isFoodEatenFlag && isBoostEatenFlag) {
-      console.log(newFoodObjects);
-    }
   });
 
   return {
@@ -475,7 +471,6 @@ function checkingFoodOnHead(bodyArray, foodObjects) {
 }
 
 function isFoodEaten({ state, prevState }, emit) {
-  console.log("isFoodEaten: ", state.round);
   let foodObjectDetails = checkingFoodOnHead(
     [...state.bodyData],
     [...state.foodObjects]
