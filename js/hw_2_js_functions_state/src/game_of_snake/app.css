@@ -1,0 +1,115 @@
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  position: relative;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.mesh {
+  display: grid;
+  grid-template-columns: repeat(25, 1fr);
+  width: 100vh;
+  height: 100vh;
+  background-color: #419884;
+  /* transition: background-color 1s;  */
+}
+
+.item {
+  width: calc(100vh / 25);
+  height: calc(100vh / 25);
+  border-radius: 15px;
+  transition: background-color 0.5s; 
+}
+
+.score {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 46px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cc4040;
+  color: #fff;
+  border: 0.5px solid;
+}
+
+.pause {
+  width: 100%;
+  height: 100%;
+  background-color: #ff7b7b;
+  z-index: 1;
+  position: absolute;
+  opacity: 35%;
+  font-size: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* color:#cc4040; */
+}
+
+.timer{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 46px;
+  width: 150px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #419884;
+  color: #fff;
+  border: 0.5px solid;
+}
+
+.score-positive {
+  background-color: #419884;
+}
+
+.score-negative {
+  background-color: #cc4040;
+}
+
+.snake-body {
+  background-color: rgb(211, 247, 4);
+  /* border: 1px solid; */
+  /* padding: 1px; */
+  /* border-radius: 15px; */
+  transition: background-color 1s;
+}
+
+.food-booster-cell {
+  background-color: rgb(247, 4, 4);
+  border-radius: 25px;
+  transition: background-color 0.5s;
+}
+
+.food-cell {
+  background-color: rgb(16, 247, 4);
+  border-radius: 25px;
+  transition: background-color 1s;
+}
+
+.alert {
+  position: fixed;
+  font-size: 50px;
+  color: white;
+  width: 100vw;
+  height: 100px;
+  display: none;
+  bottom: 30px;
+  line-height: 100px;
+  text-align: center;
+}
+
+.alert-win {
+  display: block;
+  background-color: rgb(11, 92, 7);
+  /* opacity: 70%; */
+  transition: all 1s;
+}
