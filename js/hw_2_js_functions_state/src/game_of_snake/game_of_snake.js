@@ -24,9 +24,6 @@ import { addGameScore } from "./game_score";
 
 // Good luck!
 
-const boardSize = 25;
-const adjustedBoardSize = boardSize - 1;
-
 const engine = createEngine();
 
 engine.addSignalReducer(ENGINE_INITIALIZE_SIGNAL, () => initialState);
@@ -45,7 +42,7 @@ engine.addSideEffect({
     prevState?.food !== state.food ||
     prevState?.snake !== state.snake ||
     prevState.isGameEnded !== state.isGameEnded,
-  effect: ({ state }) => renderGame(state, boardSize),
+  effect: ({ state }) => renderGame(state, state.boardSize),
 });
 
 engine.addSideEffect({
@@ -93,7 +90,10 @@ const getNextFrame = (state) => {
 
   const nextHead = getNextSnakeHead(snake, direction);
 
-  if (getIsSnakeBodyThere(nextHead, snake) || getIsWallThere(nextHead)) {
+  if (
+    getIsSnakeBodyThere(nextHead, snake) ||
+    getIsWallThere(nextHead, state.boardSize)
+  ) {
     return {
       ...state,
       snake,
@@ -118,7 +118,8 @@ const getNextFrame = (state) => {
 
           const foodCoordinates = getRandomFoodCoordinates(
             getAllFood(state),
-            snake
+            snake,
+            state.boardSize
           );
           return {
             ...food,
@@ -195,7 +196,8 @@ function getIsSnakeBodyThere(targetCoordinate, snake) {
   return snake.some((coordinate) => coordinate === targetCoordinate);
 }
 
-function getIsWallThere(coordinates) {
+function getIsWallThere(coordinates, boardSize) {
   const [x, y] = parseStringCoordinates(coordinates);
+  const adjustedBoardSize = boardSize - 1;
   return x > adjustedBoardSize || y > adjustedBoardSize || x < 0 || y < 0;
 }

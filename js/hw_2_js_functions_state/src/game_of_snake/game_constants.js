@@ -13,5 +13,3 @@ export const initialState = {
   maxGameTime: 100,
   boardSize: 25,
 };
-
-export const adjustedBoardSize = initialState.boardSize - 1;

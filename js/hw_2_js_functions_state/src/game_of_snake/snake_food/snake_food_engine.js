@@ -55,7 +55,8 @@ export function addSnakeFood(engine) {
     const superfoodExpirationTime = 5;
     const superFoodCoordinates = getRandomFoodCoordinates(
       getAllFood(state),
-      state.snake
+      state.snake,
+      state.boardSize
     );
     return {
       ...state,
@@ -84,7 +85,8 @@ export function addSnakeFood(engine) {
 
     const foodCoordinates = getRandomFoodCoordinates(
       getAllFood(state),
-      state.snake
+      state.snake,
+      state.boardSize
     );
 
     return {

@@ -42,7 +42,7 @@ engine.addSignalReducer("restartGame", () => {
 // The next question should be: "then why don't we just merge "clickOnTarget" logic into "startNextRound" reducer and remove "clickOnTarget" altogether?".
 // - We could to it, there's nothing wrong about this idea. I encourage you to try and do it yourself, it's good practice. But "clickOnTargetBonus" wouldn't be a great name, then.
 engine.addSideEffect({
-  onlyWhen: getIsRoundChanged,
+  onlyWhen: ({ prevState, state }) => prevState.round !== state.round,
   // Notice how we name the first parameter as "_". We could name it properly but it's not used here (only "emit" is used), so "_" is okay.
   effect: (_, emit) => {
     emit("startNextRound");

@@ -1,25 +1,23 @@
-import { adjustedBoardSize } from "../game_constants";
-import { getRandomNumber, stringifyCoordinates } from "../utils";
+import { arrayOfLength, getRandomNumber, stringifyCoordinates } from "../utils";
 
-export function getRandomFoodCoordinates(
-  currentFood,
-  currentSnake,
-  forbiddenCoordinates = getForbiddenFoodCoordinates(currentFood, currentSnake)
-) {
-  const nextFoodCoordinates = [
-    getRandomNumber(adjustedBoardSize),
-    getRandomNumber(adjustedBoardSize),
-  ];
+export function getRandomFoodCoordinates(currentFood, currentSnake, boardSize) {
+  const board = arrayOfLength(boardSize ** 2).map((_, index) => {
+    const x = index % boardSize;
+    const y = Math.floor(index / boardSize);
+    return stringifyCoordinates([x, y]);
+  });
 
-  if (forbiddenCoordinates[nextFoodCoordinates]) {
-    return getRandomFoodCoordinates(
-      currentFood,
-      currentSnake,
-      forbiddenCoordinates
-    );
-  }
+  const disallowedBoard = getForbiddenFoodCoordinates(
+    currentFood,
+    currentSnake
+  );
 
-  return stringifyCoordinates(nextFoodCoordinates);
+  const allowedBoard = board.filter(
+    (coordinates) => !disallowedBoard[coordinates]
+  );
+
+  const randomNumber = getRandomNumber(allowedBoard.length - 1);
+  return allowedBoard[randomNumber];
 }
 
 export function getAllFood(state) {
