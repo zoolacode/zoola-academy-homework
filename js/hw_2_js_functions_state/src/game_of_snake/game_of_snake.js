@@ -141,6 +141,7 @@ engine.addSignalReducer('burnGameTime', (state) => {
       dish: null,
       bonusDish: null,
       bonusDishExpiresTime: 0,
+      portal: [],
     };
   } else {
     return {
@@ -234,6 +235,7 @@ engine.addSignalReducer('moveSnake', (state) => {
       dish: null,
       bonusDish: null,
       bonusDishExpiresTime: 0,
+      portal: [],
     };
   }
 
