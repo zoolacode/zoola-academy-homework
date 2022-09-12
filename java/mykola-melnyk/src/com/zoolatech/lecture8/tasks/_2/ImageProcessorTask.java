@@ -11,37 +11,36 @@ public class ImageProcessorTask extends RecursiveAction {
     private final int toX;
 
     private final int[][] pixels;
-    private final Function testFunction;
+    private final Function<Integer, Integer> f;
 
 
-    public ImageProcessorTask(int fromX, int toX, int fromY, int toY, int[][] pixels, Function testFunction) {
+    public ImageProcessorTask(int fromX, int toX, int fromY, int toY, int[][] pixels, Function<Integer, Integer> f) {
         this.fromX = fromX;
         this.toX = toX;
         this.fromY = fromY;
         this.toY = toY;
         this.pixels = pixels;
-        this.testFunction = testFunction;
+        this.f = f;
     }
 
-    public ImageProcessorTask(int[][] pixels, Function testFunction) {
-        this(0, pixels.length, 0, pixels.length, pixels, testFunction);
+    public ImageProcessorTask(int[][] pixels, Function<Integer, Integer> f) {
+        this(0, pixels.length, 0, pixels.length, pixels, f);
     }
 
     @Override
     protected void compute() {
         if ((toX - fromX <= MAX_SIZE) || (toY - fromY <= MAX_SIZE)) {
             for (int x = fromX; x < toX; x++) {
-                for (int y = fromY; y < toY; y++) {
-                    testFunction.apply(pixels[x][y]);
-                }
+                for (int y = fromY; y < toY; y++)
+                    pixels[x][y]  = f.apply(pixels[x][y]);
             }
         } else {
             int midX = fromX + (toX - fromX) / 2;
             int midY = fromY + (toY - fromY) / 2;
-            invokeAll(new ImageProcessorTask(fromX, midX, fromY, midY, pixels, testFunction),
-                    new ImageProcessorTask(fromX, midX, midY, toY, pixels, testFunction),
-                    new ImageProcessorTask(midX, toX, fromY, midY, pixels, testFunction),
-                    new ImageProcessorTask(midX, toX, midY, toY, pixels, testFunction));
+            invokeAll(new ImageProcessorTask(fromX, midX, fromY, midY, pixels, f),
+                    new ImageProcessorTask(fromX, midX, midY, toY, pixels, f),
+                    new ImageProcessorTask(midX, toX, fromY, midY, pixels, f),
+                    new ImageProcessorTask(midX, toX, midY, toY, pixels, f));
         }
     }
 }
