@@ -1,6 +1,7 @@
 package com.zoolatech.lecture8.tasks._2;
 
 import java.util.concurrent.ForkJoinPool;
+import java.util.function.Function;
 
 /**
  * Create a class ImageProcessorTask that accepts an image (represented as an int[][] array, where each item
@@ -17,14 +18,13 @@ public class Task2 {
         int imgSize = 20;
         ForkJoinPool pool = ForkJoinPool.commonPool(); // create a pool of threads
         int[][] pixels = new int[imgSize][imgSize]; // create an array
-        int inc = 1; // fill with increment numbers
         for (int i = 0; i < imgSize; i++) {
             for (int j = 0; j < imgSize; j++)
                 pixels[i][j] = 1;
         }
+        Function<Integer, Integer> f = integer -> integer + 1;  // testing function
 
-
-        ImageProcessorTask myImg = new ImageProcessorTask(pixels);
+        ImageProcessorTask myImg = new ImageProcessorTask(pixels, f);
         pool.invoke(myImg); // start the task
 
         for (int i = 0; i < imgSize; i++) {  // print the array
