@@ -18,7 +18,6 @@ public class Task2 {
         int imgSize = 20;
         ForkJoinPool pool = ForkJoinPool.commonPool(); // create a pool of threads
         int[][] pixels = new int[imgSize][imgSize]; // create an array
-        int inc = 1; // fill with increment numbers
         for (int i = 0; i < imgSize; i++) {
             for (int j = 0; j < imgSize; j++)
                 pixels[i][j] = 1;
