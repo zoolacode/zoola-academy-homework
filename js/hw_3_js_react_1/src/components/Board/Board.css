@@ -1,0 +1,54 @@
+.mesh {
+  display: grid;
+  grid-template-columns: repeat(25, 1fr);
+  width: 100vh;
+  height: 100vh;
+  background-color: #419884;
+}
+
+.item {
+  width: calc(100vh / 25);
+  height: calc(100vh / 25);
+}
+
+.snakeBody {
+  background: rgb(0, 0, 0);
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.snakeHead {
+  background: rgb(148, 12, 12);
+  background-size: cover;
+  border-radius: 40%;
+}
+
+.food {
+  background: green;
+  border: 50%;
+}
+
+.mesh_action {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.sturtButton {
+  cursor: pointer;
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
