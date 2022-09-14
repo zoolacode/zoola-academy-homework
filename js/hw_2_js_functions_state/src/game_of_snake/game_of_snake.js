@@ -3,7 +3,7 @@ import { createEngine, ENGINE_INITIALIZE_SIGNAL } from "../engine/engine";
 const boardWidth = 25;
 const meshSize = boardWidth ** 2;
 const snakeSound = new Audio ("http://localhost:8080/src/game_of_snake/snakeSound.mp3");
-const gameOwerSound = new Audio ("http://localhost:8080/src/game_of_snake/GamwOverVoice .mp3");
+const gameOwerSound = new Audio ("http://localhost:8080/src/game_of_snake/GameOverVoice.mp3");
 const eateFoodSound = new Audio ("http://localhost:8080/src/game_of_snake/eating.mp3");
 
 const initialState = {
@@ -316,6 +316,7 @@ engine.addSideEffect({
     food.classList.add("food");
   
     const onDocumentClick = (e) => {
+      snakeSound.play();
       switch (e.key) {
         case "ArrowLeft":
           emit("keyClickLeft");
@@ -346,7 +347,6 @@ engine.addSideEffect({
   }
   
   function addMove(engine, obj) {
-    snakeSound.play();
     engine.addSignalReducer(obj.signal, (state) => {
       if (
         getIsGameEnded(state) ||
@@ -370,12 +370,14 @@ engine.addSideEffect({
       eateFoodSound.play();
       return true;
     } else {
+        eateFoodSound.pause();
       return false;
     }
   }
   
   function getIsGameEnded(state) {
     return state.gameLost;
+    gameOwerSound.play();
   }
   
   function getIsGamePause(state) {
