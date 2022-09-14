@@ -1,0 +1,30 @@
+.App {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.game-timer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.alert {
+  position: fixed;
+  font-size: 50px;
+  color: white;
+  width: 100vw;
+  height: 100px;
+  display: none;
+  bottom: 0;
+  line-height: 100px;
+  text-align: center;
+  display: block;
+  background-color: #cc4040;
+}
+
+.pause {
+  background-color: #a9a6a56c;
+  opacity: 0.5;
+}

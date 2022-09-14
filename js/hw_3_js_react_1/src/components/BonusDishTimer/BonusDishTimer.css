@@ -1,0 +1,10 @@
+.bonus-timer {
+  font-size: 46px;
+  width: 160px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cc4040;
+  color: #fff;
+}

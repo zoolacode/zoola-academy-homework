@@ -1,0 +1,39 @@
+.mesh {
+  display: grid;
+  grid-template-columns: repeat(25, 1fr);
+  width: 100vh;
+  height: 100vh;
+  background-color: #415798;
+}
+
+.item {
+  width: calc(100vh / 25);
+  height: calc(100vh / 25);
+  box-sizing: border-box;
+}
+
+.active-dish {
+  background-color: #ec7bbc;
+  border-radius: 20px;
+}
+
+.active-bonus-dish {
+  background-color: #f3d825;
+  border-radius: 20px;
+}
+
+.snake-body {
+  background-color: yellowgreen;
+  border: 1px solid #415798;
+  border-radius: 0px;
+}
+
+.speed-up {
+  background-color: coral;
+  border: 1px solid #415798;
+}
+
+.snake-dead {
+  background-color: #cc4040;
+  border: 1px solid #415798;
+}
