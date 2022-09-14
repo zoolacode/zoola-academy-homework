@@ -2,9 +2,9 @@ import { createEngine, ENGINE_INITIALIZE_SIGNAL } from "../engine/engine";
 
 const boardWidth = 25;
 const meshSize = boardWidth ** 2;
-const snakeSound = new Audio ('snakeSound.mp3')
-const gameOwerSound = new Audio ('GamwOverVoice .mp3')
-const eateFoodSound = new Audio ('eating.mp3')
+const snakeSound = new Audio ("http://localhost:8080/src/game_of_snake/snakeSound.mp3");
+const gameOwerSound = new Audio ("http://localhost:8080/src/game_of_snake/GamwOverVoice .mp3");
+const eateFoodSound = new Audio ("http://localhost:8080/src/game_of_snake/eating.mp3");
 
 const initialState = {
   currentScore: 0,
@@ -74,6 +74,24 @@ engine.addSideEffect({
       };
     },
   });
+
+  engine.addSignalReducer('setTimer',state => {
+    if(getIsGameEnded(state) || getIsGamePaused(state)){
+        return state;
+    };
+    
+    if(state.timer === 0){
+        return {
+            ...state,
+            gameLost: true
+        }
+    }
+
+    return {
+        ...state,
+        timer: state.timer - 100,
+    }
+})
   
   engine.addSideEffect({
     onlyWhen: ({ prevState, state }) =>
@@ -119,6 +137,27 @@ engine.addSideEffect({
   addMove(engine, {signal: "keyClickDown", direction: "down", dontMove: "up"});
   addMove(engine, {signal: "keyClickLeft", direction: "left", dontMove: "right"});
   addMove(engine, {signal: "keyClickRight", direction: "right", dontMove: "left"});
+
+
+  engine.addSignalReducer("nextSecond", (state) => {
+    if (getIsGameEnded(state) || getIsGamePause(state)) {
+      return state;
+    }
+  
+    const timeSec = 1;
+    const timeWon = 120;
+    let gameWon = false;
+  
+    if (state.time === timeWon - 1) {
+      gameWon = true;
+    }
+  
+    return {
+      ...state,
+      time: state.time + timeSec,
+      gameWon,
+    };
+  });
   
   engine.addSignalReducer("pauseGame", (state) => {
     if (getIsGameEnded(state)) {
