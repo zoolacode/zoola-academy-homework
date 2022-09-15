@@ -33,21 +33,16 @@ const GameBoard = () => {
 
   })
 
-// WORKS 
+
 useEffect(() => {
   if(pause){
     return;
   }
-    
     const prevSnakeBody = [...snake];
-
-
     let head = [...snake[0]];
-   
- 
+
     let prevSnakeHead = prevSnakeBody[0]; 
 
-  
   switch(direction) {
       case "Left":
           head = [prevSnakeHead[0] - 1,prevSnakeHead[1]]
@@ -71,7 +66,6 @@ useEffect(() => {
 
   const snakeBodyExtraTail = getSnakeBodyExtraTail(isGameLost,prevSnakeHead,head,prevSnakeBody);
 
-  
   const isFoodEaten = getIsFoodEaten(head,food);
 
   const isExtraEaten = getIsExtraFoodEaten(head,extraFood);
@@ -80,7 +74,6 @@ useEffect(() => {
 
   const newSnake = growSnake(finalEaten,prevSnakeBody,head,snakeBodyExtraTail)
 
-  
 
   if(isGameLost || isSnakeCollapsed || timer === 0){
       document.addEventListener('keydown', restartGame);
@@ -136,10 +129,6 @@ function startNewGame(){
   setGameLost(false);
   setPause(false);
   setExtraFood(undefined);
-
-
-
-
 }
 
 
@@ -158,8 +147,6 @@ function handlePressKey(e) {
     setPause(!pause);
    }
 }
-
-
 
   return (
     <div className={`${pause ? 'grid pause-game' : 'grid'}`}>
