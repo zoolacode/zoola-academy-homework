@@ -1,0 +1,44 @@
+.grid {
+    width: 100vh;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(25, 1fr);
+    background-color: #0c0c13;
+  }
+  
+.cell {
+    width: calc(100vh / 25);
+    height: calc(100vh / 25);
+    outline: 1px solid #222738;
+  }
+
+.snake {
+  background-color: rgb(87, 171, 213);
+}
+
+.food {
+  background-color: crimson;
+}
+
+.bonus-food {
+  background-color: darkviolet;
+}
+
+.pause-game {
+  background-color: #2e3660;
+  opacity: 0.5;
+}
+
+.alert {
+  position: fixed;
+  font-size: 40px;
+  color: white;
+  width: 760px;
+  height: 100px;
+  bottom: 0;
+  line-height: 100px;
+  text-align: center;
+  display: block;
+  background-color: #cc4040;
+}
+

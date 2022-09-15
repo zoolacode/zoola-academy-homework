@@ -1,0 +1,18 @@
+.timer {
+    position: absolute;
+    border-radius: 5px;
+    top: 25px;
+    right: 25px;
+    width: 200px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#0c0c13;
+    color: #fff;
+  }
+  
+  span.timer-display {
+    font-size: 40px;
+   
+  }

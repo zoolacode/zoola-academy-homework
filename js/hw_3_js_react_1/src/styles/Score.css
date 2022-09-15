@@ -1,0 +1,19 @@
+.score {
+    position: absolute;
+    border-radius: 5px;
+    top: 25px;
+    left: 25px;
+    font-size: 1rem;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #cc4040;
+    color: #fff;
+  }
+  
+
+span.score-value {
+    font-size: 40px;
+  }
