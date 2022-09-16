@@ -22,29 +22,26 @@ import java.util.stream.Stream;
 public class Task1 {
 
     private static boolean checkPopulationIsBigger(ArrayList<City> cityList, int population) {
-        long populationCount = cityList.stream()
-                .filter(city -> city.getPopulation() > population)
-                .count();
-        return cityList.size() == populationCount;
+        return cityList.stream().allMatch(city -> city.population() > population);
     } //Subtask a)
 
     private static City biggestHere(ArrayList<City> cityList, String countryName) {
-        List<City> biggestCity = cityList.stream()
-                .filter(city -> city.getCountry().equalsIgnoreCase(countryName))
+        Optional<City> biggestCity = cityList.stream()
+                .filter(city -> city.country().equalsIgnoreCase(countryName))
                 .sorted(new PopulationComparator())
-                .toList();
-        return biggestCity.get(biggestCity.size() - 1);
+                .findFirst();
+        return biggestCity.get();
     } // Subtask b) ver 1
 
     private static City biggestHere2(ArrayList<City> cityList, String countryName) {
         Optional<City> biggest = cityList.stream()
-                .filter(city -> city.getCountry().equalsIgnoreCase(countryName))
+                .filter(city -> city.country().equalsIgnoreCase(countryName))
                 .max(new PopulationComparator());
         return biggest.orElseThrow(() ->new IllegalArgumentException("Invalid Country " + countryName));
     } // Subtask b) ver 2
 
     private static Map<String, City> cityMap(ArrayList<City> cityList) {
-        return cityList.stream().collect(Collectors.toMap(City::getName, Function.identity()));
+        return cityList.stream().distinct().collect(Collectors.toMap(City::name, Function.identity()));
     }  // Subtask c)
 
     public static void main(String[] args) {
@@ -61,8 +58,7 @@ public class Task1 {
         cities.add(saoPaulo);
         cities.add(mexico);
         cities.add(beijing);
-
-        Stream<City> cityStream = cities.stream();
+        cities.add(beijing);
 
         System.out.println(checkPopulationIsBigger(cities, 2_000_000));
         System.out.println(biggestHere(cities, "china"));

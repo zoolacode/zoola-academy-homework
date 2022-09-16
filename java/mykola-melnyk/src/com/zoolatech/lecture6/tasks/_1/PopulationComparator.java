@@ -6,6 +6,6 @@ public class PopulationComparator implements Comparator<City> {
 
     @Override
     public int compare(City o1, City o2) {
-        return Integer.compare(o1.getPopulation(), o2.getPopulation());
+        return Integer.compare(o1.population(), o2.population());
     }
 }

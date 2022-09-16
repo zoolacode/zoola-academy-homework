@@ -1,6 +1,9 @@
 package com.zoolatech.lecture5.tasks._3;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Create a method that accepts a list of words, and displays only unique one (order can be random). Bonus task:
@@ -17,7 +20,7 @@ import java.util.*;
 public class Task3 {
 
     public static Set<String> uniqStr7(String... words) {
-        Comparator<String> comparator = new CaseAgnosticComparator()::compare;
+        Comparator<String> comparator = new CaseAgnosticComparator();
         TreeSet<String> myTreeSet = new TreeSet<>(comparator);
         myTreeSet.addAll(Arrays.asList(words));
         return myTreeSet;

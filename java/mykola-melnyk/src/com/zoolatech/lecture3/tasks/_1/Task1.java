@@ -18,8 +18,6 @@ package com.zoolatech.lecture3.tasks._1;
 import com.zoolatech.lecture3.tasks._1.musical_instrument.*;
 import com.zoolatech.lecture3.tasks._1.musician.*;
 
-import java.util.ArrayList;
-
 public class Task1 {
     public static void main(String[] args) {
         // As far as each musician plays its own instrument, they are
