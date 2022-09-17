@@ -17,7 +17,7 @@ const initialState = {
   direction: 'up',
   getWin: false,
   getLose: false,
-  timer: 120000,
+  timer: 120000000,
   timeGone: 0,
   score: 0,
   pause: false
@@ -291,6 +291,9 @@ function renderTimer({ state }) {
 
 }
 
+
+
+
 function renderGameBoard({ state }, emit) {
   let mesh = document.querySelector('.mesh')
 
@@ -324,16 +327,16 @@ function renderGameBoard({ state }, emit) {
 
   const handlePressKey = (event) => {     
     switch(event.keyCode){
-        case 37:
+        case 65/* 37 */:
             emit('left');
             break;
-        case 38:
+        case 87/* 38 */:
             emit('up');
             break;
-        case 39:
+        case 68/* 39 */:
             emit('right');
             break;
-        case 40:
+        case 83/* 40 */:
             emit('down');
             break;
         case 32: 
