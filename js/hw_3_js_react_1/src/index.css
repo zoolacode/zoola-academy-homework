@@ -1,0 +1,59 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+  display: flex;
+  justify-content:space-between
+}
+
+.score, .timer{
+  margin: 50px;
+  background-color: #00ff00;
+  width: 100px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 70px;
+  font-size: 30px;
+}
+
+.cell{
+  width: 40px;
+  height: 40px;
+  background: rgb(114, 205, 215);
+  border: 1px solid black;
+}
+
+.mesh{
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.snake{
+  background: rgb(155, 25, 116);
+}
+
+.food{
+  background: rgb(25, 155, 36);
+}
+
+
+.pop-up{
+  position: relative;
+  top: -230px;
+  left: 33%;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  width: 600px;
+  height: 100px;
+  background: #00ff00;
+}
