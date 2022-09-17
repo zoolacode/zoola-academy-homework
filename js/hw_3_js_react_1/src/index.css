@@ -22,16 +22,16 @@
 }
 
 .cell{
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   background: rgb(114, 205, 215);
-  border: 1px solid black;
+  border: 1px solid rgb(3, 3, 3);
 }
 
 .mesh{
   margin: 0 auto;
   margin-top: 100px;
-  width: 400px;
+  width: 750px;
   display: flex;
   flex-wrap: wrap;
 }

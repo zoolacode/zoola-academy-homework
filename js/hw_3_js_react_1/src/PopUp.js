@@ -15,7 +15,7 @@ export default function PopUp(props) {
         background: "#00ff00",
       }
 
-      if(!props.isStartGame && props.timer===20){
+      if(!props.isStartGame && props.timer===120){
         return (
             <div style={style} >
                 Press Enter to start Game {(props.score!==-1)?`, your score ${props.score}`:``}
@@ -31,3 +31,4 @@ export default function PopUp(props) {
         )
       }
 }
+

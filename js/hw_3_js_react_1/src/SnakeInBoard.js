@@ -1,7 +1,7 @@
 import React from 'react'
 import "./index.css"
 
-const BOARD_SIZE =10;
+const BOARD_SIZE =25;
 const CELLS_OF_BOARD = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill(0));
 
 

@@ -7,7 +7,7 @@ import PopUp from './PopUp';
 
 import "./index.css"
 
-const BOARD_SIZE = 10
+const BOARD_SIZE = 25
 const AVAILABLE_MOVIES = ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft"]
 const speed = 200;
 
@@ -15,7 +15,7 @@ const speed = 200;
 function App() {
 
   const [isEndGame, setIsEndGame] = useState(false)
-  const [timer, setTimer] = useState(20);
+  const [timer, setTimer] = useState(120);
   const [isPauseGame, setIsPauseGame] = useState(false)
   const [isStartGame, setIsStartGame] = useState(false)
   const [direction, setDirection] = useState(AVAILABLE_MOVIES[0])
@@ -173,7 +173,7 @@ function App() {
     setSnake([[1, 1], [1, 2], [1, 3]])
     setIsStartGame(false)
     setIsEndGame(false);
-    setTimer(20);
+    setTimer(120);
     setIsPauseGame(false);
     setDirection("ArrowDown");
     setScore(0)
@@ -195,3 +195,4 @@ function App() {
 }
 
 export default App;
+
