@@ -1,13 +1,13 @@
-import './App.css';
-import React, { useState } from 'react';
+import "./App.css";
+import React, { useState } from "react";
 
 const rows = 25,
-      columns = 25,
-      initialBoostTimerValue = 10,
-      redrawBoostTimerValue = 5,
-      defaultFoodBoost = 2,
-      gameTimer = 120,
-      pauseToEndGame = 120;
+  columns = 25,
+  initialBoostTimerValue = 10,
+  redrawBoostTimerValue = 5,
+  defaultFoodBoost = 2,
+  gameTimer = 120,
+  pauseToEndGame = 120;
 
 let meshData = [];
 
@@ -40,198 +40,182 @@ function App() {
   const [snakeState, setSnake] = useState(initialSnakeState);
 
   //cach end of game
-  React.useEffect(()=>{
-    renderGameAlert(snakeState, setSnake)
-  })
+  React.useEffect(() => {
+    renderGameAlert(snakeState, setSnake);
+  });
 
   //Game timer
   React.useEffect(() => {
     const roundInterval = setInterval(() => {
-      if(!isGameOnHold(snakeState)){
-        setSnake(prevSnake => {
+      if (!isGameOnHold(snakeState)) {
+        setSnake((prevSnake) => {
           return {
-            ...prevSnake, 
+            ...prevSnake,
             gameTimer: prevSnake.gameTimer - 1,
-          }
-        })
-      } 
-    }, 1000);
-
-    return () => {
-      clearInterval(roundInterval);
-    };
-    
-  },[snakeState.gameTimer,snakeState.gameOver])
-
-  //boost timer
-  React.useEffect(() => {
-
-    const roundInterval = setInterval(() => {
-      if(!isGameOnHold(snakeState)){
-        setSnake(prevSnake => {
-          return {
-            ...prevSnake, 
-            boostTimerToPubish: prevSnake.boostTimerToPubish - 1,
-          }
-        })
+          };
+        });
       }
     }, 1000);
 
     return () => {
       clearInterval(roundInterval);
     };
+  }, [snakeState.gameTimer, snakeState.gameOver]);
 
-    
-  },[snakeState.boostTimerToPubish])
+  //boost timer
+  React.useEffect(() => {
+    const roundInterval = setInterval(() => {
+      if (!isGameOnHold(snakeState)) {
+        setSnake((prevSnake) => {
+          return {
+            ...prevSnake,
+            boostTimerToPubish: prevSnake.boostTimerToPubish - 1,
+          };
+        });
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(roundInterval);
+    };
+  }, [snakeState.boostTimerToPubish]);
 
   //end game if on pause 120 sec
   React.useEffect(() => {
-    renderGamePause(snakeState)
-    if(snakeState.pause && !snakeState.gameOver){
-      
+    renderGamePause(snakeState);
+    if (snakeState.pause && !snakeState.gameOver) {
       const roundInterval = setInterval(() => {
         //end game
         setSnake({
           ...snakeState,
           gameOver: true,
-        })
-      }, pauseToEndGame*1000);
+        });
+      }, pauseToEndGame * 1000);
 
       return () => {
         clearInterval(roundInterval);
       };
     }
-    
-  },[snakeState.pause])
+  }, [snakeState.pause]);
 
   // checkIsGameEnded
-  React.useEffect(()=>{
+  React.useEffect(() => {
     // renderGameAlert()
-    if(!isGameOnHold(snakeState)){
-      checkIsGameEnded(snakeState,setSnake)    
+    if (!isGameOnHold(snakeState)) {
+      checkIsGameEnded(snakeState, setSnake);
     }
-  })
+  });
 
   //Render round depend on speed of Snake
   React.useEffect(() => {
-    if(!isGameOnHold(snakeState)){
+    if (!isGameOnHold(snakeState)) {
       const roundInterval = setInterval(() => {
-      
-        setSnake(prevSnake => {
+        setSnake((prevSnake) => {
           return {
-            ...prevSnake, 
-            round: prevSnake.round +1,
-          }
-        })
-      }, 1000/snakeState.boostCoefficient);
+            ...prevSnake,
+            round: prevSnake.round + 1,
+          };
+        });
+      }, 1000 / snakeState.boostCoefficient);
 
       return () => {
         clearInterval(roundInterval);
       };
     }
-     
-    
-
-  },[snakeState.round, snakeState.pause])
+  }, [snakeState.round, snakeState.pause]);
 
   //Move Snake body data
   React.useEffect(() => {
-    if(!snakeState.gameOver){
-      moveSnakeBody(snakeState,setSnake)
+    if (!snakeState.gameOver) {
+      moveSnakeBody(snakeState, setSnake);
     }
-  },[snakeState.round])  
-  
+  }, [snakeState.round]);
+
   //add boost when boost Timer expired
   React.useEffect(() => {
     //check food eaten details
-    if(snakeState.boostTimerToPubish === 0 && !isGameOnHold(snakeState)){
-      addFood(snakeState, 
-        setSnake, 
-        {
-          newFoodPossition: getNewFoodPossition(snakeState),
-          isBooster: true,
-        }
-      )
+    if (snakeState.boostTimerToPubish === 0 && !isGameOnHold(snakeState)) {
+      addFood(snakeState, setSnake, {
+        newFoodPossition: getNewFoodPossition(snakeState),
+        isBooster: true,
+      });
     }
-  }, [snakeState.boostTimerToPubish])
+  }, [snakeState.boostTimerToPubish]);
 
   //check eaten food and add score if we did it
   React.useEffect(() => {
-    if(!isGameOnHold(snakeState)){
-      checkFoodEatenArray(snakeState, setSnake)
+    if (!isGameOnHold(snakeState)) {
+      checkFoodEatenArray(snakeState, setSnake);
     }
-  }, [snakeState.currentScore])
+  }, [snakeState.currentScore]);
 
-// add initial food first time
+  // add initial food first time
   React.useEffect(() => {
-    if(snakeState.foodObjects.length === 0){
-      addFood(snakeState, 
-              setSnake, 
-              {
-                newFoodPossition: getNewFoodPossition(snakeState),
-                isBooster: false,
-              }
-      )
+    if (snakeState.foodObjects.length === 0) {
+      addFood(snakeState, setSnake, {
+        newFoodPossition: getNewFoodPossition(snakeState),
+        isBooster: false,
+      });
     }
-  },[snakeState])
+  }, [snakeState]);
 
   //Event Handler
   React.useEffect(() => {
-    if(!snakeState.gameOver){
+    if (!snakeState.gameOver) {
       document.addEventListener("keyup", eventHandler);
     }
     return () => {
       document.removeEventListener("keyup", eventHandler);
-    }
-  })
+    };
+  });
 
   function eventHandler(e) {
     if (e.code === "Space") {
-      setSnake(prevSnake => {
-        return {
-          ...prevSnake, 
-          pause: !prevSnake.pause
-        }
-      })
-    } else if(e.code === "KeyF") {
-      setSnake(prevSnake => {
-        addFood(prevSnake, 
-          setSnake, 
-          {
-            newFoodPossition: getNewFoodPossition(prevSnake),
-            isBooster: true,
-          }
-        )
+      setSnake((prevSnake) => {
         return {
           ...prevSnake,
-        }
-      })
+          pause: !prevSnake.pause,
+        };
+      });
+    } else if (e.code === "KeyF") {
+      setSnake((prevSnake) => {
+        addFood(prevSnake, setSnake, {
+          newFoodPossition: getNewFoodPossition(prevSnake),
+          isBooster: true,
+        });
+        return {
+          ...prevSnake,
+        };
+      });
     } else {
-      setSnake(prevSnake => {
-        return  !prevSnake.directionChanged 
-                ? changeDirection(prevSnake, e)
-                : {...prevSnake}
-      })
+      setSnake((prevSnake) => {
+        return !prevSnake.directionChanged
+          ? changeDirection(prevSnake, e)
+          : { ...prevSnake };
+      });
     }
   }
 
-
   return (
-    <div className='snake-game'>
+    <div className="snake-game">
       <Board />
-      <Timer time={snakeState.gameTimer}/>
-      <TimerBoost time={snakeState.boostTimerToPubish} show={snakeState.boostPublishFlag} isGameOver={snakeState.gameOver}/>
-      <Score score={snakeState.currentScore}/>
-      <Food state={snakeState}/>
+      <Timer time={snakeState.gameTimer} />
+      <TimerBoost
+        time={snakeState.boostTimerToPubish}
+        show={snakeState.boostPublishFlag}
+        isGameOver={snakeState.gameOver}
+      />
+      <Score score={snakeState.currentScore} />
+      <Food state={snakeState} />
       <Snake state={snakeState} />
     </div>
   );
 }
 
 //snake logic
-function moveSnakeBody(state,setState) {
+function moveSnakeBody(state, setState) {
   let newBodyData = [...state.bodyData],
-      head = [...newBodyData[0]];
+    head = [...newBodyData[0]];
 
   head[0] += state.direction[0];
   head[1] += state.direction[1];
@@ -241,27 +225,27 @@ function moveSnakeBody(state,setState) {
 
   if (!foodObjectDetails.isFoodEaten) {
     newBodyData.pop();
-    
+
     setState({
-      ...state, 
+      ...state,
       bodyData: newBodyData,
       directionChanged: false,
-    }) 
+    });
   } else {
     setState({
-      ...state, 
+      ...state,
       bodyData: newBodyData,
       directionChanged: false,
       foodObjects: foodObjectDetails.foodObjects,
       foodEatenArray: foodObjectDetails.eatenFood,
       currentScore: state.currentScore + 1,
-    })
+    });
   }
 }
 
 function changeDirection(state, keyEvent) {
   if (state.pause) {
-    return state
+    return state;
   }
 
   let proposedDirection = state.direction;
@@ -284,11 +268,13 @@ function changeDirection(state, keyEvent) {
   if (scalarProduct(state.direction, proposedDirection) === 0) {
     return {
       ...state,
-      direction: state.directionChanged? state.directionChanged: proposedDirection,
+      direction: state.directionChanged
+        ? state.directionChanged
+        : proposedDirection,
       directionChanged: state.direction === proposedDirection ? false : true,
-    }
+    };
   }
-  return state
+  return state;
 }
 
 //food logic
@@ -308,11 +294,10 @@ function checkingFoodOnHead(bodyArray, foodObjects) {
       isFoodEatenFlag = true;
       isBoostEatenFlag = element.isBooster;
       foodBoostCoefficient = element.foodBoostCoefficient;
-      eatenFoodObjects.push(element)
+      eatenFoodObjects.push(element);
     } else {
       newFoodObjects.push(element);
     }
-
   });
 
   return {
@@ -325,35 +310,29 @@ function checkingFoodOnHead(bodyArray, foodObjects) {
 }
 
 function checkFoodEatenArray(snakeState, setSnake) {
-  
-  if(!snakeState.foodEatenArray[0]?.isBooster){
-    addFood(snakeState, 
-      setSnake, 
-      {
-        newFoodPossition: getNewFoodPossition(snakeState),
-        isBooster: false,
-      }
-    ) 
+  if (!snakeState.foodEatenArray[0]?.isBooster) {
+    addFood(snakeState, setSnake, {
+      newFoodPossition: getNewFoodPossition(snakeState),
+      isBooster: false,
+    });
   } else {
     setSnake({
       ...snakeState,
       boostTimerToPubish: initialBoostTimerValue,
       boostPublishFlag: false,
       boostCoefficient: snakeState.foodEatenArray[0].foodBoostCoefficient,
-    })
+    });
   }
-
-  
 }
 
 function removeBoost(foodObjects) {
   let newFoodObjects = [...foodObjects],
-      eatenFoodObjects = [];       
+    eatenFoodObjects = [];
 
   for (let index = 0; index < newFoodObjects.length; index++) {
     const element = newFoodObjects[index];
     if (element.isBooster) {
-      eatenFoodObjects = newFoodObjects.splice(index,1);
+      eatenFoodObjects = newFoodObjects.splice(index, 1);
       break;
     }
   }
@@ -361,11 +340,10 @@ function removeBoost(foodObjects) {
   return [newFoodObjects, eatenFoodObjects];
 }
 
-function addFood(state, setSnake, foodParams){
-
+function addFood(state, setSnake, foodParams) {
   let boostValues = [2, 4, 6, 8, 10],
-      newFoodObjects = [...state.foodObjects],
-      eatenFoodObjects = state.foodEatenArray;
+    newFoodObjects = [...state.foodObjects],
+    eatenFoodObjects = state.foodEatenArray;
 
   newFoodObjects?.push({
     possition: foodParams.newFoodPossition,
@@ -374,29 +352,29 @@ function addFood(state, setSnake, foodParams){
       ? boostValues[getRandomNumber(boostValues.length - 1)]
       : defaultFoodBoost,
   });
-  
-  if(foodParams.isBooster){
-    if(state.boostPublishFlag===true){
+
+  if (foodParams.isBooster) {
+    if (state.boostPublishFlag === true) {
       [newFoodObjects, eatenFoodObjects] = removeBoost(newFoodObjects);
     }
-    setSnake(prevSnake => {
+    setSnake((prevSnake) => {
       return {
         ...prevSnake,
         foodObjects: newFoodObjects,
         boostCoefficient: defaultFoodBoost,
         boostPublishFlag: true,
         boostTimerToPubish: redrawBoostTimerValue,
-        foodEatenArray: eatenFoodObjects
-      }
-    })
+        foodEatenArray: eatenFoodObjects,
+      };
+    });
   } else {
-    setSnake(prevSnake => {
+    setSnake((prevSnake) => {
       return {
         ...prevSnake,
         foodObjects: newFoodObjects,
         boostCoefficient: defaultFoodBoost,
-      }
-    }) 
+      };
+    });
   }
 }
 
@@ -470,19 +448,19 @@ function checkIsGameEnded(state, setState) {
     endGameFlag = true;
   }
 
-  if(endGameFlag){
-    setState(prevSnake => {
-        return {
-          ...prevSnake,
+  if (endGameFlag) {
+    setState((prevSnake) => {
+      return {
+        ...prevSnake,
         gameOver: endGameFlag,
         bodyData: prevSnake.bodyData,
-      }
-    })
+      };
+    });
   }
 }
 
 function isGameOnHold(state) {
-  return (state.gameOver || state.pause);
+  return state.gameOver || state.pause;
 }
 
 //render Pause || Alert
@@ -498,12 +476,11 @@ function renderGameAlert(state, setState) {
 
   const onAlertEnter = (e) => {
     if (e.key === "Enter") {
-      setState(prevSnake => {
-        
+      setState((prevSnake) => {
         return {
           ...initialSnakeState,
-        }
-      })
+        };
+      });
     }
   };
 
@@ -515,13 +492,11 @@ function renderGameAlert(state, setState) {
   }
 
   return () => {
-
     document.removeEventListener("keyup", onAlertEnter);
   };
 }
 
 function renderGamePause(state) {
-
   let pauseContainer = document.querySelector(".pause");
 
   if (!pauseContainer) {
@@ -539,98 +514,91 @@ function renderGamePause(state) {
 }
 
 //components
-  function Board() {
-    let meshContainer = document.querySelector(".mesh");
-  
-    if (!meshContainer) {
-      meshContainer = document.createElement("div");
-      meshContainer.classList.add("mesh");
-      for (let x = 0; x < rows; x++) {
-        let row = [];
-  
-        for (let y = 0; y < columns; y++) {
-          const cell = document.createElement("div");
-          cell.classList.add("item");
-          meshContainer.appendChild(cell);
-          document.body.appendChild(meshContainer);
-          row.push(cell);
-        }
-        meshData.push(row);
+function Board() {
+  let meshContainer = document.querySelector(".mesh");
+
+  if (!meshContainer) {
+    meshContainer = document.createElement("div");
+    meshContainer.classList.add("mesh");
+    for (let x = 0; x < rows; x++) {
+      let row = [];
+
+      for (let y = 0; y < columns; y++) {
+        const cell = document.createElement("div");
+        cell.classList.add("item");
+        meshContainer.appendChild(cell);
+        document.body.appendChild(meshContainer);
+        row.push(cell);
       }
+      meshData.push(row);
     }
   }
-  
-  function Timer(props) {
-    let number = props.time,
-    minutes = ("0" + Math.floor(number / 60)).slice(-2),
-    seconds = ("0" + (number % 60)).slice(-2),
-    timeString = `${minutes}:${seconds}`;
-    
-    return (
-      <div className='timer'>
-        {timeString}
-      </div>
-    )
-  }
+}
 
-  function TimerBoost(props) {
-    let number = props.time,
+function Timer(props) {
+  let number = props.time,
     minutes = ("0" + Math.floor(number / 60)).slice(-2),
     seconds = ("0" + (number % 60)).slice(-2),
     timeString = `${minutes}:${seconds}`;
 
-    return (
-      <div className={props.show && !props.isGameOver ? 'timer-boost' : "timer-boost-hide"}>
-        {timeString} 
-      </div>
-    )
-  }
+  return <div className="timer">{timeString}</div>;
+}
 
-  function Score(props) {
-    return (
-      <div className='score score-positive'>
-        {props.score}
-      </div>
-    )
-  }
+function TimerBoost(props) {
+  let number = props.time,
+    minutes = ("0" + Math.floor(number / 60)).slice(-2),
+    seconds = ("0" + (number % 60)).slice(-2),
+    timeString = `${minutes}:${seconds}`;
 
-  function Food(props) {
-
-    props.state.foodObjects?.forEach((element) => {
-      let x = element.possition[0],
-        y = element.possition[1],
-        foodClassName = element.isBooster ? "food-booster-cell" : "food-cell";
-
-      meshData[x][y].classList.add(foodClassName);
-      if(props.state.gameOver){
-        meshData[x][y].classList.remove(foodClassName);
+  return (
+    <div
+      className={
+        props.show && !props.isGameOver ? "timer-boost" : "timer-boost-hide"
       }
-    });
-    props.state.foodEatenArray?.forEach((element) => {
-      let x = element.possition[0],
-        y = element.possition[1],
-        foodClassName = element.isBooster ? "food-booster-cell" : "food-cell";
-        meshData[x][y].classList.remove(foodClassName);
-    });
-  
-  
-  }
+    >
+      {timeString}
+    </div>
+  );
+}
 
-  function Snake(props) {
-    meshData.forEach( x => {
-      x.forEach( y => {
-        y.classList.remove("snake-body");
-      })
-    })
-    if(!props.state.gameOver){
-      props.state.bodyData.forEach((element) => {
-        let x = element[0],
-          y = element[1];
-        
-        meshData[x]?.[y]?.classList.add("snake-body");
-        
-      });
+function Score(props) {
+  return <div className="score score-positive">{props.score}</div>;
+}
+
+function Food(props) {
+  props.state.foodObjects?.forEach((element) => {
+    let x = element.possition[0],
+      y = element.possition[1],
+      foodClassName = element.isBooster ? "food-booster-cell" : "food-cell";
+
+    meshData[x][y].classList.add(foodClassName);
+    if (props.state.gameOver) {
+      meshData[x][y].classList.remove(foodClassName);
     }
+  });
+  props.state.foodEatenArray?.forEach((element) => {
+    let x = element.possition[0],
+      y = element.possition[1],
+      foodClassName = element.isBooster ? "food-booster-cell" : "food-cell";
+    meshData[x][y].classList.remove(foodClassName);
+  });
+}
+
+function Snake(props) {
+  meshData.forEach((x) => {
+    x.forEach((y) => {
+      y.classList.remove("snake-body");
+    });
+  });
+  if (!props.state.gameOver) {
+    props.state.bodyData.forEach((element) => {
+      let x = element[0],
+        y = element[1];
+
+      meshData[x]?.[y]?.classList.add("snake-body");
+    });
   }
+}
 
 export default App;
+
