@@ -1,38 +1,88 @@
-.App {
-  text-align: center;
+:root {
+  --chat-input-margin: 10px;
+  --chat-input-bottom: 20px;
+  --chat-list-margin-top: 20px;
+  --chat-list-margin-bottom: 20px;
+  --chat-height: calc(100vh - (calc(var(--chat-input-margin)
+    + var(--chat-input-bottom)
+    + var(--chat-list-margin-bottom)
+    + var(--chat-list-margin-top))));
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.chat-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.chat {
+  height: var(--chat-height);
+  overflow: scroll;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.chat__list {
+  padding: 0;
+  min-width: 400px;
+  margin-top: var(--chat-list-margin-top);
+  margin-bottom: var(--chat-list-margin-bottom);
+}
+
+.chat__item {
+  display: flex;
+  list-style: none;
+  margin: 5px;
+}
+
+.current-item {
+  justify-items: end;
+  justify-content: end;
+}
+
+.chat__info-wrapper {
+  background-color: rgb(248, 248, 248);
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.current-user {
+  background-color: rgb(203, 244, 203);
+  text-align: end;
+}
+
+.chat__user-name {
+  color: grey;
+  margin: 0;
+  font-size: 12px;
+}
+
+.chat__message {
+  margin: 0;
+  max-width: 300px;
+}
+
+.chat__input {
+  position: fixed;
+  bottom: var(--chat-input-bottom);
+  margin: var(--chat-input-margin);
+}
+
+.chat__input-message {
+  width: 200px;
+  border-style: none;
+  border: 1px solid rgb(211, 206, 206);
+  border-radius: 3px;
+  margin-right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.chat__input-button {
+  width: 200px;
+  border-style: none;
+  border: 1px solid rgb(211, 206, 206);
+  border-radius: 3px;
+  background-color: rgb(211, 206, 206);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
