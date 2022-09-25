@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import { getCellStyle } from "../../function/Helpers/getCellStyle";
 import { generateNewFood } from "../../function/Food/generateNewFood";
 import { growSnake } from "../../function/Snake/growSnake";
 import { snakeBodyWithTail } from "../../function/Snake/snakeBodyWithTail";
@@ -10,22 +11,17 @@ import {
 } from "../../function/GameOver/gameOver";
 import { getHasEatenFood } from "../../function/Snake/getHasEatenFood";
 import { GameTimer } from "../GameTimer/GameTimer";
-import { GameScore } from "../GameScore/GameScore"
+import { GameScore } from "../GameScore/GameScore";
+import {
+  boardWidth,
+  board,
+  initialSnakeBody,
+  initialFood,
+  initialTime,
+  speed,
+} from "../../constats";
 
 import "./Board.css";
-
-const boardWidth = 25;
-const board = Array(boardWidth).fill(Array(boardWidth).fill(0));
-const initialSnakeBody = [
-  [10, 10],
-  [10, 11],
-  [10, 12],
-  [10, 13],
-  [10, 14],
-];
-const initialFood = [[]];
-const speed = 50;
-const initialTime = 120
 
 const Board = () => {
   const [snake, setSnake] = useState([initialSnakeBody]);
@@ -62,7 +58,7 @@ const Board = () => {
       return;
     }
     if (start && !gameOver && !pause) {
-      const intervalId = setTimeout(() => {
+      const intervalId = setInterval(() => {
         snakeMove();
       }, speed)
 
@@ -74,7 +70,7 @@ const Board = () => {
 
   function play() {
     setSnake(initialSnakeBody);
-    setFood(generateNewFood(snake));
+    setFood(generateNewFood(snake, boardWidth));
     setDirection("ArrowUp");
     setScore(0);
     setGameOver(false);
@@ -131,14 +127,14 @@ const Board = () => {
       );
 
       setGameOver(
-        getIsSnakeHeadOutsideBoard(...snakeBodyFirstElemMove) ||
+        getIsSnakeHeadOutsideBoard(...snakeBodyFirstElemMove, boardWidth) ||
           getIsSnakeHeadOnBody([...snakeBodyFirstElemMove], snakeBody) ||
           getIsTimeOut(time)
       );
 
       if (hasEatenFood) {
         setScore((prevScore) => prevScore + pointForEat);
-        setFood(generateNewFood(snakeBody));
+        setFood(generateNewFood(snakeBody, boardWidth));
       }
 
       setSnake(snakeBody);
@@ -151,9 +147,9 @@ const Board = () => {
         {board.map((row, indexX) => (
           <div key={indexX} className="item">
             {row.map((cell, indexY) => {
-              let snakeBody = snake.some((item) => item[0] === indexX && item[1] === indexY) && "snakeBody";
-              let snakeHead = snake.some((item, index) => item[0] === indexX && item[1] === indexY && index === 0) && "snakeHead";
-              let foodStyle = food.some((item) => item[0] === indexX && item[1] === indexY) && "food";
+              const snakeBody = getCellStyle(snake, indexX, indexY) ? "snakeBody" : "";
+              const snakeHead = snake.some(([x, y], index) => x === indexX && y === indexY && index === 0) ? "snakeHead" : "";
+              const foodStyle = getCellStyle(food, indexX, indexY) ? "food" : "";
               return (
                 <div
                   key={indexY}
@@ -163,7 +159,7 @@ const Board = () => {
             })}
           </div>
         ))}
-        <div className="mesh_action">
+        <div className="meshAction">
           {gameOver && (
             <div className="alert">
               <span>Game has ended</span>

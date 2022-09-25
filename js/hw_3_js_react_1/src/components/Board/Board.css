@@ -3,7 +3,7 @@
   grid-template-columns: repeat(25, 1fr);
   width: 100vh;
   height: 100vh;
-  background-color: #419884;
+  background-color: rgb(65, 152, 132);
 }
 
 .item {
@@ -12,7 +12,7 @@
 }
 
 .snakeBody {
-  background: rgb(0, 0, 0);
+  background: black;
   background-size: cover;
   border-radius: 50%;
 }
@@ -28,7 +28,7 @@
   border: 50%;
 }
 
-.mesh_action {
+.meshAction {
   display: flex;
   flex-direction: column;
   gap: 20px;

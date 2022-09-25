@@ -7,6 +7,6 @@ export function growSnake(
   if (hasEatenFood) {
     return [snakeHead, ...snakeBody];
   } else {
-    return snakeBodyWithExtraTail.slice(0, snakeBodyWithExtraTail.length - 1);
+    return snakeBodyWithExtraTail.slice(0, -1);
   }
 }
