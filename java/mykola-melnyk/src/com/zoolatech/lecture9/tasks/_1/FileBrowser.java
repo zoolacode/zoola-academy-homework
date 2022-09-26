@@ -48,7 +48,7 @@ public class FileBrowser {
     }
 
     public void loopOpen() throws IOException {
-        FileOutputStream outputStream = new FileOutputStream("/home/x/IdeaProjects/zoola-academy-homework/java/mykola-melnyk/src/com/zoolatech/lecture9/tasks/_1/error.log");
+        FileOutputStream outputStream = new FileOutputStream("/home/x/IdeaProjects/zoola-academy-homework/java/mykola-melnyk/src/com/zoolatech/lecture9/tasks/_1/db/error.log", true);
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
         PrintWriter printWriter = new PrintWriter(outputStreamWriter);
         while (true) {
