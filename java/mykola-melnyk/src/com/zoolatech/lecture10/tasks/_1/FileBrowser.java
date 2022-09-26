@@ -1,4 +1,4 @@
-package com.zoolatech.lecture9.tasks._1;
+package com.zoolatech.lecture10.tasks._1;
 
 import java.io.BufferedReader;
 import java.io.File;
