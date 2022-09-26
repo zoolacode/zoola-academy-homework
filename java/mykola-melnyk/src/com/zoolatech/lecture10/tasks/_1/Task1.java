@@ -1,15 +1,7 @@
-package com.zoolatech.lecture9.tasks._1;
+package com.zoolatech.lecture10.tasks._1;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 /**
  * Given a directory called db with 3 files:
