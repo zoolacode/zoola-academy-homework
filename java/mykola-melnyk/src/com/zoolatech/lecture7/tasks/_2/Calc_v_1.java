@@ -1,11 +1,11 @@
 package com.zoolatech.lecture7.tasks._2;
 
 public class Calc_v_1 implements Calc {
-    private volatile int storedValue;
+    private int storedValue;
     public Calc_v_1(int value) {
         storedValue = value;
     }
-    public int getStoredValue() {
+    public synchronized int getStoredValue() {
         return storedValue;
     }
     public synchronized int add(int operand) {

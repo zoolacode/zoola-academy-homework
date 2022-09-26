@@ -4,12 +4,12 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Calc_v_2 implements Calc {
-    private volatile int storedValue;
+    private int storedValue;
     private Lock calcLock = new ReentrantLock();
     public Calc_v_2(int value) {
         storedValue = value;
     }
-    public int getStoredValue() {
+    public synchronized int getStoredValue() {
         return storedValue;
     }
     public int add(int operand) {

@@ -5,9 +5,9 @@ public class Test_Task2 {
         Calc_v_3 calc3 = new Calc_v_3(1);
         Calc_v_2 calc2 = new Calc_v_2(1);
         Calc_v_1 calc1 = new Calc_v_1(1);
-        Test_Task2.testCalc(calc3);
-        Test_Task2.testCalc(calc2);
-        Test_Task2.testCalc(calc1);
+        testCalc(calc3);
+        testCalc(calc2);
+        testCalc(calc1);
     }
     public static void testCalc(Calc calc) throws InterruptedException {
         Runnable r1 = () -> {
