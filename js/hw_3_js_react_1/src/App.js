@@ -1,7 +1,10 @@
+import Board from "./components/Board";
+import "./styles/App.css"
+
 function App() {
   return (
-    <div>
-      <h1>hello</h1>
+    <div className="app">
+      <Board />
     </div>
   );
 }
