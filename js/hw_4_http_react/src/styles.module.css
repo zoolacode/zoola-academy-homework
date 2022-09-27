@@ -1,0 +1,124 @@
+.screen{
+    width: 100%;
+    height: 100vh;
+}
+.form{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loginLabel span{
+    padding: 5px 7px;
+    background-color:rgb(164, 164, 164);
+    color:white;
+    border-radius:8px;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    -ms-border-radius:8px;
+    -o-border-radius:8px;
+    font-weight: 600;
+    transition: all 1s ease-in-out;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+}
+.chat{
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #e9e9ff;
+    background: -webkit-linear-gradient(0deg, #e9e9ff 0%, #e5bfff 100%);
+    background: linear-gradient(0deg, #e9e9ff 0%, #e5bfff 100%);
+}
+.chatHistory{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80%;
+    padding: 2% 3%;
+}
+
+.message{
+    width: fit-content; 
+    background: #e9e9ff;
+    display: inline-flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    max-width: 100%;
+    border-radius:15px;
+    margin-bottom:2%;
+    -webkit-border-radius:15px;
+    -moz-border-radius:15px;
+    -ms-border-radius:15px;
+    -o-border-radius:15px;
+    background: rgba(255,255,255,0.45);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.225);
+    }
+.messageSender{
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(125, 0, 125);
+}
+.messageText{
+    font-size: 16px;
+    font-weight: 500;
+    margin:10px 0 10px 0;
+}
+.messageTime{
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(108, 108, 108);
+    width: 100%;
+    text-align: right;
+}
+.chatInputContainer{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    background: rgba(255,255,255,0.45);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.225);
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+.chatInputContainer label{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 50%;
+    width: 95%;
+    justify-content: space-between;
+}
+.chatInputField{
+    width: 70%;
+    height: 100%;
+    padding: 0 0 0 10px;
+    border:2px solid rgb(62, 30, 158);
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+}
+.chatInputBtn{
+    border:2px solid rgb(62, 30, 158);
+    height: 100%;
+    width: 25%;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+}
