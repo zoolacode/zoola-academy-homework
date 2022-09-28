@@ -1,7 +1,7 @@
 export function getCurrentDate() {
   const currentDay = getCurrentDay();
   const hour = getFormatedTime(getCurrentHour());
-  const minutes = getFormatedTime(new Date().getMinutes()); //getCurrentMinutes();
+  const minutes = getFormatedTime(new Date().getMinutes());
   const timeConvention = new Date().getHours() >= 12 ? "PM" : "AM";
 
   return `${currentDay}, ${hour}:${minutes} ${timeConvention}`;
