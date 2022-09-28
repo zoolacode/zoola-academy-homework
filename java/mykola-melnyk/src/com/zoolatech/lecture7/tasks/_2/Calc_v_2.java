@@ -9,8 +9,13 @@ public class Calc_v_2 implements Calc {
     public Calc_v_2(int value) {
         storedValue = value;
     }
-    public synchronized int getStoredValue() {
-        return storedValue;
+    public int getStoredValue() {
+        calcLock.lock();
+        try {
+            return storedValue;
+        } finally {
+            calcLock.unlock();
+        }
     }
     public int add(int operand) {
         calcLock.lock();
