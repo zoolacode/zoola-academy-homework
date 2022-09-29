@@ -1,0 +1,134 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+/* .message-container {
+  background: #282c34;
+} */
+
+.chat-body {
+  background-color: #d8e1f5;
+  /* height: inherit; */
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items:stretch;
+  font-size: calc(10px + 1vmin);
+  color: rgb(0, 0, 0);
+  border: 1px solid;
+  padding: 10px;
+  margin: 5px;
+}
+
+.message {
+  min-height: max-content;
+  max-width:66%;
+  width: fit-content;
+  align-self:flex-start;
+  font-size: calc(10px + 1vmin);
+  color: rgb(0, 0, 0);
+  /* margin-top: px; */
+  margin-bottom: 2px;
+}
+
+.message-right {
+  align-self:flex-end;
+}
+
+.message-content {
+  border: 1px solid #f1f5f8;
+  /* border-radius: 20px; */
+  background-color: #f1f5f8;
+  padding: 10px 10px;
+  /* margin-top: 10px;
+  margin-bottom: 10px; */
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 12px;
+  font-size: calc(5px + 1vmin);
+}
+
+.message-content-time {
+  font-size: calc(5px + 1vmin);
+  color: rgb(90, 90, 90);
+  flex-basis: fit-content;
+}
+
+/* .message-right .message-content {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.message-left .message-content {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+} */
+
+.message-content-username{
+  width: fit-content;
+  font-size: calc(7px + 1vmin);
+  border-radius: 6px;
+  padding: 5px;
+  background-color: #ffd3da;
+  flex-basis: fit-content;
+}
+
+.message-content div{
+  align-self: center;
+  margin-right: 5px;
+}
+
+.message-content-text {
+  flex-basis:100%;
+  padding: 5px 0px 5px 5px;
+}
+
+.message-container {
+  /* height: 100%; */
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  /* align-content: stretch; */
+}
+.message-input {
+  /* align-self: flex-start; */
+  width: 80%;
+  height: 30px;
+  border-radius: 5px;
+  border: 0px;
+  padding: 0 15px;
+}
+
+.message-send {
+  /* align-self: flex-start; */
+  width: 10%;
+  height: 30px;
+  border-radius: 5px;
+  border: 0px;
+  padding: 0;
+}
