@@ -2,12 +2,14 @@ import React from 'react'
 import styles from '../styles.module.css'
 
 
-export const MessageItem = ({messageSender, messageText,messageTime }) => {
+export const MessageItem = ({messageSender, messageText,messageTime, isMyMessage}) => {
     return (
-      <div className={styles.message}>
-          <div className={styles.messageSender}>Daniel</div>
-          <p className={styles.messageText}>Hello world! </p>
-          <div className={styles.messageTime}>12:44</div>
+      <div 
+        className={isMyMessage ? styles.myMessage : styles.message }
+      >
+          <div className={styles.messageSender}>{messageSender}</div>
+          <p className={styles.messageText}>{messageText}</p>
+          <div className={styles.messageTime}>{messageTime}</div>
       </div>
     )
   }
