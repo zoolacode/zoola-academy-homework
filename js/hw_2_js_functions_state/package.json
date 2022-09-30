@@ -9,5 +9,8 @@
   },
   "devDependencies": {
     "parcel": "^2.6.2"
+  },
+  "dependencies": {
+    "stream": "^0.0.2"
   }
 }
