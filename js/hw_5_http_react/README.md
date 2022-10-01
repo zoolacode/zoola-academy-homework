@@ -21,9 +21,12 @@ Response body shape:
 
 ```
 {
-  userId: string
-  username: string
+  isAdmin: boolean
   authToken: string
+  user: {
+    id: string
+    username: string
+  }
 }
 ```
 
@@ -64,6 +67,21 @@ Add chat message. Expected request payload shape:
 
 Returns chat object.
 
+### `POST /api/chat/:chatId/attachments`
+
+Uploads a file to chat.
+
+Expects request payload of `FormData` type. (see MDN for reference https://developer.mozilla.org/en-US/docs/Web/API/FormData).
+
+```
+const formData = new FormData();
+formData.append('file', fileObject)
+// ...
+fetch({body: formData})
+```
+
+Returns chat object with `chat.attachment` as upload ID. Use `/static/${chat.attachment}` URL to load the file.
+
 ### `POST /api/chat/:chatId/members`
 
 Add chat message. Expected request payload shape:
@@ -82,10 +100,11 @@ Returns chat object.
 
 ### `POST /api/users`
 
-Create a user. Expected payload:
+Creates a user (admin only). Expected payload:
 
 ```
 {
+  adminId: string
   username: string,
   password: string
 }
@@ -103,4 +122,4 @@ Get user by ID.
 
 ### `GET /api/users/:userId/chats`
 
-Get all chats where the user is a member.
+Get all chats where the user is a member.g
