@@ -1,18 +1,17 @@
 const path = require("path");
 const express = require("express");
-const { createStorage } = require("./storage");
 const uuid = require("uuid");
 const multer = require("multer");
+const { createDatabase } = require("./database");
 
 const uploadDir = path.resolve(__dirname, "../public/uploads");
 const upload = multer({ dest: uploadDir });
 
-const storage = {
-  users: createStorage("users.json"),
-  chats: createStorage("chats.json"),
-  passwords: createStorage("passwords.json"),
-  authTokens: createStorage("authTokens.json"),
-};
+const storage = createDatabase(
+  path.resolve(__dirname, "../database"),
+  ["users", "chats", "passwords", "authTokens"],
+  [[], [], {}, {}]
+);
 
 async function authenticate(req, res, next) {
   const authWhiteList = ["/login"];

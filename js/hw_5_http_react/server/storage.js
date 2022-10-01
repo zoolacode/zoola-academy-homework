@@ -1,11 +1,7 @@
 const fs = require("fs");
 
-exports.createStorage = (storageFile) => {
-  const storageFilePath = require("path").resolve(
-    __dirname,
-    "../database",
-    storageFile
-  );
+exports.createStorage = (databaseDir, storageFile) => {
+  const storageFilePath = require("path").join(databaseDir, storageFile);
   return {
     read() {
       return new Promise((resolve, reject) => {
@@ -30,6 +26,9 @@ exports.createStorage = (storageFile) => {
           resolve();
         });
       });
+    },
+    getFilePath() {
+      return storageFile;
     },
   };
 };
