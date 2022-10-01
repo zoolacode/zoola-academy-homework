@@ -4,7 +4,7 @@ import NightsStayIcon from "@mui/icons-material/NightsStay";
 import * as session from "./session";
 import Grid from "@mui/material/Unstable_Grid2";
 import LoginIcon from "@mui/icons-material/Login";
-import { getChats, getUsers } from "./httpUtils";
+import { addBackendErrorHandler, getChats, getUsers } from "./httpUtils";
 import "./App.css";
 import { LoginForm } from "./Login";
 import { NewChatForm } from "./NewChatForm";
@@ -26,38 +26,51 @@ import {
   Typography,
 } from "@mui/material";
 import BadgeAvatar from "./BadgeAvatar";
+import { NewUserForm } from "./NewUserForm";
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState(null);
   const [currentChatId, setCurrentChatId] = React.useState(null);
   const [chats, setChats] = React.useState([]);
   const [users, setUsers] = React.useState([]);
+  const [currentSession, setCurrentSession] = React.useState(null);
 
   function onLogin(newSession) {
-    setCurrentUser(newSession.user);
+    setCurrentSession(newSession);
     session.set(newSession);
   }
 
   React.useEffect(() => {
-    setCurrentUser(session.getCurrentUser());
+    const unsubscribe = addBackendErrorHandler((res) => {
+      if (res.status === 401) {
+        setCurrentSession(null);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   React.useEffect(() => {
-    if (currentUser === null) {
+    if (currentSession === null) {
       return;
     }
-    getUsers().then(setUsers);
-  }, [currentUser]);
+    reloadUsers();
+  }, [currentSession]);
+
+  React.useEffect(() => {
+    setCurrentSession(session.get());
+  }, []);
 
   const currentChat = chats.find(({ id }) => id === currentChatId);
 
   React.useEffect(() => {
-    if (!currentUser) {
+    if (currentSession === null) {
       return;
     }
 
     function reload() {
-      getChats(currentUser?.id).then(setChats);
+      getChats(currentSession.user.id).then(setChats);
     }
     reload();
     const intervalId = setInterval(reload, 2000);
@@ -65,7 +78,7 @@ function App() {
     return () => {
       clearInterval(intervalId);
     };
-  }, [currentUser]);
+  }, [currentSession]);
 
   React.useEffect(() => {
     if (currentChatId === null && chats.length > 0) {
@@ -75,6 +88,8 @@ function App() {
 
   const [isProfileMenuOpen, setIsProfileMenuOpen] = React.useState(false);
   const [isCreateChatOpen, setIsCreateChatOpen] = React.useState(false);
+  const [isCreateUserDialogOpen, setIsCreateUserDialogOpen] =
+    React.useState(false);
 
   const defaultMode = true;
   const [mode, setMode] = React.useState(defaultMode);
@@ -85,23 +100,31 @@ function App() {
     },
   });
 
+  function reloadUsers() {
+    getUsers().then(setUsers);
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Paper sx={{ minHeight: "100vh" }}>
         <Container fixed>
-          <AppBar sx={{ marginBottom: 4 }} position="static">
+          <AppBar
+            color={currentSession?.isAdmin ? "transparent" : "primary"}
+            sx={{ mb: 4 }}
+            position="static"
+          >
             <Toolbar sx={{ justifyContent: "space-between" }}>
-              {currentUser?.username ? (
+              {currentSession?.user.username ? (
                 <>
                   <BadgeAvatar
                     onClick={() => {
                       setIsProfileMenuOpen(true);
                     }}
                   >
-                    {currentUser.username[0]}
+                    {currentSession?.user.username[0]}
                   </BadgeAvatar>
-                  <Typography sx={{ paddingLeft: "20px" }} variant="h6">
-                    Welcome, {currentUser?.username}!
+                  <Typography pl={2} variant="h6">
+                    Welcome, {currentSession?.user?.username}!
                   </Typography>
                 </>
               ) : (
@@ -112,34 +135,43 @@ function App() {
                 icon={<NightsStayIcon fontSize="small" />}
                 defaultChecked={defaultMode}
                 onChange={() => setMode((v) => !v)}
-                color="default"
+                color={currentSession?.isAdmin ? "warning" : "default"}
               />
             </Toolbar>
           </AppBar>
-          {!currentUser && (
+          {!currentSession?.user && (
             <Grid spacing={2}>
               <Grid xs={12}>
                 <LoginForm onLogin={onLogin} />
               </Grid>
             </Grid>
           )}
-          {currentUser && (
+          {currentSession?.user && (
             <Grid container spacing={2}>
               <Grid xs={4}>
-                <Stack></Stack>
-                <Button
-                  variant="outlined"
-                  onClick={() => setIsCreateChatOpen(true)}
-                >
-                  Create new chat
-                </Button>
+                <Stack spacing={1} direction="column">
+                  {currentSession?.isAdmin && (
+                    <Button
+                      variant="contained"
+                      onClick={() => setIsCreateUserDialogOpen(true)}
+                    >
+                      Create user
+                    </Button>
+                  )}
+                  <Button
+                    variant="outlined"
+                    onClick={() => setIsCreateChatOpen(true)}
+                  >
+                    Create new chat
+                  </Button>
+                </Stack>
                 <div className="chats">
                   <div className="new-chat">
                     <NewChatForm
                       users={users}
                       open={isCreateChatOpen}
                       onClose={() => setIsCreateChatOpen(false)}
-                      currentUser={currentUser}
+                      currentUser={currentSession?.user}
                     />
                   </div>
                   <ChatList
@@ -153,7 +185,7 @@ function App() {
                 <Grid xs={8}>
                   <Chat
                     users={users}
-                    currentUser={currentUser}
+                    currentUser={currentSession?.user}
                     chat={currentChat}
                   />
                 </Grid>
@@ -170,7 +202,7 @@ function App() {
                   color="error"
                   variant="contained"
                   onClick={() => {
-                    setCurrentUser(null);
+                    setCurrentSession(null);
                     setIsProfileMenuOpen(false);
                   }}
                 >
@@ -179,6 +211,15 @@ function App() {
               </DialogActions>
             </DialogContent>
           </Dialog>
+          {currentSession?.isAdmin && (
+            <NewUserForm
+              users={users}
+              onUsersUpdated={reloadUsers}
+              currentUser={currentSession?.user}
+              open={isCreateUserDialogOpen}
+              onClose={() => setIsCreateUserDialogOpen(false)}
+            />
+          )}
         </Container>
       </Paper>
     </ThemeProvider>

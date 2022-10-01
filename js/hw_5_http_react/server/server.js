@@ -7,11 +7,21 @@ const { createDatabase } = require("./database");
 const uploadDir = path.resolve(__dirname, "../public/uploads");
 const upload = multer({ dest: uploadDir });
 
-const storage = createDatabase(
-  path.resolve(__dirname, "../database"),
-  ["users", "chats", "passwords", "authTokens"],
-  [[], [], {}, {}]
-);
+const adminUserId = "fhs8dhf9s8dhf9sd8hf9sd8hf";
+const storage = createDatabase(path.resolve(__dirname, "../database"), {
+  users: [
+    {
+      id: adminUserId,
+      username: "admin",
+    },
+  ],
+  adminUsers: [adminUserId],
+  chats: [],
+  passwords: {
+    [adminUserId]: "admin", //
+  },
+  authTokens: {},
+});
 
 async function authenticate(req, res, next) {
   const authWhiteList = ["/login"];
@@ -70,13 +80,18 @@ chatApp.post(
 
     const newAuthToken = uuid.v4();
     const allTokens = await storage.authTokens.read();
+    const adminUsers = await storage.adminUsers.read();
 
     await storage.authTokens.write({
       ...allTokens,
       [user.id]: newAuthToken,
     });
 
-    res.send({ user, authToken: newAuthToken });
+    res.send({
+      user,
+      authToken: newAuthToken,
+      isAdmin: adminUsers.includes(user.id),
+    });
   })
 );
 

@@ -1,5 +1,31 @@
 import * as session from "./session";
 
+let backendErrorHandlers = {
+  handlers: [],
+};
+
+export function addBackendErrorHandler(listener) {
+  backendErrorHandlers.handlers.push(listener);
+
+  return () => {
+    backendErrorHandlers.handlers = backendErrorHandlers.handlers.filter(
+      (fn) => fn !== listener
+    );
+  };
+}
+
+function handleBackendError(res) {
+  if (res.status >= 400) {
+    backendErrorHandlers.handlers.forEach((fn) => {
+      fn(res);
+    });
+
+    return Promise.reject(res);
+  }
+
+  return res;
+}
+
 function fetchJSON(url, method = "get", body = {}, auth = true) {
   const defaultHeaders = {
     "content-type": "application/json",
@@ -12,7 +38,9 @@ function fetchJSON(url, method = "get", body = {}, auth = true) {
     method,
     body: method.toLowerCase() !== "get" ? JSON.stringify(body) : undefined,
     headers,
-  }).then((response) => response.json());
+  })
+    .then(handleBackendError)
+    .then((response) => response.json());
 }
 
 export function login({ username, password }) {
@@ -29,6 +57,14 @@ export function login({ username, password }) {
 
 export function getChats(userId) {
   return fetchJSON(`/api/users/${userId}/chats`);
+}
+
+export function createUser({ adminId, username, password }) {
+  return fetchJSON(`/api/users`, "post", {
+    adminId,
+    username,
+    password,
+  });
 }
 
 export function getUsers() {
@@ -67,5 +103,5 @@ export function uploadFileToChat({ chatId, authorId, file }) {
     headers: {
       "auth-token": session.getAuthToken(),
     },
-  });
+  }).then(handleBackendError);
 }

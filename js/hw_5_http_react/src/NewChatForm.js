@@ -5,6 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Divider,
   FormControl,
   InputLabel,
   MenuItem,
@@ -40,33 +41,41 @@ export function NewChatForm({ currentUser, open, onClose, users }) {
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Create new chat</DialogTitle>
       <DialogContent>
-        <Box padding={2}>
-          <Stack spacing={2}>
-            <TextField
-              label="Chat name"
-              value={chatName}
-              onChange={(e) => setChatName(e.target.value)}
-            />
-            <FormControl sx={{ width: 300 }}>
-              <InputLabel>Members</InputLabel>
-              <Select
-                label="Members"
-                multiple
-                value={chatMembers}
-                onChange={(e) => {
-                  setChatMembers(e.target.value);
-                }}
-              >
-                {users
-                  .filter((user) => user.id !== currentUser.id)
-                  .map((user) => (
-                    <MenuItem key={user.id} value={user.id}>
-                      {user.username}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </FormControl>
-          </Stack>
+        <Box mt={1}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setSubmitted(false);
+            }}
+          >
+            <Stack spacing={2}>
+              <TextField
+                label="Chat name"
+                value={chatName}
+                onChange={(e) => setChatName(e.target.value)}
+              />
+              <FormControl sx={{ width: 300 }}>
+                <InputLabel>Members</InputLabel>
+                <Select
+                  label="Members"
+                  multiple
+                  value={chatMembers}
+                  onChange={(e) => {
+                    setChatMembers(e.target.value);
+                  }}
+                >
+                  {users
+                    .filter((user) => user.id !== currentUser.id)
+                    .map((user) => (
+                      <MenuItem key={user.id} value={user.id}>
+                        {user.username}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+              <input type="submit" style={{ display: "none" }} />
+            </Stack>
+          </form>
         </Box>
       </DialogContent>
       <DialogActions>

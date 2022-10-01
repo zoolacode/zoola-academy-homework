@@ -129,7 +129,7 @@ export function Chat({ chat, currentUser, users }) {
                 }}
               >
                 <Stack spacing={2}>
-                  <FormControl sx={{ marginTop: 2 }}>
+                  <FormControl sx={{ mt: 2 }}>
                     <InputLabel>New members</InputLabel>
                     <Select
                       label="New members"
@@ -157,7 +157,7 @@ export function Chat({ chat, currentUser, users }) {
                   <Avatar sx={{ bgcolor: getAvatarColor(index) }}>
                     {user.username[0]}
                   </Avatar>
-                  <Typography sx={{ paddingLeft: 2 }} variant="body1">
+                  <Typography pl={2} variant="body1">
                     {user.username}
                   </Typography>
                 </Stack>
