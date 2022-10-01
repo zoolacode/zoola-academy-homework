@@ -1,0 +1,38 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 10vh;
+}
+
+.chats {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+}
+
+.new-chat {
+  margin-bottom: 20px;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-title {
+  height: 50px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.chat-title-input {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.attachment-preview {
+  border-radius: 4px;
+  width: 200px;
+}
