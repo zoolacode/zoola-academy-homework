@@ -9,11 +9,6 @@
 .chats {
   display: flex;
   flex-direction: column;
-  width: 20vw;
-}
-
-.new-chat {
-  margin-bottom: 20px;
 }
 
 .chat {

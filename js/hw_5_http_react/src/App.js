@@ -27,6 +27,7 @@ import {
 } from "@mui/material";
 import BadgeAvatar from "./BadgeAvatar";
 import { NewUserForm } from "./NewUserForm";
+import { Box } from "@mui/system";
 
 function App() {
   const [currentChatId, setCurrentChatId] = React.useState(null);
@@ -147,7 +148,7 @@ function App() {
             </Grid>
           )}
           {currentSession?.user && (
-            <Grid container spacing={2}>
+            <Grid container spacing={4}>
               <Grid xs={4}>
                 <Stack spacing={1} direction="column">
                   {currentSession?.isAdmin && (
@@ -166,19 +167,19 @@ function App() {
                   </Button>
                 </Stack>
                 <div className="chats">
-                  <div className="new-chat">
+                  <Box mt={4}>
                     <NewChatForm
                       users={users}
                       open={isCreateChatOpen}
                       onClose={() => setIsCreateChatOpen(false)}
                       currentUser={currentSession?.user}
                     />
-                  </div>
-                  <ChatList
-                    chats={chats}
-                    currentChatId={currentChatId}
-                    onChatChange={setCurrentChatId}
-                  />
+                    <ChatList
+                      chats={chats}
+                      currentChatId={currentChatId}
+                      onChatChange={setCurrentChatId}
+                    />
+                  </Box>
                 </div>
               </Grid>
               {currentChat && (

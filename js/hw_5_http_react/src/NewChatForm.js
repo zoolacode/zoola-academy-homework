@@ -80,6 +80,7 @@ export function NewChatForm({ currentUser, open, onClose, users }) {
       </DialogContent>
       <DialogActions>
         <Button
+          variant="outlined"
           onClick={() => {
             setSubmitted(false);
           }}
