@@ -25,7 +25,7 @@ const Chat = ({ userName }) => {
 
     React.useEffect(() => {
         window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
-    }, [chat])
+    }, [chat.length])
 
 
     const handleMessageSubmission = async (e) => {
@@ -38,16 +38,18 @@ const Chat = ({ userName }) => {
     }
 
     return (
-        <div className="container">
-            <div className="chat" >
-                {chat?.map((item, index) => {
-                    return <Message
-                        key={index + item.date}
-                        userName={item.user}
-                        message={item.message}
-                        date={item.date}
-                    />
-                })}
+        <>
+            <div className="container">
+                <div>
+                    {chat?.map((item, index) => {
+                        return <Message
+                            key={index + item.date}
+                            userName={item.user}
+                            message={item.message}
+                            date={item.date}
+                        />
+                    })}
+                </div>
             </div>
             <form
                 className="formMessage form"
@@ -60,7 +62,7 @@ const Chat = ({ userName }) => {
                     value={message}
                 />
             </form>
-        </div>
+        </>
     )
 }
 

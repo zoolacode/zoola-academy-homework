@@ -24,5 +24,3 @@ app.use("/api", scoreBoardApp);
 app.listen(4000, () => {
   console.log("Listening on port 4000");
 });
-
-export const date = Date.now()
