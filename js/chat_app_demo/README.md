@@ -3,11 +3,18 @@
 In separate terminal windows:
 
 ```
-yarn demo:client
-yarn demo:server
+yarn start:demo
+yarn server:demo
 ```
 
-`yarn demo:server:dev` can be used if you need live reload.
+## Starting development
+
+```
+yarn start
+yarn server
+```
+
+`yarn server:dev` can be used if you need live reload.
 
 # Chat Backend Documentation
 

@@ -4,7 +4,11 @@ const uuid = require("uuid");
 const multer = require("multer");
 const { createDatabase } = require("./database");
 
-const uploadDir = path.resolve(__dirname, "../public/uploads");
+const isDemo = process.env.DEMO !== undefined;
+const uploadDir = path.resolve(
+  __dirname,
+  `../${isDemo ? "demo_build" : "pubic"}/uploads`
+);
 const upload = multer({ dest: uploadDir });
 
 const adminUserId = "fhs8dhf9s8dhf9sd8hf9sd8hf";

@@ -25,9 +25,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "demo:client": "serve -s demo_build",
-    "demo:server": "node server/server.js",
-    "demo:server:dev": "nodemon server/server.js --watch server/"
+    "start:demo": "http-server demo_build --proxy=http://localhost:4000",
+    "server:demo": "DEMO=1 node server/server.js",
+    "server": "node server/server.js",
+    "server:dev": "nodemon server/server.js --watch server/"
   },
   "eslintConfig": {
     "extends": [
