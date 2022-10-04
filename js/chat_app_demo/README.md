@@ -1,3 +1,14 @@
+# Running product demo
+
+In separate terminal windows:
+
+```
+yarn demo:client
+yarn demo:server
+```
+
+`yarn demo:server:dev` can be used if you need live reload.
+
 # Chat Backend Documentation
 
 ## Authentication endpoints
@@ -122,4 +133,4 @@ Get user by ID.
 
 ### `GET /api/users/:userId/chats`
 
-Get all chats where the user is a member.g
+Get all chats where the user is a member.
