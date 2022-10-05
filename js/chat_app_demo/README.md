@@ -1,10 +1,17 @@
 # Running product demo
 
-In separate terminal windows:
+To run the product demo (in separate terminal windows):
 
 ```
 yarn start:demo
 yarn server:demo
+```
+
+Only a single admin user will be created, use the following credentials to log in:
+
+```
+username: admin
+password: admin
 ```
 
 ## Starting development
@@ -17,6 +24,8 @@ yarn server
 `yarn server:dev` can be used if you need live reload.
 
 # Chat Backend Documentation
+
+Use the following username
 
 ## Authentication endpoints
 
@@ -118,7 +127,14 @@ Returns chat object.
 
 ### `POST /api/users`
 
-Creates a user (admin only). Expected payload:
+Creates a user. Only admin users can use this endpoint. To obtain `adminId` use `POST /api/login` with admin user credentials:
+
+```
+username: admin
+password: admin
+```
+
+Expected payload:
 
 ```
 {

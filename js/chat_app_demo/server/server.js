@@ -22,7 +22,7 @@ const storage = createDatabase(path.resolve(__dirname, "../database"), {
   adminUsers: [adminUserId],
   chats: [],
   passwords: {
-    [adminUserId]: "admin", //
+    [adminUserId]: "admin",
   },
   authTokens: {},
 });
