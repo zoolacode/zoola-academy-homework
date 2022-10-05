@@ -1,10 +1,9 @@
 # Running product demo
 
-To run the product demo (in separate terminal windows):
+To run the product demo:
 
 ```
-yarn start:demo
-yarn server:demo
+yarn demo
 ```
 
 Only a single admin user will be created, use the following credentials to log in:
@@ -17,11 +16,11 @@ password: admin
 ## Starting development
 
 ```
-yarn start
-yarn server
+yarn dev:client
+yarn backend
 ```
 
-`yarn server:dev` can be used if you need live reload.
+Or `yarn dev:backend` if you want to debug backend.
 
 # Chat Backend Documentation
 
