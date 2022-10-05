@@ -24,8 +24,6 @@ Or `yarn dev:backend` if you want to debug backend.
 
 # Chat Backend Documentation
 
-Use the following username
-
 ## Authentication endpoints
 
 ### `POST /api/login`
