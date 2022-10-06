@@ -1,5 +1,119 @@
 body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  position: relative;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  background-color:rgb(8, 0, 54);
+  background-image:
+  radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 10px),
+  radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 5px),
+  radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 10px),
+  radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 5px),
+  radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 10px),
+  radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 5px);
+  background-size: 750px 750px, 550px 550px, 450px 450px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px, 110px 200px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(25, 1fr);
+  width: 100vh;
+  height: 100vh;
+  background-color:rgb(11, 0, 74);
+}
+
+.item {
+  height: calc(100vh / 25);
+  width: calc(100vh / 25);
+  box-shadow:0px 0px 0px .5px rgb(255, 255, 255);
+}
+
+.body {
+  background-color:rgb(23, 0, 155);
+  background-size: cover;
+  box-shadow:none;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+.head {
+  box-shadow:none;
+  background-size: cover;
+  background-color:rgb(216, 216, 216);
+  transition: all 0.1s ease-out;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -ms-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+}
+.food {
+  background: rgb(13, 0, 255);
+  border: 50%;
+}
+
+.score {
+  position: absolute;
+  top: 100px;
+  left: 5px;
+  font-size: 46px;
+  width: 100px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border-radius:5px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  -ms-border-radius:5px;
+  -o-border-radius:5px;
+}
+
+.time {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 46px;
+  width: 100px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border-radius:5px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  -ms-border-radius:5px;
+  -o-border-radius:5px;
+}
+
+.message {
+  position: fixed;
+  font-size: 50px;
+  color: white;
+  width: 100vw;
+  display: none;
+  padding: 2% 0;
+  bottom: 50%;
+}
+
+.message-win {
+  background-color: #d9ff4f;
+  display: flex;
+  vertical-align: center;
+  justify-content: center;
+}
+
+.message-loss {
+  background-color: #000000;
+  color:rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
 }
