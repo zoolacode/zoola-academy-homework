@@ -1,7 +1,9 @@
+import React from 'react';
+
 function App() {
   return (
     <div>
-      <p>blablabla</p>
+      <p>bla blabla</p>
     </div>
   );
 }
