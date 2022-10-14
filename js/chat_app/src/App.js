@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable jsx-quotes */
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Box, Typography } from '@mui/material';
+import { setIsAuth } from './redux/slicies/authSlice';
 
 function App() {
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.isAuth);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignContent: 'center'
+      }}
+    >
+      {!isAuth ? (
+        <Button onClick={() => dispatch(setIsAuth())}>Login</Button>
+      ) : (
+        <Typography variant='h1' color='blue'>
+          Chat Page
+        </Typography>
+      )}
+    </Box>
   );
 }
 
