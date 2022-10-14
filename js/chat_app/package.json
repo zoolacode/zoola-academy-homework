@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/lab": "^5.0.0-alpha.101",
     "@mui/material": "^5.10.7",
+    "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -15,6 +16,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.2",
+    "react-redux": "^8.0.4",
     "react-scripts": "5.0.1",
     "react-use": "^17.4.0",
     "uuid": "^9.0.0",
@@ -27,10 +29,13 @@
     "eject": "react-scripts eject",
     "demo": "concurrently \"yarn demo:proxy\" \"yarn demo:backend\"",
     "demo:proxy": "http-server --proxy=http://localhost:4000 --port=3000 demo_build",
-    "demo:backend": "DEMO=1 node server/server.js",
+    "demo:backend": "cross-env DEMO=1 node server/server.js",
     "dev:client": "yarn start",
     "dev:backend": "nodemon server/server.js --watch server/",
-    "backend": "node server/server.js"
+    "backend": "node server/server.js",
+    "lint": "eslint src//**/*.{js,jsx,ts,tsx,json}",
+    "lint:fix": "eslint --fix src//**/*.{js,jsx,ts,tsx,json}",
+    "format": "prettier --write \"src//**/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": [
@@ -53,8 +58,17 @@
   "proxy": "http://localhost:4000",
   "devDependencies": {
     "concurrently": "^7.4.0",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "cross-env": "^7.0.3",
     "http-server": "^14.1.1",
     "nodemon": "^2.0.20",
+    "prettier": "2.7.1",
     "serve": "^14.0.1"
   }
 }
