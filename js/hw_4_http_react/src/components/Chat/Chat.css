@@ -1,0 +1,22 @@
+.user {
+    display: flex;
+    margin: 20px;
+}
+
+.userName {
+    font-weight: 700;
+}
+
+.userTime {
+    margin-right: 20px;
+}
+
+.mainUser {
+    display: flex;
+    margin: 20px;
+    justify-content: flex-end;
+}
+
+.mainUser div:first-child {
+    margin-right: 20px;
+}
