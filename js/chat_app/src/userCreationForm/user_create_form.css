@@ -1,0 +1,92 @@
+.form {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translateY(-50%) translateX(50%);
+    width: 400px;
+    padding: 20px;  
+    border-radius: 10px;
+    background-color: white;
+    z-index: 10;
+}
+
+.userCreate {
+    width: 135px;
+}
+
+.form__mask {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.form__header {
+    text-align: start;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.form__body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form__body input {
+    padding: 15px 10px 15px 10px;
+    border-radius: 4px;
+    border: 1px solid grey;
+    font-size: 17px;
+}
+
+.form__body button {
+    background-color: white;
+    color: rgb(0, 59, 221);
+    font-size: 17px;
+    border: 1px solid rgb(0, 59, 221);
+    border-radius: 4px;
+    padding: 5px 0px 5px 0px;
+    cursor: pointer;
+}
+
+.form__userList {}
+
+.userList__ul {
+    list-style: none;
+    padding: 0;
+    height: 150px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.userList__ul::-webkit-scrollbar {
+    height: 10px;
+    width: 3px;
+    background: rgba(0, 0, 0, 0);
+}
+
+.userList__ul::-webkit-scrollbar-thumb {
+    background: #616161;
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 0 0 rgba(0, 0, 0, 0);
+}
+
+.userList__ul::-webkit-scrollbar-corner {
+    background: rgba(0, 0, 0, 0);
+}
+
+.userList__li {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
