@@ -90,6 +90,7 @@ const User_creation_form = ({ trigger }) => {
         />
         <input
           placeholder="Password"
+          type="password"
           className="form__body-password"
           ref={passwordInput}
         />
