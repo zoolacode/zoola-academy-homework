@@ -78,6 +78,8 @@
             2, 
             { "caseSensitive": false }
         ],
-        "react/prop-types": 0
+        "react/prop-types": 0,
+        "import/prefer-default-export": "off",
+        "consistent-return": "off"
     }
 }
