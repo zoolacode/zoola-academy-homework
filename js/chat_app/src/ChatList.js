@@ -125,8 +125,8 @@ const allChats = [
   },
 ];
 
-const userId = "f81cfa12-1e12-4a45-a3ac-26710b9c43d5",
-  authToken = "c204181a-2442-45a1-bbf7-4f28ae7aaf54";
+const userId = "fhs8dhf9s8dhf9sd8hf9sd8hf",
+  authToken = "c4a6ee4f-b87b-4390-88ae-e068237aad89";
 
 //component
 export default function ChatList({ onSelectChat }) {
@@ -148,11 +148,13 @@ export default function ChatList({ onSelectChat }) {
     .then((response) => response.json())
     .then((response) => setChatsData(response));
 
+  React.useEffect(() => {}, []);
+
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
       <Paper>
         <MenuList>
-          {allChats.map((params) => {
+          {chatsData.map((params) => {
             return (
               <MenuItem
                 selected={selectedId === params.id}
