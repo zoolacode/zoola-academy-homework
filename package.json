@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@types/howler": "^2.2.7"
+  }
+}
