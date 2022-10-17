@@ -4,7 +4,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Box, Typography } from '@mui/material';
 import { setIsAuth } from './redux/slicies/authSlice';
-import { ChatFeed } from './components/ChatFeed.jsx'; 
+import { ChatFeed } from './components/Message/ChatFeed.jsx'; 
+import { ChatEngine } from 'react-chat-engine';
 
 function App() {
   const dispatch = useDispatch();
