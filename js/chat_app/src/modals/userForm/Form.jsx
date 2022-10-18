@@ -11,17 +11,16 @@ import PersonIcon from '@mui/icons-material/Person';
 import { grey } from '@mui/material/colors';
 import { DialogContent, TextField } from '@mui/material';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers } from '../../redux/slicies/usersSlice';
+import { useSelector } from 'react-redux';
 
-function SimpleDialog(props) {
+export default function CreateUserForm(props) {
   const { onClose, open } = props;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const users = useSelector((state) => state.users.users);
-  const [localUsers, setLocalUsers] = useState([users]);
+  const [localUsers, setLocalUsers] = useState(users);
 
   const handleClose = () => {
     setPassword('');
@@ -117,35 +116,5 @@ function SimpleDialog(props) {
         </List>
       </DialogContent>
     </Dialog>
-  );
-}
-
-export default function UserForm() {
-  const [open, setOpen] = React.useState(false);
-  const dispatch = useDispatch();
-
-  const handleClickOpen = async () => {
-    await dispatch(getAllUsers());
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <div>
-      <Button
-        sx={{
-          color: 'white',
-          backgroundColor: 'rgb(25, 118, 210)'
-        }}
-        variant="contained"
-        onClick={handleClickOpen}
-      >
-        Create User
-      </Button>
-      <SimpleDialog open={open} onClose={handleClose} />
-    </div>
   );
 }

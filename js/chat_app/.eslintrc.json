@@ -5,7 +5,6 @@
     },
     "extends": [
         "prettier",
-        "plugin:react/recommended",
         "eslint:recommended",
         "plugin:react/recommended",
         "airbnb"
@@ -80,6 +79,7 @@
         ],
         "react/prop-types": 0,
         "import/prefer-default-export": "off",
-        "consistent-return": "off"
+        "consistent-return": "off",
+        "import/no-cycle": 0
     }
 }

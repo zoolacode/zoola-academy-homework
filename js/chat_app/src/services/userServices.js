@@ -1,4 +1,4 @@
-export const usersAPI = {
+export const userServices = {
   getAllUsers: async () => {
     try {
       const query = await fetch('/api/users', {
