@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Avatar,
   Box,
   Button,
   Dialog,
@@ -8,8 +7,8 @@ import {
   DialogTitle,
   Stack,
   TextField,
-  Typography,
 } from "@mui/material";
+import { UsersList } from "../UsersList/UsersList";
 
 const adminId = "c8e26274-93ee-4acb-9f51-126264adaeb2";
 
@@ -95,22 +94,7 @@ export const NewUserForm = ({ open, onClose }) => {
               </Stack>
             </form>
           </Box>
-          <Box>
-            <Stack spacing={1}>
-              {users.map((user) => {
-                return (
-                  <Box key={user.id}>
-                    <Stack sx={{ alignItems: "center" }} direction="row">
-                      <Avatar>{user.username[0]}</Avatar>
-                      <Box ml={2}>
-                        <Typography>{user.username}</Typography>
-                      </Box>
-                    </Stack>
-                  </Box>
-                );
-              })}
-            </Stack>
-          </Box>
+          <UsersList users={users} />
         </Stack>
       </DialogContent>
     </Dialog>
