@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import "./user_create_form.css";
 import Avatar from "@mui/material/Avatar";
 import { green } from "@mui/material/colors";
+import { useCallback } from "react";
 
 const User_creation_form = ({ trigger }) => {
   const usernameInput = useRef();
@@ -31,21 +32,8 @@ const User_creation_form = ({ trigger }) => {
           getUsers(data.authToken);
         });
     }
-
-    async function getUsers(adminToken) {
-      const response = await fetch("/api/users", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "Auth-Token": adminToken,
-        },
-      });
-      const json = await response.json();
-      setUsers(json);
-    }
-
     getAdminId();
-  }, [updateUsersList]);
+  }, []);
 
   function createUser(adminToken, adminId, username, password) {
     fetch("/api/users", {
@@ -61,7 +49,23 @@ const User_creation_form = ({ trigger }) => {
       }),
     });
     setUpdateUsersList(!updateUsersList);
+    getUsers(adminToken);
   }
+
+  const getUsers = useCallback(
+    async (adminToken) => {
+      const response = await fetch("/api/users", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "Auth-Token": adminToken,
+        },
+      });
+      const json = await response.json();
+      setUsers(json);
+    },
+    [token, updateUsersList]
+  );
 
   return (
     <div
