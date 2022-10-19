@@ -1,14 +1,35 @@
 export const userServices = {
-  getAllUsers: async () => {
+  getAllUsers: async (adminToken) => {
     try {
-      const query = await fetch('/api/users', {
+      const data = await fetch('/api/users', {
         method: 'GET',
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          'Auth-Token': adminToken
         }
       });
 
-      return JSON.parse(query.json());
+      const response = data.json();
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  setNewUser: async (adminToken, username, password, adminId) => {
+    try {
+      fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'Auth-Token': adminToken
+        },
+        body: JSON.stringify({
+          adminId,
+          username,
+          password
+        })
+      });
     } catch (error) {
       console.log(error);
     }

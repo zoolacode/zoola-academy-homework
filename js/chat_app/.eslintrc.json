@@ -79,7 +79,6 @@
         ],
         "react/prop-types": 0,
         "import/prefer-default-export": "off",
-        "consistent-return": "off",
-        "import/no-cycle": 0
+        "consistent-return": "off"
     }
 }

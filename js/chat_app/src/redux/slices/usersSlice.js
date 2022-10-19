@@ -1,21 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { userServices } from '../../services/userServices';
 
+const initialState = {
+  allUsers: []
+};
+
 const usersSlice = createSlice({
   name: 'users',
-  initialState: {
-    users: []
+  initialState,
+  reducers: {
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllUsers.fulfilled, (state, actions) => {
-      state.users = actions.payload;
+    builder.addCase(getAllUsers.fulfilled, (state, action) => {
+      state.allUsers = action.payload;
     });
   }
 });
 
-export const getAllUsers = createAsyncThunk('/api/users', async () => {
-  const result = await userServices.getAllUsers().then((response) => response);
-  return result.data;
+export const getAllUsers = createAsyncThunk('/api/users', async (adminToken) => {
+  const response = await userServices.getAllUsers(adminToken);
+  return response;
 });
 
 export const { setIsAuth } = usersSlice.actions;

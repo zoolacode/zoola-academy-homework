@@ -1,9 +1,8 @@
-/* eslint-disable jsx-quotes */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Box } from '@mui/material';
 import { setIsAuth } from './redux/slices/authSlice';
-import { Modal } from './modals/userForm/index';
+import { Modal } from './modals/UserForm';
 
 function App() {
   const dispatch = useDispatch();

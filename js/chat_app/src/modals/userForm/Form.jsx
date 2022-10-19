@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
@@ -7,20 +7,27 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import PersonIcon from '@mui/icons-material/Person';
-import { grey } from '@mui/material/colors';
-import { DialogContent, TextField } from '@mui/material';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import DialogContent from '@mui/material/DialogContent';
+import TextField from '@mui/material/TextField';
+import { useDispatch, useSelector } from 'react-redux';
+import { userServices } from '../../services/userServices';
+import { getAllUsers } from '../../redux/slices/usersSlice';
 
-export default function CreateUserForm(props) {
-  const { onClose, open } = props;
-
+export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const users = useSelector((state) => state.users.users);
-  const [localUsers, setLocalUsers] = useState(users);
+  const [errorUsername, setErrorUsername] = useState(false);
+  const [errorPassword, setErrorPassword] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const users = useSelector((state) => state.users.allUsers);
+
+  useEffect(() => {
+    // TODO: check it after implement loginization
+    dispatch(getAllUsers(adminToken));
+  }, [adminToken]);
 
   const handleClose = () => {
     setPassword('');
@@ -31,24 +38,41 @@ export default function CreateUserForm(props) {
   const handleUsername = (e) => {
     e.preventDefault();
 
-    setUsername(() => e.target.value);
+    const isUsernameExists = users.some((item) => item.username === e.target.value);
+
+    if (isUsernameExists) {
+      setErrorUsername(true);
+    } else setErrorUsername(false);
+
+    setUsername(e.target.value);
   };
 
   const handlePassword = (e) => {
     e.preventDefault();
 
-    setPassword(() => e.target.value);
+    if (e.target.value.trim()) {
+      setErrorPassword(false);
+    }
+
+    setPassword(e.target.value);
   };
 
   const handleSendButton = () => {
-    let isValidated = false;
+    if (!username.trim()) {
+      setErrorUsername(true);
+      return;
+    }
 
-    if (username.trim() && password.trim() && !localUsers.includes(username)) isValidated = true;
+    if (!password.trim()) {
+      setErrorPassword(true);
+      return;
+    }
 
-    if (localUsers.includes(username)) alert('This name already exists');
-
-    if (isValidated) {
-      setLocalUsers((prev) => [...prev, username]);
+    if (!errorUsername && !errorPassword) {
+      userServices.setNewUser(adminToken, username, password, adminId);
+      dispatch(getAllUsers(adminToken));
+      setUsername('');
+      setPassword('');
     }
   };
 
@@ -61,22 +85,22 @@ export default function CreateUserForm(props) {
         }}
       >
         <TextField
+          error={errorUsername}
           value={username}
           onChange={(e) => handleUsername(e)}
           type="text"
           fullWidth
           margin="normal"
-          id="outlined-basic1"
           label="Username"
           variant="outlined"
         />
         <TextField
+          error={errorPassword}
           value={password}
           onChange={(e) => handlePassword(e)}
           type="password"
           fullWidth
           margin="normal"
-          id="outlined-basic2"
           label="Password"
           variant="outlined"
         />
@@ -92,25 +116,23 @@ export default function CreateUserForm(props) {
           Send
         </Button>
         <List>
-          {localUsers.map((email) => (
+          {users.map((user) => (
             <ListItem
               sx={{
-                p: 1,
+                pr: 0,
+                pl: 0,
                 bgcolor: 'background.paper'
               }}
-              key={email}
+              key={user.id}
             >
               <ListItemAvatar>
                 <Avatar
-                  sx={{
-                    bgcolor: grey[400],
-                    color: 'whitesmoke'
-                  }}
+                  variant={user.username === 'admin' ? 'square' : 'circular'}
                 >
-                  <PersonIcon />
+                  {user.username[0]}
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={email} />
+              <ListItemText primary={user.username} />
             </ListItem>
           ))}
         </List>
