@@ -1,12 +1,12 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import "./user_create_form.css";
 import Avatar from "@mui/material/Avatar";
 import { green } from "@mui/material/colors";
 
-export const UserCreationForm = ({ trigger }) => {
-  const usernameInput = useRef();
-  const passwordInput = useRef();
+export const UserCreationForm = ({ styleForm }) => {
+  const [usernameInput, setUsernameInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
   const [token, setToken] = useState("");
   const [users, setUsers] = useState([]);
 
@@ -62,40 +62,37 @@ export const UserCreationForm = ({ trigger }) => {
   }
 
   return (
-    <div
-      className="form"
-      style={trigger ? { display: "block" } : { display: "none" }}
-    >
-      <div className="form__header">Create user</div>
+    <div className={"form" + styleForm}>
+      <div className="formHeader">Create user</div>
       <form
-        className="form__body"
+        className="formBody"
         onSubmit={(e) => {
           createUser(
             token.authToken,
             token.user.id,
-            usernameInput.current.value,
-            passwordInput.current.value
+            usernameInput,
+            passwordInput
           );
+          setPasswordInput("");
+          setUsernameInput("");
           e.preventDefault();
-          usernameInput.current.value = "";
-          passwordInput.current.value = "";
         }}
       >
         <input
           placeholder="Username"
-          className="form__body-username"
-          ref={usernameInput}
+          value={usernameInput}
+          onChange={(e) => setUsernameInput(e.target.value)}
         />
         <input
           placeholder="Password"
           type="password"
-          className="form__body-password"
-          ref={passwordInput}
+          value={passwordInput}
+          onChange={(e) => setPasswordInput(e.target.value)}
         />
         <button>SEND</button>
       </form>
-      <div className="form__userList">
-        <ul className="userList__ul">
+      <div>
+        <ul className="userListUl">
           {users
             ? users.map((user) => {
                 if (
@@ -103,7 +100,7 @@ export const UserCreationForm = ({ trigger }) => {
                   token.user.id === "fhs8dhf9s8dhf9sd8hf9sd8hf"
                 ) {
                   return (
-                    <li key={user.id} className="userList__li">
+                    <li key={user.id} className="userListLi">
                       <Avatar sx={{ bgcolor: green[500] }} variant="square">
                         {user.username.charAt(0)}
                       </Avatar>
@@ -112,7 +109,7 @@ export const UserCreationForm = ({ trigger }) => {
                   );
                 } else {
                   return (
-                    <li key={user.id} className="userList__li">
+                    <li key={user.id} className="userListLi">
                       <Avatar>{user.username.charAt(0)}</Avatar>
                       {user.username}
                     </li>

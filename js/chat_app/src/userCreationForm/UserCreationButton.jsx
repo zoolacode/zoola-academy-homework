@@ -5,22 +5,21 @@ import { useState } from "react";
 import "./user_create_form.css";
 
 export const UserCreationButton = () => {
-  const [trigger, setTrigger] = useState(false);
+  const [styleForm, setStyleForm] = useState(" invisible");
   return (
     <div className="userCreate">
       <Button
         variant="contained"
-        onClick={() => setTrigger(!trigger)}
-        className="userCreate__button"
+        onClick={() => setStyleForm(" block")}
+        className="userCreateButton"
       >
         Create User
       </Button>
       <div
-        className="form__mask"
-        style={trigger ? { display: "block" } : { display: "none" }}
-        onClick={() => setTrigger(!trigger)}
+        className={"formMask" + styleForm}
+        onClick={() => setStyleForm(" invisible")}
       ></div>
-      <UserCreationForm trigger={trigger} />
+      <UserCreationForm styleForm={styleForm} />
     </div>
   );
 };
