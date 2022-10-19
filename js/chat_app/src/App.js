@@ -1,11 +1,11 @@
 /* eslint-disable jsx-quotes */
 
-import React from 'react';
+import React  from 'react';
 import { ChatEngine } from 'react-chat-engine';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Box, Typography } from '@mui/material';
 import { setIsAuth } from './redux/slicies/authSlice';
-import { ChatFeed } from './components/Message/ChatFeed.jsx'; 
+import ChatFeed from './components/Message/ChatFeed.jsx'
 
 function App() {
   const dispatch = useDispatch();
