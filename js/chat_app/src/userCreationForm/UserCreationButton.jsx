@@ -1,10 +1,10 @@
 import React from "react";
 import { Button } from "@mui/material";
-import User_creation_form from "./User_creation_form";
+import { UserCreationForm } from "./UserCreationForm";
 import { useState } from "react";
 import "./user_create_form.css";
 
-const UserCreationButton = () => {
+export const UserCreationButton = () => {
   const [trigger, setTrigger] = useState(false);
   return (
     <div className="userCreate">
@@ -20,9 +20,7 @@ const UserCreationButton = () => {
         style={trigger ? { display: "block" } : { display: "none" }}
         onClick={() => setTrigger(!trigger)}
       ></div>
-      <User_creation_form trigger={trigger} />
+      <UserCreationForm trigger={trigger} />
     </div>
   );
 };
-
-export default UserCreationButton;

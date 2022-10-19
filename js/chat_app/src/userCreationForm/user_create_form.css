@@ -63,25 +63,9 @@
 .userList__ul {
     list-style: none;
     padding: 0;
-    height: 150px;
+    max-height: 150px;
     overflow: auto;
     overflow-x: hidden;
-}
-
-.userList__ul::-webkit-scrollbar {
-    height: 10px;
-    width: 3px;
-    background: rgba(0, 0, 0, 0);
-}
-
-.userList__ul::-webkit-scrollbar-thumb {
-    background: #616161;
-    -webkit-border-radius: 1ex;
-    -webkit-box-shadow: 0px 0 0 rgba(0, 0, 0, 0);
-}
-
-.userList__ul::-webkit-scrollbar-corner {
-    background: rgba(0, 0, 0, 0);
 }
 
 .userList__li {

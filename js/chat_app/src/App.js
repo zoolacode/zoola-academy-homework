@@ -1,5 +1,5 @@
 import "./App.css";
-import UserCreationButton from "./userCreationForm/UserCreationButton";
+import { UserCreationButton } from "./userCreationForm/UserCreationButton";
 
 function App() {
   return (

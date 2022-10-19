@@ -3,18 +3,16 @@ import { useState, useEffect, useRef } from "react";
 import "./user_create_form.css";
 import Avatar from "@mui/material/Avatar";
 import { green } from "@mui/material/colors";
-import { useCallback } from "react";
 
-const User_creation_form = ({ trigger }) => {
+export const UserCreationForm = ({ trigger }) => {
   const usernameInput = useRef();
   const passwordInput = useRef();
   const [token, setToken] = useState("");
-  const [users, setUsers] = useState();
-  const [updateUsersList, setUpdateUsersList] = useState(true);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    async function getAdminId() {
-      await fetch("/api/login", {
+    function getAdminId() {
+      fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -48,24 +46,20 @@ const User_creation_form = ({ trigger }) => {
         password: password,
       }),
     });
-    setUpdateUsersList(!updateUsersList);
     getUsers(adminToken);
   }
 
-  const getUsers = useCallback(
-    async (adminToken) => {
-      const response = await fetch("/api/users", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "Auth-Token": adminToken,
-        },
-      });
-      const json = await response.json();
-      setUsers(json);
-    },
-    [token, updateUsersList]
-  );
+  async function getUsers(adminToken) {
+    const response = await fetch("/api/users", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Auth-Token": adminToken,
+      },
+    });
+    const json = await response.json();
+    setUsers(json);
+  }
 
   return (
     <div
@@ -131,5 +125,3 @@ const User_creation_form = ({ trigger }) => {
     </div>
   );
 };
-
-export default User_creation_form;
