@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
-import CreateUserForm from './Form';
+import CreateChatForm from './Form';
 
-export default function CreateUserModal() {
+export default function CreateChatModal() {
   const [open, setOpen] = useState(false);
 
   const [adminToken, setAdminToken] = useState('');
-  const [adminId, setAdminId] = useState('');
 
   useEffect(() => {
     // TODO: refactoring when loginization will be implemented
@@ -23,7 +22,6 @@ export default function CreateUserModal() {
       .then((response) => response.json())
       .then((res) => {
         setAdminToken(res.authToken);
-        setAdminId(res.user.id);
       });
   }, []);
 
@@ -41,12 +39,12 @@ export default function CreateUserModal() {
         sx={{
           width: '400px'
         }}
-        variant="contained"
+        variant="outlined"
         onClick={handleClickOpen}
       >
-        Create User
+        Create Chat
       </Button>
-      <CreateUserForm open={open} onClose={handleClose} adminToken={adminToken} adminId={adminId} />
+      <CreateChatForm open={open} onClose={handleClose} adminToken={adminToken} />
     </div>
   );
 }
