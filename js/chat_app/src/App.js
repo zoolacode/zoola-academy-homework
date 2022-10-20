@@ -18,7 +18,12 @@ function App() {
       <UserContext.Provider value={{ auth, setAuth }}>
         <Router>
           <Routes>
-            <Route path="/" element={<Navigate to="/login" replace={true} />} />
+            <Route
+              path="/"
+              element={
+                <Navigate to={auth ? "/dashboard" : "login"} replace={true} />
+              }
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<DashBoard />} />
           </Routes>
