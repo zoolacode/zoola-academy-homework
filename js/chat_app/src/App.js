@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from "./components/Login";
+import DashBoard from "./components/DashBoard";
+import { useState, useEffect } from "react";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { UserContext } from "./components/UserContext";
 
 function App() {
+  const session = JSON.parse(sessionStorage.getItem("user-info"));
+  const [auth, setAuth] = useState(session);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = JSON.parse(sessionStorage.getItem("user-info"));
+    setAuth(auth);
+    if (auth !== null) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <UserContext.Provider value={{ auth, setAuth }}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Navigate to={auth ? "/dashboard" : "/login"} replace={true} />
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<DashBoard />} />
+        </Routes>
+      </UserContext.Provider>
     </div>
   );
 }
