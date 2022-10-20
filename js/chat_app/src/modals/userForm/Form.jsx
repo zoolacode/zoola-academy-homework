@@ -10,8 +10,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import { userServices } from '../../services/userServices';
-import { getAllUsers } from '../../redux/slices/usersSlice';
+import { getAllUsersThunk, createUserThunk } from '../../redux/slices/usersSlice';
 
 export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
   const [username, setUsername] = useState('');
@@ -26,7 +25,7 @@ export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
 
   useEffect(() => {
     // TODO: check it after implement loginization
-    dispatch(getAllUsers(adminToken));
+    dispatch(getAllUsersThunk(adminToken));
   }, [adminToken]);
 
   const handleClose = () => {
@@ -36,8 +35,6 @@ export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
   };
 
   const handleUsername = (e) => {
-    e.preventDefault();
-
     const isUsernameExists = users.some((item) => item.username === e.target.value);
 
     if (isUsernameExists) {
@@ -48,8 +45,6 @@ export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
   };
 
   const handlePassword = (e) => {
-    e.preventDefault();
-
     if (e.target.value.trim()) {
       setErrorPassword(false);
     }
@@ -57,7 +52,7 @@ export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
     setPassword(e.target.value);
   };
 
-  const handleSendButton = () => {
+  const handleSendButton = async () => {
     if (!username.trim()) {
       setErrorUsername(true);
       return;
@@ -69,8 +64,16 @@ export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
     }
 
     if (!errorUsername && !errorPassword) {
-      userServices.setNewUser(adminToken, username, password, adminId);
-      dispatch(getAllUsers(adminToken));
+      const paramsForCreateUser = {
+        adminToken,
+        username,
+        password,
+        adminId
+      };
+
+      await dispatch(createUserThunk(paramsForCreateUser));
+      dispatch(getAllUsersThunk(adminToken));
+
       setUsername('');
       setPassword('');
     }
@@ -126,11 +129,7 @@ export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
               key={user.id}
             >
               <ListItemAvatar>
-                <Avatar
-                  variant={user.username === 'admin' ? 'square' : 'circular'}
-                >
-                  {user.username[0]}
-                </Avatar>
+                <Avatar variant={user.username === 'admin' ? 'square' : 'circular'}>{user.username[0]}</Avatar>
               </ListItemAvatar>
               <ListItemText primary={user.username} />
             </ListItem>

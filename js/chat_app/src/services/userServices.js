@@ -16,9 +16,9 @@ export const userServices = {
       console.log(error);
     }
   },
-  setNewUser: async (adminToken, username, password, adminId) => {
+  createUser: async (adminToken, username, password, adminId) => {
     try {
-      fetch('/api/users', {
+      await fetch('/api/users', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
