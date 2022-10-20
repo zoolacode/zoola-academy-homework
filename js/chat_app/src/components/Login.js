@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Login.css";
 import {
   AppBar,
@@ -21,14 +21,6 @@ const Login = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const auth = JSON.parse(sessionStorage.getItem("user-info"));
-    setAuth(auth);
-    if (auth !== null) {
-      navigate("/dashboard", { replace: true });
-    }
-  }, []);
 
   async function handleClick(e) {
     e.preventDefault();
