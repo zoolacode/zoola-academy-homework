@@ -24,3 +24,4 @@ yarn-error.log*
 
 /public/uploads
 /database
+package-lock.json

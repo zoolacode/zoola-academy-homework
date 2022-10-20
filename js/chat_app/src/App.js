@@ -1,31 +1,22 @@
 /* eslint-disable jsx-quotes */
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, Box, Typography } from '@mui/material';
-import { setIsAuth } from './redux/slicies/authSlice';
+import { useSelector } from 'react-redux';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LogIn from './components/LogIn';
+import LogOut from './components/LogOut';
+import authSelectors from './redux/auth/authSelector';
 
 function App() {
-  const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.isAuth);
-
+  const isLogin = useSelector(authSelectors.getLogin);
   return (
-    <Box
-      sx={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignContent: 'center'
-      }}
-    >
-      {!isAuth ? (
-        <Button onClick={() => dispatch(setIsAuth())}>Login</Button>
-      ) : (
-        <Typography variant='h1' color='blue'>
-          Chat Page
-        </Typography>
-      )}
-    </Box>
+    <div>
+      <Router>
+        <Routes>
+          <Route path='/' element={<LogIn />} />
+          <Route path='/chat' element={<LogOut />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
