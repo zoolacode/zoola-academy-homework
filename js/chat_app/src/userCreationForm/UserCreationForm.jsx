@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./user_create_form.css";
+import "./userCreationForm.css";
 import Avatar from "@mui/material/Avatar";
 import { green } from "@mui/material/colors";
 
@@ -45,8 +45,7 @@ export const UserCreationForm = ({ styleForm }) => {
         username: username,
         password: password,
       }),
-    });
-    getUsers(adminToken);
+    }).then(getUsers(adminToken));
   }
 
   async function getUsers(adminToken) {
@@ -62,7 +61,7 @@ export const UserCreationForm = ({ styleForm }) => {
   }
 
   return (
-    <div className={"form" + styleForm}>
+    <div className={`form ${styleForm}`}>
       <div className="formHeader">Create user</div>
       <form
         className="formBody"
@@ -93,30 +92,28 @@ export const UserCreationForm = ({ styleForm }) => {
       </form>
       <div>
         <ul className="userListUl">
-          {users
-            ? users.map((user) => {
-                if (
-                  user.username === "admin" &&
-                  token.user.id === "fhs8dhf9s8dhf9sd8hf9sd8hf"
-                ) {
-                  return (
-                    <li key={user.id} className="userListLi">
-                      <Avatar sx={{ bgcolor: green[500] }} variant="square">
-                        {user.username.charAt(0)}
-                      </Avatar>
-                      {user.username}
-                    </li>
-                  );
-                } else {
-                  return (
-                    <li key={user.id} className="userListLi">
-                      <Avatar>{user.username.charAt(0)}</Avatar>
-                      {user.username}
-                    </li>
-                  );
-                }
-              })
-            : "Loading..."}
+          {users?.map((user) => {
+            if (
+              user.username === "admin" &&
+              token.user.id === "fhs8dhf9s8dhf9sd8hf9sd8hf"
+            ) {
+              return (
+                <li key={user.id} className="userListLi">
+                  <Avatar sx={{ bgcolor: green[500] }} variant="square">
+                    {user.username.charAt(0).toUpperCase()}
+                  </Avatar>
+                  {user.username}
+                </li>
+              );
+            } else {
+              return (
+                <li key={user.id} className="userListLi">
+                  <Avatar>{user.username.charAt(0).toUpperCase()}</Avatar>
+                  {user.username}
+                </li>
+              );
+            }
+          }) ?? "Loading..."}
         </ul>
       </div>
     </div>
