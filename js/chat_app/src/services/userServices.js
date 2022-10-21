@@ -1,11 +1,11 @@
 export const userServices = {
-  getAllUsers: async (adminToken) => {
+  getAllUsers: async (authToken) => {
     try {
       const data = await fetch('/api/users', {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
-          'Auth-Token': adminToken
+          'Auth-Token': authToken
         }
       });
 
@@ -16,13 +16,13 @@ export const userServices = {
       console.log(error);
     }
   },
-  createUser: async (adminToken, username, password, adminId) => {
+  createUser: async (authToken, username, password, adminId) => {
     try {
       await fetch('/api/users', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
-          'Auth-Token': adminToken
+          'Auth-Token': authToken
         },
         body: JSON.stringify({
           adminId,
