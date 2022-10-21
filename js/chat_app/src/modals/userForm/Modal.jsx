@@ -5,7 +5,7 @@ import CreateUserForm from './Form';
 export default function CreateUserModal() {
   const [open, setOpen] = useState(false);
 
-  const [adminToken, setAdminToken] = useState('');
+  const [authToken, setAuthToken] = useState('');
   const [adminId, setAdminId] = useState('');
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function CreateUserModal() {
     })
       .then((response) => response.json())
       .then((res) => {
-        setAdminToken(res.authToken);
+        setAuthToken(res.authToken);
         setAdminId(res.user.id);
       });
   }, []);
@@ -46,7 +46,7 @@ export default function CreateUserModal() {
       >
         Create User
       </Button>
-      <CreateUserForm open={open} onClose={handleClose} adminToken={adminToken} adminId={adminId} />
+      <CreateUserForm open={open} onClose={handleClose} authToken={authToken} adminId={adminId} />
     </div>
   );
 }

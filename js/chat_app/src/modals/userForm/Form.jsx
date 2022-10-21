@@ -12,7 +12,7 @@ import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsersThunk, createUserThunk } from '../../redux/slices/usersSlice';
 
-export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
+export default function CreateUserForm({ onClose, open, authToken, adminId }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -25,8 +25,8 @@ export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
 
   useEffect(() => {
     // TODO: check it after implement loginization
-    dispatch(getAllUsersThunk(adminToken));
-  }, [adminToken]);
+    dispatch(getAllUsersThunk(authToken));
+  }, [authToken]);
 
   const handleClose = () => {
     setPassword('');
@@ -35,13 +35,15 @@ export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
   };
 
   const handleUsername = (e) => {
-    const isUsernameExists = users.some((item) => item.username === e.target.value);
+    const isUsernameExists = users.some((item) => item.username === e.target.value.trim());
 
     if (isUsernameExists) {
       setErrorUsername(true);
-    } else setErrorUsername(false);
+    } else if (e.target.value.trim()) {
+      setErrorUsername(false);
+    }
 
-    setUsername(e.target.value);
+    setUsername(e.target.value.trim());
   };
 
   const handlePassword = (e) => {
@@ -49,30 +51,31 @@ export default function CreateUserForm({ onClose, open, adminToken, adminId }) {
       setErrorPassword(false);
     }
 
-    setPassword(e.target.value);
+    setPassword(e.target.value.trim());
   };
 
-  const handleSendButton = async () => {
-    if (!username.trim()) {
+  const handleSendButton = () => {
+    if (!username) {
       setErrorUsername(true);
+      setUsername('');
       return;
     }
 
-    if (!password.trim()) {
+    if (!password) {
       setErrorPassword(true);
+      setPassword('');
       return;
     }
 
     if (!errorUsername && !errorPassword) {
       const paramsForCreateUser = {
-        adminToken,
+        authToken,
         username,
         password,
         adminId
       };
 
-      await dispatch(createUserThunk(paramsForCreateUser));
-      dispatch(getAllUsersThunk(adminToken));
+      dispatch(createUserThunk(paramsForCreateUser));
 
       setUsername('');
       setPassword('');
