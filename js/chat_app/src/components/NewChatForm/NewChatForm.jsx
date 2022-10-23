@@ -12,9 +12,11 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+import { fetchRequestJSON } from "../../function/fetch";
 
 const currentUserToken = "d46c97b0-ddcc-4897-b327-8593fcf6cb78";
 const currentUserId = "75da786f-b490-408d-9ea1-ee1675b98d3c";
+const intervalUpdate = 1000;
 
 export const NewChatForm = ({ open, onClose }) => {
   const [chatMembers, setChatMembers] = useState([]);
@@ -22,50 +24,33 @@ export const NewChatForm = ({ open, onClose }) => {
   const [chatName, setChatName] = useState("");
 
   const submitHandler = async () => {
-    const data1 = {
+    const userData = {
       userId: currentUserId,
       title: chatName,
     };
 
-    const data2 = {
+    const membersData = {
       members: [currentUserId, ...chatMembers],
     };
 
-    await fetch("/api/chats", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": currentUserToken,
-      },
-      body: JSON.stringify(data1),
-    })
-      .then((response) => response.json())
-      .then((chat) => {
-        fetch(`/api/chats/${chat.id}/members`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": currentUserToken,
-          },
-          body: JSON.stringify(data2),
-        }).then((response) => response.json());
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    fetchRequestJSON("/api/chats", "POST", currentUserToken, userData).then(
+      (chat) => {
+        fetchRequestJSON(
+          `/api/chats/${chat.id}/members`,
+          "POST",
+          currentUserToken,
+          membersData
+        );
+      }
+    );
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetch("/api/users", {
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": currentUserToken,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => setUsers(data));
-    }, 1000);
+      fetchRequestJSON("/api/users", "GET", currentUserToken).then((data) =>
+        setUsers(data)
+      );
+    }, intervalUpdate);
 
     return () => {
       clearInterval(interval);
@@ -116,4 +101,4 @@ export const NewChatForm = ({ open, onClose }) => {
       </DialogContent>
     </Dialog>
   );
-}
+};

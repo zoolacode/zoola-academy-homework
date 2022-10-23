@@ -9,8 +9,10 @@ import {
   TextField,
 } from "@mui/material";
 import { UsersList } from "../UsersList/UsersList";
+import { fetchRequestJSON } from "../../function/fetch";
 
 const adminId = "c8e26274-93ee-4acb-9f51-126264adaeb2";
+const intervalUpdate = 1000;
 
 export const NewUserForm = ({ open, onClose }) => {
   const [userName, setUserName] = useState("");
@@ -19,15 +21,10 @@ export const NewUserForm = ({ open, onClose }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetch("/api/users", {
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": adminId,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => setUsers(data));
-    }, 1000);
+      fetchRequestJSON("/api/users", "GET", adminId).then((data) =>
+        setUsers(data)
+      );
+    }, intervalUpdate);
 
     return () => {
       clearInterval(interval);
@@ -44,27 +41,11 @@ export const NewUserForm = ({ open, onClose }) => {
       password: userPassword,
     };
 
-    await fetch("/api/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": adminId,
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    fetchRequestJSON("/api/users", "POST", adminId, data);
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={() => {
-        onClose();
-      }}
-    >
+    <Dialog open={open} onClose={onClose}>
       <DialogTitle>Create user</DialogTitle>
       <DialogContent sx={{ width: 400 }}>
         <Stack mt={1} spacing={5}>
