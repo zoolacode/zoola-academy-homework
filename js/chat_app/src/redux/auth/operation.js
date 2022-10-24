@@ -5,7 +5,7 @@ import login from '../../services/services';
 const loginAuth = createAsyncThunk('auth/login', async ({ username, password }) => {
   const response = await login({ username, password });
   const data = await response.json();
-  const result = await localStorage.setItem('auth', JSON.stringify(data));
+  localStorage.setItem('auth', JSON.stringify(data));
   return data;
 });
 

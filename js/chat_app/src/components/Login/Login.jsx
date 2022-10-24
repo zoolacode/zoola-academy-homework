@@ -10,10 +10,10 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import LoginIcon from '@mui/icons-material/Login';
 import { Box } from '@mui/system';
-import loginAuth from '../../redux/auth/authOperation';
-import LogOut from '../LogOut/LogOut';
-import authSelectors from '../../redux/auth/authSelector';
+import loginAuth from '../../redux/auth/operation';
+import authSelectors from '../../redux/auth/selector';
 import './LogIn.css';
+import Header from '../Header/Header';
 
 function Login() {
   const dispatch = useDispatch();
@@ -35,24 +35,20 @@ function Login() {
   };
 
   useEffect(() => {
-    if (isLogin === false) {
+    if (!isLogin) {
       navigation('/');
     } else {
       navigation('/chat');
     }
   }, [isLogin]);
-  const validationForm = () => {
-    if (isLogin) {
-      return true;
-    }
-    return false;
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginAuth({ username, password }));
     setUsername('');
     setPassword('');
   };
+
   return !isLogin ? (
     <Container fixed>
       <AppBar color={'primary'} sx={{ mb: 3 }} position='static'>
@@ -86,7 +82,7 @@ function Login() {
       </form>
     </Container>
   ) : (
-    <LogOut />
+    <Header />
   );
 }
 

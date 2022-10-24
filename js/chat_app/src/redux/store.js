@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authSlice from './auth/authSlice';
+import authSlice from './auth/slice';
 
 let preloadedState;
-const persistedTodosString = localStorage.getItem('auth');
+const persistedAuthString = localStorage.getItem('auth');
 
-if (persistedTodosString) {
+if (persistedAuthString) {
   preloadedState = {
     auth: {
-      auth: JSON.parse(persistedTodosString)
+      auth: JSON.parse(persistedAuthString)
     }
   };
 }

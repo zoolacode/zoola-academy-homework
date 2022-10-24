@@ -1,5 +1,5 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
-import loginAuth from './authOperation';
+import loginAuth from './operation';
 
 export const isLogout = createAction('logout');
 const initialState = {
