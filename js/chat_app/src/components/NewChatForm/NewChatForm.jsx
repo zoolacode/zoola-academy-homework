@@ -23,7 +23,11 @@ export const NewChatForm = ({ open, onClose }) => {
   const [users, setUsers] = useState([]);
   const [chatName, setChatName] = useState("");
 
-  const submitHandler = async () => {
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setUsers([]);
+    setChatName("");
+
     const userData = {
       userId: currentUserId,
       title: chatName,
@@ -62,11 +66,7 @@ export const NewChatForm = ({ open, onClose }) => {
       <DialogTitle>Create new chat</DialogTitle>
       <DialogContent>
         <Box>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
+          <form>
             <Stack spacing={2}>
               <TextField
                 label="Chat name"
@@ -92,7 +92,7 @@ export const NewChatForm = ({ open, onClose }) => {
                     ))}
                 </Select>
               </FormControl>
-              <Button variant="outlined" onClick={submitHandler}>
+              <Button variant="outlined" onClick={submitHandler} onSubmit>
                 Create
               </Button>
             </Stack>

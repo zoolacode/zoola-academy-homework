@@ -31,10 +31,13 @@ export const NewUserForm = ({ open, onClose }) => {
     };
   }, []);
 
-  const submitHandler = async () => {
+  const submitHandler = async (e) => {
     if (userName.length === 0 || userPassword.length === 0) {
       return;
     }
+    e.preventDefault();
+    setUserName("");
+    setUserPassword("");
 
     const data = {
       username: userName,
@@ -50,13 +53,7 @@ export const NewUserForm = ({ open, onClose }) => {
       <DialogContent sx={{ width: 400 }}>
         <Stack mt={1} spacing={5}>
           <Box>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setUserName("");
-                setUserPassword("");
-              }}
-            >
+            <form>
               <Stack spacing={2}>
                 <TextField
                   label="Username"
@@ -69,7 +66,12 @@ export const NewUserForm = ({ open, onClose }) => {
                   value={userPassword}
                   onChange={(e) => setUserPassword(e.target.value)}
                 />
-                <Button fullWidth variant="outlined" onClick={submitHandler}>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  onClick={submitHandler}
+                  onSubmit
+                >
                   Send
                 </Button>
               </Stack>
