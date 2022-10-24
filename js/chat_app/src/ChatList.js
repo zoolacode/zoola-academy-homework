@@ -10,7 +10,7 @@ import MenuList from "@mui/material/MenuList";
   const authToken = "c4a6ee4f-b87b-4390-88ae-e068237aad89";
 }
 
-export const function ChatList({ onSelectChat }) {
+export const ChatList = ({ onSelectChat }) => {
   const [selectedId, setSelectedID] = React.useState(1);
   const [chatsData, setChatsData] = React.useState([]);
 
