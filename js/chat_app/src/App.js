@@ -1,7 +1,7 @@
 /* eslint-disable jsx-quotes */
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LogIn from './components/LogIn';
+import Login from './components/Login';
 import Header from './components/Header';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path='/' element={<LogIn />} />
+          <Route path='/' element={<Login />} />
           <Route path='/chat' element={<Header />} />
         </Routes>
       </Router>

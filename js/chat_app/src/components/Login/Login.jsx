@@ -12,7 +12,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import { Box } from '@mui/system';
 import loginAuth from '../../redux/auth/operation';
 import authSelectors from '../../redux/auth/selector';
-import './LogIn.css';
+import './Login.css';
 import Header from '../Header/Header';
 
 function Login() {
