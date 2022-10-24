@@ -3,7 +3,7 @@ import { AppBar, Avatar, Toolbar, Typography, Switch } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import { UserContext } from "./UserContext";
-import Logout from "./Logout";
+import LogoutDialog from "./LogoutDialog";
 
 const DashBoard = () => {
   const { auth } = useContext(UserContext);
@@ -24,7 +24,7 @@ const DashBoard = () => {
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div onClick={handleOpen} style={{ cursor: "pointer" }}>
               <Avatar sx={{ bgcolor: deepOrange[500] }}>
-                {auth?.user.username.charAt(0)}
+                {auth?.user.username.charAt(0).toUpperCase()}
               </Avatar>
             </div>
             <Typography
@@ -32,13 +32,13 @@ const DashBoard = () => {
               variant="h6"
               color="inherit"
             >
-              {"Welcome, " + auth?.user.username}
+              {`Welcome, ${auth?.user.username}`}
             </Typography>
             <Switch color="default" />
           </Toolbar>
         </AppBar>
       </Container>
-      <Logout open={open} onClose={handleClose} />
+      <LogoutDialog open={open} onClose={handleClose} />
     </>
   );
 };

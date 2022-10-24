@@ -2,24 +2,19 @@ import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Logout = ({ open, onClose }) => {
+const LogoutDialog = ({ open, onClose }) => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
     sessionStorage.removeItem("user-info");
-    navigate("/login", { replace: true });
+    navigate("/login");
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogContent>
         <DialogActions>
-          <Button
-            onClick={handleLogOut}
-            sx={{ m: 2 }}
-            variant="contained"
-            color="error"
-          >
+          <Button onClick={handleLogOut} variant="contained" color="error">
             Log out
           </Button>
         </DialogActions>
@@ -28,4 +23,4 @@ const Logout = ({ open, onClose }) => {
   );
 };
 
-export default Logout;
+export default LogoutDialog;

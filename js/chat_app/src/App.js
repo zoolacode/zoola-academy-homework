@@ -3,7 +3,7 @@ import DashBoard from "./components/DashBoard";
 import { useState, useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { UserContext } from "./components/UserContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   const session = JSON.parse(sessionStorage.getItem("user-info"));
