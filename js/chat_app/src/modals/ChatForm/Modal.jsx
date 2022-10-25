@@ -5,7 +5,7 @@ import CreateChatForm from './Form';
 export default function CreateChatModal() {
   const [open, setOpen] = useState(false);
 
-  const [adminToken, setAdminToken] = useState('');
+  const [authToken, setAuthToken] = useState('');
 
   useEffect(() => {
     // TODO: refactoring when loginization will be implemented
@@ -21,7 +21,7 @@ export default function CreateChatModal() {
     })
       .then((response) => response.json())
       .then((res) => {
-        setAdminToken(res.authToken);
+        setAuthToken(res.authToken);
       });
   }, []);
 
@@ -44,7 +44,7 @@ export default function CreateChatModal() {
       >
         Create Chat
       </Button>
-      <CreateChatForm open={open} onClose={handleClose} adminToken={adminToken} />
+      <CreateChatForm open={open} onClose={handleClose} authToken={authToken} />
     </div>
   );
 }

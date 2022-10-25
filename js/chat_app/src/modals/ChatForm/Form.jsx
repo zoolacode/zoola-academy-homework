@@ -5,12 +5,14 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import ChatSelect from './Select';
+import CreateChatSelect from './Select';
 import { getAllUsersThunk } from '../../redux/slices/usersSlice';
+import { createChatThunk } from '../../redux/slices/chatSlice';
 
-export default function CreateChatForm({ onClose, open, adminToken }) {
+export default function CreateChatForm({ onClose, open, authToken }) {
   const [chatName, setChatName] = useState('');
   const [errorChatName, setErrorChatName] = useState(false);
+  const [resetMembersTrigger, setResetMembersTrigger] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -18,8 +20,8 @@ export default function CreateChatForm({ onClose, open, adminToken }) {
 
   useEffect(() => {
     // TODO: check it after implement loginization
-    dispatch(getAllUsersThunk(adminToken));
-  }, [adminToken]);
+    dispatch(getAllUsersThunk(authToken));
+  }, [authToken]);
 
   const handleClose = () => {
     setChatName('');
@@ -31,8 +33,15 @@ export default function CreateChatForm({ onClose, open, adminToken }) {
   };
 
   const handleSendButton = () => {
+    const paramsForCreateChat = {
+      chatName,
+      authToken
+    };
+
+    dispatch(createChatThunk(paramsForCreateChat));
     setChatName('');
     setErrorChatName(false);
+    setResetMembersTrigger((prev) => !prev);
   };
 
   return (
@@ -53,7 +62,7 @@ export default function CreateChatForm({ onClose, open, adminToken }) {
           label="Chat name"
           variant="outlined"
         />
-        <ChatSelect users={users} />
+        <CreateChatSelect resetMembersTrigger={resetMembersTrigger} users={users} />
         <Button
           sx={{
             margin: '15px 0'

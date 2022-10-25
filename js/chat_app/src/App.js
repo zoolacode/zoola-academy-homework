@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Box } from '@mui/material';
 import { setIsAuth } from './redux/slices/authSlice';
-import { UserModal } from './modals/UserForm';
 import { ChatModal } from './modals/ChatForm';
 
 function App() {
@@ -19,14 +18,7 @@ function App() {
         alignContent: 'center'
       }}
     >
-      {!isAuth ? (
-        <Button onClick={() => dispatch(setIsAuth())}>Login</Button>
-      ) : (
-        <div>
-          <UserModal />
-          <ChatModal />
-        </div>
-      )}
+      {!isAuth ? <Button onClick={() => dispatch(setIsAuth())}>Login</Button> : <ChatModal />}
     </Box>
   );
 }

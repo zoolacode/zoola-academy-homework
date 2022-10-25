@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useDispatch } from 'react-redux';
+import { setMembers } from '../../redux/slices/chatSlice';
 
-export default function CreateChatSelect({ users }) {
-  const [username, setUsername] = useState([]);
+export default function CreateChatSelect({ users, resetMembersTrigger }) {
+  console.log({
+    resetMembersTrigger
+  });
+  const [membersName, setMembersName] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setMembersName([]);
+  }, [resetMembersTrigger]);
 
   const handleChange = (event) => {
     const { target: { value } } = event;
-    setUsername(
+
+    setMembersName(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
+
+    const membersIds = users.filter((user) => value.includes(user.username)).map((user) => user.id);
+    dispatch(setMembers(membersIds));
   };
 
   return (
@@ -23,30 +36,28 @@ export default function CreateChatSelect({ users }) {
           width: '350px'
         }}
       >
-        <Select
-          multiple
-          displayEmpty
-          value={username}
-          onChange={handleChange}
-          input={<TextField label="Members" variant="outlined" margin="normal" select />}
-          renderValue={(selected) => {
-            if (selected.length === 0) {
-              return;
-            }
-
-            return selected.join(', ');
+        <TextField
+          select
+          label="Members"
+          variant="outlined"
+          SelectProps={{
+            multiple: true,
+            onChange: handleChange,
+            value: membersName
           }}
         >
           {users.map((user) => {
+            // TODO: change 'admin' on the authUsername
             if (user.username !== 'admin') {
               return (
                 <MenuItem key={user.id} value={user.username}>
                   {user.username}
                 </MenuItem>
               );
-            } return null;
+            }
+            return null;
           })}
-        </Select>
+        </TextField>
       </FormControl>
     </div>
   );
