@@ -19,9 +19,21 @@ interface dateOptions {
   second: "numeric";
 }
 
+type messageListType = {
+  id: string;
+  message: string;
+  authorId: string;
+  date: number;
+};
+
+type usersListType = {
+  id?: string;
+  username?: string;
+};
+
 export const Chat: React.FC = () => {
-  const [messagesList, setMessagesList] = useState([]);
-  const [usersList, setUsersList] = useState([]);
+  const [messagesList, setMessagesList] = useState<messageListType[]>([]);
+  const [usersList, setUsersList] = useState<usersListType[]>([]);
   const [message, setMessage] = useState<string>("");
   const { auth } = useContext(UserContext);
   const chatId: string = "e2f96143-b219-40e1-b6dc-a9a6a0cd01c0";
@@ -36,7 +48,7 @@ export const Chat: React.FC = () => {
   };
 
   useEffect(() => {
-    getUserName();
+    getUsersList();
     const interval = setInterval(() => {
       fetch(`/api/chats/${chatId}`, {
         method: "GET",
@@ -56,7 +68,7 @@ export const Chat: React.FC = () => {
     };
   }, []);
 
-  const postMessage = (message: string) => {
+  const postMessage = (message: string): void => {
     fetch(`/api/chats/${chatId}/messages`, {
       method: "POST",
       headers: {
@@ -70,7 +82,7 @@ export const Chat: React.FC = () => {
     });
   };
 
-  const getUserName = () => {
+  const getUsersList = (): void => {
     fetch("/api/users", {
       method: "GET",
       headers: {
@@ -80,6 +92,15 @@ export const Chat: React.FC = () => {
     })
       .then((res) => res.json())
       .then((data) => setUsersList(data));
+  };
+
+  const getUserName = (
+    array: usersListType[],
+    messageItem: messageListType
+  ): string | undefined => {
+    const items = array.find((item) => item.id === messageItem.authorId);
+    const username = items?.username;
+    return username;
   };
 
   return (
@@ -125,10 +146,7 @@ export const Chat: React.FC = () => {
                   <TimelineConnector />
                 </TimelineSeparator>
                 <TimelineContent color="text.secondary">
-                  {
-                    usersList.find((item) => item.id === messageItem.authorId)
-                      .username
-                  }
+                  {getUserName(usersList, messageItem)}
                   <br />
                   {`${new Date(messageItem.date).toLocaleDateString(
                     undefined,
