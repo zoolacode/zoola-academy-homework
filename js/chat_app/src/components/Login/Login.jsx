@@ -12,8 +12,8 @@ import LoginIcon from '@mui/icons-material/Login';
 import { Box } from '@mui/system';
 import loginAuth from '../../redux/auth/operation';
 import authSelectors from '../../redux/auth/selector';
-import './Login.css';
 import Header from '../Header/Header';
+import Form from '../Form';
 
 function Login() {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ function Login() {
         <Toolbar sx={{ justifyContent: 'space-between' }}>{/* <LoginIcon /> */}</Toolbar>
       </AppBar>
 
-      <form className='login-form' onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Typography variant='h5'>Welcome to chat</Typography>
         <Box sx={{ p: 4, width: 1 / 2 }} autoComplete='off'>
           <Stack spacing={2}>
@@ -79,7 +79,7 @@ function Login() {
             </Button>
           </Stack>
         </Box>
-      </form>
+      </Form>
     </Container>
   ) : (
     <Header />

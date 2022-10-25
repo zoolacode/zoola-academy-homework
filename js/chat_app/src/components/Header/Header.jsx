@@ -28,7 +28,6 @@ function Header() {
 
   useEffect(() => {
     navigation('/chat');
-    localStorage.getItem('auth');
   }, []);
 
   const handleLogoutClick = () => {
