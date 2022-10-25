@@ -3,6 +3,7 @@ import DashBoard from "./components/DashBoard";
 import { useState, useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { UserContext } from "./components/UserContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   const session = JSON.parse(sessionStorage.getItem("user-info"));
@@ -27,8 +28,15 @@ function App() {
               <Navigate to={auth ? "/dashboard" : "/login"} replace={true} />
             }
           />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashBoard />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<DashBoard />} />
         </Routes>
       </UserContext.Provider>
     </div>
