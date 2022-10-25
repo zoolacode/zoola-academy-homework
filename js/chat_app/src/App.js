@@ -1,14 +1,28 @@
-import Login from "./components/Login";
-import DashBoard from "./components/DashBoard";
-import { useState, useEffect } from "react";
+import { Login } from "./components/Login";
+import { DashBoard } from "./components/DashBoard";
+import { useState, useEffect, useContext } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { UserContext } from "./components/UserContext";
+import { ThemeContext } from "./components/ThemeContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
-function App() {
+export const App = () => {
+  const { setDarkMode, setChecked } = useContext(ThemeContext);
   const session = JSON.parse(sessionStorage.getItem("user-info"));
   const [auth, setAuth] = useState(session);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (JSON.parse(sessionStorage.getItem("isChecked"))) {
+      setChecked(JSON.parse(sessionStorage.getItem("isChecked")));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (JSON.parse(sessionStorage.getItem("darkMode"))) {
+      setDarkMode(JSON.parse(sessionStorage.getItem("darkMode")));
+    }
+  }, []);
 
   useEffect(() => {
     const auth = JSON.parse(sessionStorage.getItem("user-info"));
@@ -41,6 +55,4 @@ function App() {
       </UserContext.Provider>
     </div>
   );
-}
-
-export default App;
+};

@@ -3,10 +3,15 @@ import { AppBar, Avatar, Toolbar, Typography, Switch } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import { UserContext } from "./UserContext";
+import { ThemeContext } from "./ThemeContext";
 import LogoutDialog from "./LogoutDialog";
+import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
+import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 
-const DashBoard = () => {
+export const DashBoard = () => {
   const { auth } = useContext(UserContext);
+  const { toggleMode, checked } = useContext(ThemeContext);
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -34,7 +39,13 @@ const DashBoard = () => {
             >
               {`Welcome, ${auth?.user.username}`}
             </Typography>
-            <Switch color="default" />
+            <Switch
+              color="default"
+              onChange={toggleMode}
+              checked={checked}
+              checkedIcon={<Brightness4RoundedIcon fontSize="small" />}
+              icon={<Brightness5RoundedIcon fontSize="small" />}
+            />
           </Toolbar>
         </AppBar>
       </Container>
@@ -42,5 +53,3 @@ const DashBoard = () => {
     </>
   );
 };
-
-export default DashBoard;
