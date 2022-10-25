@@ -2,7 +2,7 @@
     position: absolute;
     top: 50%;
     right: 50%;
-    transform: translateY(-50%) translateX(50%);
+    transform: translateY(-65%) translateX(50%);
     width: 400px;
     padding: 20px;  
     border-radius: 10px;

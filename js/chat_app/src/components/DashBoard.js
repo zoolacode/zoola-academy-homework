@@ -39,7 +39,7 @@ const DashBoard = () => {
             <Switch color="default" />
           </Toolbar>
         </AppBar>
-        <UserCreationButton />
+        {<UserCreationButton />}
       </Container>
       <LogoutDialog open={open} onClose={handleClose} />
     </>
