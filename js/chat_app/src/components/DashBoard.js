@@ -4,7 +4,8 @@ import { deepOrange } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import { UserContext } from "./UserContext";
 import { ThemeContext } from "./ThemeContext";
-import LogoutDialog from "./LogoutDialog";
+import { LogoutDialog } from "./LogoutDialog";
+import { BadgeAvatar } from "./BadgeAvatar";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 
@@ -28,9 +29,11 @@ export const DashBoard = () => {
         <AppBar position="static" color="inherit">
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div onClick={handleOpen} style={{ cursor: "pointer" }}>
-              <Avatar sx={{ bgcolor: deepOrange[500] }}>
-                {auth?.user.username.charAt(0).toUpperCase()}
-              </Avatar>
+              <BadgeAvatar>
+                <Avatar sx={{ bgcolor: deepOrange[500] }}>
+                  {auth?.user.username.charAt(0).toUpperCase()}
+                </Avatar>
+              </BadgeAvatar>
             </div>
             <Typography
               sx={{ flexGrow: 1, textAlign: "center" }}
