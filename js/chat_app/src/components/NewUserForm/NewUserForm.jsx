@@ -53,7 +53,7 @@ export const NewUserForm = ({ open, onClose }) => {
       <DialogContent sx={{ width: 400 }}>
         <Stack mt={1} spacing={5}>
           <Box>
-            <form>
+            <form onSubmit={submitHandler}>
               <Stack spacing={2}>
                 <TextField
                   label="Username"
@@ -69,8 +69,7 @@ export const NewUserForm = ({ open, onClose }) => {
                 <Button
                   fullWidth
                   variant="outlined"
-                  onClick={submitHandler}
-                  onSubmit
+                  type="submit"
                 >
                   Send
                 </Button>

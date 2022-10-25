@@ -66,7 +66,7 @@ export const NewChatForm = ({ open, onClose }) => {
       <DialogTitle>Create new chat</DialogTitle>
       <DialogContent>
         <Box>
-          <form>
+          <form onSubmit={submitHandler}>
             <Stack spacing={2}>
               <TextField
                 label="Chat name"
@@ -92,7 +92,7 @@ export const NewChatForm = ({ open, onClose }) => {
                     ))}
                 </Select>
               </FormControl>
-              <Button variant="outlined" onClick={submitHandler} onSubmit>
+              <Button variant="outlined" type="submit">
                 Create
               </Button>
             </Stack>
