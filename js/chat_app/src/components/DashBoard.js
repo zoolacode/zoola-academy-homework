@@ -3,6 +3,7 @@ import { AppBar, Avatar, Toolbar, Typography, Switch } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import { UserContext } from "./UserContext";
+import { Chat } from "./chatComponents/Chat.tsx";
 
 const DashBoard = () => {
   const { auth } = useContext(UserContext);
@@ -24,6 +25,7 @@ const DashBoard = () => {
           <Switch color="default" />
         </Toolbar>
       </AppBar>
+      <Chat />
     </Container>
   );
 };
