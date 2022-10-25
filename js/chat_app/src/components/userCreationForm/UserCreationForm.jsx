@@ -1,36 +1,18 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./userCreationForm.css";
 import Avatar from "@mui/material/Avatar";
 import { green } from "@mui/material/colors";
+import { UserContext } from "../UserContext";
 
 export const UserCreationForm = ({ styleForm }) => {
+  const { auth } = useContext(UserContext);
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [token, setToken] = useState("");
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    function getAdminId() {
-      fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-        body: JSON.stringify({
-          username: "admin",
-          password: "admin",
-        }),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          setToken(data);
-          getUsers(data.authToken);
-        });
-    }
-    getAdminId();
+    getUsers(auth.authToken);
   }, []);
 
   function createUser(adminToken, adminId, username, password) {
@@ -67,8 +49,8 @@ export const UserCreationForm = ({ styleForm }) => {
         className="formBody"
         onSubmit={(e) => {
           createUser(
-            token.authToken,
-            token.user.id,
+            auth.authToken,
+            auth.user.id,
             usernameInput,
             passwordInput
           );
@@ -95,7 +77,7 @@ export const UserCreationForm = ({ styleForm }) => {
           {users?.map((user) => {
             if (
               user.username === "admin" &&
-              token.user.id === "fhs8dhf9s8dhf9sd8hf9sd8hf"
+              auth.user.id === "fhs8dhf9s8dhf9sd8hf9sd8hf"
             ) {
               return (
                 <li key={user.id} className="userListLi">
