@@ -14,7 +14,7 @@ import { UserContext } from "./UserContext";
 import { ThemeContext } from "./ThemeContext";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
-import { setStorage } from "./themeStorage.ts";
+import { set } from "./themeStorage.ts";
 
 export const Login = () => {
   const { setAuth } = useContext(UserContext);
@@ -40,7 +40,7 @@ export const Login = () => {
     }
     const result = await response.json();
     setAuth(result);
-    setStorage("user-info", result);
+    set("user-info", result);
     navigate("/dashboard", { replace: true });
   }
 

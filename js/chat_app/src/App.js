@@ -5,27 +5,27 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { UserContext } from "./components/UserContext";
 import { ThemeContext } from "./components/ThemeContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { setStorage, getStorage } from "./components/themeStorage.ts";
+import { set, get } from "./components/themeStorage.ts";
 
 export const App = () => {
   const { setDarkMode, darkMode } = useContext(ThemeContext);
-  const session = getStorage("user-info");
+  const session = get("user-info");
   const [auth, setAuth] = useState(session);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setStorage("darkMode", darkMode);
+    set("darkMode", darkMode);
   }, [darkMode]);
 
   useEffect(() => {
-    const storage = getStorage("darkMode");
+    const storage = get("darkMode");
     if (storage) {
-      setDarkMode(getStorage("darkMode"));
+      setDarkMode(get("darkMode"));
     }
   }, []);
 
   useEffect(() => {
-    const auth = getStorage("user-info");
+    const auth = get("user-info");
     setAuth(auth);
     if (auth !== null) {
       navigate("/dashboard", { replace: true });
