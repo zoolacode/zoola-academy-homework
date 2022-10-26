@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <ChatList setChatID={setChatID}/>
+      <ChatList chatId={chatId} setChatID={setChatID}/>
     </div>
   );
 }

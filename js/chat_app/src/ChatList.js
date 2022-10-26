@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 
-export const ChatList = ({ setChatID }) => {
+export const ChatList = ({chatId, setChatID }) => {
   const [chatsData, setChatsData] = React.useState([]);
   const { auth } = useContext(UserContext);
 
@@ -38,7 +38,7 @@ export const ChatList = ({ setChatID }) => {
           {chatsData.map((params) => {
             return (
               <MenuItem
-                selected={selectedId === params.id}
+                selected={chatId === params.id}
                 onClick={(event) => handleChatListItemClick(event, params.id)}
               >
                 {params.title}
