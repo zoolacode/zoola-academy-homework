@@ -5,27 +5,27 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { UserContext } from "./components/UserContext";
 import { ThemeContext } from "./components/ThemeContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { setStorage, getStorage } from "./components/themeStorage.ts";
 
 export const App = () => {
-  const { setDarkMode, setChecked } = useContext(ThemeContext);
-  const session = JSON.parse(sessionStorage.getItem("user-info"));
+  const { setDarkMode, darkMode } = useContext(ThemeContext);
+  const session = getStorage("user-info");
   const [auth, setAuth] = useState(session);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (JSON.parse(sessionStorage.getItem("isChecked"))) {
-      setChecked(JSON.parse(sessionStorage.getItem("isChecked")));
+    setStorage("darkMode", darkMode);
+  }, [darkMode]);
+
+  useEffect(() => {
+    const storage = getStorage("darkMode");
+    if (storage) {
+      setDarkMode(getStorage("darkMode"));
     }
   }, []);
 
   useEffect(() => {
-    if (JSON.parse(sessionStorage.getItem("darkMode"))) {
-      setDarkMode(JSON.parse(sessionStorage.getItem("darkMode")));
-    }
-  }, []);
-
-  useEffect(() => {
-    const auth = JSON.parse(sessionStorage.getItem("user-info"));
+    const auth = getStorage("user-info");
     setAuth(auth);
     if (auth !== null) {
       navigate("/dashboard", { replace: true });

@@ -11,7 +11,7 @@ import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 
 export const DashBoard = () => {
   const { auth } = useContext(UserContext);
-  const { toggleMode, checked } = useContext(ThemeContext);
+  const { toggleMode, darkMode } = useContext(ThemeContext);
 
   const [open, setOpen] = useState(false);
 
@@ -45,7 +45,7 @@ export const DashBoard = () => {
             <Switch
               color="default"
               onChange={toggleMode}
-              checked={checked}
+              checked={darkMode}
               checkedIcon={<Brightness4RoundedIcon fontSize="small" />}
               icon={<Brightness5RoundedIcon fontSize="small" />}
             />

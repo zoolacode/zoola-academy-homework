@@ -14,11 +14,12 @@ import { UserContext } from "./UserContext";
 import { ThemeContext } from "./ThemeContext";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
+import { setStorage } from "./themeStorage.ts";
 
 export const Login = () => {
   const { setAuth } = useContext(UserContext);
 
-  const { toggleMode, checked } = useContext(ThemeContext);
+  const { toggleMode, darkMode } = useContext(ThemeContext);
 
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
@@ -39,7 +40,7 @@ export const Login = () => {
     }
     const result = await response.json();
     setAuth(result);
-    sessionStorage.setItem("user-info", JSON.stringify(result));
+    setStorage("user-info", result);
     navigate("/dashboard", { replace: true });
   }
 
@@ -50,7 +51,7 @@ export const Login = () => {
           <Switch
             color="default"
             onChange={toggleMode}
-            checked={checked}
+            checked={darkMode}
             checkedIcon={<Brightness4RoundedIcon fontSize="small" />}
             icon={<Brightness5RoundedIcon fontSize="small" />}
           />
