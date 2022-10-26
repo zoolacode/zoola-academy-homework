@@ -14,7 +14,9 @@ function Form({ children, onSubmit }) {
   const classes = formStyles();
   return (
     <>
-      <form className={classes.loginForm} onSubmit={onSubmit}>{children}</form>
+      <form className={classes.loginForm} onSubmit={onSubmit}>
+        {children}
+      </form>
     </>
   );
 }

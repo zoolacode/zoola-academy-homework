@@ -54,7 +54,9 @@ function Header() {
                   anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                   variant='dot'
                 >
-                  <Avatar sx={{ bgcolor: deepOrange[500] }} onClick={handleOpenWindowLogout} alt={name.slice(0, 1)} />
+                  <Avatar sx={{ bgcolor: deepOrange[500] }} onClick={handleOpenWindowLogout}>
+                    {name.slice(0, 1)}
+                  </Avatar>
                 </StyledBadge>
               </Stack>
               <>

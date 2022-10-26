@@ -13,7 +13,7 @@ import { Box } from '@mui/system';
 import loginAuth from '../../redux/auth/operation';
 import authSelectors from '../../redux/auth/selector';
 import Header from '../Header/Header';
-import Form from '../Form';
+import Form from './Form';
 
 function Login() {
   const dispatch = useDispatch();
