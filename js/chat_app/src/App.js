@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Box } from '@mui/material';
 import { setIsAuth } from './redux/slices/authSlice';
-import { ChatModal } from './modals/ChatForm';
+import { ChatModal } from './modals/chatForm';
 
 function App() {
   const dispatch = useDispatch();

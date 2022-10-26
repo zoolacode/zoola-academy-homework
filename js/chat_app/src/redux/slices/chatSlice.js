@@ -2,10 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { chatServices } from '../../services/chatServices';
 
 const initialState = {
-  title: '',
-  chatId: '',
-  members: [],
-  message: []
+  chatData: null,
+  selectedMembers: []
 };
 
 const chatSlice = createSlice({
@@ -13,7 +11,7 @@ const chatSlice = createSlice({
   initialState,
   reducers: {
     setMembers: (state, action) => {
-      state.members = action.payload;
+      state.selectedMembers = action.payload;
     }
   }
 });
@@ -30,7 +28,7 @@ export const createChatThunk = createAsyncThunk(
   'createChat/api/chats',
   async (paramsForCreateChat, { getState, dispatch }) => {
     const { title, authToken } = paramsForCreateChat;
-    const membersId = getState().chat.members;
+    const membersId = getState().chat.selectedMembers;
 
     const response = await chatServices.createChat(title, authToken);
 

@@ -6,9 +6,6 @@ import { useDispatch } from 'react-redux';
 import { setMembers } from '../../redux/slices/chatSlice';
 
 export default function CreateChatSelect({ users, resetMembersTrigger }) {
-  console.log({
-    resetMembersTrigger
-  });
   const [membersName, setMembersName] = useState([]);
   const dispatch = useDispatch();
 
