@@ -72,32 +72,27 @@ export const UserCreationForm = ({ styleForm }) => {
         />
         <button>SEND</button>
       </form>
-      <div>
-        <ul className="userListUl">
-          {users?.map((user) => {
-            if (
-              user.username === "admin" &&
-              auth.user.id === "fhs8dhf9s8dhf9sd8hf9sd8hf"
-            ) {
-              return (
-                <li key={user.id} className="userListLi">
-                  <Avatar sx={{ bgcolor: green[500] }} variant="square">
-                    {user.username.charAt(0).toUpperCase()}
-                  </Avatar>
-                  {user.username}
-                </li>
-              );
-            } else {
-              return (
-                <li key={user.id} className="userListLi">
-                  <Avatar>{user.username.charAt(0).toUpperCase()}</Avatar>
-                  {user.username}
-                </li>
-              );
-            }
-          }) ?? "Loading..."}
-        </ul>
-      </div>
+      <ul className="userListUl">
+        {users?.map((user) => {
+          if (user.id === auth.user.id) {
+            return (
+              <li key={user.id} className="userListLi">
+                <Avatar sx={{ bgcolor: green[500] }} variant="square">
+                  {user.username.charAt(0).toUpperCase()}
+                </Avatar>
+                {user.username}
+              </li>
+            );
+          } else {
+            return (
+              <li key={user.id} className="userListLi">
+                <Avatar>{user.username.charAt(0).toUpperCase()}</Avatar>
+                {user.username}
+              </li>
+            );
+          }
+        }) ?? "Loading..."}
+      </ul>
     </div>
   );
 };
