@@ -73,6 +73,11 @@
             "ExportDeclaration": { "multiline": true, "minProperties": 3 }
         }],
         "no-param-reassign": ["error", { "props": false }],
-        "max-len": ["error", { "code": 120 }]
+        "max-len": ["error", { "code": 120 }],
+        "import/no-unresolved": [
+            2, 
+            { "caseSensitive": false }
+        ],
+        "react/prop-types": 0
     }
 }
