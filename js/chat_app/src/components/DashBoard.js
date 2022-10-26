@@ -4,7 +4,7 @@ import { deepOrange } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import { UserContext } from "./UserContext";
 import LogoutDialog from "./LogoutDialog";
-import { Chat } from "./chatComponents/Chat.tsx";
+import { Chat } from "./Chat/Chat.tsx";
 
 const DashBoard = () => {
   const { auth } = useContext(UserContext);

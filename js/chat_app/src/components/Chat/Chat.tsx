@@ -1,4 +1,4 @@
-import { Box, Container, TextField } from "@mui/material";
+import { Box, CircularProgress, Container, TextField } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../UserContext";
 
@@ -10,7 +10,7 @@ import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
-interface dateOptions {
+interface DateOptionsType {
   day: "numeric";
   month: "numeric";
   year: "numeric";
@@ -19,26 +19,26 @@ interface dateOptions {
   second: "numeric";
 }
 
-type messageListType = {
+type MessageListType = {
   id: string;
   message: string;
   authorId: string;
   date: number;
 };
 
-type usersListType = {
+type UsersListType = {
   id?: string;
   username?: string;
 };
 
 export const Chat: React.FC = () => {
-  const [messagesList, setMessagesList] = useState<messageListType[]>([]);
-  const [usersList, setUsersList] = useState<usersListType[]>([]);
+  const [messagesList, setMessagesList] = useState<MessageListType[]>([]);
+  const [usersList, setUsersList] = useState<UsersListType[]>([]);
   const [message, setMessage] = useState<string>("");
   const { auth } = useContext(UserContext);
   const chatId: string = "e2f96143-b219-40e1-b6dc-a9a6a0cd01c0";
 
-  const options: dateOptions = {
+  const options: DateOptionsType = {
     day: "numeric",
     month: "numeric",
     year: "numeric",
@@ -95,20 +95,19 @@ export const Chat: React.FC = () => {
   };
 
   const getUserName = (
-    array: usersListType[],
-    messageItem: messageListType
-  ): string | undefined => {
+    array: UsersListType[],
+    messageItem: MessageListType
+  ): string => {
     const items = array.find((item) => item.id === messageItem.authorId);
     const username = items?.username;
-    return username;
+    return username ?? "";
   };
 
   return (
     <Container>
       <Box
         sx={{
-          width: 800,
-          height: 600,
+          width: "70%",
           marginLeft: "auto",
           marginTop: 5,
         }}
@@ -124,7 +123,7 @@ export const Chat: React.FC = () => {
             variant="standard"
             placeholder="Enter your message"
             sx={{
-              width: 750,
+              width: "95%",
             }}
             onChange={(e) => {
               setMessage(e.currentTarget.value);
@@ -132,30 +131,38 @@ export const Chat: React.FC = () => {
             value={message}
           />
         </form>
-        <Timeline>
-          {messagesList
-            ?.slice(0)
-            .reverse()
-            .map((messageItem) => (
-              <TimelineItem key={messageItem.id}>
-                <TimelineOppositeContent>
-                  {messageItem.message}
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                  <TimelineDot />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent color="text.secondary">
-                  {getUserName(usersList, messageItem)}
-                  <br />
-                  {`${new Date(messageItem.date).toLocaleDateString(
-                    undefined,
-                    options
-                  )}`}
-                </TimelineContent>
-              </TimelineItem>
-            )) ?? "Loading..."}
-        </Timeline>
+        <Box
+          sx={{
+            maxHeight: "75vh",
+            overflow: "auto",
+            overflowX: "hidden",
+          }}
+        >
+          <Timeline>
+            {messagesList
+              ?.slice(0)
+              .reverse()
+              .map((messageItem) => (
+                <TimelineItem key={messageItem.id}>
+                  <TimelineOppositeContent>
+                    {messageItem.message}
+                  </TimelineOppositeContent>
+                  <TimelineSeparator>
+                    <TimelineDot />
+                    <TimelineConnector />
+                  </TimelineSeparator>
+                  <TimelineContent color="text.secondary">
+                    {getUserName(usersList, messageItem)}
+                    <br />
+                    {`${new Date(messageItem.date).toLocaleDateString(
+                      undefined,
+                      options
+                    )}`}
+                  </TimelineContent>
+                </TimelineItem>
+              )) ?? <CircularProgress />}
+          </Timeline>
+        </Box>
       </Box>
     </Container>
   );
