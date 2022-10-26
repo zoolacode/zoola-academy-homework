@@ -1,5 +1,5 @@
-import React from "react";
-import "./Login.css";
+import React, { useState, useContext } from "react";
+import "../styles/Login.css";
 import {
   AppBar,
   Button,
@@ -9,13 +9,17 @@ import {
   Toolbar,
   Switch,
 } from "@mui/material";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { UserContext } from "./UserContext";
+import { ThemeContext } from "./ThemeContext";
+import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
+import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
+import { set } from "./themeStorage.ts";
 
-const Login = () => {
+export const Login = () => {
   const { setAuth } = useContext(UserContext);
+
+  const { toggleMode, darkMode } = useContext(ThemeContext);
 
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
@@ -36,7 +40,7 @@ const Login = () => {
     }
     const result = await response.json();
     setAuth(result);
-    sessionStorage.setItem("user-info", JSON.stringify(result));
+    set("user-info", result);
     navigate("/dashboard", { replace: true });
   }
 
@@ -44,7 +48,13 @@ const Login = () => {
     <Container maxWidth="lg">
       <AppBar position="static" color="primary">
         <Toolbar sx={{ flexDirection: "row-reverse" }}>
-          <Switch color="default" />
+          <Switch
+            color="default"
+            onChange={toggleMode}
+            checked={darkMode}
+            checkedIcon={<Brightness4RoundedIcon fontSize="small" />}
+            icon={<Brightness5RoundedIcon fontSize="small" />}
+          />
         </Toolbar>
       </AppBar>
       <form className="form" onSubmit={handleClick}>
@@ -79,5 +89,3 @@ const Login = () => {
     </Container>
   );
 };
-
-export default Login;

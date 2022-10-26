@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const LogoutDialog = ({ open, onClose }) => {
+export const LogoutDialog = ({ open, onClose }) => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -22,5 +22,3 @@ const LogoutDialog = ({ open, onClose }) => {
     </Dialog>
   );
 };
-
-export default LogoutDialog;
