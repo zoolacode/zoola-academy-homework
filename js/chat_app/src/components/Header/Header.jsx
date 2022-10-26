@@ -1,10 +1,10 @@
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import { deepOrange } from '@mui/material/colors';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
@@ -24,11 +24,9 @@ function Header() {
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
-  const theme = useContext(ThemeContext);
+  const isAdmin = useSelector((state) => state.auth.auth.isAdmin);
 
-  useEffect(() => {
-    navigation('/chat');
-  }, []);
+  const theme = useContext(ThemeContext);
 
   const handleLogoutClick = () => {
     setIsWindowLogoutOpen(false);
@@ -44,7 +42,12 @@ function Header() {
   };
   return (
     <ThemeProvider theme={theme}>
-      <Container fixed>
+      <Box
+        sx={{
+          backgroundColor: `${!isAdmin ? 'rgb(25, 118, 210)' : 'white'}`,
+          color: `${!isAdmin ? 'white' : 'black'}`
+        }}
+      >
         <AppBar
           color="transparent"
           sx={{
@@ -91,7 +94,7 @@ function Header() {
             </DialogActions>
           </DialogContent>
         </Dialog>
-      </Container>
+      </Box>
     </ThemeProvider>
   );
 }

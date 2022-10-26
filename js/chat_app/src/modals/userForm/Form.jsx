@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
@@ -10,9 +10,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsersThunk, createUserThunk } from '../../redux/slices/usersSlice';
+import { createUserThunk } from '../../redux/slices/usersSlice';
 
-export default function CreateUserForm({ onClose, open, authToken, adminId }) {
+export default function CreateUserForm({ onClose, open }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -22,11 +22,6 @@ export default function CreateUserForm({ onClose, open, authToken, adminId }) {
   const dispatch = useDispatch();
 
   const users = useSelector((state) => state.users.allUsers);
-
-  useEffect(() => {
-    // TODO: check it after implement loginization
-    dispatch(getAllUsersThunk(authToken));
-  }, [authToken]);
 
   const handleClose = () => {
     setPassword('');
@@ -69,10 +64,8 @@ export default function CreateUserForm({ onClose, open, authToken, adminId }) {
 
     if (!errorUsername && !errorPassword) {
       const paramsForCreateUser = {
-        authToken,
         username,
         password,
-        adminId
       };
 
       dispatch(createUserThunk(paramsForCreateUser));
