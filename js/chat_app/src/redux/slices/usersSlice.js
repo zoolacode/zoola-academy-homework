@@ -27,10 +27,13 @@ export const getAllUsersThunk = createAsyncThunk('getAllUsers/api/users', async 
 export const createUserThunk = createAsyncThunk(
   'createUser/api/users',
   async (paramsForCreateUser, { dispatch, getState }) => {
-    const { authToken, adminId } = getState().auth.auth;
+    // eslint-disable-next-line no-debugger
+    debugger;
+    const { authToken } = getState().auth.auth;
+    const { id } = getState().auth.auth.user;
     const { username, password } = paramsForCreateUser;
 
-    await userServices.createUser(authToken, username, password, adminId);
+    await userServices.createUser(authToken, username, password, id);
 
     dispatch(getAllUsersThunk(authToken));
   }
