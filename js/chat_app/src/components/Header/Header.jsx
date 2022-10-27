@@ -1,7 +1,7 @@
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import { deepOrange } from '@mui/material/colors';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import authSelectors from '../../redux/auth/selector';
@@ -17,18 +17,22 @@ import { StyledBadge } from '../StyleBadge';
 import { ThemeProvider } from '@emotion/react';
 import { isLogout } from '../../redux/auth/slice';
 import { ThemeContext } from '../ThemeContext/ThemeContext';
+import userSelectors from '../../redux/user/selector';
+import getAllUserChats from '../../redux/user/operation';
+import ChatList from '../ChatList';
 
 function Header() {
   const [isWindowLogoutOpen, setIsWindowLogoutOpen] = useState(false);
   const name = useSelector(authSelectors.getUsername);
   const dispatch = useDispatch();
   const navigation = useNavigate();
-
+  // const authToken = useSelector(userSelectors.getAuthToken);
+  // const userId = useSelector(userSelectors.getUserId);
   const theme = useContext(ThemeContext);
 
   useEffect(() => {
     navigation('/chat');
-  }, []);
+  }, [dispatch]);
 
   const handleLogoutClick = () => {
     setIsWindowLogoutOpen(false);
@@ -76,6 +80,7 @@ function Header() {
               </DialogActions>
             </DialogContent>
           </Dialog>
+          <ChatList />
         </Container>
       </ThemeProvider>
     </>
