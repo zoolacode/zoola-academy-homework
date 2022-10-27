@@ -6,12 +6,15 @@ import { UserContext } from "./components/UserContext";
 import { ThemeContext } from "./components/ThemeContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { set, get } from "./components/themeStorage.ts";
+import { ChatList } from './ChatList';
+
 
 export const App = () => {
   const { setDarkMode, darkMode } = useContext(ThemeContext);
   const session = get("user-info");
   const [auth, setAuth] = useState(session);
   const navigate = useNavigate();
+  const [chatId, setChatID] = useState(null);
 
   useEffect(() => {
     set("darkMode", darkMode);
@@ -47,6 +50,7 @@ export const App = () => {
             element={
               <ProtectedRoute>
                 <DashBoard />
+                <ChatList chatId={chatId} setChatID={setChatID}/>
               </ProtectedRoute>
             }
           />
