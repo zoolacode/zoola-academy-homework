@@ -6,7 +6,7 @@ import { UserContext } from "./UserContext";
 import { ThemeContext } from "./ThemeContext";
 import { LogoutDialog } from "./LogoutDialog";
 import { BadgeAvatar } from "./BadgeAvatar";
-import { ChatList } from './components/ChatList';
+import { ChatList } from "./components/ChatList";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 
@@ -55,7 +55,7 @@ export const DashBoard = () => {
         </AppBar>
       </Container>
       <LogoutDialog open={open} onClose={handleClose} />
-      <ChatList chatId={chatId} setChatID={setChatID}/>
+      <ChatList chatId={chatId} setChatID={setChatID} />
     </>
   );
 };
