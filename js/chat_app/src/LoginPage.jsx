@@ -1,12 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 import LoginIcon from '@mui/icons-material/Login';
-import Grid from '@mui/material/Grid';
-import FormControl from '@mui/material/FormControl';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import {
+  Grid,
+  FormControl,
+  Typography,
+  Box,
+  TextField,
+  Button,
+} from '@mui/material';
 
 export function LoginPage({ setUserData }) {
   const [userName, setUserName] = useState('');
@@ -48,11 +50,7 @@ export function LoginPage({ setUserData }) {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Box>
-          <Button
-            sx={{ mt: 3 }}
-            endIcon={<LoginIcon />}
-            onClick={() => submitLogin()}
-          >
+          <Button sx={{ mt: 3 }} endIcon={<LoginIcon />} onClick={submitLogin}>
             Login
           </Button>
         </FormControl>
@@ -61,15 +59,15 @@ export function LoginPage({ setUserData }) {
   );
 }
 
-function request(userName, password) {
+function request(username, password) {
   return fetch('/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: JSON.stringify({
-      username: userName,
-      password: password,
+      username,
+      password,
     }),
   }).then((response) => response.json());
 }

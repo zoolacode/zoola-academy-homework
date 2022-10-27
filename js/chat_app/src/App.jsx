@@ -33,7 +33,7 @@ function App() {
       <CssBaseline />
       <div className='App'>
         <Header setMode={setMode} mode={mode} userData={userData} />
-        {!userData.isAdmin && (
+        {!userData.authToken && (
           <LoginPage setUserData={setUserData} setMode={setMode} mode={mode} />
         )}
       </div>

@@ -1,18 +1,20 @@
 import React from 'react';
-import Container from '@mui/material/Container';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import LoginIcon from '@mui/icons-material/Login';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import {
+  Container,
+  AppBar,
+  Toolbar,
+  Avatar,
+  Typography,
+  FormGroup,
+  FormControlLabel,
+  Switch,
+  Badge,
+} from '@mui/material';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import { deepOrange } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
-import Badge from '@mui/material/Badge';
+import LoginIcon from '@mui/icons-material/Login';
 
 export function Header({ setMode, mode, userData }) {
   const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -48,7 +50,7 @@ export function Header({ setMode, mode, userData }) {
     <Container maxWidth='lg' fixed={true}>
       <AppBar position='static'>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          {userData.isAdmin ? (
+          {userData.authToken ? (
             <>
               <StyledBadge
                 overlap='circular'
