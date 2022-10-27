@@ -49,6 +49,7 @@ export const Chat: React.FC = () => {
 
   useEffect(() => {
     getUsersList();
+
     const interval = setInterval(() => {
       fetch(`/api/chats/${chatId}`, {
         method: "GET",

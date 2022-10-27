@@ -54,7 +54,6 @@
   },
   "proxy": "http://localhost:4000",
   "devDependencies": {
-    "@types/jest": "^29.2.0",
     "@types/node": "^18.11.4",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
