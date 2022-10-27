@@ -5,17 +5,14 @@ import Paper from "@mui/material/Paper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 
-export const ChatList = ({chatId, setChatID }) => {
+export const ChatList = ({ chatId, setChatID }) => {
   const [chatsData, setChatsData] = React.useState([]);
   const { auth } = useContext(UserContext);
 
   const userId = auth?.user.id;
   const authToken = auth?.authToken;
 
-
   const handleChatListItemClick = (event, id) => {
-    //`GET /api/chats/:chatId`
-    // draw chat history use onSelectChat component
     setChatID(id);
   };
 
@@ -29,7 +26,7 @@ export const ChatList = ({chatId, setChatID }) => {
     })
       .then((response) => response.json())
       .then(setChatsData);
-  },[])
+  }, []);
 
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
@@ -49,4 +46,4 @@ export const ChatList = ({chatId, setChatID }) => {
       </Paper>
     </Box>
   );
-}
+};
