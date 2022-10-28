@@ -15,6 +15,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.2",
+<<<<<<< HEAD
+=======
+    "react-jss": "^10.9.2",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
+>>>>>>> dc0b68407afd119bef0214892334035193e47883
     "react-scripts": "5.0.1",
     "react-use": "^17.4.0",
     "uuid": "^9.0.0",
@@ -56,7 +62,13 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
+<<<<<<< HEAD
     "eslint-plugin-react": "^7.31.10",
+=======
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+>>>>>>> dc0b68407afd119bef0214892334035193e47883
     "http-server": "^14.1.1",
     "nodemon": "^2.0.20",
     "serve": "^14.0.1"

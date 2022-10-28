@@ -24,5 +24,9 @@ yarn-error.log*
 
 /public/uploads
 /database
+<<<<<<< HEAD
 /hw_2_js_functions_state
 /hw_3_js_react_1
+=======
+/package-lock.json
+>>>>>>> dc0b68407afd119bef0214892334035193e47883

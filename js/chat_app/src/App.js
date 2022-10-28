@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable jsx-quotes */
 
 import React  from 'react';
@@ -6,12 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Box, Typography } from '@mui/material';
 import { setIsAuth } from './redux/slicies/authSlice';
 import ChatFeed from './components/Message/ChatFeed.jsx'
+=======
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Login } from './components/Login';
+import Chat from './components/Chat';
+>>>>>>> dc0b68407afd119bef0214892334035193e47883
 
 function App() {
-  const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.isAuth);
-
   return (
+<<<<<<< HEAD
     <Box
       sx={{
         width: '100vw',
@@ -35,6 +40,16 @@ function App() {
       renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
       />
     </Box>
+=======
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/chat" element={<Chat />} />
+        </Routes>
+      </Router>
+    </div>
+>>>>>>> dc0b68407afd119bef0214892334035193e47883
   );
 }
 
