@@ -3,7 +3,8 @@ import loginAuth from './operation';
 
 export const isLogout = createAction('logout');
 const initialState = {
-  auth: {},
+  auth: {
+  },
   isLogin: false,
   error: false,
   isLogout: true
@@ -18,12 +19,13 @@ const authSlice = createSlice({
       state.isLogin = true;
       state.isLogout = false;
     },
-    [loginAuth.rejected](state, action) {
+    [loginAuth.rejected](state) {
       state.isLogin = false;
       state.error = true;
     },
-    [isLogout](state, action) {
-      state.auth = {};
+    [isLogout](state) {
+      state.auth = {
+      };
       state.error = null;
       state.isLogin = false;
       state.isLogout = true;

@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import usersSlice from './slices/usersSlice';
 import authSlice from './auth/slice';
 
 let preloadedState;
@@ -13,7 +14,10 @@ if (persistedAuthString) {
 }
 
 const store = configureStore({
-  reducer: { auth: authSlice.reducer },
+  reducer: {
+    auth: authSlice.reducer,
+    users: usersSlice.reducer
+  },
   preloadedState
 });
 
