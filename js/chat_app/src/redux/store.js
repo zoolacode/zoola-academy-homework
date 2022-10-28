@@ -1,14 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authSlice from './slices/authSlice';
-import chatSlice from './slices/chatSlice';
 import usersSlice from './slices/usersSlice';
+import authSlice from './auth/slice';
+
+let preloadedState;
+const persistedAuthString = localStorage.getItem('auth');
+
+if (persistedAuthString) {
+  preloadedState = {
+    auth: {
+      auth: JSON.parse(persistedAuthString)
+    }
+  };
+}
 
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
-    users: usersSlice.reducer,
-    chat: chatSlice.reducer
-  }
+    users: usersSlice.reducer
+  },
+  preloadedState
 });
 
 export default store;
