@@ -31,12 +31,15 @@ type UsersListType = {
   username?: string;
 };
 
-export const Chat: React.FC = () => {
+type PropsType = {
+  chatId: string | null;
+};
+
+export const Chat = ({ chatId }: PropsType) => {
   const [messagesList, setMessagesList] = useState<MessageListType[]>([]);
   const [usersList, setUsersList] = useState<UsersListType[]>([]);
   const [message, setMessage] = useState<string>("");
   const { auth } = useContext(UserContext);
-  const chatId: string = "e2f96143-b219-40e1-b6dc-a9a6a0cd01c0";
 
   const options: DateOptionsType = {
     day: "numeric",
@@ -49,25 +52,32 @@ export const Chat: React.FC = () => {
 
   useEffect(() => {
     getUsersList();
+    getMessages();
 
     const interval = setInterval(() => {
-      fetch(`/api/chats/${chatId}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "Auth-Token": auth.authToken,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setMessagesList(data.messages);
-        });
+      if (chatId !== null) {
+        getMessages();
+      }
     }, 1000);
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [chatId]);
+
+  const getMessages = () => {
+    fetch(`/api/chats/${chatId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Auth-Token": auth.authToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMessagesList(data.messages);
+      });
+  };
 
   const postMessage = (message: string): void => {
     fetch(`/api/chats/${chatId}/messages`, {
@@ -104,67 +114,82 @@ export const Chat: React.FC = () => {
     return username ?? "";
   };
 
-  return (
-    <Container>
+  if (chatId === null) {
+    return (
       <Box
         sx={{
-          width: "70%",
-          marginLeft: "auto",
-          marginTop: 5,
+          display: "flex",
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "space-around",
         }}
       >
-        <form
-          onSubmit={(e) => {
-            postMessage(message);
-            e.preventDefault();
-            setMessage("");
-          }}
-        >
-          <TextField
-            variant="standard"
-            placeholder="Enter your message"
-            sx={{
-              width: "95%",
-            }}
-            onChange={(e) => {
-              setMessage(e.currentTarget.value);
-            }}
-            value={message}
-          />
-        </form>
+        <div>Click on chat</div>
+      </Box>
+    );
+  } else {
+    return (
+      <Container>
         <Box
           sx={{
-            maxHeight: "75vh",
-            overflow: "auto",
-            overflowX: "hidden",
+            /* width: "70%", */
+            marginLeft: "auto",
+            marginTop: 5,
           }}
         >
-          <Timeline>
-            {messagesList
-              ?.slice(0)
-              .reverse()
-              .map((messageItem) => (
-                <TimelineItem key={messageItem.id}>
-                  <TimelineOppositeContent>
-                    {messageItem.message}
-                  </TimelineOppositeContent>
-                  <TimelineSeparator>
-                    <TimelineDot />
-                    <TimelineConnector />
-                  </TimelineSeparator>
-                  <TimelineContent color="text.secondary">
-                    {getUserName(usersList, messageItem)}
-                    <br />
-                    {`${new Date(messageItem.date).toLocaleDateString(
-                      undefined,
-                      options
-                    )}`}
-                  </TimelineContent>
-                </TimelineItem>
-              )) ?? <CircularProgress />}
-          </Timeline>
+          <form
+            onSubmit={(e) => {
+              postMessage(message);
+              e.preventDefault();
+              setMessage("");
+            }}
+          >
+            <TextField
+              variant="standard"
+              placeholder="Enter your message"
+              sx={{
+                width: "95%",
+              }}
+              onChange={(e) => {
+                setMessage(e.currentTarget.value);
+              }}
+              value={message}
+            />
+          </form>
+          <Box
+            sx={{
+              maxHeight: "75vh",
+              overflow: "auto",
+              overflowX: "hidden",
+            }}
+          >
+            <Timeline>
+              {messagesList
+                ?.slice(0)
+                .reverse()
+                .map((messageItem) => (
+                  <TimelineItem key={messageItem.id}>
+                    <TimelineOppositeContent>
+                      {messageItem.message}
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                      <TimelineDot />
+                      <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent color="text.secondary">
+                      {getUserName(usersList, messageItem)}
+                      <br />
+                      {`${new Date(messageItem.date).toLocaleDateString(
+                        undefined,
+                        options
+                      )}`}
+                    </TimelineContent>
+                  </TimelineItem>
+                )) ?? <CircularProgress />}
+            </Timeline>
+          </Box>
         </Box>
-      </Box>
-    </Container>
-  );
+      </Container>
+    );
+  }
 };
