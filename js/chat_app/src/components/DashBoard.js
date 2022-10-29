@@ -3,12 +3,17 @@ import { AppBar, Avatar, Toolbar, Typography, Switch } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import { UserContext } from "./UserContext";
-import LogoutDialog from "./LogoutDialog";
-
+import { ThemeContext } from "./ThemeContext";
+import { LogoutDialog } from "./LogoutDialog";
+import { BadgeAvatar } from "./BadgeAvatar";
+import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
+import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 import { UserCreationButton } from "./userCreationForm/UserCreationButton";
 
-const DashBoard = () => {
+export const DashBoard = () => {
   const { auth } = useContext(UserContext);
+  const { toggleMode, darkMode } = useContext(ThemeContext);
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -25,9 +30,11 @@ const DashBoard = () => {
         <AppBar position="static" color="inherit">
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div onClick={handleOpen} style={{ cursor: "pointer" }}>
-              <Avatar sx={{ bgcolor: deepOrange[500] }}>
-                {auth?.user.username.charAt(0).toUpperCase()}
-              </Avatar>
+              <BadgeAvatar>
+                <Avatar sx={{ bgcolor: deepOrange[500] }}>
+                  {auth?.user.username.charAt(0).toUpperCase()}
+                </Avatar>
+              </BadgeAvatar>
             </div>
             <Typography
               sx={{ flexGrow: 1, textAlign: "center" }}
@@ -36,7 +43,13 @@ const DashBoard = () => {
             >
               {`Welcome, ${auth?.user.username}`}
             </Typography>
-            <Switch color="default" />
+            <Switch
+              color="default"
+              onChange={toggleMode}
+              checked={darkMode}
+              checkedIcon={<Brightness4RoundedIcon fontSize="small" />}
+              icon={<Brightness5RoundedIcon fontSize="small" />}
+            />
           </Toolbar>
         </AppBar>
         {<UserCreationButton />}
@@ -45,5 +58,3 @@ const DashBoard = () => {
     </>
   );
 };
-
-export default DashBoard;
