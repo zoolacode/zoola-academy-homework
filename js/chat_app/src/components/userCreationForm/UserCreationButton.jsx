@@ -7,23 +7,19 @@ import { UserContext } from "../UserContext";
 
 export const UserCreationButton = () => {
   const { auth } = useContext(UserContext);
-  const [styleForm, setStyleForm] = useState(" invisible");
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="userCreate">
       <Button
         variant="contained"
-        onClick={() => setStyleForm(" block")}
+        onClick={() => setOpen(true)}
         className="userCreateButton"
         disabled={auth.isAdmin ? false : true}
       >
         Create User
       </Button>
-      <div
-        className={`formMask ${styleForm}`}
-        onClick={() => setStyleForm(" invisible")}
-      ></div>
-      <UserCreationForm styleForm={styleForm} />
+      <UserCreationForm isOpen={open} setOpen={setOpen} />
     </div>
   );
 };

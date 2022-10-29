@@ -1,35 +1,7 @@
-.form {
-    position: absolute;
-    top: 50%;
-    right: 50%;
-    transform: translateY(-65%) translateX(50%);
-    width: 25vw;
-    min-width: 250px;
-    padding: 20px;  
-    border-radius: 10px;
-    background-color: white;
-    z-index: 10;
-}
 
-.invisible {
-    display: none;
-}
 
 .userCreate {
     width: 135px;
-}
-
-.formMask {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 2;
-    cursor: pointer;
 }
 
 .formHeader {
@@ -43,28 +15,10 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    width: 95%;
-}
-
-.formBody input {
-    padding: 15px 10px 15px 10px;
-    border-radius: 4px;
-    border: 1px solid grey;
-    font-size: 17px;
-}
-
-.formBody button {
-    background-color: white;
-    color: rgb(0, 59, 221);
-    font-size: 17px;
-    border: 1px solid rgb(0, 59, 221);
-    border-radius: 4px;
-    padding: 5px 0px 5px 0px;
-    cursor: pointer;
 }
 
 .userListUl {
-    width: 95%;
+    width: 100%;
     list-style: none;
     padding: 0;
     max-height: 150px;
