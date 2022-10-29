@@ -13,8 +13,6 @@ export const ChatList = ({ chatId, setChatID }) => {
   const authToken = auth?.authToken;
 
   const handleChatListItemClick = (event, id) => {
-    //`GET /api/chats/:chatId`
-    // draw chat history use onSelectChat component
     setChatID(id);
   };
 

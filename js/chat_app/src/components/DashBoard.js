@@ -6,6 +6,7 @@ import { UserContext } from "./UserContext";
 import { ThemeContext } from "./ThemeContext";
 import { LogoutDialog } from "./LogoutDialog";
 import { BadgeAvatar } from "./BadgeAvatar";
+import { ChatList } from "./ChatList";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 import { UserCreationButton } from "./userCreationForm/UserCreationButton";
@@ -15,6 +16,7 @@ export const DashBoard = () => {
   const { toggleMode, darkMode } = useContext(ThemeContext);
 
   const [open, setOpen] = useState(false);
+  const [chatId, setChatID] = useState(null);
 
   const handleOpen = () => {
     setOpen(true);
@@ -53,6 +55,7 @@ export const DashBoard = () => {
           </Toolbar>
         </AppBar>
         {<UserCreationButton />}
+        <ChatList chatId={chatId} setChatID={setChatID} />
       </Container>
       <LogoutDialog open={open} onClose={handleClose} />
     </>
