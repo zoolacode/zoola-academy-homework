@@ -22,7 +22,8 @@ export default function CreateUserModal() {
       <Button
         sx={{
           color: 'white',
-          backgroundColor: 'rgb(25, 118, 210)'
+          backgroundColor: 'rgb(25, 118, 210)',
+          width: '100%'
         }}
         variant="contained"
         onClick={handleClickOpen}

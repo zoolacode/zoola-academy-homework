@@ -18,16 +18,19 @@ const chatSlice = createSlice({
 
 export const addChatMembersThunk = createAsyncThunk(
   'addMembers/api/chat/:chatId/members',
-  async (paramsForAddMembers) => {
-    const { chatId, authToken, members } = paramsForAddMembers;
+  async (paramsForAddMembers, { getState }) => {
+    const { authToken } = getState().auth.auth;
+    const { chatId, members } = paramsForAddMembers;
     await chatServices.addChatMembers(chatId, authToken, members);
   }
 );
 
 export const createChatThunk = createAsyncThunk(
   'createChat/api/chats',
-  async (paramsForCreateChat, { getState, dispatch }) => {
-    const { title, authToken } = paramsForCreateChat;
+  async (title, { getState, dispatch }) => {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    const { authToken } = getState().auth.auth;
     const membersId = getState().chat.selectedMembers;
 
     const response = await chatServices.createChat(title, authToken);

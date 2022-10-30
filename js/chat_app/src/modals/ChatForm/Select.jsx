@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setMembers } from '../../redux/slices/chatSlice';
 
 export default function CreateChatSelect({ users, resetMembersTrigger }) {
   const [membersName, setMembersName] = useState([]);
+  const authUsername = useSelector((state) => state.auth.auth.user.username);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,8 +45,7 @@ export default function CreateChatSelect({ users, resetMembersTrigger }) {
           }}
         >
           {users.map((user) => {
-            // TODO: change 'admin' on the authUsername
-            if (user.username !== 'admin') {
+            if (user.username !== authUsername) {
               return (
                 <MenuItem key={user.id} value={user.username}>
                   {user.username}
