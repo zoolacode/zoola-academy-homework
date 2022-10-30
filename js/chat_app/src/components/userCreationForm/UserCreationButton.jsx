@@ -15,7 +15,7 @@ export const UserCreationButton = () => {
         variant="contained"
         onClick={() => setOpen(true)}
         className="userCreateButton"
-        disabled={auth.isAdmin ? false : true}
+        disabled={!auth.isAdmin}
       >
         Create User
       </Button>

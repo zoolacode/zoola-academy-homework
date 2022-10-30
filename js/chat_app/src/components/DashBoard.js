@@ -54,7 +54,7 @@ export const DashBoard = () => {
             />
           </Toolbar>
         </AppBar>
-        {<UserCreationButton />}
+        <UserCreationButton />
         <ChatList chatId={chatId} setChatID={setChatID} />
       </Container>
       <LogoutDialog open={open} onClose={handleClose} />
