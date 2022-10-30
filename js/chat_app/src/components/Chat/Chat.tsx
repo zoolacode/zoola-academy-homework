@@ -132,7 +132,6 @@ export const Chat = ({ chatId }: PropsType) => {
       <Container>
         <Box
           sx={{
-            /* width: "70%", */
             marginLeft: "auto",
             marginTop: 5,
           }}
