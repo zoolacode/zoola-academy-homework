@@ -4,7 +4,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import CreateChatSelect from './Select';
 import { createChatThunk } from '../../redux/slices/chatSlice';
 
@@ -14,8 +14,6 @@ export default function CreateChatForm({ onClose, open }) {
   const [resetMembersTrigger, setResetMembersTrigger] = useState(true);
 
   const dispatch = useDispatch();
-
-  const users = useSelector((state) => state.users.allUsers);
 
   const handleClose = () => {
     setChatName('');
@@ -47,7 +45,7 @@ export default function CreateChatForm({ onClose, open }) {
           label="Chat name"
           variant="outlined"
         />
-        <CreateChatSelect resetMembersTrigger={resetMembersTrigger} users={users} />
+        <CreateChatSelect resetMembersTrigger={resetMembersTrigger} />
         <Button
           sx={{
             margin: '15px 0'

@@ -20,8 +20,7 @@ const usersSlice = createSlice({
 export const getAllUsersThunk = createAsyncThunk('getAllUsers/api/users', async (_, { getState }) => {
   const { authToken } = getState().auth.auth;
 
-  const response = await userServices.getAllUsers(authToken);
-  return response;
+  return userServices.getAllUsers(authToken);
 });
 
 export const createUserThunk = createAsyncThunk(

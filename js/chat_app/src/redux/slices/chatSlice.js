@@ -10,7 +10,7 @@ const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
-    setMembers: (state, action) => {
+    setSelectedMembers: (state, action) => {
       state.selectedMembers = action.payload;
     }
   }
@@ -21,7 +21,7 @@ export const addChatMembersThunk = createAsyncThunk(
   async (paramsForAddMembers, { getState }) => {
     const { authToken } = getState().auth.auth;
     const { chatId, members } = paramsForAddMembers;
-    await chatServices.addChatMembers(chatId, authToken, members);
+    return chatServices.addChatMembers(chatId, authToken, members);
   }
 );
 
@@ -43,5 +43,5 @@ export const createChatThunk = createAsyncThunk(
   }
 );
 
-export const { setMembers } = chatSlice.actions;
+export const { setSelectedMembers } = chatSlice.actions;
 export default chatSlice;

@@ -14,6 +14,7 @@ const loginAuth = createAsyncThunk('auth/login', async ({ username, password }) 
       authToken: data.authToken,
       isAdmin: data.isAdmin,
       user: {
+        id: data.user.id,
         username: data.user.username
       }
     })

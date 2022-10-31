@@ -3,11 +3,12 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMembers } from '../../redux/slices/chatSlice';
+import { setSelectedMembers } from '../../redux/slices/chatSlice';
 
-export default function CreateChatSelect({ users, resetMembersTrigger }) {
+export default function CreateChatSelect({ resetMembersTrigger }) {
   const [membersName, setMembersName] = useState([]);
   const authUsername = useSelector((state) => state.auth.auth.user.username);
+  const users = useSelector((state) => state.users.allUsers);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,7 +24,7 @@ export default function CreateChatSelect({ users, resetMembersTrigger }) {
     );
 
     const membersIds = users.filter((user) => value.includes(user.username)).map((user) => user.id);
-    dispatch(setMembers(membersIds));
+    dispatch(setSelectedMembers(membersIds));
   };
 
   return (
