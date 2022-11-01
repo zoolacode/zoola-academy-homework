@@ -33,5 +33,22 @@ export const userServices = {
     } catch (error) {
       console.log(error);
     }
+  },
+  getUserById: async (authToken, userId) => {
+    try {
+      const data = await fetch(`/api/users/${userId}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'Auth-Token': authToken
+        }
+      });
+
+      const response = await data.json();
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 };

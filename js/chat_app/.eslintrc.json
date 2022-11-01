@@ -72,14 +72,15 @@
             "ImportDeclaration": "never",
             "ExportDeclaration": { "multiline": true, "minProperties": 3 }
         }],
-         
-        "no-unused-vars": [
-                "error",
-                {
-                    "varsIgnorePattern": "React"
-                }
-            ],
         "no-param-reassign": ["error", { "props": false }],
-        "max-len": ["error", { "code": 120 }]
+        "max-len": ["error", { "code": 120 }],
+        "import/no-unresolved": [
+            2, 
+            { "caseSensitive": false }
+        ],
+        "react/prop-types": 0,
+        "import/prefer-default-export": "off",
+        "consistent-return": "off",
+        "linebreak-style": 0
     }
 }

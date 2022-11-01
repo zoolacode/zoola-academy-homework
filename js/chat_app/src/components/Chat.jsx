@@ -4,6 +4,8 @@ import Container from '@mui/material/Container';
 import { useSelector } from 'react-redux';
 import { Header } from './Header';
 import { UserModal } from '../modals/userForm';
+import { ChatModal } from '../modals/ChatForm';
+import ChatWindow from './ChatWindow/ChatWindow';
 
 function Chat() {
   const isAdmin = useSelector((state) => state.auth.auth.isAdmin);
@@ -17,9 +19,34 @@ function Chat() {
     >
       <Container fixed>
         <Header />
-        {isAdmin
-          ? <UserModal />
-          : null}
+        <Box
+          display="flex"
+          sx={{
+            height: '85vh'
+          }}
+        >
+          <Box
+            sx={{
+              width: '400px',
+              borderRight: '1px solid',
+              pr: '10px',
+              height: '100%'
+            }}
+          >
+            {isAdmin ? <UserModal /> : null}
+            <ChatModal />
+          </Box>
+          <Box
+            sx={{
+              width: '100%',
+              borderRight: '1px solid',
+              p: '0 10px',
+              height: '100%'
+            }}
+          >
+            <ChatWindow />
+          </Box>
+        </Box>
       </Container>
     </Box>
   );
