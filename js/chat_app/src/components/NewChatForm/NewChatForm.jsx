@@ -12,13 +12,11 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { fetchRequestJSON } from "../../function/fetch";
 
-const currentUserToken = "d46c97b0-ddcc-4897-b327-8593fcf6cb78";
-const currentUserId = "75da786f-b490-408d-9ea1-ee1675b98d3c";
-const intervalUpdate = 1000;
+import { createChat, getUsers, addChatMembers } from "../../function/requests";
+import { INTERVAL_UPDATE } from "../../constants";
 
-export const NewChatForm = ({ open, onClose }) => {
+export const NewChatForm = ({ open, onClose, authToken, user }) => {
   const [chatMembers, setChatMembers] = useState([]);
   const [users, setUsers] = useState([]);
   const [chatName, setChatName] = useState("");
@@ -29,37 +27,32 @@ export const NewChatForm = ({ open, onClose }) => {
     setChatName("");
 
     const userData = {
-      userId: currentUserId,
+      userId: user?.id,
       title: chatName,
     };
 
     const membersData = {
-      members: [currentUserId, ...chatMembers],
+      members: [user?.id, ...chatMembers],
     };
 
-    fetchRequestJSON("/api/chats", "POST", currentUserToken, userData).then(
+    createChat(userData, authToken).then(
       (chat) => {
-        fetchRequestJSON(
-          `/api/chats/${chat.id}/members`,
-          "POST",
-          currentUserToken,
-          membersData
-        );
+        addChatMembers(authToken, chat.id, membersData);
       }
     );
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetchRequestJSON("/api/users", "GET", currentUserToken).then((data) =>
+      getUsers(authToken).then((data) =>
         setUsers(data)
       );
-    }, intervalUpdate);
+    }, INTERVAL_UPDATE);
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [authToken]);
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -84,10 +77,10 @@ export const NewChatForm = ({ open, onClose }) => {
                   }}
                 >
                   {users
-                    .filter((user) => user.id !== currentUserId)
-                    .map((user) => (
-                      <MenuItem key={user.id} value={user.id}>
-                        {user.username}
+                    .filter(({id}) => id !== user?.id)
+                    .map(({id, username}) => (
+                      <MenuItem key={id} value={id}>
+                        {username}
                       </MenuItem>
                     ))}
                 </Select>

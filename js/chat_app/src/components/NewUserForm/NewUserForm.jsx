@@ -8,23 +8,22 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+
 import { UsersList } from "../UsersList/UsersList";
-import { fetchRequestJSON } from "../../function/fetch";
+import { getUsers, createUser } from "../../function/requests";
+import { INTERVAL_UPDATE } from "../../constants";
 
-const adminId = "c8e26274-93ee-4acb-9f51-126264adaeb2";
-const intervalUpdate = 1000;
-
-export const NewUserForm = ({ open, onClose }) => {
+export const NewUserForm = ({ open, onClose, authToken, user }) => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetchRequestJSON("/api/users", "GET", adminId).then((data) =>
+      getUsers(authToken).then((data) =>
         setUsers(data)
       );
-    }, intervalUpdate);
+    }, INTERVAL_UPDATE);
 
     return () => {
       clearInterval(interval);
@@ -36,15 +35,15 @@ export const NewUserForm = ({ open, onClose }) => {
       return;
     }
     e.preventDefault();
-    setUserName("");
-    setUserPassword("");
 
     const data = {
       username: userName,
       password: userPassword,
     };
+    createUser(data, authToken);
 
-    fetchRequestJSON("/api/users", "POST", adminId, data);
+    setUserName("");
+    setUserPassword("");
   };
 
   return (

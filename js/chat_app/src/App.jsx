@@ -1,18 +1,16 @@
 import { useState, useMemo } from "react";
-import { Button, ThemeProvider, createTheme, CssBaseline } from "@mui/material";
-import { NewUserForm } from "./components/NewUserForm/NewUserForm";
-import { NewChatForm } from "./components/NewChatForm/NewChatForm";
-import { Chats } from "./components/Chats/Chats";
-import { Header } from "./Header";
-import { LoginPage } from "./LoginPage";
+import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import { Header } from "./components/Header";
+import { LoginPage } from "./pages/LoginPage";
+import { ChatPage } from "./pages/ChatPage";
 
 import "./App.css";
+import { Logout } from "./components/Logout";
 
 function App() {
-  const [isCreateUserOpen, setIsCreateUserOpen] = useState(false);
-  const [isCreateChatOpen, setIsCreateChatOpen] = useState(false);
   const [mode, setMode] = useState("light");
   const [userData, setUserData] = useState({});
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   //userData is saved in this format {
   //   isAdmin: boolean
@@ -33,13 +31,27 @@ function App() {
     [mode]
   );
 
+  const closeProfile = () => {
+    setIsProfileOpen(false);
+  };
+
+  const logout = () => {
+    setUserData({});
+    closeProfile();
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="App">
-          <Header setMode={setMode} mode={mode} userData={userData} />
-          {!userData.authToken && (
+          <Header setMode={setMode} mode={mode} userData={userData} setIsProfileOpen={setIsProfileOpen} />
+          {userData.authToken ? (
+            <>
+              <ChatPage userData={userData} />
+              <Logout isOpen={isProfileOpen} onClose={closeProfile} userLogout={logout} />
+            </>
+          ) : (
             <LoginPage
               setUserData={setUserData}
               setMode={setMode}
@@ -48,23 +60,6 @@ function App() {
           )}
         </div>
       </ThemeProvider>
-      <div className="App">
-        <Button variant="contained" onClick={() => setIsCreateUserOpen(true)}>
-          Create user
-        </Button>
-        <Button variant="outlined" onClick={() => setIsCreateChatOpen(true)}>
-          Create new chat
-        </Button>
-        <NewUserForm
-          open={isCreateUserOpen}
-          onClose={() => setIsCreateUserOpen(false)}
-        />
-        <NewChatForm
-          open={isCreateChatOpen}
-          onClose={() => setIsCreateChatOpen(false)}
-        />
-        <Chats />
-      </div>
     </>
   );
 }
