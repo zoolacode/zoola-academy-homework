@@ -13,6 +13,11 @@ const chatSlice = createSlice({
     setSelectedMembers: (state, action) => {
       state.selectedMembers = action.payload;
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getChatByIdThunk.fulfilled, (state, action) => {
+      state.chatData = action.payload;
+    });
   }
 });
 
@@ -25,21 +30,28 @@ export const addChatMembersThunk = createAsyncThunk(
   }
 );
 
-export const createChatThunk = createAsyncThunk(
-  'createChat/api/chats',
-  async (title, { getState, dispatch }) => {
+export const createChatThunk = createAsyncThunk('createChat/api/chats', async (title, { getState, dispatch }) => {
+  const { authToken } = getState().auth.auth;
+  const membersId = getState().chat.selectedMembers;
+
+  const response = await chatServices.createChat(title, authToken);
+
+  const paramsForAddMembers = {
+    chatId: response.id,
+    members: membersId,
+    authToken
+  };
+
+  dispatch(addChatMembersThunk(paramsForAddMembers));
+});
+
+export const getChatByIdThunk = createAsyncThunk(
+  'getChatById/api/chats/:chatId',
+  async (chatId, { getState }) => {
     const { authToken } = getState().auth.auth;
-    const membersId = getState().chat.selectedMembers;
+    const response = await chatServices.getChatById(chatId, authToken);
 
-    const response = await chatServices.createChat(title, authToken);
-
-    const paramsForAddMembers = {
-      chatId: response.id,
-      members: membersId,
-      authToken
-    };
-
-    dispatch(addChatMembersThunk(paramsForAddMembers));
+    return response;
   }
 );
 

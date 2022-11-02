@@ -1,10 +1,4 @@
-export const query = async (
-  url,
-  method,
-  authToken,
-  body = {
-  }
-) => {
+export const query = async (url, method, authToken, body = {}) => {
   try {
     if (Object.keys(body).length) {
       const data = await fetch(url, {
@@ -15,10 +9,7 @@ export const query = async (
         },
         body: JSON.stringify(body)
       });
-
-      const response = await data.json();
-
-      return response;
+      return data.json();
     }
 
     const data = await fetch(url, {
@@ -29,9 +20,7 @@ export const query = async (
       }
     });
 
-    const response = await data.json();
-
-    return response;
+    return data.json();
   } catch (error) {
     console.log(error);
   }

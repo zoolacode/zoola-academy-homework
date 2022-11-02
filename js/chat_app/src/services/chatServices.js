@@ -13,5 +13,9 @@ export const chatServices = {
       members
     };
     query(`/api/chats/${chatId}/members`, 'POST', authToken, body);
+  },
+  getChatById: async (chatId, authToken) => {
+    const response = await query(`/api/chats/${chatId}`, 'GET', authToken);
+    return response;
   }
 };
