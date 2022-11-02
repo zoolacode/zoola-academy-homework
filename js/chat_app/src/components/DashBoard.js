@@ -17,6 +17,7 @@ import { BadgeAvatar } from "./BadgeAvatar";
 import { ChatList } from "./ChatList";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
+import { UserCreationButton } from "./userCreationForm/UserCreationButton";
 
 export const DashBoard = () => {
   const { auth } = useContext(UserContext);
@@ -61,14 +62,9 @@ export const DashBoard = () => {
             />
           </Toolbar>
         </AppBar>
-        <Box
-          sx={{
-            display: "flex",
-          }}
-        >
-          <ChatList chatId={chatId} setChatID={setChatID} />
-          <Chat chatId={chatId} />
-        </Box>
+        <UserCreationButton />
+        <ChatList chatId={chatId} setChatID={setChatID} />
+        <Chat chatId={chatId} />
       </Container>
       <LogoutDialog open={open} onClose={handleClose} />
     </>
