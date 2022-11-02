@@ -1,0 +1,131 @@
+body p {
+    padding: 0;
+    margin: 0;
+}
+
+.app {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 100vw;
+    height: 100vh;
+    /* background-color: aqua; */
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(25, 1fr);
+    width: 100vh;
+    height: 100vh;
+
+    background-color: rgb(127, 213, 160);
+}
+
+.cell {
+    border: 1px solid transparent;
+}
+
+.snake {
+    border: 1px solid rgb(11, 11, 148);
+    background-color: rgb(0, 0, 239);
+
+    border-radius: 6px;
+    transition: all 1s;
+    /* animation: 1s 1s snake; */
+}
+
+@keyframes snake {
+    from {
+        
+    }
+    to{
+        transform: scale(0.9);
+    }
+}
+
+.food {
+    border: 1px solid rgb(163, 97, 5);
+    background-color: rgb(255, 166, 2);
+
+    border-radius: 50%;
+}
+
+.bonusFood {
+    border: 1px solid rgb(109, 5, 17);
+    background-color: rgb(191, 12, 59);
+
+    border-radius: 25%;
+}
+
+.score {
+    margin: 20px;
+
+    border-bottom: 3px solid green;
+    width: 250px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 30px;
+}
+
+.score span {
+    color: green;
+    font-size: 40px;
+}
+
+.gameTime {
+    margin: 20px;
+
+    border-bottom: 3px solid red;
+    width: 250px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 30px;
+}
+
+.gameTime span {
+    color: rgb(255, 0, 0);
+    font-size: 40px;
+}
+
+.modalEnd {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: brown;
+    opacity: 0.7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalEnd p {
+    background-color: red;
+    padding: 20px 40px;
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+}
+
+.modalPause {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(179, 167, 35);
+    opacity: 0.7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalPause p {
+    background-color: rgb(255, 149, 0);
+    padding: 20px 40px;
+    color: rgb(0, 0, 0);
+    font-size: 50px;
+}
