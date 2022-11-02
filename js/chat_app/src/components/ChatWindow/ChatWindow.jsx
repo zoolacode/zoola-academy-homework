@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { sendMessageByChatIdThunk } from '../../redux/slices/chatSlice';
 import ListOfChats from './ListOfChats';
+import UploadButton from '../ChatImageUpload/UploadButton';
 
 function ChatWindow() {
   const [message, setMessage] = useState('');
@@ -28,6 +29,7 @@ function ChatWindow() {
   return (
     <Box component="form" onSubmit={(e) => handleSubmit(e)} noValidate autoComplete="off">
       <Input fullWidth onChange={(e) => handleMessage(e)} value={message} placeholder="Enter your message" />
+      <UploadButton />
       <ListOfChats />
     </Box>
   );
