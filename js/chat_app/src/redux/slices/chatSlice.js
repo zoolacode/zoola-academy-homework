@@ -23,35 +23,29 @@ const chatSlice = createSlice({
 
 export const addChatMembersThunk = createAsyncThunk(
   'addMembers/api/chat/:chatId/members',
-  async (paramsForAddMembers, { getState }) => {
+  async (paramsForAddMembers, { getState, dispatch }) => {
     const { authToken } = getState().auth.auth;
     const { chatId, members } = paramsForAddMembers;
-    return chatServices.addChatMembers(chatId, authToken, members);
+
+    await chatServices.addChatMembers(chatId, authToken, members);
+    dispatch(getChatByIdThunk(chatId));
   }
 );
 
-export const createChatThunk = createAsyncThunk('createChat/api/chats', async (title, { getState, dispatch }) => {
+export const createChatThunk = createAsyncThunk('createChat/api/chats', async (title, { getState }) => {
   const { authToken } = getState().auth.auth;
   const membersId = getState().chat.selectedMembers;
 
   const response = await chatServices.createChat(title, authToken);
 
-  const paramsForAddMembers = {
-    chatId: response.id,
-    members: membersId,
-    authToken
-  };
-
-  dispatch(addChatMembersThunk(paramsForAddMembers));
+  return chatServices.addChatMembers(response.id, authToken, membersId);
 });
 
 export const getChatByIdThunk = createAsyncThunk(
   'getChatById/api/chats/:chatId',
   async (chatId, { getState }) => {
     const { authToken } = getState().auth.auth;
-    const response = await chatServices.getChatById(chatId, authToken);
-
-    return response;
+    return chatServices.getChatById(chatId, authToken);
   }
 );
 

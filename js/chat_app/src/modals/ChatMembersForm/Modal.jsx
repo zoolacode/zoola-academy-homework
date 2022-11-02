@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import AvatarGroup from '@mui/material/AvatarGroup';
-import IconButton from '@mui/material/IconButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsersThunk } from '../../redux/slices/usersSlice';
 import { getChatByIdThunk } from '../../redux/slices/chatSlice';
@@ -13,11 +12,12 @@ export default function ChatMembersListModal() {
   const membersIds = useSelector((state) => state.chat.chatData?.members);
   const allUsers = useSelector((state) => state.users?.allUsers);
 
-  const membersData = useMemo(() => allUsers?.filter((user) => membersIds?.includes(user.id)), [allUsers]);
+  // TODO: check why it's not updating
+  const membersData = useMemo(() => allUsers?.filter((user) => membersIds?.includes(user.id)), [membersIds, allUsers]);
 
   // TODO: refactoring when chat list will be done
   useEffect(() => {
-    const chatId = '9cea1435-00b1-4e86-9631-9040f0d5afc1';
+    const chatId = 'd49fa7a4-e2b3-4835-a975-b0e761ff6329';
     dispatch(getChatByIdThunk(chatId));
     dispatch(getAllUsersThunk());
   }, []);
@@ -33,18 +33,17 @@ export default function ChatMembersListModal() {
 
   return (
     <div>
-      <IconButton
+      <AvatarGroup
         sx={{
-          width: '100%'
+          cursor: 'pointer'
         }}
         onClick={handleClickOpen}
+        max={5}
       >
-        <AvatarGroup max={5}>
-          {membersData?.map((user) => (
-            <MemberAvatar key={user.id} username={user.username} />
-          ))}
-        </AvatarGroup>
-      </IconButton>
+        {membersData?.map((user) => (
+          <MemberAvatar key={user.id} username={user.username} />
+        ))}
+      </AvatarGroup>
       <MemberList open={open} onClose={handleClose} membersData={membersData} allUsers={allUsers} />
     </div>
   );
