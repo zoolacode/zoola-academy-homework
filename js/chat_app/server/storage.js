@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 exports.createStorage = (databaseDir, storageFile) => {
-  const storageFilePath = require("path").join(databaseDir, storageFile);
+  const storageFilePath = require('path').join(databaseDir, storageFile);
   return {
     read() {
       return new Promise((resolve, reject) => {

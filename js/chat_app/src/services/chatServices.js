@@ -62,10 +62,10 @@ export const chatServices = {
           'content-type': 'application/json',
           'Auth-Token': authToken
         },
-        body: {
+        body: JSON.stringify({
           authorId,
           message
-        }
+        })
       });
     } catch (error) {
       console.log(error);
