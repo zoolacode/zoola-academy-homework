@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AppBar, Avatar, Toolbar, Typography, Switch, Box } from "@mui/material";
+import {
+  AppBar,
+  Avatar,
+  Toolbar,
+  Typography,
+  Switch,
+  Box,
+} from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import { UserContext } from "./UserContext";
@@ -7,7 +14,7 @@ import { ThemeContext } from "./ThemeContext";
 import { LogoutDialog } from "./LogoutDialog";
 import { BadgeAvatar } from "./BadgeAvatar";
 import { ChatList } from "./ChatList";
-import { getServerResponse } from "./getServerResponse";
+import { fetchJSON } from "./serverResponse";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 import { UserCreationButton } from "./userCreationForm/UserCreationButton";
@@ -28,12 +35,13 @@ export const DashBoard = () => {
     setOpen(false);
   };
 
+  // const fetchJSON = useHttpClient();
+
   useEffect(() => {
     const url = `api/users/${auth?.user.id}/chats`;
-    const token = auth?.authToken;
 
-    getServerResponse(url, { "auth-token": token }).then((response) =>
-      setChatID(response[0]?.id)
+    fetchJSON(url, { headers: { "auth-token": auth?.authToken } }).then(
+      (response) => setChatID(response[0]?.id)
     );
   }, []);
 
@@ -65,9 +73,7 @@ export const DashBoard = () => {
             />
           </Toolbar>
         </AppBar>
-        <Box sx={{ mt: 3 }} >
-          <CreateChatForm />
-        </Box>
+        <Box sx={{ mt: 3 }}>{/* <CreateChatForm /> */}</Box>
         <UserCreationButton />
         <ChatList chatId={chatId} setChatID={setChatID} />
       </Container>

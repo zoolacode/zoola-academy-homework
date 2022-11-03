@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
-import { getServerResponse } from "./getServerResponse";
+import { fetchJSON } from "./serverResponse";
 import { Box, Paper, MenuItem, MenuList, Typography } from "@mui/material";
 
 export const ChatList = ({ chatId, setChatID }) => {
@@ -8,34 +8,37 @@ export const ChatList = ({ chatId, setChatID }) => {
   const { auth } = useContext(UserContext);
 
   const userId = auth?.user.id;
-  const token = auth?.authToken;
+  //const token = auth?.authToken;
 
   const handleChatListItemClick = (event, id) => {
     setChatID(id);
   };
+  // const fetchJSON = useHttpClient();
 
   React.useEffect(() => {
     const url = `api/users/${userId}/chats`;
 
-    getServerResponse(url, { "auth-token": token }).then(setChatsData);
+    fetchJSON(url, { headers: { "auth-token": auth?.authToken } }).then(
+      setChatsData
+    );
   }, []);
 
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
       <Paper>
-        {(chatsData.length === 0 && (
+        {chatsData.length === 0 ? (
           <Typography align="center" sx={{ p: 1 }}>
             No existing chats
           </Typography>
-        )) || (
+        ) : (
           <MenuList>
-            {chatsData.map((params) => {
+            {chatsData.map((chat) => {
               return (
                 <MenuItem
-                  selected={chatId === params.id}
-                  onClick={(event) => handleChatListItemClick(event, params.id)}
+                  selected={chatId === chat.id}
+                  onClick={(event) => handleChatListItemClick(event, chat.id)}
                 >
-                  {params.title}
+                  {chat.title}
                 </MenuItem>
               );
             })}
