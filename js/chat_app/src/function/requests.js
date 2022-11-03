@@ -8,7 +8,7 @@ export const login = (data) => {
         method: "POST",
         data
     });
-}
+};
 
 export const createChat = (data, token) => {
     return fetchRequestJSON({
@@ -50,4 +50,4 @@ export const addChatMembers = (token, chatId, data) => {
         authToken: token,
         data
     });
-}
+};
