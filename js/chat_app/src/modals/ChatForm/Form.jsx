@@ -4,14 +4,17 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
-import { useDispatch } from 'react-redux';
+import Alert from '@mui/material/Alert';
+import { useDispatch, useSelector } from 'react-redux';
 import CreateChatSelect from './Select';
-import { createChatThunk } from '../../redux/slices/chatSlice';
+import { createChatThunk } from '../../redux/chat/slice';
+import chatSelectors from '../../redux/chat/selector';
 
 export default function CreateChatForm({ onClose, open }) {
   const [chatName, setChatName] = useState('');
-  const [errorChatName, setErrorChatName] = useState(false);
   const [resetMembersTrigger, setResetMembersTrigger] = useState(true);
+
+  const isError = useSelector(chatSelectors.getError);
 
   const dispatch = useDispatch();
 
@@ -27,16 +30,20 @@ export default function CreateChatForm({ onClose, open }) {
   const handleSendButton = () => {
     dispatch(createChatThunk(chatName));
     setChatName('');
-    setErrorChatName(false);
     setResetMembersTrigger((prev) => !prev);
   };
 
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle variant="h6">Create chat</DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{
+        width: 450
+      }}
+      >
+        {isError
+          ? <Alert severity="error">Something went wrong - try again!</Alert>
+          : null}
         <TextField
-          error={errorChatName}
           value={chatName}
           onChange={(e) => handleChatName(e)}
           type="text"
