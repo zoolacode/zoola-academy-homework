@@ -1,6 +1,6 @@
-import React from 'react';
-import { useState } from 'react';
-import LoginIcon from '@mui/icons-material/Login';
+import React from "react";
+import { useState } from "react";
+import LoginIcon from "@mui/icons-material/Login";
 import {
   Grid,
   FormControl,
@@ -8,11 +8,11 @@ import {
   Box,
   TextField,
   Button,
-} from '@mui/material';
+} from "@mui/material";
 
-export function LoginPage({ setUserData }) {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+export const LoginPage = ({ setUserData }) => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   function submitLogin() {
     if (userName && password) {
@@ -20,33 +20,46 @@ export function LoginPage({ setUserData }) {
         setUserData(result)
       );
 
-      setUserName('');
-      setPassword('');
+      setUserName("");
+      setPassword("");
     }
+  }
+
+  function request(username, password) {
+    return fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    }).then((response) => response.json());
   }
 
   return (
     <Grid container spacing={2} mt={5}>
       <Grid item xs={12}>
         <FormControl>
-          <Typography variant='h5' mb={5}>
+          <Typography variant="h5" mb={5}>
             Welcome to chat
           </Typography>
           <Box
-            component='form'
-            sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+            component="form"
+            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
             noValidate
-            autoComplete='off'
+            autoComplete="off"
           >
             <TextField
               value={userName}
-              placeholder='Username'
+              placeholder="Username"
               onChange={(e) => setUserName(e.target.value)}
             />
             <TextField
               value={password}
-              type='password'
-              placeholder='Password'
+              type="password"
+              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </Box>
@@ -57,17 +70,4 @@ export function LoginPage({ setUserData }) {
       </Grid>
     </Grid>
   );
-}
-
-function request(username, password) {
-  return fetch('/api/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: JSON.stringify({
-      username,
-      password,
-    }),
-  }).then((response) => response.json());
-}
+};
