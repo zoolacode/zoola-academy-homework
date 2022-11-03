@@ -4,17 +4,23 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { addChatMembersThunk } from '../../redux/slices/chatSlice';
+import { addChatMembersThunk } from '../../redux/chat/slice';
+import chatSelectors from '../../redux/chat/selector';
 
 function Select({ usersDontMembers }) {
   const [selectedMembers, setSelectedMembers] = useState([]);
+  const [selectesMembersError, setSelectesMembersError] = useState(false);
+
   const [membersId, setMembersId] = useState([]);
+
   const dispatch = useDispatch();
-  const chatId = useSelector((state) => state.chat.chatData.id);
-  console.log(chatId);
+
+  const chatId = useSelector(chatSelectors.getChatId);
 
   const handleChange = (event) => {
     const { target: { value } } = event;
+
+    setSelectesMembersError(false);
 
     setSelectedMembers(
       // On autofill we get a stringified value.
@@ -25,49 +31,59 @@ function Select({ usersDontMembers }) {
   };
 
   const handleSubmit = () => {
-    dispatch(addChatMembersThunk({
-      chatId, members: membersId
-    }));
+    if (!selectedMembers.length) {
+      setSelectesMembersError(true);
+      return;
+    }
+
+    dispatch(
+      addChatMembersThunk({
+        chatId,
+        members: membersId
+      })
+    );
+
     setSelectedMembers([]);
   };
 
   return (
     <div>
-      {usersDontMembers?.length
-        ? (
-          <FormControl
-            fullWidth
+      {usersDontMembers?.length ? (
+        <FormControl fullWidth>
+          <TextField
+            sx={{
+              mb: 1,
+              mt: 1
+            }}
+            error={selectesMembersError}
+            select
+            label="New members"
+            variant="outlined"
+            SelectProps={{
+              multiple: true,
+              onChange: handleChange,
+              value: selectedMembers
+            }}
           >
-            <TextField
-              select
-              label="New members"
-              variant="outlined"
-              SelectProps={{
-                multiple: true,
-                onChange: handleChange,
-                value: selectedMembers
-              }}
-            >
-              {usersDontMembers.map((user) => (
-                <MenuItem key={user.id} value={user.username}>
-                  {user.username}
-                </MenuItem>
-              ))}
-            </TextField>
-            <Button
-              sx={{
-                margin: '15px 0'
-              }}
-              type="button"
-              fullWidth
-              variant="text"
-              onClick={handleSubmit}
-            >
-              Add
-            </Button>
-          </FormControl>
-        )
-        : null}
+            {usersDontMembers.map((user) => (
+              <MenuItem key={user.id} value={user.username}>
+                {user.username}
+              </MenuItem>
+            ))}
+          </TextField>
+          <Button
+            sx={{
+              mb: 1
+            }}
+            type="button"
+            fullWidth
+            variant="text"
+            onClick={handleSubmit}
+          >
+            Add
+          </Button>
+        </FormControl>
+      ) : null}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 const getAllUsers = (state) => state.users?.allUsers;
 const usersSelectors = {
-  getAllUsers,
+  getAllUsers
 };
 
 export default usersSelectors;

@@ -1,23 +1,24 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsersThunk } from '../../redux/slices/usersSlice';
-import { getChatByIdThunk } from '../../redux/slices/chatSlice';
+import { getAllUsersThunk } from '../../redux/users/slice';
+import { getChatByIdThunk } from '../../redux/chat/slice';
 import MemberAvatar from './MemberAvatar';
 import MemberList from './MemberList';
+import chatSelectors from '../../redux/chat/selector';
+import usersSelectors from '../../redux/users/selector';
 
 export default function ChatMembersListModal() {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const membersIds = useSelector((state) => state.chat.chatData?.members);
-  const allUsers = useSelector((state) => state.users?.allUsers);
+  const membersIds = useSelector(chatSelectors.getMembers);
+  const allUsers = useSelector(usersSelectors.getAllUsers);
 
-  // TODO: check why it's not updating
   const membersData = useMemo(() => allUsers?.filter((user) => membersIds?.includes(user.id)), [membersIds, allUsers]);
 
   // TODO: refactoring when chat list will be done
   useEffect(() => {
-    const chatId = 'd49fa7a4-e2b3-4835-a975-b0e761ff6329';
+    const chatId = '382138b8-684c-489f-9ef2-b99d9fc61f38';
     dispatch(getChatByIdThunk(chatId));
     dispatch(getAllUsersThunk());
   }, []);

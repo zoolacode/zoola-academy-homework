@@ -28,16 +28,27 @@ const chatSlice = createSlice({
       .addCase(createChatThunk.rejected, (state, action) => {
         state.status = action.meta.requestStatus;
         state.isError = true;
+      })
+
+      .addCase(getChatByIdThunk.fulfilled, (state, action) => {
+        state.isError = false;
+        state.status = action.meta.requestStatus;
+        state.chatData = action.payload;
+      })
+      .addCase(getChatByIdThunk.rejected, (state, action) => {
+        state.isError = true;
+        state.status = action.meta.requestStatus;
       });
   }
 });
 
 export const addChatMembersThunk = createAsyncThunk(
   'addMembers/api/chat/:chatId/members',
-  async (paramsForAddMembers, { getState }) => {
+  async (paramsForAddMembers, { getState, dispatch }) => {
     const { authToken } = getState().auth.auth;
     const { chatId, members } = paramsForAddMembers;
-    return chatServices.addChatMembers(chatId, authToken, members);
+    const response = await chatServices.addChatMembers(chatId, authToken, members);
+    dispatch(getChatByIdThunk(response?.id, authToken));
   }
 );
 
@@ -69,6 +80,20 @@ export const createChatThunk = createAsyncThunk(
     }
   }
 );
+
+export const getChatByIdThunk = createAsyncThunk('getChatById/api/chats/:id', async (chatId, { getState }) => {
+  try {
+    const { authToken } = getState().auth.auth;
+
+    return chatServices.getChatById(chatId, authToken);
+  } catch (error) {
+    if (!error.response) {
+      throw error;
+    }
+
+    return rejectWithValue(error.response.data);
+  }
+});
 
 export const { setSelectedMembers } = chatSlice.actions;
 export default chatSlice;
