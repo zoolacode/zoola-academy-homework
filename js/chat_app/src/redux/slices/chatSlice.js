@@ -28,6 +28,8 @@ export const addChatMembersThunk = createAsyncThunk(
 export const createChatThunk = createAsyncThunk(
   'createChat/api/chats',
   async (title, { getState, dispatch }) => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     const { authToken } = getState().auth.auth;
     const authId = getState().auth.auth.user.id;
     const membersId = getState().chat.selectedMembers;
