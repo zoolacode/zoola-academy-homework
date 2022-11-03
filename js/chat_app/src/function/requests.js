@@ -24,7 +24,6 @@ export const getChatsByUserId = (token, userId) => {
         url: `api/users/${userId}/chats`,
         authToken: token
     });
-
 };
 
 export const createUser = (data, token) => {

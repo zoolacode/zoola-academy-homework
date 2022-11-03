@@ -13,24 +13,26 @@ import { UsersList } from "../UsersList/UsersList";
 import { getUsers, createUser } from "../../function/requests";
 import { INTERVAL_UPDATE } from "../../constants";
 
-export const NewUserForm = ({ open, onClose, authToken, user }) => {
+export const NewUserForm = ({ open, onClose, userInfo = {} }) => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      getUsers(authToken).then((data) =>
-        setUsers(data)
-      );
-    }, INTERVAL_UPDATE);
+    if (userInfo.authToken) {
+      const interval = setInterval(() => {
+        getUsers(userInfo.authToken).then((data) =>
+          setUsers(data)
+        );
+      }, INTERVAL_UPDATE);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [userInfo]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     if (userName.length === 0 || userPassword.length === 0) {
       return;
     }
@@ -40,7 +42,7 @@ export const NewUserForm = ({ open, onClose, authToken, user }) => {
       username: userName,
       password: userPassword,
     };
-    createUser(data, authToken);
+    createUser(data,  userInfo.authToken);
 
     setUserName("");
     setUserPassword("");
@@ -65,11 +67,7 @@ export const NewUserForm = ({ open, onClose, authToken, user }) => {
                   value={userPassword}
                   onChange={(e) => setUserPassword(e.target.value)}
                 />
-                <Button
-                  fullWidth
-                  variant="outlined"
-                  type="submit"
-                >
+                <Button fullWidth variant="outlined" type="submit">
                   Send
                 </Button>
               </Stack>

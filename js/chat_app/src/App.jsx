@@ -1,18 +1,18 @@
 import { useState, useMemo } from "react";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import { ButtonsAndChatList } from "./components/ButtonsAndChatList/ButtonsAndChatList";
 import { Header } from "./components/Header";
-import { LoginPage } from "./pages/LoginPage";
-import { ChatPage } from "./pages/ChatPage";
+import { LoginPage } from "./components/LoginPage";
+import { Logout } from "./components/Logout";
 
 import "./App.css";
-import { Logout } from "./components/Logout";
 
 function App() {
   const [mode, setMode] = useState("light");
   const [userData, setUserData] = useState({});
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  //userData is saved in this format {
+  // userData is saved in this format {
   //   isAdmin: boolean
   //   authToken: string
   //   user: {
@@ -47,10 +47,10 @@ function App() {
         <div className="App">
           <Header setMode={setMode} mode={mode} userData={userData} setIsProfileOpen={setIsProfileOpen} />
           {userData.authToken ? (
-            <>
-              <ChatPage userData={userData} />
+            <div className="container">
+              <ButtonsAndChatList userData={userData} />
               <Logout isOpen={isProfileOpen} onClose={closeProfile} userLogout={logout} />
-            </>
+            </div>
           ) : (
             <LoginPage
               setUserData={setUserData}
