@@ -13,7 +13,7 @@ import { fetchRequestJSON } from "../../function/fetch";
 
 const intervalUpdate = 1000;
 
-export const NewUserForm = ({ open, onClose, userInfo }) => {
+export const NewUserForm = ({ open, onClose, userInfo = {} }) => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [users, setUsers] = useState([]);

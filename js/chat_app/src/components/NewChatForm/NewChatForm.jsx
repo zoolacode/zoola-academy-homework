@@ -16,7 +16,7 @@ import { fetchRequestJSON } from "../../function/fetch";
 
 const intervalUpdate = 1000;
 
-export const NewChatForm = ({ open, onClose, userInfo }) => {
+export const NewChatForm = ({ open, onClose, userInfo = {} }) => {
   const [chatMembers, setChatMembers] = useState([]);
   const [users, setUsers] = useState([]);
   const [chatName, setChatName] = useState("");
@@ -27,12 +27,12 @@ export const NewChatForm = ({ open, onClose, userInfo }) => {
     setChatName("");
 
     const userData = {
-      userId: userInfo.user.id,
+      userId: userInfo.user?.id,
       title: chatName,
     };
 
     const membersData = {
-      members: [userInfo.user.id, ...chatMembers],
+      members: [userInfo.user?.id, ...chatMembers],
     };
 
     fetchRequestJSON("/api/chats", "POST", userInfo.authToken, userData).then(
@@ -48,18 +48,17 @@ export const NewChatForm = ({ open, onClose, userInfo }) => {
   };
 
   useEffect(() => {
-    if(userInfo.authToken) {
+    if (userInfo.authToken) {
       const interval = setInterval(() => {
         fetchRequestJSON("/api/users", "GET", userInfo.authToken).then((data) =>
           setUsers(data)
         );
       }, intervalUpdate);
-  
+
       return () => {
         clearInterval(interval);
       };
     }
-
   }, [userInfo]);
 
   return (

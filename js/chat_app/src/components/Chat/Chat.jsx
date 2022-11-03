@@ -1,4 +1,4 @@
-import { Box, Container, TextField } from "@mui/material";
+import { Container, Box, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { fetchRequestJSON } from "../../function/fetch";
 import { Messages } from "../Messages/Message";
@@ -17,13 +17,11 @@ export const Chat = ({ chatId, userData }) => {
         (data) => setMessagesList(data.messages)
       );
       const interval = setInterval(() => {
-        if (chatId !== "") {
-          fetchRequestJSON(
-            `/api/chats/${chatId}`,
-            "GET",
-            userData.authToken
-          ).then((data) => setMessagesList(data.messages));
-        }
+        fetchRequestJSON(
+          `/api/chats/${chatId}`,
+          "GET",
+          userData.authToken
+        ).then((data) => setMessagesList(data.messages));
       }, 1000);
 
       return () => {

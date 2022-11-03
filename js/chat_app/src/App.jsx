@@ -43,14 +43,16 @@ function App() {
             />
           )}
         </div>
+        <div className="container">
+          {userData.authToken && (
+            <>
+              <ButtonsAndChatList
+                userData={userData}
+              />
+            </>
+          )}
+        </div>
       </ThemeProvider>
-      <div className="container">
-        {userData.authToken && (
-          <>
-            <ButtonsAndChatList userData={userData} />
-          </>
-        )}
-      </div>
     </>
   );
 }
