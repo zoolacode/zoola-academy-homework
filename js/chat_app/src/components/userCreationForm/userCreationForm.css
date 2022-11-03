@@ -1,0 +1,29 @@
+
+.formHeader {
+    text-align: start;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.formBody {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.userListUl {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    max-height: 150px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.userListLi {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
