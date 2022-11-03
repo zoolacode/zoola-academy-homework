@@ -1,2 +1,2 @@
 
-export const INTERVAL_UPDATE = 5000;
+export const INTERVAL_UPDATE = 3000;

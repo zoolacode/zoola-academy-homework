@@ -17,6 +17,3 @@ export const fetchRequestJSON = ({url, method = "GET", authToken, data} = {}) =>
       console.log(err)
     });
 };
-
-
-
