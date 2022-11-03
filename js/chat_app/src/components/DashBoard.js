@@ -7,7 +7,7 @@ import { ThemeContext } from "./ThemeContext";
 import { LogoutDialog } from "./LogoutDialog";
 import { BadgeAvatar } from "./BadgeAvatar";
 import { ChatList } from "./ChatList";
-import { serverResponse } from "./serverResponse";
+import { getServerResponse } from "./getServerResponse";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 
@@ -30,7 +30,7 @@ export const DashBoard = () => {
     const url = `api/users/${auth?.user.id}/chats`;
     const token = auth?.authToken;
 
-    serverResponse(url, { "auth-token": token }).then((response) =>
+    getServerResponse(url, { "auth-token": token }).then((response) =>
       setChatID(response[0]?.id)
     );
   }, []);

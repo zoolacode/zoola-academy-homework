@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
-import { serverResponse } from "./serverResponse";
+import { getServerResponse } from "./getServerResponse";
 import { Box, Paper, MenuItem, MenuList, Typography } from "@mui/material";
 
 export const ChatList = ({ chatId, setChatID }) => {
@@ -17,7 +17,7 @@ export const ChatList = ({ chatId, setChatID }) => {
   React.useEffect(() => {
     const url = `api/users/${userId}/chats`;
 
-    serverResponse(url, { "auth-token": token }).then(setChatsData);
+    getServerResponse(url, { "auth-token": token }).then(setChatsData);
   }, []);
 
   return (
