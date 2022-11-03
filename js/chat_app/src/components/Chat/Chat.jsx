@@ -1,28 +1,27 @@
 import { Container, Box, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { fetchRequestJSON } from "../../function/fetch";
 import { Messages } from "../Messages/Message";
 
-export const Chat = ({ chatId, userData }) => {
+import { getUsers, getChatById, addChatMessage } from "../../function/requests";
+import { INTERVAL_UPDATE } from "../../constants";
+
+export const Chat = ({ chatId, userData = {} }) => {
   const [usersList, setUsersList] = useState([]);
   const [messagesList, setMessagesList] = useState([]);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (chatId) {
-      fetchRequestJSON("/api/users", "GET", userData.authToken).then((data) =>
+      getUsers(userData.authToken).then((data) =>
         setUsersList(data)
       );
-      fetchRequestJSON(`/api/chats/${chatId}`, "GET", userData.authToken).then(
+      getChatById(userData.authToken, chatId).then(
         (data) => setMessagesList(data.messages)
       );
       const interval = setInterval(() => {
-        fetchRequestJSON(
-          `/api/chats/${chatId}`,
-          "GET",
-          userData.authToken
-        ).then((data) => setMessagesList(data.messages));
-      }, 1000);
+        getChatById(userData.authToken, chatId)
+        .then((data) => setMessagesList(data.messages));
+      }, INTERVAL_UPDATE);
 
       return () => {
         clearInterval(interval);
@@ -35,12 +34,10 @@ export const Chat = ({ chatId, userData }) => {
       message: message,
       authorId: userData.user.id,
     };
-    fetchRequestJSON(
-      `/api/chats/${chatId}/messages`,
-      "POST",
-      userData.authToken,
-      data
-    ).then((data) => setMessagesList(data.messages));
+    addChatMessage(userData.authToken, chatId, data)
+    .then(
+      (data) => setMessagesList(data.messages)
+    );
   };
 
   if (!chatId) {
@@ -51,6 +48,7 @@ export const Chat = ({ chatId, userData }) => {
           width: "100%",
           alignItems: "center",
           justifyContent: "space-around",
+          minHeight: "50vh"
         }}
       >
         <div>Click on chat</div>
@@ -62,7 +60,7 @@ export const Chat = ({ chatId, userData }) => {
         <Box
           sx={{
             marginLeft: "auto",
-            marginTop: 5,
+            marginTop: 5
           }}
         >
           <form

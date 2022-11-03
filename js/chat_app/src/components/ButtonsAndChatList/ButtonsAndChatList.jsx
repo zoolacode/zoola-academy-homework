@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MenuItem, MenuList, Paper } from "@mui/material";
+import { MenuItem, MenuList, Paper, Container } from "@mui/material";
 
 import { Chat } from "../Chat/Chat";
 import { CreateButtons } from "../CreateButtons/CreateButtons";
@@ -26,6 +26,7 @@ export const ButtonsAndChatList = ({ userData = {} }) => {
   }, [userData]);
 
   return (
+    <Container maxWidth="lg" fixed={true}>
     <div className="chatsAndButtons">
       <div className="container">
         <CreateButtons userData={userData} />
@@ -44,5 +45,6 @@ export const ButtonsAndChatList = ({ userData = {} }) => {
       </div>
       <Chat chatId={chatId} userData={userData} />
     </div>
+    </Container>
   );
 };

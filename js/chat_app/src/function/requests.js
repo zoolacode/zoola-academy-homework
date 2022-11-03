@@ -50,3 +50,19 @@ export const addChatMembers = (token, chatId, data) => {
         data
     });
 };
+
+export const getChatById = (token, chatId) => {
+    return fetchRequestJSON({
+        url: `/api/chats/${chatId}`,
+        authToken: token
+    });
+};
+
+export const addChatMessage = (token, chatId, data) => {
+    return fetchRequestJSON({
+        url: `/api/chats/${chatId}/messages`,
+        method: "POST",
+        authToken: token,
+        data
+    });
+};
