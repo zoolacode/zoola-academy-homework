@@ -1,20 +1,16 @@
 import { useState, useMemo } from "react";
-import { Button, ThemeProvider, createTheme, CssBaseline } from "@mui/material";
-import { NewUserForm } from "./components/NewUserForm/NewUserForm";
-import { NewChatForm } from "./components/NewChatForm/NewChatForm";
-import { Chats } from "./components/Chats/Chats";
+import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import { ButtonsAndChatList } from "./components/ButtonsAndChatList/ButtonsAndChatList";
 import { Header } from "./Header";
 import { LoginPage } from "./LoginPage";
 
 import "./App.css";
 
 function App() {
-  const [isCreateUserOpen, setIsCreateUserOpen] = useState(false);
-  const [isCreateChatOpen, setIsCreateChatOpen] = useState(false);
   const [mode, setMode] = useState("light");
   const [userData, setUserData] = useState({});
 
-  //userData is saved in this format {
+  // userData is saved in this format {
   //   isAdmin: boolean
   //   authToken: string
   //   user: {
@@ -48,22 +44,12 @@ function App() {
           )}
         </div>
       </ThemeProvider>
-      <div className="App">
-        <Button variant="contained" onClick={() => setIsCreateUserOpen(true)}>
-          Create user
-        </Button>
-        <Button variant="outlined" onClick={() => setIsCreateChatOpen(true)}>
-          Create new chat
-        </Button>
-        <NewUserForm
-          open={isCreateUserOpen}
-          onClose={() => setIsCreateUserOpen(false)}
-        />
-        <NewChatForm
-          open={isCreateChatOpen}
-          onClose={() => setIsCreateChatOpen(false)}
-        />
-        <Chats />
+      <div className="container">
+        {userData.authToken && (
+          <>
+            <ButtonsAndChatList userData={userData} />
+          </>
+        )}
       </div>
     </>
   );

@@ -11,25 +11,26 @@ import {
 import { UsersList } from "../UsersList/UsersList";
 import { fetchRequestJSON } from "../../function/fetch";
 
-const adminId = "c8e26274-93ee-4acb-9f51-126264adaeb2";
 const intervalUpdate = 1000;
 
-export const NewUserForm = ({ open, onClose }) => {
+export const NewUserForm = ({ open, onClose, userInfo }) => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      fetchRequestJSON("/api/users", "GET", adminId).then((data) =>
-        setUsers(data)
-      );
-    }, intervalUpdate);
+    if (userInfo.authToken) {
+      const interval = setInterval(() => {
+        fetchRequestJSON("/api/users", "GET", userInfo.authToken).then((data) =>
+          setUsers(data)
+        );
+      }, intervalUpdate);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [userInfo]);
 
   const submitHandler = async (e) => {
     if (userName.length === 0 || userPassword.length === 0) {
@@ -44,7 +45,7 @@ export const NewUserForm = ({ open, onClose }) => {
       password: userPassword,
     };
 
-    fetchRequestJSON("/api/users", "POST", adminId, data);
+    fetchRequestJSON("/api/users", "POST", userInfo.authToken, data);
   };
 
   return (
@@ -66,11 +67,7 @@ export const NewUserForm = ({ open, onClose }) => {
                   value={userPassword}
                   onChange={(e) => setUserPassword(e.target.value)}
                 />
-                <Button
-                  fullWidth
-                  variant="outlined"
-                  type="submit"
-                >
+                <Button fullWidth variant="outlined" type="submit">
                   Send
                 </Button>
               </Stack>
