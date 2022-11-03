@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux';
 import { Header } from './Header';
 import { UserModal } from '../modals/userForm';
 import { ChatModal } from '../modals/ChatForm';
+import authSelectors from '../redux/auth/selector';
 
 function Chat() {
-  const isAdmin = useSelector((state) => state.auth.auth.isAdmin);
+  const isAdmin = useSelector(authSelectors.getAdmin);
 
   return (
     <Box sx={{

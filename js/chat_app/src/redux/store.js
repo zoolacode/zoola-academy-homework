@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import usersSlice from './slices/usersSlice';
+import usersSlice from './users/slice';
 import authSlice from './auth/slice';
-import chatSlice from './slices/chatSlice';
+import chatSlice from './chat/slice';
 
 let preloadedState;
 const persistedAuthString = localStorage.getItem('auth');

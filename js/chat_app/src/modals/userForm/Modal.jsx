@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 import CreateUserForm from './Form';
-import { getAllUsersThunk } from '../../redux/slices/usersSlice';
+import { getAllUsersThunk } from '../../redux/users/slice';
 
 export default function CreateUserModal() {
   const [open, setOpen] = useState(false);
+
   const dispatch = useDispatch();
 
   const handleClickOpen = () => {
@@ -21,9 +22,8 @@ export default function CreateUserModal() {
     <div>
       <Button
         sx={{
-          color: 'white',
-          backgroundColor: 'rgb(25, 118, 210)',
-          width: '100%'
+          width: '100%',
+          mb: 1
         }}
         variant="contained"
         onClick={handleClickOpen}
