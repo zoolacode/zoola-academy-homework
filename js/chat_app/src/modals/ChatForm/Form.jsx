@@ -36,13 +36,12 @@ export default function CreateChatForm({ onClose, open }) {
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle variant="h6">Create chat</DialogTitle>
-      <DialogContent sx={{
-        width: 450
-      }}
+      <DialogContent
+        sx={{
+          width: 450
+        }}
       >
-        {isError
-          ? <Alert severity="error">Something went wrong - try again!</Alert>
-          : null}
+        {isError ? <Alert severity="error">Something went wrong - try again!</Alert> : null}
         <TextField
           value={chatName}
           onChange={(e) => handleChatName(e)}

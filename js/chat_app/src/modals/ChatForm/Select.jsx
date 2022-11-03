@@ -33,9 +33,7 @@ export default function CreateChatSelect({ resetMembersTrigger }) {
 
   return (
     <div>
-      <FormControl
-        fullWidth
-      >
+      <FormControl fullWidth>
         <TextField
           select
           label="Members"
