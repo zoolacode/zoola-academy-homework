@@ -10,32 +10,22 @@ import {
   Button,
 } from "@mui/material";
 
+import { login } from "../function/requests";
+
 export const LoginPage = ({ setUserData }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   function submitLogin() {
     if (userName && password) {
-      request(userName.trim(), password.trim()).then((result) =>
+      login({username: userName.trim(), password: password.trim()})
+      .then((result) =>
         setUserData(result)
-      );
+      ).catch(err => console.log(err));
 
       setUserName("");
       setPassword("");
     }
-  }
-
-  function request(username, password) {
-    return fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    }).then((response) => response.json());
   }
 
   return (

@@ -1,23 +1,19 @@
-export const getData = async (URL, options = {}) => {
-  return fetch(URL, options).then((response) => response.json());
-};
 
-export const fetchRequestJSON = (URL, method, token, data) => {
-  if (method === "POST") {
-    return getData(URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": token,
-      },
-      body: JSON.stringify(data),
+
+export const fetchRequestJSON = ({url, method = "GET", authToken, data} = {}) => {
+
+    const authtoken = {"auth-token": authToken};
+    const headers = {
+      "Content-Type": "application/json"
+    };
+
+    return fetch(url, {
+        method,
+        headers: authToken ? {...headers, ...authtoken} : headers,
+        body: data ? JSON.stringify(data) : undefined
+      }
+    ).then((response) => response.json())
+    .catch(err => {
+      console.log(err)
     });
-  } else if (method === "GET") {
-    return getData(URL, {
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": token,
-      },
-    });
-  }
 };

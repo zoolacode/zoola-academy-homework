@@ -16,7 +16,7 @@ import { deepOrange } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 import LoginIcon from "@mui/icons-material/Login";
 
-export const Header = ({ setMode, mode, userData }) => {
+export const Header = ({ setMode, mode, userData, setIsProfileOpen }) => {
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       backgroundColor: "#44b700",
@@ -56,6 +56,7 @@ export const Header = ({ setMode, mode, userData }) => {
                 overlap="circular"
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 variant="dot"
+                onClick={() => {setIsProfileOpen(true)}}
               >
                 <Avatar sx={{ bgcolor: deepOrange[500] }}>
                   {userData.user.username[0]}

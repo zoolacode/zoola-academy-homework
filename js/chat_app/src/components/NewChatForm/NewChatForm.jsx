@@ -12,16 +12,15 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { fetchRequestJSON } from "../../function/fetch";
-
-const intervalUpdate = 1000;
+import { createChat, getUsers, addChatMembers } from "../../function/requests";
+import { INTERVAL_UPDATE } from "../../constants";
 
 export const NewChatForm = ({ open, onClose, userInfo = {} }) => {
   const [chatMembers, setChatMembers] = useState([]);
   const [users, setUsers] = useState([]);
   const [chatName, setChatName] = useState("");
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
     setUsers([]);
     setChatName("");
@@ -35,14 +34,9 @@ export const NewChatForm = ({ open, onClose, userInfo = {} }) => {
       members: [userInfo.user?.id, ...chatMembers],
     };
 
-    fetchRequestJSON("/api/chats", "POST", userInfo.authToken, userData).then(
+    createChat(userData, userInfo.authToken).then(
       (chat) => {
-        fetchRequestJSON(
-          `/api/chats/${chat.id}/members`,
-          "POST",
-          userInfo.authToken,
-          membersData
-        );
+        addChatMembers(userInfo.authToken, chat.id, membersData);
       }
     );
   };
@@ -50,10 +44,10 @@ export const NewChatForm = ({ open, onClose, userInfo = {} }) => {
   useEffect(() => {
     if (userInfo.authToken) {
       const interval = setInterval(() => {
-        fetchRequestJSON("/api/users", "GET", userInfo.authToken).then((data) =>
+        getUsers(userInfo.authToken).then((data) =>
           setUsers(data)
         );
-      }, intervalUpdate);
+      }, INTERVAL_UPDATE);
 
       return () => {
         clearInterval(interval);

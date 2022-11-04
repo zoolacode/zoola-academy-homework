@@ -8,10 +8,10 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { UsersList } from "../UsersList/UsersList";
-import { fetchRequestJSON } from "../../function/fetch";
 
-const intervalUpdate = 1000;
+import { UsersList } from "../UsersList/UsersList";
+import { getUsers, createUser } from "../../function/requests";
+import { INTERVAL_UPDATE } from "../../constants";
 
 export const NewUserForm = ({ open, onClose, userInfo = {} }) => {
   const [userName, setUserName] = useState("");
@@ -21,10 +21,10 @@ export const NewUserForm = ({ open, onClose, userInfo = {} }) => {
   useEffect(() => {
     if (userInfo.authToken) {
       const interval = setInterval(() => {
-        fetchRequestJSON("/api/users", "GET", userInfo.authToken).then((data) =>
+        getUsers(userInfo.authToken).then((data) =>
           setUsers(data)
         );
-      }, intervalUpdate);
+      }, INTERVAL_UPDATE);
 
       return () => {
         clearInterval(interval);
@@ -32,20 +32,20 @@ export const NewUserForm = ({ open, onClose, userInfo = {} }) => {
     }
   }, [userInfo]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     if (userName.length === 0 || userPassword.length === 0) {
       return;
     }
     e.preventDefault();
-    setUserName("");
-    setUserPassword("");
 
     const data = {
       username: userName,
       password: userPassword,
     };
+    createUser(data,  userInfo.authToken);
 
-    fetchRequestJSON("/api/users", "POST", userInfo.authToken, data);
+    setUserName("");
+    setUserPassword("");
   };
 
   return (
