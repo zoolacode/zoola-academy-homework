@@ -1,8 +1,17 @@
 import React, { useContext, useState } from "react";
-import { AppBar, Avatar, Toolbar, Typography, Switch, Box } from "@mui/material";
+import {
+  AppBar,
+  Avatar,
+  Toolbar,
+  Typography,
+  Switch,
+  Box,
+  Stack,
+} from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import { UserContext } from "./UserContext";
+import { Chat } from "./Chat/Chat";
 import { ThemeContext } from "./ThemeContext";
 import { LogoutDialog } from "./LogoutDialog";
 import { BadgeAvatar } from "./BadgeAvatar";
@@ -55,8 +64,13 @@ export const DashBoard = () => {
             />
           </Toolbar>
         </AppBar>
-        <UserCreationButton />
-        <ChatList chatId={chatId} setChatID={setChatID} />
+        <Stack direction="row" spacing={2}>
+          <Box sx={{ mt: 3, width: "45%" }}>
+            <UserCreationButton />
+            <ChatList chatId={chatId} setChatID={setChatID} />
+          </Box>
+          <Chat chatId={chatId} />
+        </Stack>
       </Container>
       <LogoutDialog open={open} onClose={handleClose} />
     </>

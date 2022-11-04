@@ -37,6 +37,7 @@ export const ChatList = ({ chatId, setChatID }) => {
               <MenuItem
                 selected={chatId === params.id}
                 onClick={(event) => handleChatListItemClick(event, params.id)}
+                key={params.id}
               >
                 {params.title}
               </MenuItem>

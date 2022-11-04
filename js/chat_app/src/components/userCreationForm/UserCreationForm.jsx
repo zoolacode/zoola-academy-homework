@@ -12,7 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 
-export const UserCreationForm = ({ /* styleForm */ isOpen, setOpen }) => {
+export const UserCreationForm = ({ isOpen, setOpen }) => {
   const { auth } = useContext(UserContext);
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -20,7 +20,7 @@ export const UserCreationForm = ({ /* styleForm */ isOpen, setOpen }) => {
 
   useEffect(() => {
     getUsers(auth.authToken);
-  }, []);
+  }, [users]);
 
   function createUser(adminToken, adminId, username, password) {
     fetch("/api/users", {

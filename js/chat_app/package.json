@@ -50,6 +50,9 @@
   },
   "proxy": "http://localhost:4000",
   "devDependencies": {
+    "@types/node": "^18.11.4",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "concurrently": "^7.4.0",
     "cross-env": "^7.0.3",
     "http-server": "^14.1.1",
