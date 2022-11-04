@@ -1,5 +1,12 @@
 import React, { useContext, useState } from "react";
-import { AppBar, Avatar, Toolbar, Typography, Switch, Box } from "@mui/material";
+import {
+  AppBar,
+  Avatar,
+  Toolbar,
+  Typography,
+  Switch,
+  Box,
+} from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import { UserContext } from "./UserContext";
@@ -10,7 +17,7 @@ import { ChatList } from "./ChatList";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 import { UserCreationButton } from "./userCreationForm/UserCreationButton";
-import CreateChatForm from "./CreateChatForm";
+import { CreateChatForm } from "./CreateChatForm";
 
 export const DashBoard = () => {
   const { auth } = useContext(UserContext);
@@ -55,7 +62,7 @@ export const DashBoard = () => {
             />
           </Toolbar>
         </AppBar>
-        <Box sx={{ mt: 3 }} >
+        <Box sx={{ mt: 3 }}>
           <CreateChatForm />
         </Box>
         <UserCreationButton />
