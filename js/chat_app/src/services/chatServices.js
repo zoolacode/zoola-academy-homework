@@ -19,6 +19,7 @@ export const chatServices = {
       console.log(error);
     }
   },
+
   addChatMembers: async (chatId, authToken, members) => {
     try {
       await fetch(`/api/chats/${chatId}/members`, {
@@ -52,6 +53,25 @@ export const chatServices = {
       console.log(error);
     }
   },
+
+  getMessageByChatId: async () => {
+    try {
+      await fetch(`/api/chats/${chatId}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'Auth-Token': authToken
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          messagesList(data.messages);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
   sendMessageByChatId: async (chatId, authToken, message, authorId) => {
     try {
       // eslint-disable-next-line no-debugger
@@ -62,13 +82,31 @@ export const chatServices = {
           'content-type': 'application/json',
           'Auth-Token': authToken
         },
-        body: {
+        body: JSON.stringify({
           authorId,
           message
-        }
+        })
       });
     } catch (error) {
       console.log(error);
     }
-  }
+  },
+
+  sendUploadsByChatId: async (chatId, authToken, attachment, authorId) => {
+    try {
+      await fetch(`/api/chats/${chatId}/attachments`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'Auth-Token': authToken
+        },
+        body: JSON.stringify({
+          authorId,
+          attachment
+        })
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

@@ -1,34 +1,37 @@
-const path = require("path");
-const express = require("express");
-const uuid = require("uuid");
-const multer = require("multer");
-const { createDatabase } = require("./database");
+const path = require('path');
+const express = require('express');
+const uuid = require('uuid');
+const multer = require('multer');
+const { createDatabase } = require('./database');
 
 const isDemo = process.env.DEMO !== undefined;
 const uploadDir = path.resolve(
   __dirname,
-  `../${isDemo ? "demo_build" : "pubic"}/uploads`
+  `../${isDemo ? 'demo_build' : 'public'}/uploads`
 );
-const upload = multer({ dest: uploadDir });
+const upload = multer({
+  dest: uploadDir
+});
 
-const adminUserId = "fhs8dhf9s8dhf9sd8hf9sd8hf";
-const storage = createDatabase(path.resolve(__dirname, "../database"), {
+const adminUserId = 'fhs8dhf9s8dhf9sd8hf9sd8hf';
+const storage = createDatabase(path.resolve(__dirname, '../database'), {
   users: [
     {
       id: adminUserId,
-      username: "admin",
+      username: 'admin',
     },
   ],
   adminUsers: [adminUserId],
   chats: [],
   passwords: {
-    [adminUserId]: "admin",
+    [adminUserId]: 'admin',
   },
-  authTokens: {},
+  authTokens: {
+  },
 });
 
 async function authenticate(req, res, next) {
-  const authWhiteList = ["/login"];
+  const authWhiteList = ['/login'];
 
   if (authWhiteList.includes(req.path)) {
     next();
@@ -37,11 +40,11 @@ async function authenticate(req, res, next) {
 
   const tokens = await storage.authTokens.read();
   const allTokens = Object.values(tokens);
-  const authToken = req.headers["auth-token"];
+  const authToken = req.headers['auth-token'];
 
   if (!authToken || !allTokens.includes(authToken)) {
     res.writeHead(401);
-    res.end("authentication failed");
+    res.end('authentication failed');
     return;
   }
 
@@ -67,7 +70,7 @@ chatApp.use(express.json());
 chatApp.use(authenticate);
 
 chatApp.post(
-  "/login",
+  '/login',
   withErrorHandle(async (req, res, next) => {
     const { username, password } = req.body;
     const users = await storage.users.read();
@@ -78,7 +81,7 @@ chatApp.post(
     );
     if (!user) {
       res.writeHead(401);
-      res.end("user not found");
+      res.end('user not found');
       return;
     }
 
@@ -100,7 +103,7 @@ chatApp.post(
 );
 
 chatApp.get(
-  "/users/:id",
+  '/users/:id',
   withErrorHandle(async (req, res) => {
     const { id } = req.params;
     storage.users.read().then((users) => {
@@ -110,9 +113,9 @@ chatApp.get(
 );
 
 chatApp.post(
-  "/users",
+  '/users',
   withErrorHandle(async (req, res) => {
-    const body = req.body;
+    const { body } = req;
 
     if (!body.username?.length) {
       res.writeHead(400);
@@ -144,14 +147,16 @@ chatApp.post(
     await storage.users.write([...users, user]);
 
     const passwords = await storage.passwords.read();
-    await storage.passwords.write({ ...passwords, [id]: body.password });
+    await storage.passwords.write({
+      ...passwords, [id]: body.password
+    });
 
     res.send(user);
   })
 );
 
 chatApp.get(
-  "/users",
+  '/users',
   withErrorHandle(async (req, res) => {
     const { searchQuery } = req.query;
 
@@ -171,7 +176,7 @@ chatApp.get(
 );
 
 chatApp.get(
-  "/users/:id/chats",
+  '/users/:id/chats',
   withErrorHandle(async (req, res) => {
     const { id: userId } = req.params;
     const chats = await storage.chats.read();
@@ -186,7 +191,7 @@ chatApp.get(
 );
 
 chatApp.post(
-  "/chats",
+  '/chats',
   withErrorHandle(async (req, res) => {
     const { title } = req.body;
     const chatId = uuid.v4();
@@ -203,7 +208,7 @@ chatApp.post(
 );
 
 chatApp.post(
-  "/chats/:id/members",
+  '/chats/:id/members',
   withErrorHandle(async (req, res) => {
     const { id } = req.params;
     const { members: memberIds } = req.body;
@@ -228,12 +233,14 @@ chatApp.post(
 
     if (isNonUnique) {
       res.writeHead(400);
-      res.end("some users have been added to this chat already");
+      res.end('some users have been added to this chat already');
       return;
     }
 
     const nextMembers = [...members, ...memberIds];
-    const nextChat = { ...chat, members: nextMembers };
+    const nextChat = {
+      ...chat, members: nextMembers
+    };
 
     const nextChats = [...chats].map((chat) => {
       if (chat.id === id) {
@@ -249,7 +256,7 @@ chatApp.post(
 );
 
 chatApp.get(
-  "/chats/:id",
+  '/chats/:id',
   withErrorHandle(async (req, res) => {
     const { id } = req.params;
     const chats = await storage.chats.read();
@@ -257,7 +264,7 @@ chatApp.get(
 
     if (!chat) {
       res.writeHead(404);
-      res.end("no such chat");
+      res.end('no such chat');
       return;
     }
 
@@ -266,12 +273,12 @@ chatApp.get(
 );
 
 chatApp.post(
-  "/chats/:chatId/attachments",
-  upload.single("file"),
+  '/chats/:chatId/attachments',
+  upload.single('file'),
   withErrorHandle(async (req, res) => {
     if (!req.file) {
       res.writeHead(400);
-      res.end("no file uploaded");
+      res.end('no file uploaded');
       return;
     }
 
@@ -281,7 +288,7 @@ chatApp.post(
 
     if (!chat) {
       res.writeHead(404);
-      res.end("chat not found");
+      res.end('chat not found');
       return;
     }
 
@@ -292,7 +299,7 @@ chatApp.post(
     const message = {
       date: Date.now(),
       authorId,
-      message: "",
+      message: '',
       attachment: req.file.filename,
       id: messageId,
     };
@@ -318,14 +325,14 @@ chatApp.post(
 );
 
 chatApp.post(
-  "/chats/:id/messages",
+  '/chats/:id/messages',
   withErrorHandle(async (req, res) => {
     const { id: chatId } = req.params;
     const { message, authorId } = req.body;
 
     if (!message) {
       res.writeHead(400);
-      res.end("no message provided");
+      res.end('no message provided');
       return;
     }
 
@@ -334,14 +341,14 @@ chatApp.post(
 
     if (!chat) {
       res.writeHead(404);
-      res.end("chat not found");
+      res.end('chat not found');
       return;
     }
 
     const memberId = chat.members.find((member) => member === authorId);
     if (memberId === undefined) {
       res.writeHead(400);
-      res.end("author is not a member of this chat");
+      res.end('author is not a member of this chat');
       return;
     }
 
@@ -349,7 +356,9 @@ chatApp.post(
     const messageId = uuid.v1();
     const nextMessages = [
       ...messages,
-      { id: messageId, message, authorId, date: Date.now() },
+      {
+        id: messageId, message, authorId, date: Date.now()
+      },
     ];
     const nextChat = {
       ...chat,
@@ -370,8 +379,8 @@ chatApp.post(
   })
 );
 
-app.use("/api", chatApp);
+app.use('/api', chatApp);
 
 app.listen(4000, () => {
-  console.log("Listening on port 4000");
+  console.log('Listening on port 4000');
 });
