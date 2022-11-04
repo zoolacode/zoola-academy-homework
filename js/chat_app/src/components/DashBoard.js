@@ -66,7 +66,7 @@ export const DashBoard = () => {
         </AppBar>
         <Stack direction="row" spacing={2}>
           <Box sx={{ mt: 3, width: "45%" }}>
-            {auth.isAdmin && <UserCreationButton />}
+            <UserCreationButton />
             <ChatList chatId={chatId} setChatID={setChatID} />
           </Box>
           <Chat chatId={chatId} />
