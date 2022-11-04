@@ -24,6 +24,13 @@ function ListOfChats() {
           alignItems: 'center'
         }}
       >
+        <form
+          onSubmit={(e) => {
+            sendMessageByChatId(message);
+            e.preventDefault();
+            setMessage('');
+          }}
+        />
         {arrayOfMessages.map((message, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <ListItem key={index}>

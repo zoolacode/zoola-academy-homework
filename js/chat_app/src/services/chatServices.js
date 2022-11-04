@@ -52,6 +52,23 @@ export const chatServices = {
       console.log(error);
     }
   },
+  getMessageByChatId: async () => {
+    try {
+      await fetch(`/api/chats/${chatId}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'Auth-Token': authToken
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          messagesList(data.messages);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
   sendMessageByChatId: async (chatId, authToken, message, authorId) => {
     try {
       // eslint-disable-next-line no-debugger
