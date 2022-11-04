@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { UserContext } from "./UserContext";
 
-function fetchCreateChatWithMembers(chatName, token, selectedUsers) {
+function fetchCreateChatWithMembers(chatName, token, selectedUsers, userId) {
   return fetch("/api/chats", {
     method: "post",
     body: JSON.stringify({ title: chatName }),
@@ -28,7 +28,7 @@ function fetchCreateChatWithMembers(chatName, token, selectedUsers) {
     .then((date) => {
       return fetch(`/api/chats/${date}/members`, {
         method: "post",
-        body: JSON.stringify({ members: selectedUsers }),
+        body: JSON.stringify({ members: [...selectedUsers, userId] }),
         headers: {
           "content-type": "application/json",
           "auth-token": token,
@@ -55,7 +55,7 @@ export function CreateChatForm() {
     fetchGetUsers(auth.authToken).then(setUsers);
   }, [open]);
 
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([auth.user.id]);
   const handleChangeSelect = (event) => {
     setSelectedUsers(event.target.value);
   };
@@ -74,11 +74,14 @@ export function CreateChatForm() {
     setSelectedUsers([]);
   };
   const handleSubmit = () => {
-    fetchCreateChatWithMembers(chatName, auth.authToken, selectedUsers).then(
-      () => {
-        handleClose();
-      }
-    );
+    fetchCreateChatWithMembers(
+      chatName,
+      auth.authToken,
+      selectedUsers,
+      auth.user.id
+    ).then(() => {
+      handleClose();
+    });
   };
 
   return (
