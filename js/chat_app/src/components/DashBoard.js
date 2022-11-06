@@ -6,10 +6,12 @@ import {
   Typography,
   Switch,
   Box,
+  Stack,
 } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { Container } from "@mui/system";
 import { UserContext } from "./UserContext";
+import { Chat } from "./Chat/Chat.tsx";
 import { ThemeContext } from "./ThemeContext";
 import { LogoutDialog } from "./LogoutDialog";
 import { BadgeAvatar } from "./BadgeAvatar";
@@ -17,8 +19,8 @@ import { ChatList } from "./ChatList";
 import { fetchJSON } from "./serverResponse";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
+
 import { UserCreationButton } from "./userCreationForm/UserCreationButton";
-import CreateChatForm from "./CreateChatForm";
 
 export const DashBoard = () => {
   const { auth } = useContext(UserContext);
@@ -48,7 +50,7 @@ export const DashBoard = () => {
   return (
     <>
       <Container maxWidth="lg">
-        <AppBar position="static" color="inherit">
+        <AppBar position="static" color={auth.isAdmin ? "inherit" : "primary"}>
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div onClick={handleOpen} style={{ cursor: "pointer" }}>
               <BadgeAvatar>
@@ -73,9 +75,13 @@ export const DashBoard = () => {
             />
           </Toolbar>
         </AppBar>
-        <Box sx={{ mt: 3 }}>{/* <CreateChatForm /> */}</Box>
-        <UserCreationButton />
-        <ChatList chatId={chatId} setChatID={setChatID} />
+        <Stack direction="row" spacing={2}>
+          <Box sx={{ mt: 3, width: "45%" }}>
+            {auth.isAdmin && <UserCreationButton />}
+            <ChatList chatId={chatId} setChatID={setChatID} />
+          </Box>
+          <Chat chatId={chatId} />
+        </Stack>
       </Container>
       <LogoutDialog open={open} onClose={handleClose} />
     </>

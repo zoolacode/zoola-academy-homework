@@ -15,7 +15,10 @@ export const UserCreationButton = () => {
         variant="contained"
         onClick={() => setOpen(true)}
         className="userCreateButton"
-        disabled={!auth.isAdmin}
+        sx={{
+          width: "100%",
+          mb: 1,
+        }}
       >
         Create User
       </Button>
