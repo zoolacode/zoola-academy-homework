@@ -39,7 +39,7 @@ export const DashBoard = () => {
   return (
     <>
       <Container maxWidth="lg">
-        <AppBar position="static" color="inherit">
+        <AppBar position="static" color={auth.isAdmin ? "inherit" : "primary"}>
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div onClick={handleOpen} style={{ cursor: "pointer" }}>
               <BadgeAvatar>
