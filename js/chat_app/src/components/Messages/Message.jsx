@@ -11,8 +11,8 @@ import {
 
 export const Messages = ({ messagesList, usersList }) => {
   const getUserName = (array, messageItem) => {
-    const items = array.find((item) => item.id === messageItem.authorId);
-    return items.username;
+    const items = array.find((item) => item?.id === messageItem?.authorId);
+    return items?.username;
   };
   
   return (
@@ -23,17 +23,23 @@ export const Messages = ({ messagesList, usersList }) => {
         .map((messageItem, index) => (
           <TimelineItem key={messageItem.id}>
             <TimelineOppositeContent>
-              {messageItem.message}
+              {messageItem?.attachment ?
+                <img
+                  src={`uploads/${messageItem.attachment}`}
+                  height={140}
+                  width="auto"
+                />
+              : messageItem.message}
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineDot />
               {!(index === messagesList.length - 1) && <TimelineConnector />}
             </TimelineSeparator>
             <TimelineContent color="text.secondary">
-              {getUserName(usersList, messageItem)}
+              {getUserName(usersList, messageItem) || ""}
               <br />
-              {`${new Date(messageItem.date).toLocaleDateString()}`}/
-              {`${new Date(messageItem.date).toLocaleTimeString()}`}
+              {`${new Date(messageItem?.date).toLocaleDateString()}`}/
+              {`${new Date(messageItem?.date).toLocaleTimeString()}`}
             </TimelineContent>
           </TimelineItem>
         )) ?? <CircularProgress />}

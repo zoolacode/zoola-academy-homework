@@ -1,14 +1,16 @@
 import { Container, Box, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Messages } from "../Messages/Message";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 
-import { getUsers, getChatById, addChatMessage } from "../../function/requests";
+import { getUsers, getChatById, addChatMessage, uploadFileToChat } from "../../function/requests";
 import { INTERVAL_UPDATE } from "../../constants";
 
 export const Chat = ({ chatId, userData = {} }) => {
   const [usersList, setUsersList] = useState([]);
   const [messagesList, setMessagesList] = useState([]);
   const [message, setMessage] = useState("");
+  const hiddenFileInputRef = useRef(null);
 
   useEffect(() => {
     if (chatId) {
@@ -40,6 +42,24 @@ export const Chat = ({ chatId, userData = {} }) => {
     );
   };
 
+  const onUploadClick = (e) => {
+    if (hiddenFileInputRef.current) {
+      hiddenFileInputRef.current.click();
+    }
+  }
+  const onUploadPhoto = (e) => {
+    try {
+        const uploadedFile = e?.target?.files[0];
+        uploadFileToChat(
+          userData.authToken,
+          chatId,
+          uploadedFile
+        );
+    } catch (err) {
+        console.log(err);
+    }
+  };
+
   if (!chatId) {
     return (
       <Box
@@ -60,7 +80,8 @@ export const Chat = ({ chatId, userData = {} }) => {
         <Box
           sx={{
             marginLeft: "auto",
-            marginTop: 5
+            marginTop: 5,
+            position: "relative"
           }}
         >
           <form
@@ -82,6 +103,24 @@ export const Chat = ({ chatId, userData = {} }) => {
               value={message}
             />
           </form>
+          <Box
+            ml={1}
+            sx={{
+              position: "absolute",
+              right: "10px",
+              top: "5px"
+            }}
+          >
+            <AttachFileIcon fontSize="small" sx={{ cursor: "pointer" }} onClick={onUploadClick}/>
+            <input
+              id="attach"
+              type="file"
+              accept="image/png, image/jpeg"
+              style={{display: "none"}}
+              ref={hiddenFileInputRef}
+              onChange={onUploadPhoto}
+            />
+          </Box>
           <Box
             sx={{
               maxHeight: "75vh",

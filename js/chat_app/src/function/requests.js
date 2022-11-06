@@ -66,3 +66,17 @@ export const addChatMessage = (token, chatId, data) => {
         data
     });
 };
+
+export const uploadFileToChat = (token, chatId, data) => {
+    const formData = new FormData();
+    formData.append("file", data);
+    formData.append("authorToken", token);
+      
+    return fetch(`/api/chats/${chatId}/attachments`, {
+        method: "POST",
+        body: formData,
+        headers: {
+            "auth-token": token
+        }
+    });
+};

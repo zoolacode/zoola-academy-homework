@@ -3,7 +3,7 @@
 export const fetchRequestJSON = ({url, method = "GET", authToken, data} = {}) => {
 
     const authtoken = {"auth-token": authToken};
-    const headers = {
+    const headers =  {
       "Content-Type": "application/json"
     };
 
