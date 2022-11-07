@@ -20,6 +20,7 @@ import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 
 import { UserCreationButton } from "./userCreationForm/UserCreationButton";
+import { CreateChatForm } from "./CreateChatForm";
 
 export const DashBoard = () => {
   const { auth } = useContext(UserContext);
@@ -67,6 +68,7 @@ export const DashBoard = () => {
         <Stack direction="row" spacing={2}>
           <Box sx={{ mt: 3, width: "45%" }}>
             {auth.isAdmin && <UserCreationButton />}
+            <CreateChatForm />
             <ChatList chatId={chatId} setChatID={setChatID} />
           </Box>
           <Chat chatId={chatId} />
