@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   AppBar,
   Avatar,
@@ -16,6 +16,7 @@ import { ThemeContext } from "./ThemeContext";
 import { LogoutDialog } from "./LogoutDialog";
 import { BadgeAvatar } from "./BadgeAvatar";
 import { ChatList } from "./ChatList";
+import { useHttpClient } from "./serverResponse";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 
@@ -28,6 +29,7 @@ export const DashBoard = () => {
 
   const [open, setOpen] = useState(false);
   const [chatId, setChatID] = useState(null);
+  const fetchJSON = useHttpClient();
 
   const handleOpen = () => {
     setOpen(true);
@@ -50,10 +52,17 @@ export const DashBoard = () => {
       .then(setChats);
   }
 
+  useEffect(() => {
+    const url = `api/users/${auth?.user.id}/chats`;
+
+    fetchJSON(url).then((response) => setChatID(response[0]?.id));
+  }, []);
+
+
   return (
     <>
       <Container maxWidth="lg">
-        <AppBar position="static" color="inherit">
+        <AppBar position="static" color={auth.isAdmin ? "inherit" : "primary"}>
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <div onClick={handleOpen} style={{ cursor: "pointer" }}>
               <BadgeAvatar>
