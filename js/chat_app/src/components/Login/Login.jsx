@@ -9,13 +9,11 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import LoginIcon from '@mui/icons-material/Login';
-import { Box } from '@mui/system';
+import Box from '@mui/material/Box';
 import loginAuth from '../../redux/auth/operation';
 import authSelectors from '../../redux/auth/selector';
 import Header from '../Header/Header';
-import Form from './Form';
-import userSelectors from '../../redux/user/selector';
-import getAllUserChats from '../../redux/user/operation';
+import { Form } from './Form';
 
 function Login() {
   const dispatch = useDispatch();
@@ -34,7 +32,7 @@ function Login() {
       case 'username':
         return setUsername(value);
       default:
-        return;
+        return null;
     }
   };
 
@@ -49,37 +47,54 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginAuth({ username, password }));
+    dispatch(
+      loginAuth({
+        username,
+        password
+      })
+    );
     setUsername('');
     setPassword('');
   };
 
   return !isLogin ? (
     <Container fixed>
-      <AppBar color={'primary'} sx={{ mb: 3 }} position='static'>
-        <Toolbar sx={{ justifyContent: 'space-between' }}>{/* <LoginIcon /> */}</Toolbar>
+      <AppBar
+        color="primary"
+        sx={{
+          mb: 3
+        }}
+        position="static"
+      >
+        <Toolbar
+          sx={{
+            justifyContent: 'space-between'
+          }}
+        >
+          {/* <LoginIcon /> */}
+        </Toolbar>
       </AppBar>
 
       <Form onSubmit={handleSubmit}>
-        <Typography variant='h5'>Welcome to chat</Typography>
-        <Box sx={{ p: 4, width: 1 / 2 }} autoComplete='off'>
+        <Typography variant="h5">Welcome to chat</Typography>
+        <Box
+          sx={{
+            p: 4,
+            width: 1 / 2
+          }}
+          autoComplete="off"
+        >
           <Stack spacing={2}>
+            <TextField label="Username" name="username" onChange={handleChange} error={!!isError} autoComplete="off" />
             <TextField
-              label='Username'
-              name='username'
+              label="Password"
+              name="password"
+              type="password"
               onChange={handleChange}
-              error={isError ? true : false}
-              autoComplete='off'
+              error={!!isError}
+              autoComplete="off"
             />
-            <TextField
-              label='Password'
-              name='password'
-              type='password'
-              onChange={handleChange}
-              error={isError ? true : false}
-              autoComplete='off'
-            />
-            <Button endIcon={<LoginIcon password={password} username={username} />} color='primary' type='submit'>
+            <Button endIcon={<LoginIcon password={password} username={username} />} color="primary" type="submit">
               Login
             </Button>
           </Stack>

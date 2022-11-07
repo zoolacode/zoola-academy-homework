@@ -19,11 +19,11 @@ const authSlice = createSlice({
       state.isLogin = true;
       state.isLogout = false;
     },
-    [loginAuth.rejected](state, action) {
+    [loginAuth.rejected](state) {
       state.isLogin = false;
       state.error = true;
     },
-    [isLogout](state, action) {
+    [isLogout](state) {
       state.auth = {
       };
       state.error = null;

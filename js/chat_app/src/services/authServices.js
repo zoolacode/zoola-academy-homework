@@ -5,8 +5,8 @@ const login = async ({ username, password }) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      password: password,
-      username: username
+      password,
+      username
     })
   });
   if (response.status === 401) {

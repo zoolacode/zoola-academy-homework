@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
+import usersSlice from './users/slice';
 import authSlice from './auth/slice';
 import userSlice from './user/slice';
+import chatSlice from './chat/slice';
 
 let preloadedState;
 const persistedAuthString = localStorage.getItem('auth');
@@ -17,7 +19,11 @@ if (persistedAuthString && persistedChatsString) {
 }
 
 const store = configureStore({
-  reducer: { auth: authSlice.reducer, user: userSlice.reducer },
+  reducer: {
+    auth: authSlice.reducer,
+    users: usersSlice.reducer,
+    chat: chatSlice.reducer
+  },
   preloadedState
 });
 

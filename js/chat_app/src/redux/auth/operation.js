@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import login from '../../services/services';
+import login from '../../services/authServices';
 
 const loginAuth = createAsyncThunk('auth/login', async ({ username, password }) => {
   const response = await login({
@@ -12,9 +12,10 @@ const loginAuth = createAsyncThunk('auth/login', async ({ username, password }) 
     'auth',
     JSON.stringify({
       authToken: data.authToken,
+      isAdmin: data.isAdmin,
       user: {
-        username: data.user.username,
-        id: data.user.id
+        id: data.user.id,
+        username: data.user.username
       }
     })
   );
