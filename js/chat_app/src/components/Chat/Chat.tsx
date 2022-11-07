@@ -9,6 +9,8 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import { ChatMembersList } from "./ChatMemberList";
+import { useHttpClient } from "../serverResponse";
 
 interface DateOptionsType {
   day: "numeric";
@@ -40,6 +42,8 @@ export const Chat = ({ chatId }: PropsType) => {
   const [usersList, setUsersList] = useState<UsersListType[]>([]);
   const [message, setMessage] = useState<string>("");
   const { auth } = useContext(UserContext);
+  const fetchJSON = useHttpClient();
+
 
   const options: DateOptionsType = {
     day: "numeric",
@@ -66,42 +70,22 @@ export const Chat = ({ chatId }: PropsType) => {
   }, [chatId]);
 
   const getMessages = () => {
-    fetch(`/api/chats/${chatId}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Auth-Token": auth.authToken,
-      },
-    })
-      .then((res) => res.json())
+    fetchJSON(`/api/chats/${chatId}`)
       .then((data) => {
         setMessagesList(data.messages);
       });
   };
 
   const postMessage = (message: string): void => {
-    fetch(`/api/chats/${chatId}/messages`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        "Auth-Token": auth.authToken,
-      },
-      body: JSON.stringify({
-        message: message,
-        authorId: auth.user.id,
-      }),
-    });
+
+    fetchJSON(`/api/chats/${chatId}/messages`,{ method: "POST", body: JSON.stringify({
+          message: message,
+          authorId: auth.user.id,
+        })})
   };
 
   const getUsersList = (): void => {
-    fetch("/api/users", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Auth-Token": auth.authToken,
-      },
-    })
-      .then((res) => res.json())
+    fetchJSON("/api/users")
       .then((data) => setUsersList(data));
   };
 
@@ -130,12 +114,14 @@ export const Chat = ({ chatId }: PropsType) => {
   } else {
     return (
       <Container>
+        
         <Box
           sx={{
             marginLeft: "auto",
             marginTop: 5,
           }}
         >
+          <ChatMembersList chatId={chatId}/>
           <form
             onSubmit={(e) => {
               postMessage(message);

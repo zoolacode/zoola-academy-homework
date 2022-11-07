@@ -16,7 +16,7 @@ import { ThemeContext } from "./ThemeContext";
 import { LogoutDialog } from "./LogoutDialog";
 import { BadgeAvatar } from "./BadgeAvatar";
 import { ChatList } from "./ChatList";
-import { fetchJSON } from "./serverResponse";
+import { useHttpClient } from "./serverResponse";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 
@@ -28,6 +28,7 @@ export const DashBoard = () => {
 
   const [open, setOpen] = useState(false);
   const [chatId, setChatID] = useState(null);
+  const fetchJSON = useHttpClient();
 
   const handleOpen = () => {
     setOpen(true);
@@ -37,14 +38,10 @@ export const DashBoard = () => {
     setOpen(false);
   };
 
-  // const fetchJSON = useHttpClient();
-
   useEffect(() => {
     const url = `api/users/${auth?.user.id}/chats`;
 
-    fetchJSON(url, { headers: { "auth-token": auth?.authToken } }).then(
-      (response) => setChatID(response[0]?.id)
-    );
+    fetchJSON(url).then((response) => setChatID(response[0]?.id));
   }, []);
 
   return (

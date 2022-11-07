@@ -4,6 +4,7 @@ import "./userCreationForm.css";
 import Avatar from "@mui/material/Avatar";
 import { green } from "@mui/material/colors";
 import { UserContext } from "../UserContext";
+import { useHttpClient } from "../serverResponse";
 import {
   Button,
   Dialog,
@@ -17,18 +18,15 @@ export const UserCreationForm = ({ isOpen, setOpen }) => {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [users, setUsers] = useState([]);
+  const fetchJSON = useHttpClient();
 
   useEffect(() => {
     getUsers(auth.authToken);
   }, [users]);
 
   function createUser(adminToken, adminId, username, password) {
-    fetch("/api/users", {
+    fetchJSON("/api/users", {
       method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        "Auth-Token": adminToken,
-      },
       body: JSON.stringify({
         adminId: adminId,
         username: username,
@@ -38,15 +36,7 @@ export const UserCreationForm = ({ isOpen, setOpen }) => {
   }
 
   async function getUsers(adminToken) {
-    const response = await fetch("/api/users", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Auth-Token": adminToken,
-      },
-    });
-    const json = await response.json();
-    setUsers(json);
+    const response = await fetchJSON("/api/users").then(setUsers);
   }
 
   const handleClose = () => {
