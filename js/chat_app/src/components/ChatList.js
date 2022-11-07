@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
-import { fetchJSON } from "./serverResponse";
+import { useHttpClient } from "./serverResponse";
 import { Box, Paper, MenuItem, MenuList, Typography } from "@mui/material";
 
 export const ChatList = ({ chatId, setChatID }) => {
@@ -13,14 +13,12 @@ export const ChatList = ({ chatId, setChatID }) => {
   const handleChatListItemClick = (event, id) => {
     setChatID(id);
   };
-  // const fetchJSON = useHttpClient();
+  const fetchJSON = useHttpClient();
 
   React.useEffect(() => {
     const url = `api/users/${userId}/chats`;
 
-    fetchJSON(url, { headers: { "auth-token": auth?.authToken } }).then(
-      setChatsData
-    );
+    fetchJSON(url).then(setChatsData);
   }, []);
 
   return (

@@ -1,10 +1,25 @@
 import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
 
-export const fetchJSON = (
-  url,
-  { method = "GET", body = undefined, headers = {} }
-) => {
+export function useHttpClient() {
+  const { auth } = useContext(UserContext);
+
+  return (
+    url,
+    { method, body } = {
+      method: "GET",
+      body: undefined,
+    }
+  ) => {
+    return fetchJSON(url, {
+      method,
+      body,
+      headers: { "auth-token": auth?.authToken },
+    });
+  };
+}
+
+export const fetchJSON = (url, { method, body, headers }) => {
   return fetch(url, {
     method: method,
     headers: {
