@@ -29,6 +29,8 @@ export const DashBoard = () => {
   const [open, setOpen] = useState(false);
   const [chatId, setChatID] = useState(null);
 
+  const [selectedUsers, setSelectedUsers] = useState([]);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -68,8 +70,8 @@ export const DashBoard = () => {
         <Stack direction="row" spacing={2}>
           <Box sx={{ mt: 3, width: "45%" }}>
             {auth.isAdmin && <UserCreationButton />}
-            <CreateChatForm />
-            <ChatList chatId={chatId} setChatID={setChatID} />
+            <CreateChatForm selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} />
+            <ChatList chatId={chatId} setChatID={setChatID} selectedUsers={selectedUsers} />
           </Box>
           <Chat chatId={chatId} />
         </Stack>

@@ -46,7 +46,7 @@ function fetchGetUsers(token) {
     }).then((response) => response.json());
 }
 
-export function CreateChatForm() {
+export function CreateChatForm({ selectedUsers, setSelectedUsers }) {
     const { auth } = useContext(UserContext);
 
     const [open, setOpen] = useState(false);
@@ -55,7 +55,7 @@ export function CreateChatForm() {
         fetchGetUsers(auth.authToken).then(setUsers);
     }, [open]);
 
-    const [selectedUsers, setSelectedUsers] = useState([]);
+    //const [selectedUsers, setSelectedUsers] = useState([]); // zabrali
     const handleChangeSelect = (event) => {
         const {
             target: { value },
@@ -77,7 +77,7 @@ export function CreateChatForm() {
         setSelectedUsers([]);
     };
     const handleSubmit = () => {
-        fetchCreateChatWithMembers(chatName, auth.authToken, selectedUsers).then(
+        fetchCreateChatWithMembers(chatName, auth.authToken, selectedUsers.concat(auth.user.id)).then(
             () => {
                 handleClose();
             }
@@ -97,6 +97,8 @@ export function CreateChatForm() {
                         label="Chat name"
                         onChange={handleChatName}
                     ></TextField>
+
+
 
                     <FormControl fullWidth sx={{ mb: 5, mt: 2 }} >
                         <InputLabel id="usersSelect">Members</InputLabel>
