@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   AppBar,
   Avatar,
@@ -16,6 +16,7 @@ import { ThemeContext } from "./ThemeContext";
 import { LogoutDialog } from "./LogoutDialog";
 import { BadgeAvatar } from "./BadgeAvatar";
 import { ChatList } from "./ChatList";
+import { fetchJSON } from "./serverResponse";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 
@@ -35,6 +36,16 @@ export const DashBoard = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  // const fetchJSON = useHttpClient();
+
+  useEffect(() => {
+    const url = `api/users/${auth?.user.id}/chats`;
+
+    fetchJSON(url, { headers: { "auth-token": auth?.authToken } }).then(
+      (response) => setChatID(response[0]?.id)
+    );
+  }, []);
 
   return (
     <>
