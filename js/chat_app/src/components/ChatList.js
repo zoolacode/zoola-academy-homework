@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 
-export const ChatList = ({ chatId, setChatID, selectedUsers }) => {
+export const ChatList = ({ chatId, setChatID, chats }) => {
   const [chatsData, setChatsData] = React.useState([]);
   const { auth } = useContext(UserContext);
 
@@ -16,7 +16,6 @@ export const ChatList = ({ chatId, setChatID, selectedUsers }) => {
     setChatID(id);
   };
 
-
   React.useEffect(() => {
     fetch(`api/users/${userId}/chats`, {
       method: "GET",
@@ -26,9 +25,8 @@ export const ChatList = ({ chatId, setChatID, selectedUsers }) => {
       },
     })
       .then((response) => response.json())
-      .then(setChatsData)
-  }, [selectedUsers]);
-
+      .then(setChatsData);
+  }, [chats]);
 
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
@@ -37,7 +35,6 @@ export const ChatList = ({ chatId, setChatID, selectedUsers }) => {
           {chatsData.map((params) => {
             return (
               <MenuItem
-
                 selected={chatId === params.id}
                 onClick={(event) => handleChatListItemClick(event, params.id)}
                 key={params.id}

@@ -29,8 +29,6 @@ export const DashBoard = () => {
   const [open, setOpen] = useState(false);
   const [chatId, setChatID] = useState(null);
 
-  const [selectedUsers, setSelectedUsers] = useState([]);
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -38,6 +36,19 @@ export const DashBoard = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [chats, setChats] = useState([]);
+  function fetchChats() {
+    return fetch(`api/users/${auth.user.id}/chats`, {
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+        "auth-token": auth.authToken,
+      },
+    })
+      .then((response) => response.json())
+      .then(setChats);
+  }
 
   return (
     <>
@@ -70,8 +81,8 @@ export const DashBoard = () => {
         <Stack direction="row" spacing={2}>
           <Box sx={{ mt: 3, width: "45%" }}>
             {auth.isAdmin && <UserCreationButton />}
-            <CreateChatForm selectedUsers={selectedUsers} setSelectedUsers={setSelectedUsers} />
-            <ChatList chatId={chatId} setChatID={setChatID} selectedUsers={selectedUsers} />
+            <CreateChatForm onCreateChat={fetchChats} />
+            <ChatList chatId={chatId} setChatID={setChatID} chats={chats} />
           </Box>
           <Chat chatId={chatId} />
         </Stack>

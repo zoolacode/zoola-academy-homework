@@ -46,7 +46,7 @@ function fetchGetUsers(token) {
     }).then((response) => response.json());
 }
 
-export function CreateChatForm({ selectedUsers, setSelectedUsers }) {
+export function CreateChatForm(props) {
     const { auth } = useContext(UserContext);
 
     const [open, setOpen] = useState(false);
@@ -55,7 +55,8 @@ export function CreateChatForm({ selectedUsers, setSelectedUsers }) {
         fetchGetUsers(auth.authToken).then(setUsers);
     }, [open]);
 
-    //const [selectedUsers, setSelectedUsers] = useState([]); // zabrali
+    const [selectedUsers, setSelectedUsers] = useState([]);
+
     const handleChangeSelect = (event) => {
         const {
             target: { value },
@@ -77,11 +78,15 @@ export function CreateChatForm({ selectedUsers, setSelectedUsers }) {
         setSelectedUsers([]);
     };
     const handleSubmit = () => {
-        fetchCreateChatWithMembers(chatName, auth.authToken, selectedUsers.concat(auth.user.id)).then(
-            () => {
+        fetchCreateChatWithMembers(
+            chatName,
+            auth.authToken,
+            selectedUsers.concat(auth.user.id)
+        )
+            .then(() => {
                 handleClose();
-            }
-        );
+            })
+            .then(() => props.onCreateChat());
     };
 
     return (
@@ -89,8 +94,12 @@ export function CreateChatForm({ selectedUsers, setSelectedUsers }) {
             <Button fullWidth variant="outlined" onClick={handleClickOpen}>
                 Create New Chat
             </Button>
-            <Dialog sx={{ maxWidth: 400, m: "0 auto" }} onClose={handleClose} open={open}>
-                <DialogTitle >Create new chat</DialogTitle>
+            <Dialog
+                sx={{ maxWidth: 400, m: "0 auto" }}
+                onClose={handleClose}
+                open={open}
+            >
+                <DialogTitle>Create new chat</DialogTitle>
                 <Box sx={{ p: 3 }}>
                     <TextField
                         fullWidth
@@ -98,9 +107,7 @@ export function CreateChatForm({ selectedUsers, setSelectedUsers }) {
                         onChange={handleChatName}
                     ></TextField>
 
-
-
-                    <FormControl fullWidth sx={{ mb: 5, mt: 2 }} >
+                    <FormControl fullWidth sx={{ mb: 5, mt: 2 }}>
                         <InputLabel id="usersSelect">Members</InputLabel>
                         <Select
                             labelId="usersSelect"
@@ -109,14 +116,15 @@ export function CreateChatForm({ selectedUsers, setSelectedUsers }) {
                             onChange={handleChangeSelect}
                             input={<OutlinedInput label="Members" />}
                         >
-                            {users.map((el) => {
-                                if (el.id !== auth.user.id)
+                            {users
+                                .filter((user) => user.id !== auth.user.id)
+                                .map((el) => {
                                     return (
                                         <MenuItem key={el.id} value={el.id}>
                                             {el.username}
                                         </MenuItem>
                                     );
-                            })}
+                                })}
                         </Select>
                     </FormControl>
 
