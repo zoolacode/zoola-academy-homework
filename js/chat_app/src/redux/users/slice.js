@@ -20,15 +20,12 @@ const usersSlice = createSlice({
 export const getAllUsersThunk = createAsyncThunk('getAllUsers/api/users', async (_, { getState }) => {
   const { authToken } = getState().auth.auth;
 
-  const response = await userServices.getAllUsers(authToken);
-  return response;
+  return userServices.getAllUsers(authToken);
 });
 
 export const createUserThunk = createAsyncThunk(
   'createUser/api/users',
   async (paramsForCreateUser, { dispatch, getState }) => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     const { authToken } = getState().auth.auth;
     const { id } = getState().auth.auth.user;
     const { username, password } = paramsForCreateUser;
