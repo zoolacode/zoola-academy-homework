@@ -1,20 +1,12 @@
-import { MenuItem, MenuList, Paper, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import getChatsUsers from '../../redux/chat/operation';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { useSelector } from 'react-redux';
 import userSelectors from '../../redux/user/selector';
 
-function ChatList() {
-  const [currentChatId, setCurrentChatId] = useState(null);
+function ChatList({ currentChatId, onChatChange }) {
   const chats = useSelector(userSelectors.getChats);
-  const authToken = useSelector(userSelectors.getAuthToken);
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getChatsUsers.getAllChats({
-  //     currentChatId, authToken
-  //   }));
-  // }, [dispatch]);
 
   if (!chats.length) {
     return <Typography variant="body2">No chats</Typography>;
@@ -23,18 +15,15 @@ function ChatList() {
   return (
     <Paper>
       <MenuList>
-        {chats?.map((chat) => (
+        {chats?.map(({ id, title }) => (
           <MenuItem
-            selected={chat.id === currentChatId}
+            selected={id === currentChatId}
             onClick={() => {
-              // dispatch(getChatsUsers.getUserChat({
-              //   currentChatId, authToken
-              // }));
-              setCurrentChatId(chat.id);
+              onChatChange(id);
             }}
-            key={chat.id}
+            key={id}
           >
-            {chat.title}
+            {title}
           </MenuItem>
         ))}
       </MenuList>

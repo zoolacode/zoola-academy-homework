@@ -3,11 +3,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import login from '../../services/authServices';
 
 const loginAuth = createAsyncThunk('auth/login', async ({ username, password }) => {
-  const response = await login({
+  const data = await login({
     username,
     password
   });
-  const data = await response.json();
+  // const data = await response.json();
   localStorage.setItem(
     'auth',
     JSON.stringify({

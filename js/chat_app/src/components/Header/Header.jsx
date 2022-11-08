@@ -17,8 +17,6 @@ import { StyledBadge } from '../StyleBadge';
 import authSelectors from '../../redux/auth/selector';
 import { isLogout } from '../../redux/auth/slice';
 import { ThemeContext } from '../ThemeContext/ThemeContext';
-// import ChatList from '../ChatList/ChatList';
-// import ChatList from '../ChatList';
 
 function Header() {
   const [isWindowLogoutOpen, setIsWindowLogoutOpen] = useState(false);
@@ -33,6 +31,7 @@ function Header() {
   const handleLogoutClick = () => {
     setIsWindowLogoutOpen(false);
     localStorage.removeItem('auth');
+    localStorage.removeItem('user');
     navigation('/');
     dispatch(isLogout());
   };
@@ -81,9 +80,7 @@ function Header() {
                 </Avatar>
               </StyledBadge>
             </Stack>
-            <Typography variant="h6">
-              {`Welcome, ${name}!`}
-            </Typography>
+            <Typography variant="h6">{`Welcome, ${name}!`}</Typography>
           </Toolbar>
         </AppBar>
 

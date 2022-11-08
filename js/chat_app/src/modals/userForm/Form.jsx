@@ -66,7 +66,7 @@ export default function CreateUserForm({ onClose, open }) {
     if (!errorUsername && !errorPassword) {
       const paramsForCreateUser = {
         username,
-        password,
+        password
       };
 
       dispatch(createUserThunk(paramsForCreateUser));
@@ -78,7 +78,7 @@ export default function CreateUserForm({ onClose, open }) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle variant="h6">Create user</DialogTitle>
+      <DialogTitle variant='h6'>Create user</DialogTitle>
       <DialogContent
         sx={{
           width: 450
@@ -88,29 +88,29 @@ export default function CreateUserForm({ onClose, open }) {
           error={errorUsername}
           value={username}
           onChange={(e) => handleUsername(e)}
-          type="text"
+          type='text'
           fullWidth
-          margin="normal"
-          label="Username"
-          variant="outlined"
+          margin='normal'
+          label='Username'
+          variant='outlined'
         />
         <TextField
           error={errorPassword}
           value={password}
           onChange={(e) => handlePassword(e)}
-          type="password"
+          type='password'
           fullWidth
-          margin="normal"
-          label="Password"
-          variant="outlined"
+          margin='normal'
+          label='Password'
+          variant='outlined'
         />
         <Button
           sx={{
             margin: '15px 0'
           }}
-          type="button"
+          type='button'
           fullWidth
-          variant="outlined"
+          variant='outlined'
           onClick={handleSendButton}
         >
           Send

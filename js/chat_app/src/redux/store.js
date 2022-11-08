@@ -12,9 +12,9 @@ if (persistedAuthString && persistedChatsString) {
     auth: {
       auth: JSON.parse(persistedAuthString)
     },
-    // user: {
-    //   user: JSON.parse(persistedChatsString)
-    // }
+    user: {
+      user: JSON.parse(persistedChatsString)
+    }
   };
 }
 

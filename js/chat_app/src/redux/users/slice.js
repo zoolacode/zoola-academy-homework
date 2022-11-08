@@ -2,14 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { userServices } from '../../services/userServices';
 
 const initialState = {
-  allUsers: [],
+  allUsers: []
 };
 
 const usersSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllUsersThunk.fulfilled, (state, action) => {
       state.allUsers = action.payload;

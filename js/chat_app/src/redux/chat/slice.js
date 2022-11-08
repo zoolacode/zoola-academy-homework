@@ -1,11 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { chatServices } from '../../services/chatServices';
-import getChatsUsers from './operation';
 
 const initialState = {
-  chat: {
-},
-  chats: [],
   chatData: null,
   selectedMembers: [],
   status: 'fullfield',
@@ -32,12 +28,6 @@ const chatSlice = createSlice({
       .addCase(createChatThunk.rejected, (state, action) => {
         state.status = action.meta.requestStatus;
         state.isError = true;
-      })
-      .addCase(getChatsUsers.getUserChat.fulfilled, (state, action) => {
-        state.chat = action.payload;
-      })
-      .addCase(getChatsUsers.getAllChats.fulfilled, (state, action) => {
-        state.chats = action.payload;
       });
   }
 });
