@@ -9,7 +9,6 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
-import { ChatMembersList } from "./ChatMemberList";
 import { useHttpClient } from "../serverResponse";
 
 interface DateOptionsType {
@@ -44,7 +43,6 @@ export const Chat = ({ chatId }: PropsType) => {
   const { auth } = useContext(UserContext);
   const fetchJSON = useHttpClient();
 
-
   const options: DateOptionsType = {
     day: "numeric",
     month: "numeric",
@@ -70,23 +68,23 @@ export const Chat = ({ chatId }: PropsType) => {
   }, [chatId]);
 
   const getMessages = () => {
-    fetchJSON(`/api/chats/${chatId}`)
-      .then((data) => {
-        setMessagesList(data.messages);
-      });
+    fetchJSON(`/api/chats/${chatId}`).then((data) => {
+      setMessagesList(data.messages);
+    });
   };
 
   const postMessage = (message: string): void => {
-
-    fetchJSON(`/api/chats/${chatId}/messages`,{ method: "POST", body: JSON.stringify({
-          message: message,
-          authorId: auth.user.id,
-        })})
+    fetchJSON(`/api/chats/${chatId}/messages`, {
+      method: "POST",
+      body: JSON.stringify({
+        message: message,
+        authorId: auth.user.id,
+      }),
+    });
   };
 
   const getUsersList = (): void => {
-    fetchJSON("/api/users")
-      .then((data) => setUsersList(data));
+    fetchJSON("/api/users").then((data) => setUsersList(data));
   };
 
   const getUserName = (
@@ -114,14 +112,12 @@ export const Chat = ({ chatId }: PropsType) => {
   } else {
     return (
       <Container>
-        
         <Box
           sx={{
             marginLeft: "auto",
             marginTop: 5,
           }}
         >
-          <ChatMembersList chatId={chatId}/>
           <form
             onSubmit={(e) => {
               postMessage(message);
