@@ -223,13 +223,7 @@ export const Chat = ({ chatId }: PropsType) => {
                           </div>
                         </>
                       ) : (
-                        <Linkify
-                          properties={{
-                            style: { color: "green" },
-                          }}
-                        >
-                          {messageItem.message}
-                        </Linkify>
+                        <Linkify>{messageItem.message}</Linkify>
                       )}
                     </TimelineOppositeContent>
                     <TimelineSeparator>
