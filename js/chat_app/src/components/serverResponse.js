@@ -6,7 +6,7 @@ export function useHttpClient() {
 
   return (
     url,
-    { method, body } = {
+    { method = "GET", body = undefined } = {
       method: "GET",
       body: undefined,
     }

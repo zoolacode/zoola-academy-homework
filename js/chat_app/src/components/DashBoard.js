@@ -28,7 +28,7 @@ export const DashBoard = () => {
   const { toggleMode, darkMode } = useContext(ThemeContext);
 
   const [open, setOpen] = useState(false);
-  const [chatId, setChatID] = useState(null);
+  const [chatId, setChatId] = useState(null);
   const fetchJSON = useHttpClient();
 
   const handleOpen = () => {
@@ -40,24 +40,21 @@ export const DashBoard = () => {
   };
 
   const [chats, setChats] = useState([]);
+
   function fetchChats() {
-    return fetch(`api/users/${auth.user.id}/chats`, {
-      method: "get",
-      headers: {
-        "content-type": "application/json",
-        "auth-token": auth.authToken,
-      },
-    })
-      .then((response) => response.json())
-      .then(setChats);
+    return fetchJSON(`api/users/${auth.user.id}/chats`, {
+      method: "GET",
+    }).then((chats) => {
+      setChats(chats);
+      return chats;
+    });
   }
 
   useEffect(() => {
-    const url = `api/users/${auth?.user.id}/chats`;
-
-    fetchJSON(url).then((response) => setChatID(response[0]?.id));
+    fetchChats().then((chats) => {
+      setChatId(chats[0]?.id);
+    });
   }, []);
-
 
   return (
     <>
@@ -90,8 +87,14 @@ export const DashBoard = () => {
         <Stack direction="row" spacing={2}>
           <Box sx={{ mt: 3, width: "45%" }}>
             {auth.isAdmin && <UserCreationButton />}
-            <CreateChatForm onCreateChat={fetchChats} />
-            <ChatList chatId={chatId} setChatID={setChatID} chats={chats} />
+            <CreateChatForm
+              onCreateChat={() => {
+                fetchChats().then((chats) => {
+                  setChatId(chats[chats.length - 1].id);
+                });
+              }}
+            />
+            <ChatList chatId={chatId} setChatId={setChatId} chats={chats} />
           </Box>
           <Chat chatId={chatId} />
         </Stack>
