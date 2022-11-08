@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addChatMembersThunk } from '../../redux/chat/slice';
 import chatSelectors from '../../redux/chat/selector';
 
-function Select({ usersDontMembers }) {
+function Select({ users }) {
   const [selectedMembers, setSelectedMembers] = useState([]);
-  const [selectesMembersError, setSelectesMembersError] = useState(false);
+  const [selectedMembersError, setSelectedMembersError] = useState(false);
 
-  const [membersId, setMembersId] = useState([]);
+  const [membersIds, setMembersIds] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -20,26 +20,26 @@ function Select({ usersDontMembers }) {
   const handleChange = (event) => {
     const { target: { value } } = event;
 
-    setSelectesMembersError(false);
+    setSelectedMembersError(false);
 
     setSelectedMembers(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
 
-    setMembersId(usersDontMembers.filter((user) => value.includes(user.username)).map((user) => user.id));
+    setMembersIds(users.filter((user) => value.includes(user.username)).map((user) => user.id));
   };
 
   const handleSubmit = () => {
     if (!selectedMembers.length) {
-      setSelectesMembersError(true);
+      setSelectedMembersError(true);
       return;
     }
 
     dispatch(
       addChatMembersThunk({
         chatId,
-        members: membersId
+        members: membersIds
       })
     );
 
@@ -48,14 +48,14 @@ function Select({ usersDontMembers }) {
 
   return (
     <div>
-      {usersDontMembers?.length ? (
+      {users?.length ? (
         <FormControl fullWidth>
           <TextField
             sx={{
               mb: 1,
               mt: 1
             }}
-            error={selectesMembersError}
+            error={selectedMembersError}
             select
             label="New members"
             variant="outlined"
@@ -65,7 +65,7 @@ function Select({ usersDontMembers }) {
               value: selectedMembers
             }}
           >
-            {usersDontMembers.map((user) => (
+            {users.map((user) => (
               <MenuItem key={user.id} value={user.username}>
                 {user.username}
               </MenuItem>

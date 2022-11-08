@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { chatServices } from '../../services/chatServices';
+import authSelectors from '../auth/selector';
+import chatSelectors from './selector';
 
 const initialState = {
   chatData: null,
   selectedMembers: [],
-  status: 'fullfield',
   isError: false
 };
 
@@ -18,26 +19,19 @@ const chatSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createChatThunk.fulfilled, (state, action) => {
-        state.status = action.meta.requestStatus;
+      .addCase(createChatThunk.fulfilled, (state) => {
         state.isError = false;
       })
-      .addCase(createChatThunk.pending, (state, action) => {
-        state.status = action.meta.requestStatus;
-      })
-      .addCase(createChatThunk.rejected, (state, action) => {
-        state.status = action.meta.requestStatus;
+      .addCase(createChatThunk.rejected, (state) => {
         state.isError = true;
       })
 
       .addCase(getChatByIdThunk.fulfilled, (state, action) => {
         state.isError = false;
-        state.status = action.meta.requestStatus;
         state.chatData = action.payload;
       })
-      .addCase(getChatByIdThunk.rejected, (state, action) => {
+      .addCase(getChatByIdThunk.rejected, (state) => {
         state.isError = true;
-        state.status = action.meta.requestStatus;
       });
   }
 });
@@ -45,10 +39,15 @@ const chatSlice = createSlice({
 export const addChatMembersThunk = createAsyncThunk(
   'addMembers/api/chat/:chatId/members',
   async (paramsForAddMembers, { getState, dispatch }) => {
-    const { authToken } = getState().auth.auth;
+    const authToken = authSelectors.getAuthToken(getState());
+    const currentChatId = chatSelectors.getChatId(getState());
     const { chatId, members } = paramsForAddMembers;
+
     const response = await chatServices.addChatMembers(chatId, authToken, members);
-    dispatch(getChatByIdThunk(response?.id, authToken));
+
+    if (currentChatId === chatId) {
+      dispatch(getChatByIdThunk(response?.id, authToken));
+    }
   }
 );
 
@@ -56,9 +55,9 @@ export const createChatThunk = createAsyncThunk(
   'createChat/api/chats',
   async (title, { getState, dispatch, rejectWithValue }) => {
     try {
-      const { authToken } = getState().auth.auth;
-      const authId = getState().auth.auth.user.id;
-      const membersId = getState().chat.selectedMembers;
+      const authToken = authSelectors.getAuthToken(getState());
+      const authId = authSelectors.getAuthUserId(getState());
+      const membersId = chatSelectors.getSelectedMembers(getState());
 
       const response = await chatServices.createChat(title, authToken);
 
@@ -83,7 +82,7 @@ export const createChatThunk = createAsyncThunk(
 
 export const getChatByIdThunk = createAsyncThunk('getChatById/api/chats/:id', async (chatId, { getState }) => {
   try {
-    const { authToken } = getState().auth.auth;
+    const authToken = authSelectors.getAuthToken(getState());
 
     return chatServices.getChatById(chatId, authToken);
   } catch (error) {

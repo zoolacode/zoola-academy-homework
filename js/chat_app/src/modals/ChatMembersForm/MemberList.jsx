@@ -10,7 +10,7 @@ import MemberAvatar from './MemberAvatar';
 import Select from './SelectForm';
 
 function MemberList({ onClose, open, membersData, allUsers }) {
-  const usersDontMembers = allUsers.filter((user) => !membersData?.includes(user));
+  const users = allUsers.filter((user) => !membersData?.includes(user));
 
   return (
     <Dialog onClose={onClose} open={open}>
@@ -20,7 +20,7 @@ function MemberList({ onClose, open, membersData, allUsers }) {
           width: 450
         }}
       >
-        <Select usersDontMembers={usersDontMembers} />
+        <Select users={users} />
         <List>
           {membersData?.map((user) => (
             <ListItem

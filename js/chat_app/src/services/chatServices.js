@@ -12,8 +12,7 @@ export const chatServices = {
     const body = {
       members
     };
-    const response = query(`/api/chats/${chatId}/members`, 'POST', authToken, body);
-    return response;
+    return query(`/api/chats/${chatId}/members`, 'POST', authToken, body);
   },
   getChatById: async (chatId, authToken) => {
     const response = await query(`/api/chats/${chatId}`, 'GET', authToken);
