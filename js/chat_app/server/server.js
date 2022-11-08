@@ -7,7 +7,7 @@ const { createDatabase } = require("./database");
 const isDemo = process.env.DEMO !== undefined;
 const uploadDir = path.resolve(
   __dirname,
-  `../${isDemo ? "demo_build" : "pubic"}/uploads`
+  `../${isDemo ? "demo_build" : "public"}/uploads`
 );
 const upload = multer({ dest: uploadDir });
 
