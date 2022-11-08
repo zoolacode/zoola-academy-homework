@@ -21,13 +21,14 @@ import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 
 import { UserCreationButton } from "./userCreationForm/UserCreationButton";
+import { CreateChatForm } from "./CreateChatForm";
 
 export const DashBoard = () => {
   const { auth } = useContext(UserContext);
   const { toggleMode, darkMode } = useContext(ThemeContext);
 
   const [open, setOpen] = useState(false);
-  const [chatId, setChatID] = useState(null);
+  const [chatId, setChatId] = useState(null);
   const fetchJSON = useHttpClient();
 
   const handleOpen = () => {
@@ -38,10 +39,21 @@ export const DashBoard = () => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    const url = `api/users/${auth?.user.id}/chats`;
+  const [chats, setChats] = useState([]);
 
-    fetchJSON(url).then((response) => setChatID(response[0]?.id));
+  function fetchChats() {
+    return fetchJSON(`api/users/${auth.user.id}/chats`, {
+      method: "GET",
+    }).then((chats) => {
+      setChats(chats);
+      return chats;
+    });
+  }
+
+  useEffect(() => {
+    fetchChats().then((chats) => {
+      setChatId(chats[0]?.id);
+    });
   }, []);
 
   return (
@@ -75,7 +87,14 @@ export const DashBoard = () => {
         <Stack direction="row" spacing={2}>
           <Box sx={{ mt: 3, width: "45%" }}>
             {auth.isAdmin && <UserCreationButton />}
-            <ChatList chatId={chatId} setChatID={setChatID} />
+            <CreateChatForm
+              onCreateChat={() => {
+                fetchChats().then((chats) => {
+                  setChatId(chats[chats.length - 1].id);
+                });
+              }}
+            />
+            <ChatList chatId={chatId} setChatId={setChatId} chats={chats} />
           </Box>
           <Chat chatId={chatId} />
         </Stack>
