@@ -25,7 +25,7 @@ export default function CreateChatModal() {
           width: '100%',
           mb: 1
         }}
-        variant="outlined"
+        variant='outlined'
         onClick={handleClickOpen}
       >
         Create Chat

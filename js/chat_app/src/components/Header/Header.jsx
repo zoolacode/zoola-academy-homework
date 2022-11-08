@@ -31,6 +31,7 @@ function Header() {
   const handleLogoutClick = () => {
     setIsWindowLogoutOpen(false);
     localStorage.removeItem('auth');
+    localStorage.removeItem('user');
     navigation('/');
     dispatch(isLogout());
   };
@@ -79,9 +80,7 @@ function Header() {
                 </Avatar>
               </StyledBadge>
             </Stack>
-            <Typography variant="h6">
-              {`Welcome, ${name}!`}
-            </Typography>
+            <Typography variant="h6">{`Welcome, ${name}!`}</Typography>
           </Toolbar>
         </AppBar>
 
@@ -94,6 +93,7 @@ function Header() {
             </DialogActions>
           </DialogContent>
         </Dialog>
+        {/* <ChatList /> */}
       </Box>
     </ThemeProvider>
   );

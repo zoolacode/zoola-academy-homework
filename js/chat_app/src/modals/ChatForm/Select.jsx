@@ -20,7 +20,9 @@ export default function CreateChatSelect({ resetMembersTrigger }) {
   }, [resetMembersTrigger]);
 
   const handleChange = (event) => {
-    const { target: { value } } = event;
+    const {
+      target: { value }
+    } = event;
 
     setMembersName(
       // On autofill we get a stringified value.
@@ -33,13 +35,11 @@ export default function CreateChatSelect({ resetMembersTrigger }) {
 
   return (
     <div>
-      <FormControl
-        fullWidth
-      >
+      <FormControl fullWidth>
         <TextField
           select
-          label="Members"
-          variant="outlined"
+          label='Members'
+          variant='outlined'
           SelectProps={{
             multiple: true,
             onChange: handleChange,

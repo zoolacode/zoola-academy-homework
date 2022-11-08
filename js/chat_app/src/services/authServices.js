@@ -1,17 +1,11 @@
+import { queryAuth } from './utils/utils';
+
 const login = async ({ username, password }) => {
-  const response = await fetch('/api/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      password,
-      username
-    })
-  });
-  if (response.status === 401) {
-    throw Error('Bad req');
-  }
+  const body = {
+    username,
+    password,
+  };
+  const response = await queryAuth('/api/login', 'POST', body);
   return response;
 };
 

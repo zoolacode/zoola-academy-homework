@@ -9,11 +9,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import CreateChatSelect from './Select';
 import { createChatThunk } from '../../redux/chat/slice';
 import chatSelectors from '../../redux/chat/selector';
+import userSelectors from '../../redux/user/selector';
+import getAllUserChats from '../../redux/user/operation';
 
 export default function CreateChatForm({ onClose, open }) {
   const [chatName, setChatName] = useState('');
   const [resetMembersTrigger, setResetMembersTrigger] = useState(true);
-
+  const authToken = useSelector(userSelectors.getAuthToken);
+  const userId = useSelector(userSelectors.getUserId);
   const isError = useSelector(chatSelectors.getError);
 
   const dispatch = useDispatch();
@@ -29,37 +32,37 @@ export default function CreateChatForm({ onClose, open }) {
 
   const handleSendButton = () => {
     dispatch(createChatThunk(chatName));
+    // dispatch(getAllUserChats({authToken, userId}));
     setChatName('');
     setResetMembersTrigger((prev) => !prev);
   };
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle variant="h6">Create chat</DialogTitle>
-      <DialogContent sx={{
-        width: 450
-      }}
+      <DialogTitle variant='h6'>Create chat</DialogTitle>
+      <DialogContent
+        sx={{
+          width: 450
+        }}
       >
-        {isError
-          ? <Alert severity="error">Something went wrong - try again!</Alert>
-          : null}
+        {isError ? <Alert severity='error'>Something went wrong - try again!</Alert> : null}
         <TextField
           value={chatName}
           onChange={(e) => handleChatName(e)}
-          type="text"
+          type='text'
           fullWidth
-          margin="normal"
-          label="Chat name"
-          variant="outlined"
+          margin='normal'
+          label='Chat name'
+          variant='outlined'
         />
         <CreateChatSelect resetMembersTrigger={resetMembersTrigger} />
         <Button
           sx={{
             margin: '15px 0'
           }}
-          type="button"
+          type='button'
           fullWidth
-          variant="outlined"
+          variant='outlined'
           onClick={handleSendButton}
         >
           Create

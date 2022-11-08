@@ -25,7 +25,7 @@ export default function CreateUserModal() {
           width: '100%',
           mb: 1
         }}
-        variant="contained"
+        variant='contained'
         onClick={handleClickOpen}
       >
         Create User
