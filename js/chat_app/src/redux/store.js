@@ -12,9 +12,9 @@ if (persistedAuthString && persistedChatsString) {
     auth: {
       auth: JSON.parse(persistedAuthString)
     },
-    user: {
-      user: JSON.parse(persistedChatsString)
-    }
+    // user: {
+    //   user: JSON.parse(persistedChatsString)
+    // }
   };
 }
 
@@ -22,7 +22,8 @@ const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     users: usersSlice.reducer,
-    chat: chatSlice.reducer
+    chat: chatSlice.reducer,
+    user: userSlice.reducer
   },
   preloadedState
 });

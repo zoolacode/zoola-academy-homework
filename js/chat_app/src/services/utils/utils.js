@@ -2,6 +2,7 @@ export const query = async (
   url,
   method,
   authToken,
+  id,
   body = {
   }
 ) => {

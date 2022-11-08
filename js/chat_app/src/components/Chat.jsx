@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Header } from './Header';
 import { UserModal } from '../modals/userForm';
 import { ChatModal } from '../modals/ChatForm';
 import authSelectors from '../redux/auth/selector';
+import ChatList from './ChatList/ChatList';
 
 function Chat() {
   const isAdmin = useSelector(authSelectors.getAdmin);
-
+//   const [currentChatId, setCurrentChatId] = useState(null);
+//   const dispatch = useDispatch();
+// useEffect (()=>{
+// dispatch()
+// },[])
   return (
     <Box sx={{
       width: '100vw',
@@ -35,6 +40,7 @@ function Chat() {
               ? <UserModal />
               : null}
             <ChatModal />
+          <ChatList />
           </Box>
           <Box sx={{
             width: '100%',
@@ -43,7 +49,7 @@ function Chat() {
             height: '100%'
           }}
           >
-            ChatWindow
+            <div>Chat</div>
           </Box>
         </Box>
       </Container>

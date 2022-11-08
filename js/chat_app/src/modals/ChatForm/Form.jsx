@@ -9,11 +9,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import CreateChatSelect from './Select';
 import { createChatThunk } from '../../redux/chat/slice';
 import chatSelectors from '../../redux/chat/selector';
+import userSelectors from '../../redux/user/selector';
+import getAllUserChats from '../../redux/user/operation';
 
 export default function CreateChatForm({ onClose, open }) {
   const [chatName, setChatName] = useState('');
   const [resetMembersTrigger, setResetMembersTrigger] = useState(true);
-
+  const authToken = useSelector(userSelectors.getAuthToken);
+  const userId = useSelector(userSelectors.getUserId);
   const isError = useSelector(chatSelectors.getError);
 
   const dispatch = useDispatch();
@@ -29,6 +32,7 @@ export default function CreateChatForm({ onClose, open }) {
 
   const handleSendButton = () => {
     dispatch(createChatThunk(chatName));
+    // dispatch(getAllUserChats({authToken, userId}));
     setChatName('');
     setResetMembersTrigger((prev) => !prev);
   };

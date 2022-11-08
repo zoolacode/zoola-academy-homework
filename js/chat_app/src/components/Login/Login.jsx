@@ -14,16 +14,24 @@ import loginAuth from '../../redux/auth/operation';
 import authSelectors from '../../redux/auth/selector';
 import Header from '../Header/Header';
 import { Form } from './Form';
+import userSelectors from '../../redux/user/selector';
+import getAllUserChats from '../../redux/user/operation';
+import getUserChat from '../../redux/chat/operation';
+import getChatsUsers from '../../redux/chat/operation';
 
 function Login() {
   const dispatch = useDispatch();
+  // const chatId = useSelector(userSelectors.getChatId);
+  // console.log('chatId', chatId);
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [currentChatId, setCurrentChatId] = useState(null);
   const isLogin = useSelector(authSelectors.getLogin);
   const isError = useSelector(authSelectors.getError);
   const navigation = useNavigate();
   const authToken = useSelector(userSelectors.getAuthToken);
   const userId = useSelector(userSelectors.getUserId);
+
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -41,7 +49,8 @@ function Login() {
       navigation('/');
     } else {
       navigation('/chat');
-      dispatch(getAllUserChats({ authToken, userId }));
+      dispatch(getAllUserChats({authToken, userId}));
+      // dispatch(getChatsUsers.getAllChats({authToken}));
     }
   }, [isLogin]);
 

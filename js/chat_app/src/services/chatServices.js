@@ -13,5 +13,11 @@ export const chatServices = {
       members
     };
     query(`/api/chats/${chatId}/members`, 'POST', authToken, body);
+  },
+  // getAllChats: async ({authToken}) => {
+  //   query(`/api/chats`, 'POST', authToken);
+  // },
+  getChat: async ({chatId, authToken}) => {
+    query(`/api/chats/${chatId}`, 'GET', authToken);
   }
 };

@@ -17,9 +17,8 @@ import { StyledBadge } from '../StyleBadge';
 import authSelectors from '../../redux/auth/selector';
 import { isLogout } from '../../redux/auth/slice';
 import { ThemeContext } from '../ThemeContext/ThemeContext';
-import userSelectors from '../../redux/user/selector';
-import getAllUserChats from '../../redux/user/operation';
-import ChatList from '../ChatList';
+// import ChatList from '../ChatList/ChatList';
+// import ChatList from '../ChatList';
 
 function Header() {
   const [isWindowLogoutOpen, setIsWindowLogoutOpen] = useState(false);
@@ -97,6 +96,7 @@ function Header() {
             </DialogActions>
           </DialogContent>
         </Dialog>
+        {/* <ChatList /> */}
       </Box>
     </ThemeProvider>
   );
