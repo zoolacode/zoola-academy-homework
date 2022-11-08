@@ -1,37 +1,23 @@
-export const query = async (
-  url,
-  method,
-  authToken,
-  body = {
-  }
-) => {
+export const query = async (url, method, authToken, body = {}) => {
+  const headers = {
+    'content-type': 'application/json', 'Auth-Token': authToken
+  };
   try {
     if (Object.keys(body).length) {
       const data = await fetch(url, {
         method,
-        headers: {
-          'content-type': 'application/json',
-          'Auth-Token': authToken
-        },
+        headers,
         body: JSON.stringify(body)
       });
-
-      const response = await data.json();
-
-      return response;
+      return data.json();
     }
 
     const data = await fetch(url, {
       method,
-      headers: {
-        'content-type': 'application/json',
-        'Auth-Token': authToken
-      }
+      headers
     });
 
-    const response = await data.json();
-
-    return response;
+    return data.json();
   } catch (error) {
     console.log(error);
   }

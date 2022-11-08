@@ -66,7 +66,7 @@ export default function CreateUserForm({ onClose, open }) {
     if (!errorUsername && !errorPassword) {
       const paramsForCreateUser = {
         username,
-        password,
+        password
       };
 
       dispatch(createUserThunk(paramsForCreateUser));

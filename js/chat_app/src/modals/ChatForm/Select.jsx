@@ -8,7 +8,7 @@ import authSelectors from '../../redux/auth/selector';
 import usersSelectors from '../../redux/users/selector';
 
 export default function CreateChatSelect({ resetMembersTrigger }) {
-  const [membersName, setMembersName] = useState([]);
+  const [membersNames, setMembersNames] = useState([]);
 
   const authUsername = useSelector(authSelectors.getUsername);
   const users = useSelector(usersSelectors.getAllUsers);
@@ -16,13 +16,13 @@ export default function CreateChatSelect({ resetMembersTrigger }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setMembersName([]);
+    setMembersNames([]);
   }, [resetMembersTrigger]);
 
   const handleChange = (event) => {
     const { target: { value } } = event;
 
-    setMembersName(
+    setMembersNames(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
@@ -33,9 +33,7 @@ export default function CreateChatSelect({ resetMembersTrigger }) {
 
   return (
     <div>
-      <FormControl
-        fullWidth
-      >
+      <FormControl fullWidth>
         <TextField
           select
           label="Members"
@@ -43,7 +41,7 @@ export default function CreateChatSelect({ resetMembersTrigger }) {
           SelectProps={{
             multiple: true,
             onChange: handleChange,
-            value: membersName
+            value: membersNames
           }}
         >
           {users.map((user) => {

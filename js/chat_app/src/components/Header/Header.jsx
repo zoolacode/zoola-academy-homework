@@ -79,9 +79,7 @@ function Header() {
                 </Avatar>
               </StyledBadge>
             </Stack>
-            <Typography variant="h6">
-              {`Welcome, ${name}!`}
-            </Typography>
+            <Typography variant="h6">{`Welcome, ${name}!`}</Typography>
           </Toolbar>
         </AppBar>
 
