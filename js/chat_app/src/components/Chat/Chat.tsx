@@ -203,7 +203,7 @@ export const Chat = ({ chatId }: PropsType) => {
               <input {...getInputProps()} type="file" />
             </Box>
           </Stack>
-          <Dialog open={!!preview} onClose={() => setPreview(undefined)}>
+          <Dialog open={Boolean(preview)} onClose={() => setPreview(undefined)}>
             <DialogContent>
               <img style={{ width: "100%" }} src={`/uploads/${preview}`} />
             </DialogContent>
@@ -230,7 +230,7 @@ export const Chat = ({ chatId }: PropsType) => {
                             <img
                               alt="img"
                               style={{
-                                width: "250px",
+                                width: "15rem",
                                 borderRadius: 4,
                                 cursor: "pointer",
                               }}
