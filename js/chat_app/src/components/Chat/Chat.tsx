@@ -18,6 +18,7 @@ import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { Stack } from "@mui/system";
+import { useHttpClient } from "../serverResponse";
 
 interface DateOptionsType {
   day: "numeric";
@@ -54,6 +55,7 @@ export const Chat = ({ chatId }: PropsType) => {
   const [preview, setPreview] =
     useState<MessageListType["attachment"]>(undefined);
   const { auth } = useContext(UserContext);
+  const fetchJSON = useHttpClient();
 
   const { getInputProps, getRootProps } = useDropzone({
     onDrop: (files) => {
@@ -93,26 +95,14 @@ export const Chat = ({ chatId }: PropsType) => {
   }, [attachment]);
 
   const getMessages = () => {
-    fetch(`/api/chats/${chatId}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Auth-Token": auth.authToken,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setMessagesList(data.messages);
-      });
+    fetchJSON(`/api/chats/${chatId}`).then((data) => {
+      setMessagesList(data.messages);
+    });
   };
 
   const postMessage = (message: string): void => {
-    fetch(`/api/chats/${chatId}/messages`, {
+    fetchJSON(`/api/chats/${chatId}/messages`, {
       method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        "Auth-Token": auth.authToken,
-      },
       body: JSON.stringify({
         message: message,
         authorId: auth.user.id,
@@ -121,15 +111,7 @@ export const Chat = ({ chatId }: PropsType) => {
   };
 
   const getUsersList = (): void => {
-    fetch("/api/users", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Auth-Token": auth.authToken,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setUsersList(data));
+    fetchJSON("/api/users").then((data) => setUsersList(data));
   };
 
   const getUserName = (
