@@ -20,6 +20,8 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { Stack } from "@mui/system";
 import { useHttpClient } from "../serverResponse";
 
+import Linkify from "react-linkify";
+
 interface DateOptionsType {
   day: "numeric";
   month: "numeric";
@@ -221,7 +223,7 @@ export const Chat = ({ chatId }: PropsType) => {
                           </div>
                         </>
                       ) : (
-                        messageItem.message
+                        <Linkify>{messageItem.message}</Linkify>
                       )}
                     </TimelineOppositeContent>
                     <TimelineSeparator>
