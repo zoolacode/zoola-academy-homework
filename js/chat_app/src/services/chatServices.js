@@ -38,6 +38,8 @@ export const chatServices = {
   },
   getChatById: async (chatId, authToken) => {
     try {
+      // eslint-disable-next-line no-debugger
+      debugger;
       const data = await fetch(`/api/chats/${chatId}`, {
         method: 'GET',
         headers: {
@@ -74,8 +76,6 @@ export const chatServices = {
 
   sendMessageByChatId: async (chatId, authToken, message, authorId) => {
     try {
-      // eslint-disable-next-line no-debugger
-      debugger;
       await fetch(`/api/chats/${chatId}/messages`, {
         method: 'POST',
         headers: {
@@ -92,18 +92,17 @@ export const chatServices = {
     }
   },
 
-  sendUploadsByChatId: async (chatId, authToken, attachment, authorId) => {
+  sendUploadsByChatId: async (chatId, authToken, data) => {
+    const formData = new FormData();
+    formData.append('file', data);
+    formData.append('authorToken', token);
     try {
       await fetch(`/api/chats/${chatId}/attachments`, {
         method: 'POST',
+        body: formData,
         headers: {
-          'content-type': 'application/json',
-          'Auth-Token': authToken
+          'auth-token': authToken
         },
-        body: JSON.stringify({
-          authorId,
-          attachment
-        })
       });
     } catch (error) {
       console.log(error);

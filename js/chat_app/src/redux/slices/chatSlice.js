@@ -55,12 +55,12 @@ export const createChatThunk = createAsyncThunk(
 );
 
 export const getChatByIdThunk = createAsyncThunk('getChatById/api/chats/:chatId', async (_, { getState }) => {
-  const chatId = '18340592-5fcf-45a3-acd3-80264267b5fb';
+  // eslint-disable-next-line no-debugger
+  debugger;
+  const chatId = 'dd6de923-ed8c-4b3c-9dec-9f0156242ff3';
   const { authToken } = getState().auth.auth;
 
-  const response = await chatServices.getChatById(chatId, authToken);
-
-  return response;
+  return chatServices.getChatById(chatId, authToken);
 });
 
 export const sendMessageByChatIdThunk = createAsyncThunk(
@@ -84,6 +84,18 @@ export const getMessageByChatId = createAsyncThunk(
     const authorId = getState().auth.auth.user.id;
 
     await chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
+  }
+);
+
+export const sendUploadsByChatId = createAsyncThunk(
+  'sendUploadsByChatId/api/chats/:chatId',
+  async (params, { getState }) => {
+    const { uploadFile } = params;
+    const chatId = getState().chat.chatData.id;
+    const { authToken } = getState().auth.auth;
+    const authorId = getState().auth.auth.user.id;
+
+    await chatServices.sendUploadsByChatId(chatId, authToken, uploadFile, authorId);
   }
 );
 

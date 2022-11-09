@@ -21,14 +21,21 @@ function Separator({ date, authorId, message }) {
   return (
     <Timeline>
       <TimelineItem>
-        <TimelineOppositeContent color="textSecondary">{message}</TimelineOppositeContent>
+        <TimelineOppositeContent color="textSecondary">
+          {message}
+          {attachment}
+        </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot />
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
           <Typography>{user ? user.username : ''}</Typography>
-          <Typography>{Date(date)}</Typography>
+          <Typography>
+            {new Date(date.toLocaleDateString())}
+            /
+            {new Date(date.toLocaleTimeString())}
+          </Typography>
         </TimelineContent>
       </TimelineItem>
     </Timeline>
