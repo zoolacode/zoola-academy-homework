@@ -28,7 +28,6 @@ function Chat() {
           <Box
             sx={{
               width: '400px',
-              borderRight: '1px solid',
               pr: '10px',
               height: '100%'
             }}
@@ -39,7 +38,6 @@ function Chat() {
           <Box
             sx={{
               width: '100%',
-              borderRight: '1px solid',
               p: '0 10px',
               height: '100%'
             }}

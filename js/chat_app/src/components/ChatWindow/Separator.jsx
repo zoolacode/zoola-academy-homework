@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import { useDispatch } from 'react-redux';
 import { getUserByIdThunk } from '../../redux/slices/chatSlice';
+import Image from '../ChatImageUpload/Image';
 
 function Separator({ date, authorId, message }) {
   const [user, setUser] = useState();
@@ -18,23 +19,30 @@ function Separator({ date, authorId, message }) {
     dispatch(getUserByIdThunk(authorId)).then((res) => setUser(res.payload));
   }, []);
 
+  const options = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  };
+
   return (
     <Timeline>
       <TimelineItem>
-        <TimelineOppositeContent color="textSecondary">
-          {message}
-          {attachment}
+        <TimelineOppositeContent>
+          {message?.attachment
+            ? <Image attachment={message.attachment} />
+            : message.message}
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent>
+        <TimelineContent color="textSecondary">
           <Typography>{user ? user.username : ''}</Typography>
           <Typography>
-            {new Date(date.toLocaleDateString())}
-            /
-            {new Date(date.toLocaleTimeString())}
+            {new Date(date).toLocaleDateString('en-GB', options)}
           </Typography>
         </TimelineContent>
       </TimelineItem>
