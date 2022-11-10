@@ -45,11 +45,20 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="App">
-          <Header setMode={setMode} mode={mode} userData={userData} setIsProfileOpen={setIsProfileOpen} />
+          <Header
+            setMode={setMode}
+            mode={mode}
+            userData={userData}
+            setIsProfileOpen={setIsProfileOpen}
+          />
           {userData.authToken ? (
             <div className="container">
               <ButtonsAndChatList userData={userData} />
-              <Logout isOpen={isProfileOpen} onClose={closeProfile} userLogout={logout} />
+              <Logout
+                isOpen={isProfileOpen}
+                onClose={closeProfile}
+                userLogout={logout}
+              />
             </div>
           ) : (
             <LoginPage

@@ -1,8 +1,10 @@
 import { useState } from "react";
+
 import { Button } from "@mui/material";
 import { NewChatForm } from "../NewChatForm/NewChatForm";
 import { NewUserForm } from "../NewUserForm/NewUserForm";
-import "./CreateButtons.css"
+
+import "./CreateButtons.css";
 
 export const CreateButtons = ({ userData }) => {
   const [isCreateUserOpen, setIsCreateUserOpen] = useState(false);
