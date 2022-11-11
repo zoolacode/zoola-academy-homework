@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+
+import { UsersList } from "../UsersList/UsersList";
+import { getUsers, createUser } from "../../function/requests";
+import { INTERVAL_UPDATE } from "../../constants";
 import {
   Box,
   Button,
@@ -9,10 +13,6 @@ import {
   TextField,
 } from "@mui/material";
 
-import { UsersList } from "../UsersList/UsersList";
-import { getUsers, createUser } from "../../function/requests";
-import { INTERVAL_UPDATE } from "../../constants";
-
 export const NewUserForm = ({ open, onClose, userInfo = {} }) => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -21,9 +21,7 @@ export const NewUserForm = ({ open, onClose, userInfo = {} }) => {
   useEffect(() => {
     if (userInfo.authToken) {
       const interval = setInterval(() => {
-        getUsers(userInfo.authToken).then((data) =>
-          setUsers(data)
-        );
+        getUsers(userInfo.authToken).then((data) => setUsers(data));
       }, INTERVAL_UPDATE);
 
       return () => {
@@ -42,7 +40,7 @@ export const NewUserForm = ({ open, onClose, userInfo = {} }) => {
       username: userName,
       password: userPassword,
     };
-    createUser(data,  userInfo.authToken);
+    createUser(data, userInfo.authToken);
 
     setUserName("");
     setUserPassword("");

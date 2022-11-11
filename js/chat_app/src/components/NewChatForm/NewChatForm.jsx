@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+
+import { createChat, getUsers, addChatMembers } from "../../function/requests";
+import { INTERVAL_UPDATE } from "../../constants";
 import {
   Box,
   Button,
@@ -12,8 +15,6 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { createChat, getUsers, addChatMembers } from "../../function/requests";
-import { INTERVAL_UPDATE } from "../../constants";
 
 export const NewChatForm = ({ open, onClose, userInfo = {} }) => {
   const [chatMembers, setChatMembers] = useState([]);
@@ -22,7 +23,7 @@ export const NewChatForm = ({ open, onClose, userInfo = {} }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setUsers([]);
+    setChatMembers([]);
     setChatName("");
 
     const userData = {
@@ -34,19 +35,15 @@ export const NewChatForm = ({ open, onClose, userInfo = {} }) => {
       members: [userInfo.user?.id, ...chatMembers],
     };
 
-    createChat(userData, userInfo.authToken).then(
-      (chat) => {
-        addChatMembers(userInfo.authToken, chat.id, membersData);
-      }
-    );
+    createChat(userData, userInfo.authToken).then((chat) => {
+      addChatMembers(userInfo.authToken, chat.id, membersData);
+    });
   };
 
   useEffect(() => {
     if (userInfo.authToken) {
       const interval = setInterval(() => {
-        getUsers(userInfo.authToken).then((data) =>
-          setUsers(data)
-        );
+        getUsers(userInfo.authToken).then((data) => setUsers(data));
       }, INTERVAL_UPDATE);
 
       return () => {

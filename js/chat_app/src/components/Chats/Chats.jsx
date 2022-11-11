@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { MenuItem, MenuList, Paper } from "@mui/material";
 
 import { getChatsByUserId } from "../../function/requests";
 import { INTERVAL_UPDATE } from "../../constants";
+import { MenuItem, MenuList, Paper } from "@mui/material";
 
-export const Chats = ({userData = {}}) => {
+export const Chats = ({ userData = {} }) => {
   const [chats, setChats] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (userData?.user?.id) {
-        getChatsByUserId(userData.authToken, userData.user.id)
-          .then((data) => setChats(data));
+        getChatsByUserId(userData.authToken, userData.user.id).then((data) =>
+          setChats(data)
+        );
       }
     }, INTERVAL_UPDATE);
 
@@ -29,4 +30,4 @@ export const Chats = ({userData = {}}) => {
       </MenuList>
     </Paper>
   );
-}
+};

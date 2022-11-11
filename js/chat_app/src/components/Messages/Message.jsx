@@ -14,7 +14,7 @@ export const Messages = ({ messagesList, usersList }) => {
     const items = array.find((item) => item?.id === messageItem?.authorId);
     return items?.username;
   };
-  
+
   return (
     <Timeline>
       {messagesList
@@ -23,13 +23,15 @@ export const Messages = ({ messagesList, usersList }) => {
         .map((messageItem, index) => (
           <TimelineItem key={messageItem.id}>
             <TimelineOppositeContent>
-              {messageItem?.attachment ?
+              {messageItem?.attachment ? (
                 <img
                   src={`uploads/${messageItem.attachment}`}
                   height={140}
                   width="auto"
                 />
-              : messageItem.message}
+              ) : (
+                messageItem.message
+              )}
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineDot />
