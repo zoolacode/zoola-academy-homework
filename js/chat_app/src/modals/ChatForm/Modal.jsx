@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
-import CreateUserForm from './Form';
+import CreateChatForm from './Form';
 import { getAllUsersThunk } from '../../redux/users/slice';
 
-export default function CreateUserModal() {
+export default function CreateChatModal() {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -25,12 +25,12 @@ export default function CreateUserModal() {
           width: '100%',
           mb: 1
         }}
-        variant="contained"
+        variant="outlined"
         onClick={handleClickOpen}
       >
-        Create User
+        Create Chat
       </Button>
-      <CreateUserForm open={open} onClose={handleClose} />
+      <CreateChatForm open={open} onClose={handleClose} />
     </div>
   );
 }

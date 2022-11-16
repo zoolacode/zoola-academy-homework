@@ -10,7 +10,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import { createUserThunk } from '../../redux/slices/usersSlice';
+import { createUserThunk } from '../../redux/users/slice';
+import usersSelectors from '../../redux/users/selector';
 
 export default function CreateUserForm({ onClose, open }) {
   const [username, setUsername] = useState('');
@@ -21,7 +22,7 @@ export default function CreateUserForm({ onClose, open }) {
 
   const dispatch = useDispatch();
 
-  const users = useSelector((state) => state.users.allUsers);
+  const users = useSelector(usersSelectors.getAllUsers);
 
   const handleClose = () => {
     setPassword('');
@@ -80,7 +81,7 @@ export default function CreateUserForm({ onClose, open }) {
       <DialogTitle variant="h6">Create user</DialogTitle>
       <DialogContent
         sx={{
-          maxWidth: '450px'
+          width: 450
         }}
       >
         <TextField
