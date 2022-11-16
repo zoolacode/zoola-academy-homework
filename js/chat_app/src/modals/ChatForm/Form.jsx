@@ -4,18 +4,19 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateChatSelect from './Select';
-import { createChatThunk } from '../../redux/slices/chatSlice';
+import { createChatThunk } from '../../redux/chat/slice';
+import chatSelectors from '../../redux/chat/selector';
 
 export default function CreateChatForm({ onClose, open }) {
   const [chatName, setChatName] = useState('');
-  const [errorChatName, setErrorChatName] = useState(false);
   const [resetMembersTrigger, setResetMembersTrigger] = useState(true);
 
-  const dispatch = useDispatch();
+  const isError = useSelector(chatSelectors.getError);
 
-  const users = useSelector((state) => state.users.allUsers);
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     setChatName('');
@@ -27,23 +28,22 @@ export default function CreateChatForm({ onClose, open }) {
   };
 
   const handleSendButton = () => {
-    const paramsForCreateChat = {
-      chatName,
-      authToken
-    };
-
-    dispatch(createChatThunk(paramsForCreateChat));
+    dispatch(createChatThunk(chatName));
     setChatName('');
-    setErrorChatName(false);
     setResetMembersTrigger((prev) => !prev);
   };
 
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle variant="h6">Create chat</DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{
+        width: 450
+      }}
+      >
+        {isError
+          ? <Alert severity="error">Something went wrong - try again!</Alert>
+          : null}
         <TextField
-          error={errorChatName}
           value={chatName}
           onChange={(e) => handleChatName(e)}
           type="text"
@@ -52,7 +52,7 @@ export default function CreateChatForm({ onClose, open }) {
           label="Chat name"
           variant="outlined"
         />
-        <CreateChatSelect resetMembersTrigger={resetMembersTrigger} users={users} />
+        <CreateChatSelect resetMembersTrigger={resetMembersTrigger} />
         <Button
           sx={{
             margin: '15px 0'

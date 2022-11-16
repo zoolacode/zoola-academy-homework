@@ -1,54 +1,11 @@
+import { query } from './utils/utils';
+
 export const userServices = {
-  getAllUsers: async (authToken) => {
-    try {
-      const data = await fetch('/api/users', {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'Auth-Token': authToken
-        }
-      });
-
-      const response = data.json();
-
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  },
+  getAllUsers: async (authToken) => query('/api/users', 'GET', authToken),
   createUser: async (authToken, username, password, adminId) => {
-    try {
-      await fetch('/api/users', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'Auth-Token': authToken
-        },
-        body: JSON.stringify({
-          adminId,
-          username,
-          password
-        })
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  getUserById: async (authToken, userId) => {
-    try {
-      const data = await fetch(`/api/users/${userId}`, {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'Auth-Token': authToken
-        }
-      });
-
-      const response = await data.json();
-
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
+    const body = {
+      username, password, adminId
+    };
+    query('/api/users', 'POST', authToken, body);
   }
 };

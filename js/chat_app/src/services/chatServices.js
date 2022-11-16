@@ -1,59 +1,19 @@
+import { query } from './utils/utils';
+
 export const chatServices = {
   createChat: async (title, authToken) => {
-    try {
-      const data = await fetch('/api/chats', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'Auth-Token': authToken
-        },
-        body: JSON.stringify({
-          title
-        })
-      });
-
-      const response = await data.json();
-
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
+    const body = {
+      title
+    };
+    const response = await query('/api/chats', 'POST', authToken, body);
+    return response;
   },
-
   addChatMembers: async (chatId, authToken, members) => {
-    try {
-      await fetch(`/api/chats/${chatId}/members`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'Auth-Token': authToken
-        },
-        body: JSON.stringify({
-          members
-        })
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const body = {
+      members
+    };
+    query(`/api/chats/${chatId}/members`, 'POST', authToken, body);
   },
-  getChatById: async (chatId, authToken) => {
-    try {
-      const data = await fetch(`/api/chats/${chatId}`, {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'Auth-Token': authToken
-        }
-      });
-
-      const response = await data.json();
-
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  },
-
   getMessageByChatId: async () => {
     try {
       await fetch(`/api/chats/${chatId}`, {
@@ -106,3 +66,5 @@ export const chatServices = {
     }
   },
 };
+
+

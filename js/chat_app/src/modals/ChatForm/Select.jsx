@@ -3,11 +3,16 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMembers } from '../../redux/slices/chatSlice';
+import { setSelectedMembers } from '../../redux/chat/slice';
+import authSelectors from '../../redux/auth/selector';
+import usersSelectors from '../../redux/users/selector';
 
-export default function CreateChatSelect({ users, resetMembersTrigger }) {
+export default function CreateChatSelect({ resetMembersTrigger }) {
   const [membersName, setMembersName] = useState([]);
-  const authUsername = useSelector((state) => state.auth.auth.user.username);
+
+  const authUsername = useSelector(authSelectors.getUsername);
+  const users = useSelector(usersSelectors.getAllUsers);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,16 +28,13 @@ export default function CreateChatSelect({ users, resetMembersTrigger }) {
     );
 
     const membersIds = users.filter((user) => value.includes(user.username)).map((user) => user.id);
-    dispatch(setMembers(membersIds));
+    dispatch(setSelectedMembers(membersIds));
   };
 
   return (
     <div>
       <FormControl
         fullWidth
-        sx={{
-          width: '350px'
-        }}
       >
         <TextField
           select
