@@ -82,9 +82,5 @@
         "import/prefer-default-export": "off",
         "consistent-return": "off",
         "linebreak-style": 0
-        "react/prop-types": 0,
-        "import/prefer-default-export": "off",
-        "consistent-return": "off",
-        "linebreak-style": 0
     }
 }
