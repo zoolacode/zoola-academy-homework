@@ -14,6 +14,23 @@ export const chatServices = {
     };
     query(`/api/chats/${chatId}/members`, 'POST', authToken, body);
   },
+  getChatById: async (chatId, authToken) => {
+    try {
+      const data = await fetch(`/api/chats/${chatId}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'Auth-Token': authToken
+        }
+      });
+
+      const response = await data.json();
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  },
   getMessageByChatId: async () => {
     try {
       await fetch(`/api/chats/${chatId}`, {
@@ -50,7 +67,7 @@ export const chatServices = {
     }
   },
 
-  sendUploadsByChatId: async (chatId, authToken, fileObject) => {
+  sendUploadsByChatId: async (chatId, authToken, fileObject, authorId) => {
     const formData = new FormData();
     formData.append('file', fileObject);
     try {
@@ -60,11 +77,10 @@ export const chatServices = {
           'Auth-Token': authToken
         },
         body: formData,
+        authorId
       });
     } catch (error) {
       console.log(error);
     }
   },
 };
-
-

@@ -54,12 +54,15 @@ export const createChatThunk = createAsyncThunk(
   }
 );
 
-export const getChatByIdThunk = createAsyncThunk('getChatById/api/chats/:chatId', async (_, { getState }) => {
-  const chatId = 'dd6de923-ed8c-4b3c-9dec-9f0156242ff3';
-  const { authToken } = getState().auth.auth;
+export const getChatByIdThunk = createAsyncThunk(
+  'getChatById/api/chats/:chatId',
+  async (_, { getState }) => {
+    const chatId = '9587af3b-c57c-40ee-ac17-431bb6f9fa9f';
+    const { authToken } = getState().auth.auth;
 
-  return chatServices.getChatById(chatId, authToken);
-});
+    return chatServices.getChatById(chatId, authToken);
+  }
+);
 
 export const sendMessageByChatIdThunk = createAsyncThunk(
   'sendMessageByChatId/api/chats/:chatId/messages',
@@ -95,13 +98,15 @@ export const sendUploadsByChatIdThunk = createAsyncThunk(
   }
 );
 
-export const getUserByIdThunk = createAsyncThunk('getUserById/api/users/:userId', async (userId, { getState }) => {
-  const { authToken } = getState().auth.auth;
+export const getUserByIdThunk = createAsyncThunk(
+  'getUserById/api/users/:userId',
+  async (userId, { getState }) => {
+    const { authToken } = getState().auth.auth;
+    const response = await userServices.getUserById(authToken, userId);
 
-  const response = await userServices.getUserById(authToken, userId);
-
-  return response;
-});
+    return response;
+  }
+);
 
 export const { setMembers } = chatSlice.actions;
 export default chatSlice;
