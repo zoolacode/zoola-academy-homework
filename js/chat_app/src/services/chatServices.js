@@ -51,6 +51,8 @@ export const chatServices = {
 
   sendMessageByChatId: async (chatId, authToken, message, authorId) => {
     try {
+      // eslint-disable-next-line no-debugger
+      debugger;
       await fetch(`/api/chats/${chatId}/messages`, {
         method: 'POST',
         headers: {

@@ -57,7 +57,7 @@ export const createChatThunk = createAsyncThunk(
 export const getChatByIdThunk = createAsyncThunk(
   'getChatById/api/chats/:chatId',
   async (_, { getState }) => {
-    const chatId = '51ef4da5-c0de-405f-81ad-e80d6078bb06';
+    const chatId = '6fd9d223-11c7-4969-98ce-2986bd2c2a88';
     const { authToken } = getState().auth.auth;
 
     return chatServices.getChatById(chatId, authToken);
@@ -72,7 +72,7 @@ export const sendMessageByChatIdThunk = createAsyncThunk(
     const { authToken } = getState().auth.auth;
     const authorId = getState().auth.auth.user.id;
 
-    await chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
+    return chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
   }
 );
 
