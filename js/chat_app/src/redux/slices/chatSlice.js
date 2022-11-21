@@ -54,12 +54,15 @@ export const createChatThunk = createAsyncThunk(
   }
 );
 
-export const getChatByIdThunk = createAsyncThunk('getChatById/api/chats/:chatId', async (_, { getState }) => {
-  const chatId = 'dd6de923-ed8c-4b3c-9dec-9f0156242ff3';
-  const { authToken } = getState().auth.auth;
+export const getChatByIdThunk = createAsyncThunk(
+  'getChatById/api/chats/:chatId',
+  async (_, { getState }) => {
+    const chatId = '6fd9d223-11c7-4969-98ce-2986bd2c2a88';
+    const { authToken } = getState().auth.auth;
 
-  return chatServices.getChatById(chatId, authToken);
-});
+    return chatServices.getChatById(chatId, authToken);
+  }
+);
 
 export const sendMessageByChatIdThunk = createAsyncThunk(
   'sendMessageByChatId/api/chats/:chatId/messages',
@@ -69,7 +72,7 @@ export const sendMessageByChatIdThunk = createAsyncThunk(
     const { authToken } = getState().auth.auth;
     const authorId = getState().auth.auth.user.id;
 
-    await chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
+    return chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
   }
 );
 
@@ -91,17 +94,19 @@ export const sendUploadsByChatIdThunk = createAsyncThunk(
     const chatId = getState().chat.chatData.id;
     const { authToken } = getState().auth.auth;
 
-    return chatServices.sendUploadsByChatId(chatId, authToken, fileObject);
+    return chatServices.sendUploadsByChatId(chatId, authToken, fileObject, authorID);
   }
 );
 
-export const getUserByIdThunk = createAsyncThunk('getUserById/api/users/:userId', async (userId, { getState }) => {
-  const { authToken } = getState().auth.auth;
+export const getUserByIdThunk = createAsyncThunk(
+  'getUserById/api/users/:userId',
+  async (userId, { getState }) => {
+    const { authToken } = getState().auth.auth;
+    const response = await userServices.getUserById(authToken, userId);
 
-  const response = await userServices.getUserById(authToken, userId);
-
-  return response;
-});
+    return response;
+  }
+);
 
 export const { setMembers } = chatSlice.actions;
 export default chatSlice;

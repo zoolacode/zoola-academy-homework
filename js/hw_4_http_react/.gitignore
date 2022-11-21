@@ -21,14 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-/public/uploads
-/database
-/package-lock.json
-
-/hw_4_http_react
-/http_workshop
-/hw_1_dom_basics
-/hw_1_dom_basics_solution
-/hw_2_js_functions_state
-/hw_3_js_react_1
