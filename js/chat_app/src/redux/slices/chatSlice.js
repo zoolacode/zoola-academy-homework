@@ -3,13 +3,8 @@ import { chatServices } from '../../services/chatServices';
 import { userServices } from '../../services/userServices';
 
 const initialState = {
-  chatData: {
-    id: '',
-    members: [],
-    messages: [],
-    title: ''
-  },
-  selectedMembers: []
+  chatData: null,
+  selectedMembers: [],
 };
 
 const chatSlice = createSlice({
@@ -22,6 +17,8 @@ const chatSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getChatByIdThunk.fulfilled, (state, action) => {
+      // eslint-disable-next-line no-debugger
+      debugger;
       state.chatData = action.payload;
     });
   }
@@ -84,7 +81,7 @@ export const getMessageByChatId = createAsyncThunk(
     const { authToken } = getState().auth.auth;
     const authorId = getState().auth.auth.user.id;
 
-    await chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
+    return chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
   }
 );
 
