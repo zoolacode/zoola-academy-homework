@@ -94,7 +94,7 @@ export const sendUploadsByChatIdThunk = createAsyncThunk(
     const chatId = getState().chat.chatData.id;
     const { authToken } = getState().auth.auth;
 
-    return chatServices.sendUploadsByChatId(chatId, authToken, fileObject, authorId);
+    return chatServices.sendUploadsByChatId(chatId, authToken, fileObject, authorID);
   }
 );
 
