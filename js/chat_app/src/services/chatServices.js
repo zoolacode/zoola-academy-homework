@@ -57,6 +57,8 @@ export const chatServices = {
     try {
       // eslint-disable-next-line no-debugger
       debugger;
+      // eslint-disable-next-line no-debugger
+      debugger;
       await fetch(`/api/chats/${chatId}/messages`, {
         method: 'POST',
         headers: {
@@ -73,7 +75,7 @@ export const chatServices = {
     }
   },
 
-  sendUploadsByChatId: async (chatId, authToken, fileObject, authorId) => {
+  sendUploadsByChatId: async (chatId, authToken, fileObject, authorId, authorId) => {
     const formData = new FormData();
     formData.append('file', fileObject);
     try {
@@ -83,6 +85,7 @@ export const chatServices = {
           'Auth-Token': authToken
         },
         body: formData,
+        authorId
         authorId
       });
     } catch (error) {
