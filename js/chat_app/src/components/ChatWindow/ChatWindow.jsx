@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getChatByIdThunk, sendMessageByChatIdThunk } from '../../redux/slices/chatSlice';
+import { getChatByIdThunk, sendMessageByChatIdThunk } from '../../redux/chat/slice';
 import ListOfChats from './ListOfChats';
 import UploadButton from '../ChatImageUpload/UploadButton';
 

@@ -8,7 +8,7 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import Typography from '@mui/material/Typography';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import { useDispatch } from 'react-redux';
-import { getUserByIdThunk } from '../../redux/slices/chatSlice';
+import { getUserByIdThunk } from '../../redux/chat/slice';
 import Image from '../ChatImageUpload/Image';
 
 function Separator({ date, authorId, message }) {

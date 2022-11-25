@@ -7,5 +7,6 @@ export const userServices = {
       username, password, adminId
     };
     query('/api/users', 'POST', authToken, body);
-  }
+  },
+  getUserChats: async ({ authToken, userId }) => query(`/api/users/${userId}/chats`, 'GET', authToken)
 };

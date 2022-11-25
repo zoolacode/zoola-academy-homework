@@ -7,6 +7,7 @@ import { UserModal } from '../modals/userForm';
 import { ChatModal } from '../modals/ChatForm';
 import ChatWindow from './ChatWindow/ChatWindow';
 import authSelectors from '../redux/auth/selector';
+import ChatList from './ChatList/ChatList';
 
 function Chat() {
   const isAdmin = useSelector(authSelectors.getAdmin);
@@ -35,6 +36,7 @@ function Chat() {
           >
             {isAdmin ? <UserModal /> : null}
             <ChatModal />
+            <ChatList />
           </Box>
           <Box
             sx={{

@@ -14,6 +14,8 @@ import loginAuth from '../../redux/auth/operation';
 import authSelectors from '../../redux/auth/selector';
 import Header from '../Header/Header';
 import { Form } from './Form';
+import getAllUserChats from '../../redux/user/operation';
+import userSelectors from '../../redux/user/selector';
 
 function Login() {
   const dispatch = useDispatch();
@@ -22,6 +24,8 @@ function Login() {
   const isLogin = useSelector(authSelectors.getLogin);
   const isError = useSelector(authSelectors.getError);
   const navigation = useNavigate();
+  const authToken = useSelector(userSelectors.getAuthToken);
+  const userId = useSelector(userSelectors.getUserId);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -39,6 +43,12 @@ function Login() {
       navigation('/');
     } else {
       navigation('/chat');
+      dispatch(
+        getAllUserChats({
+          authToken,
+          userId
+        })
+      );
     }
   }, [isLogin]);
 

@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import Stack from '@mui/material/Stack';
 import { useDispatch } from 'react-redux';
-import { sendUploadsByChatIdThunk } from '../../redux/slices/chatSlice';
+import { sendUploadsByChatIdThunk } from '../../redux/chat/slice';
 
 export default function UploadButton() {
   const dispatch = useDispatch();
