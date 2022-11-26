@@ -20,7 +20,7 @@ function ListOfChats() {
       >
         {arrayOfMessages.map((message, index) => (
           <ListItem key={index}>
-            <Separator message={message} date={message.date} authId={message.authId} />
+            <Separator message={message} date={message.date} authorId={message.authorId} />
           </ListItem>
         ))}
       </List>

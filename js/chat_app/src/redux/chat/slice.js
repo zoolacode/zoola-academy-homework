@@ -52,14 +52,14 @@ export const createChatThunk = createAsyncThunk(
   async (title, { getState, dispatch, rejectWithValue }) => {
     try {
       const { authToken } = getState().auth.auth;
-      const authId = getState().auth.auth.user.id;
+      const authorId = getState().auth.auth.user.id;
       const membersId = getState().chat.selectedMembers;
 
       const response = await chatServices.createChat(title, authToken);
 
       const paramsForAddMembers = {
         chatId: response.id,
-        members: [authId, ...membersId],
+        members: [authorId, ...membersId],
         authToken
       };
 
@@ -102,9 +102,9 @@ export const sendMessageByChatIdThunk = createAsyncThunk(
     const { message } = params;
     const chatId = getState().chat.chatData.id;
     const { authToken } = getState().auth.auth;
-    const authId = getState().auth.auth.user.id;
+    const authorId = getState().auth.auth.user.id;
 
-    return chatServices.sendMessageByChatId(chatId, authToken, message, authId);
+    return chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
   }
 );
 
@@ -114,9 +114,9 @@ export const getMessageByChatId = createAsyncThunk(
     const { message } = params;
     const chatId = getState().chat.chatData.id;
     const { authToken } = getState().auth.auth;
-    const authId = getState().auth.auth.user.id;
+    const authorId = getState().auth.auth.user.id;
 
-    return chatServices.sendMessageByChatId(chatId, authToken, message, authId);
+    return chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
   }
 );
 
@@ -125,9 +125,9 @@ export const sendUploadsByChatIdThunk = createAsyncThunk(
   async (fileObject, { getState }) => {
     const chatId = getState().chat.chatData.id;
     const { authToken } = getState().auth.auth;
-    const authId = getState().auth.auth.user.id;
+    const authorId = getState().auth.auth.user.id;
 
-    return chatServices.sendUploadsByChatId(chatId, authToken, fileObject, authId);
+    return chatServices.sendUploadsByChatId(chatId, authToken, fileObject, authorId);
   }
 );
 

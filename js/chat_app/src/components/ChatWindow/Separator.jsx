@@ -11,12 +11,12 @@ import { useDispatch } from 'react-redux';
 import { getUserByIdThunk } from '../../redux/chat/slice';
 import Image from '../ChatImageUpload/Image';
 
-function Separator({ date, authId, message }) {
+function Separator({ date, authorId, message }) {
   const [user, setUser] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUserByIdThunk(authId)).then((res) => setUser(res.payload));
+    dispatch(getUserByIdThunk(authorId)).then((res) => setUser(res.payload));
   }, []);
 
   const options = {
