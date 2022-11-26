@@ -14,14 +14,12 @@ function ChatList() {
   const dispatch = useDispatch();
   const authToken = useSelector(userSelectors.getAuthToken);
   
-
-
 useEffect(() => {
   if (currentChatId === null && chats.length > 0) {
     setCurrentChatId(chats.id);
   }
   dispatch(getUserChat({authToken, currentChatId }))
-}, [chats, currentChatId, dispatch]);
+}, [authToken, chats, currentChatId, dispatch]);
 
 const memberChat = chats?.filter((userId) => userId !== currentUser.id).find(({ id }) => id === currentChatId);
   if (!chats.length) {
@@ -33,7 +31,7 @@ const memberChat = chats?.filter((userId) => userId !== currentUser.id).find(({ 
       <MenuList>
         {chats?.map(({ id, title }) => (
           <MenuItem
-            selected={id === currentChatId}
+            selected={memberChat}
             onClick={() => {
               setCurrentChatId(id);
              

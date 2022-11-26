@@ -99,14 +99,12 @@ export const getUserByIdThunk = createAsyncThunk(
 export const sendMessageByChatIdThunk = createAsyncThunk(
   'sendMessageByChatId/api/chats/:chatId/messages',
   async (params, { getState }) => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     const { message } = params;
     const chatId = getState().chat.chatData.id;
-    const { authToken } = getState().auth.auth.authToken;
-    const authorId = getState().auth.auth.user.id;
+    const { authToken } = getState().auth.auth;
+    const authId = getState().auth.auth.user.id;
 
-    return chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
+    return chatServices.sendMessageByChatId(chatId, authToken, message, authId);
   }
 );
 
@@ -116,9 +114,9 @@ export const getMessageByChatId = createAsyncThunk(
     const { message } = params;
     const chatId = getState().chat.chatData.id;
     const { authToken } = getState().auth.auth;
-    const authorId = getState().auth.auth.user.id;
+    const authId = getState().auth.auth.user.id;
 
-    return chatServices.sendMessageByChatId(chatId, authToken, message, authorId);
+    return chatServices.sendMessageByChatId(chatId, authToken, message, authId);
   }
 );
 
@@ -127,9 +125,9 @@ export const sendUploadsByChatIdThunk = createAsyncThunk(
   async (fileObject, { getState }) => {
     const chatId = getState().chat.chatData.id;
     const { authToken } = getState().auth.auth;
-    const authorId = getState().auth.auth.user.id;
+    const authId = getState().auth.auth.user.id;
 
-    return chatServices.sendUploadsByChatId(chatId, authToken, fileObject, authorId);
+    return chatServices.sendUploadsByChatId(chatId, authToken, fileObject, authId);
   }
 );
 

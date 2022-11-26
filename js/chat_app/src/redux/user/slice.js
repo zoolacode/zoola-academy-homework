@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getAllUserChats from './operation';
 
+
 const initialState = {
   user: []
 };

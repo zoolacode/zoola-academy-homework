@@ -19,9 +19,8 @@ function ListOfChats() {
         }}
       >
         {arrayOfMessages.map((message, index) => (
-          // eslint-disable-next-line react/no-array-index-key
           <ListItem key={index}>
-            <Separator message={message} date={message.date} authorId={message.authorId} />
+            <Separator message={message} date={message.date} authId={message.authId} />
           </ListItem>
         ))}
       </List>
