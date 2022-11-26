@@ -13,6 +13,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "multer": "^1.4.5-lts.1",
+    "npm-run-demo": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.2",
@@ -35,8 +36,8 @@
     "dev:client": "yarn start",
     "dev:backend": "nodemon server/server.js --watch server/",
     "backend": "node server/server.js",
-    "lint": "eslint src//**/*.{js,jsx,ts,tsx,json}",
-    "lint:fix": "eslint --fix src//**/*.{js,jsx,ts,tsx,json}",
+    "lint": "eslint src//**/*.{js,jsx,json}",
+    "lint:fix": "eslint --fix src//**/*.{js,jsx,json}",
     "format": "prettier --write \"src//**/*.{js,jsx}\""
   },
   "eslintConfig": {
