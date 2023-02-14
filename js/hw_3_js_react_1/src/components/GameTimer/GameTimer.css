@@ -1,0 +1,13 @@
+.time {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 46px;
+  width: 100px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #419884;
+  color: #fff;
+}

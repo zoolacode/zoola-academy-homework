@@ -1,0 +1,13 @@
+.score {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 46px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #419884;
+  color: #fff;
+}
