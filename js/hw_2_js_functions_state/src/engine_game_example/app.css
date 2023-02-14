@@ -33,6 +33,20 @@ body {
   background-color: #cc4040;
   color: #fff;
 }
+.time {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 46px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cc4040;
+  color: #fff;
+}
+
 
 .score-positive {
   background-color: #419884;

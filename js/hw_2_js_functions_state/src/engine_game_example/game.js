@@ -5,9 +5,6 @@ const meshSize = 25;
 
 const initialState = {
   currentColor: {
-    r: 0,
-    g: 0,
-    b: 0,
   },
   currentScore: 0,
   currentIndex: 0,
@@ -41,22 +38,17 @@ engine.addSignalReducer("restartGame", () => {
 //
 // The next question should be: "then why don't we just merge "clickOnTarget" logic into "startNextRound" reducer and remove "clickOnTarget" altogether?".
 // - We could to it, there's nothing wrong about this idea. I encourage you to try and do it yourself, it's good practice. But "clickOnTargetBonus" wouldn't be a great name, then.
-engine.addSideEffect({
-  onlyWhen: getIsRoundChanged,
-  // Notice how we name the first parameter as "_". We could name it properly but it's not used here (only "emit" is used), so "_" is okay.
-  effect: (_, emit) => {
-    emit("startNextRound");
-  },
-});
 
 // This effect has the same "onlyWhen" condition function as the previous one, so they could easily be merged. Try it out yourself!
+
 engine.addSideEffect({
   onlyWhen: getIsRoundChanged,
   effect: (_, emit) => {
+    emit("startNextRound");
     const timeoutId = setTimeout(() => {
       emit("roundTimedOut");
     }, 1000);
-
+    
     return () => {
       clearTimeout(timeoutId);
     };
@@ -96,7 +88,6 @@ engine.addSideEffect({
 // Notice how these signals are used to set "gameWon" and "gameLost" state down the line, which creates a strong feeling of tautology.
 // Much better would be to use a "global" reducer function that can calculate "gameWon" and "gameLost" whenever "currentScore" is changed.
 // The reason we don't want to add this calculation into EVERY reducer function that changes "currentScore" is that it would create unnecessary code duplication.
-
 engine.addSideEffect({
   onlyWhen: ({ prevState, state }) =>
     getIsStateChanged("currentScore", prevState, state) &&
