@@ -5,6 +5,7 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  background-color: #143c33;
 }
 
 .mesh {
@@ -35,7 +36,7 @@ body {
 }
 
 .score-positive {
-  background-color: #419884;
+  background-color: #0ab055;
 }
 
 .score-negative {
