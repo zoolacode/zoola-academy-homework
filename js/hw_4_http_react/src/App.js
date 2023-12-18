@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
+import Chat from "./Chat";
 
 function App() {
-  const [draftUserName, setDraftUserName] = React.useState("");
-  const [userName, setUserName] = React.useState("");
+  const [draftUserName, setDraftUserName] = useState("");
+  const [userName, setUserName] = useState("");
 
   if (!userName) {
     return (
@@ -30,7 +31,11 @@ function App() {
     );
   }
 
-  return <div></div>;
+  return (
+    <div>
+      <Chat userName={userName} />
+    </div>
+  );
 }
 
 export default App;

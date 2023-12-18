@@ -1,6 +1,32 @@
 [
   {
     "user": "Misha",
-    "message": "Hi all"
+    "message": "Hi all",
+    "time": "Always"
+  },
+  {
+    "user": "Mike",
+    "message": "Hello",
+    "time": "Mon, 11:32 AM"
+  },
+  {
+    "user": "Mike",
+    "message": "What's new?",
+    "time": "Mon, 11:32 AM"
+  },
+  {
+    "user": "Jake",
+    "message": "Nothing new) Just chilling",
+    "time": "Mon, 11:32 AM"
+  },
+  {
+    "user": "Alice",
+    "message": "Hey! Have a nice day!",
+    "time": "Mon, 11:32 AM"
+  },
+  {
+    "user": "Mike",
+    "message": "You too!",
+    "time": "Mon, 11:32 AM"
   }
 ]
