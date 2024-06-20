@@ -1,6 +1,32 @@
 [
   {
-    "user": "Misha",
-    "message": "Hi all"
+    "user": "Mike",
+    "message": "Hi",
+    "date": "11:11:15 PM"
+  },
+  {
+    "user": "Sasha",
+    "message": "Hello",
+    "date": "11:11:25 PM"
+  },
+  {
+    "user": "Stas",
+    "message": "Hi everyone",
+    "date": "11:11:37 PM"
+  },
+  {
+    "user": "Mike",
+    "message": "What are you doing?",
+    "date": "11:11:52 PM"
+  },
+  {
+    "user": "Sasha",
+    "message": "I'm doing my homework",
+    "date": "11:12:03 PM"
+  },
+  {
+    "user": "Stas",
+    "message": "I'm too",
+    "date": "11:12:12 PM"
   }
 ]
