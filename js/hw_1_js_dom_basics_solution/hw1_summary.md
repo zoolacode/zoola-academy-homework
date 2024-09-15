@@ -1,0 +1,5 @@
+- Use Prettier in your IDE
+- Use snake_case or camelCase, but not both
+- Only use raw numbers as exceptions, otherwise use constants
+- Use `classList` over `className`
+- Test your solution carefully
