@@ -1,0 +1,75 @@
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  position: relative;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.mesh {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  width: 100vh;
+  height: 100vh;
+  background-color: #5a5a5a;
+}
+
+.item {
+  width: calc(100vh / 5);
+  height: calc(100vh / 5);
+  border: 1px solid white;
+}
+
+.item-highlighted {
+  cursor: pointer;
+}
+
+.item-highlighted.item-highlighted-1 {
+  background-color: #f2db63;
+}
+
+.item-highlighted.item-highlighted-2 {
+  background-color: #cc4040;
+}
+
+.item-highlighted.item-highlighted-3 {
+  background-color: #ebfca4;
+}
+
+.score {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 32px;
+  font-weight: 600;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #5a5a5a;
+  color: #ffffff;
+}
+.btn{
+  display: flex;
+  flex-direction: column;
+}
+.btn button{
+  border: none;
+  padding: 7px 10px;
+  margin-bottom: 5px;
+  background: #000000;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  margin-right:120px ;
+
+}
+.btn button:first-child{
+  font-weight: 600;
+}
+.btn button:hover{
+  background: gray;
+  transition: .3s ease all;
+}
