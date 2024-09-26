@@ -2,8 +2,11 @@
 import { createEngine, ENGINE_INITIALIZE_SIGNAL } from "../engine/engine";
 
 const meshSize = 25;
+const colors = ['white', 'black', 'silver', 'gray', 'maroon', 'red', 'purple', 'fuchsia',
+  'green', 'lime', 'olive', 'yellow', 'navy', 'blue', 'teal', 'aqua']
 
 const initialState = {
+  bodyColorIndex: 0,
   currentColor: {
     r: 0,
     g: 0,
@@ -231,6 +234,23 @@ engine.addSideEffect({
   },
 });
 
+engine.addSideEffect({
+  onlyWhen: getIsRoundChanged,
+  effect: (_, emit) => {
+    emit("changedBodyColor")
+  }
+})
+
+engine.addSignalReducer("changedBodyColor", (state) => {
+  const colorIndex = getRandomNumber(colors.length - 1)
+  return {
+    ...state,
+    bodyColorIndex: colorIndex
+  }
+})
+
+engine.addSideEffect({ effect: ({ state }) => console.log(state) })
+
 // Start engine :)
 // It is strongly recommended to start after all reducers and side-effects have been registered.
 engine.start();
@@ -320,6 +340,12 @@ function renderGameBoard({ state, prevState }, emit) {
   };
   document.addEventListener("click", onDocumentClick);
 
+  const body = window.document.body
+  body.setAttribute(
+    "style",
+    `background-color: ${colors[state.bodyColorIndex]}`
+  );
+
   return () => {
     activeElement.setAttribute("style", "");
     activeElement.removeEventListener("click", onElementClick);
@@ -365,3 +391,5 @@ function getIsRoundChanged({ prevState, state }) {
     getIsStateChanged("round", { prevState, state }) && !getIsGameEnded(state)
   );
 }
+
+
