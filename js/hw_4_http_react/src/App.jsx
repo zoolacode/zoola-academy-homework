@@ -1,21 +1,17 @@
 import React from "react";
 import "./App.css";
+//components
+import Chat from "./components/Chat";
 
 function App() {
   const [draftUserName, setDraftUserName] = React.useState("");
   const [userName, setUserName] = React.useState("");
 
+
   if (!userName) {
     return (
       <form
-        style={{
-          position: "fixed",
-          height: "100vh",
-          width: "100vw",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+        className="form"
         onSubmit={(e) => {
           e.preventDefault();
           setUserName(draftUserName);
@@ -24,13 +20,14 @@ function App() {
       >
         <label>
           Enter your username:{" "}
-          <input onChange={(e) => setDraftUserName(e.target.value)} />
+          <input placeholder="user" onChange={(e) => setDraftUserName(e.target.value)} />
         </label>
       </form>
     );
   }
 
-  return <div></div>;
+
+  return <Chat userName={userName} />;
 }
 
 export default App;
